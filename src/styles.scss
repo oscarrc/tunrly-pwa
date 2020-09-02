@@ -1,0 +1,8 @@
+//== 1: Bootstrap file
+@import "vendors/bootstrap/bootstrap";
+
+//== 2: Theme base file
+@import "assets/scss/base/includes";
+
+//== 3: Theme framework
+@import "assets/scss/framework/includes";
