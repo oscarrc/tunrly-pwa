@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../core/services/loading.service';
-import { EventsConfigService } from '../../../../../core/services/events-config.service';
+import { LoadingService } from '../../../../../services/loading.service';
+import { EventsConfigService } from '../../../../../services/events-config.service';
 
 @Component({
     selector: 'app-event-details',

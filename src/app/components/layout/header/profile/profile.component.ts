@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { MenuConfigService } from '../../../../core/services/menu-config.service';
-import { SearchService } from '../../../../core/services/search.service';
+import { MenuConfigService } from '../../../../services/menu-config.service';
+import { SearchService } from '../../../../services/search.service';
 import { LoginComponent } from '../login/login.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 

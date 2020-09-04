@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable, Output, Directive } from '@angular/core';
 
-import { PlaylistConfig } from '../../config/playlist';
+import { PlaylistConfig } from '../config/playlist';
 
 @Directive()
 @Injectable({

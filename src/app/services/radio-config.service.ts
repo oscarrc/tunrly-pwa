@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {RadioConfig} from '../../config/radio';
+import {RadioConfig} from '../config/radio';
 
 @Injectable({
     providedIn: 'root'

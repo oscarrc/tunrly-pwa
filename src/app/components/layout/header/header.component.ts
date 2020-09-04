@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 
 import { SimpleModalService } from 'ngx-simple-modal';
 import { LanguageComponent } from './language/language.component';
-import { SearchService } from '../../../core/services/search.service';
-import { LocalStorageService } from '../../../core/services/local-storage.service';
-import { SkinService } from '../../../core/services/skin.service';
+import { SearchService } from '../../../services/search.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { SkinService } from '../../../services/skin.service';
 import { Config } from '../../../config/config';
 
 @Component({

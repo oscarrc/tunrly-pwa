@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { AudioPlayerService } from '../../../../core/services/audio-player.service';
+import { AudioPlayerService } from '../../../../services/audio-player.service';
 
 @Component({
     selector: 'app-primary-card',

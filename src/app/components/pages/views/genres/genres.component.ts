@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
-import { GenresConfigService } from '../../../../core/services/genres-config.service';
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
+import { LoadingService } from '../../../../services/loading.service';
+import { GenresConfigService } from '../../../../services/genres-config.service';
+import { SongsConfigService } from '../../../../services/songs-config.service';
 
 @Component({
     selector: 'app-genres',

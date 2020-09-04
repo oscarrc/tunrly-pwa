@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { SongsConfig } from '../../config/songs';
+import { SongsConfig } from '../config/songs';
 
 @Injectable({
     providedIn: 'root'

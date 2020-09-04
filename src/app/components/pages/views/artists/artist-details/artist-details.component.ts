@@ -2,10 +2,10 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../core/services/loading.service';
-import { ArtistsConfigService } from '../../../../../core/services/artists-config.service';
-import { SongsConfigService } from '../../../../../core/services/songs-config.service';
-import { AudioPlayerService } from '../../../../../core/services/audio-player.service';
+import { LoadingService } from '../../../../../services/loading.service';
+import { ArtistsConfigService } from '../../../../../services/artists-config.service';
+import { SongsConfigService } from '../../../../../services/songs-config.service';
+import { AudioPlayerService } from '../../../../../services/audio-player.service';
 import { Config } from '../../../../../config/config';
 
 @Component({

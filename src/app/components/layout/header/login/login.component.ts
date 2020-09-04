@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 
-import { LocalStorageService } from '../../../../core/services/local-storage.service';
+import { LocalStorageService } from '../../../../services/local-storage.service';
 import { Config } from '../../../../config/config';
 
 @Component({

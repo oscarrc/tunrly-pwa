@@ -1,8 +1,8 @@
 import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SearchService } from '../../../core/services/search.service';
-import { AudioPlayerService } from '../../../core/services/audio-player.service';
+import { SearchService } from '../../../services/search.service';
+import { AudioPlayerService } from '../../../services/audio-player.service';
 
 @Component({
     selector: 'app-song-horizontal',

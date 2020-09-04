@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import { LocalStorageService } from '../../../core/services/local-storage.service';
-import { SkinService } from '../../../core/services/skin.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { SkinService } from '../../../services/skin.service';
 import { Config } from '../../../config/config';
 
 @Component({

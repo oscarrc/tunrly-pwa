@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { EventsConfig } from '../../config/events';
+import { EventsConfig } from '../config/events';
 
 @Injectable({
     providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { MenuConfig } from '../../config/menu';
+import { MenuConfig } from '../config/menu';
 
 @Injectable({
     providedIn: 'root'

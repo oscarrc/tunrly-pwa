@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { RadioConfigService } from '../../../../core/services/radio-config.service';
-import { LoadingService } from '../../../../core/services/loading.service';
+import { RadioConfigService } from '../../../../services/radio-config.service';
+import { LoadingService } from '../../../../services/loading.service';
 
 @Component({
     selector: 'app-stations',

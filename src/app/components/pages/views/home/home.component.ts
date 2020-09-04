@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
-import { LoadingService } from '../../../../core/services/loading.service';
-import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
-import { PlaylistConfigService } from '../../../../core/services/playlist-config.service';
-import { RadioConfigService } from '../../../../core/services/radio-config.service';
-import { GenresConfigService } from '../../../../core/services/genres-config.service';
-import { EventsConfigService } from '../../../../core/services/events-config.service';
+import { SongsConfigService } from '../../../../services/songs-config.service';
+import { LoadingService } from '../../../../services/loading.service';
+import { ArtistsConfigService } from '../../../../services/artists-config.service';
+import { PlaylistConfigService } from '../../../../services/playlist-config.service';
+import { RadioConfigService } from '../../../../services/radio-config.service';
+import { GenresConfigService } from '../../../../services/genres-config.service';
+import { EventsConfigService } from '../../../../services/events-config.service';
 
 
 @Component({

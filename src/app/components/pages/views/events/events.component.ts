@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
-import { EventsConfigService } from '../../../../core/services/events-config.service';
+import { LoadingService } from '../../../../services/loading.service';
+import { EventsConfigService } from '../../../../services/events-config.service';
 
 @Component({
     selector: 'app-events',

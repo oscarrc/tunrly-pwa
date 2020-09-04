@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ArtistsConfig } from '../../config/artists';
+import { ArtistsConfig } from '../config/artists';
 
 @Injectable({
     providedIn: 'root'

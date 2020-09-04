@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../../core/services/loading.service';
+import { LoadingService } from '../../../../../services/loading.service';
 
 @Component({
     selector: 'app-user-profile',

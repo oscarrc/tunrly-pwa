@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 import { LocalStorageService } from './local-storage.service';
-import { Config } from '../../config/config';
+import { Config } from '../config/config';
 
 @Injectable({
     providedIn: 'root'

@@ -4,8 +4,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { Subscription } from 'rxjs';
 
-import { LocalStorageService } from '../../../core/services/local-storage.service';
-import { SkinService } from '../../../core/services/skin.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { SkinService } from '../../../services/skin.service';
 
 @Component({
     selector: 'app-views',

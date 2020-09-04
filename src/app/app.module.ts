@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './components/layout/layout.module';
 import { LoaderComponent } from './components/layout/loader/loader.component';
-import { LoadingService } from './core/services/loading.service';
-import { MenuConfigService } from './core/services/menu-config.service';
-import { SongsConfigService } from './core/services/songs-config.service';
+import { LoadingService } from './services/loading.service';
+import { MenuConfigService } from './services/menu-config.service';
+import { SongsConfigService } from './services/songs-config.service';
 
 @NgModule({
     declarations: [

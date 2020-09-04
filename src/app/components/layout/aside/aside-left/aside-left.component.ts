@@ -1,9 +1,9 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { MenuConfigService } from '../../../../core/services/menu-config.service';
-import { SkinService } from '../../../../core/services/skin.service';
-import { LocalStorageService } from '../../../../core/services/local-storage.service';
+import { MenuConfigService } from '../../../../services/menu-config.service';
+import { SkinService } from '../../../../services/skin.service';
+import { LocalStorageService } from '../../../../services/local-storage.service';
 import { Config } from '../../../../config/config';
 import {DOCUMENT} from '@angular/common';
 

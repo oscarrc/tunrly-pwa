@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Config} from '../../config/config';
+import {Config} from '../config/config';
 
 @Injectable({
     providedIn: 'root'

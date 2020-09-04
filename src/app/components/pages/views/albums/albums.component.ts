@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
-import { AlbumsConfigService } from '../../../../core/services/albums-config.service';
+import { LoadingService } from '../../../../services/loading.service';
+import { AlbumsConfigService } from '../../../../services/albums-config.service';
 
 @Component({
     selector: 'app-albums',

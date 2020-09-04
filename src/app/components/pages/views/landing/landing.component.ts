@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 
 import { LoginComponent } from '../../../layout/header/login/login.component';
-import { EventsConfigService } from '../../../../core/services/events-config.service';
-import { LoadingService } from '../../../../core/services/loading.service';
-import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
+import { EventsConfigService } from '../../../../services/events-config.service';
+import { LoadingService } from '../../../../services/loading.service';
+import { ArtistsConfigService } from '../../../../services/artists-config.service';
 import { Config } from '../../../../config/config';
 
 @Component({

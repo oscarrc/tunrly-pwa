@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AlbumsConfig } from '../../config/albums';
+import { AlbumsConfig } from '../config/albums';
 
 @Injectable({
     providedIn: 'root'

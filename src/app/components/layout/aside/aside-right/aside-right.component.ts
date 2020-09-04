@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 
-import { PlaylistConfigService } from '../../../../core/services/playlist-config.service';
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
+import { PlaylistConfigService } from '../../../../services/playlist-config.service';
+import { SongsConfigService } from '../../../../services/songs-config.service';
 
 @Component({
     selector: 'app-aside-right',

@@ -2,9 +2,9 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
-import { SongsConfigService } from '../../../core/services/songs-config.service';
-import { LocalStorageService } from '../../../core/services/local-storage.service';
-import { SkinService } from '../../../core/services/skin.service';
+import { SongsConfigService } from '../../../services/songs-config.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { SkinService } from '../../../services/skin.service';
 import { Config } from '../../../config/config';
 import * as Amplitude from 'amplitudejs';
 

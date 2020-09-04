@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
-import { LoadingService } from '../../../../core/services/loading.service';
+import { SongsConfigService } from '../../../../services/songs-config.service';
+import { LoadingService } from '../../../../services/loading.service';
 
 @Component({
     selector: 'app-music',

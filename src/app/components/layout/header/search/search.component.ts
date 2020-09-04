@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
-import { AlbumsConfigService } from '../../../../core/services/albums-config.service';
-import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
-import { SearchService } from '../../../../core/services/search.service';
+import { SongsConfigService } from '../../../../services/songs-config.service';
+import { AlbumsConfigService } from '../../../../services/albums-config.service';
+import { ArtistsConfigService } from '../../../../services/artists-config.service';
+import { SearchService } from '../../../../services/search.service';
 
 @Component({
     selector: 'app-search',

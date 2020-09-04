@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
-import { SkinService } from '../../core/services/skin.service';
+import { SkinService } from '../../services/skin.service';
 
 @Component({
     selector: 'app-pages',

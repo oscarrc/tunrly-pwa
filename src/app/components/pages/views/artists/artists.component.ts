@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
-import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
+import { LoadingService } from '../../../../services/loading.service';
+import { ArtistsConfigService } from '../../../../services/artists-config.service';
 
 @Component({
     selector: 'app-artists',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { GenresConfig } from '../../config/genres';
+import { GenresConfig } from '../config/genres';
 
 @Injectable({
     providedIn: 'root'

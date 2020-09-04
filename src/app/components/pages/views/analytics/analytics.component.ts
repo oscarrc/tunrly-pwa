@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
-import { LocalStorageService } from '../../../../core/services/local-storage.service';
+import { LoadingService } from '../../../../services/loading.service';
+import { LocalStorageService } from '../../../../services/local-storage.service';
 
 @Component({
     selector: 'app-analytics',
