@@ -8,12 +8,12 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { ErrorComponent } from './components/error/error.component';
+import { ErrorComponent } from './views/error/error.component';
 import { LayoutModule } from '../layout/layout.module';
 import { PartialsModule } from '../partials/partials.module';
-import { ComponentsModule } from './components/components.module';
+import { ComponentsModule } from './views/views.module';
 import { CoreModule } from '../../core/core.module';
-import { LandingComponent } from './components/landing/landing.component';
+import { LandingComponent } from './views/landing/landing.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true

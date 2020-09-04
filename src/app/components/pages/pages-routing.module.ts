@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LandingComponent } from './components/landing/landing.component';
-import { ErrorComponent } from './components/error/error.component';
+import { LandingComponent } from './views/landing/landing.component';
+import { ErrorComponent } from './views/error/error.component';
 import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
@@ -20,7 +20,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                loadChildren: () => import('./components/components.module').then(m => m.ComponentsModule)
+                loadChildren: () => import('./views/views.module').then(m => m.ComponentsModule)
             }
         ]
     }

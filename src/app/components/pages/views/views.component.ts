@@ -8,10 +8,10 @@ import { LocalStorageService } from '../../../core/services/local-storage.servic
 import { SkinService } from '../../../core/services/skin.service';
 
 @Component({
-    selector: 'app-components',
-    templateUrl: './components.component.html'
+    selector: 'app-views',
+    templateUrl: './views.component.html'
 })
-export class ComponentsComponent implements OnInit, OnDestroy {
+export class ViewsComponent implements OnInit, OnDestroy {
 
     themeClass = 'theme-light';
 
