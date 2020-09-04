@@ -8,13 +8,12 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { ErrorPageComponent } from './snippets/error-page/error-page.component';
+import { ErrorComponent } from './components/error/error.component';
 import { LayoutModule } from '../layout/layout.module';
 import { PartialsModule } from '../partials/partials.module';
 import { ComponentsModule } from './components/components.module';
 import { CoreModule } from '../../core/core.module';
-import { LandingPageComponent } from './snippets/landing-page/landing-page.component';
-import { DemoPageComponent } from './snippets/demo-page/demo-page.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -23,9 +22,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
     declarations: [
         PagesComponent,
-        ErrorPageComponent,
-        LandingPageComponent,
-        DemoPageComponent
+        ErrorComponent,
+        LandingComponent,
     ],
     imports: [
         CommonModule,

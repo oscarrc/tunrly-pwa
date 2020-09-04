@@ -8,10 +8,10 @@ import { ArtistsConfigService } from '../../../../core/services/artists-config.s
 import { Config } from '../../../../config/config';
 
 @Component({
-    selector: 'app-landing-page',
-    templateUrl: './landing-page.component.html'
+    selector: 'app-landing',
+    templateUrl: './landing.component.html'
 })
-export class LandingPageComponent implements OnInit, AfterViewInit {
+export class LandingComponent implements OnInit, AfterViewInit {
 
     config: Config;
     brand: any = {};

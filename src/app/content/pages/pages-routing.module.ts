@@ -1,23 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DemoPageComponent } from './snippets/demo-page/demo-page.component';
-import { LandingPageComponent } from './snippets/landing-page/landing-page.component';
-import { ErrorPageComponent } from './snippets/error-page/error-page.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { ErrorComponent } from './components/error/error.component';
 import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: DemoPageComponent
-    },
-    {
-        path: 'landing',
-        component: LandingPageComponent
+        component: LandingComponent
     },
     {
         path: '404',
-        component: ErrorPageComponent
+        component: ErrorComponent
     },
     {
         path: 'pages',
