@@ -36,6 +36,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "node_modules/ionicons/dist/ionicons.js",
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/slick-carousel/slick/slick.min.js"
@@ -111,7 +112,8 @@
               "src/assets/vendors/line-awesome/css/line-awesome.min.css",
               "src/styles.scss"
             ],
-            "scripts": [
+            "scripts": [              
+              "node_modules/ionicons/dist/ionicons.js",
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/slick-carousel/slick/slick.min.js"
