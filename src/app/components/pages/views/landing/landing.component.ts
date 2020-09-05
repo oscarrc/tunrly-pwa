@@ -18,6 +18,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
     events: any = [];
     trendingArtists: any = [];
     sliderConfig: any = {};
+    backgroundImage: string = "";
 
     constructor(private loadingService: LoadingService,
                 private simpleModalService: SimpleModalService,
@@ -30,6 +31,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.initEvents();
         this.initTrendingArtists();
+        this.backgroundImage = this.getRandomBackground();
 
         this.sliderConfig = {
             arrows: false,
@@ -86,6 +88,11 @@ export class LandingComponent implements OnInit, AfterViewInit {
             } else {
             }
         });
+    }
+
+    getRandomBackground(){
+        const number = Math.floor(Math.random() * 7);
+        return "assets/images/background/header-" + number + ".jpg";
     }
 
 }

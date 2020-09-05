@@ -1,7 +1,7 @@
 <div id="wrapper">
     <perfect-scrollbar class="vh-100">
         <!-- Begin | Landing Page Banner [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
-        <div class="banner landing-banner bg-landing">
+        <div class="banner landing-banner bg-landing" [style.background-image]="'url('+ backgroundImage + ')'">
             <header id="landing-header">
             <div class="container d-flex align-items-center py-3">
               <a routerLink="/home" class="brand">
