@@ -1,7 +1,7 @@
 <!-- Begin | Footer [[ Find at scss/framework/base/footer/footer.scss ]] -->
 <footer id="footer" class="bg-img">
     <div class="footer-content">
-        <a class="email">info@listenapp.com</a>
+        <!-- <a class="email">info@listenapp.com</a> -->
         <div class="platform-btn-inline">
             <button *ngFor="let button of footerButtons" [class]="button.classes">
                 <i [class]="button.icon"></i>
@@ -11,6 +11,9 @@
                 </span>
             </button>
         </div>
+    </div>
+    <div class="footer-copy">
+        <p class="text-center">&copy; {{ year }} Made with <i class="la la-heart"></i> by <a href="https://oscarrc.me" target="_BLANK">Oscar R.C.</a></p>
     </div>
 </footer>
 <!-- End | Footer -->

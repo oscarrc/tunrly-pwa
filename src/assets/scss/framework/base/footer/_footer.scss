@@ -30,6 +30,12 @@
         z-index: 1;
     }
 
+    .footer-copy{
+        @include absolute(bottom 1rem right 0 left 0);
+        width: 100%;
+        z-index: 1;
+    }
+
     .email {
         font-weight: map-get($font-weight, light);
         font-size: 3rem;

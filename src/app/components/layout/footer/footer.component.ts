@@ -5,17 +5,19 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './footer.component.html'
 })
 export class FooterComponent implements OnInit {
-
+    
+    year: number = (new Date()).getFullYear();
+    
     public footerButtons: any = [
         {
-            classes: 'btn btn-dark btn-air platform-btn',
+            classes: 'btn btn-success btn-air platform-btn',
             icon: 'ion-logo-android',
             subtitle: 'Android'
         },
         {
-            classes: 'btn btn-danger btn-air platform-btn',
-            icon: 'ion-logo-apple',
-            subtitle: 'App Store'
+            classes: 'btn btn-info btn-air platform-btn',
+            icon: 'ion-logo-windows',
+            subtitle: 'Windows'
         }
     ];
 
