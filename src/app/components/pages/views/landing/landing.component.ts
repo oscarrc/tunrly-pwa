@@ -91,7 +91,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
     }
 
     getRandomBackground(){
-        const number = Math.floor(Math.random() * 7);
+        const number = Math.floor(Math.random() * 6) + 1;
         return "assets/images/background/header-" + number + ".jpg";
     }
 
