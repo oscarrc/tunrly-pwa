@@ -69,7 +69,7 @@ img {
         background-color: rgba($white, .3);
     }
 
-    &:after {
+    &:after:not(.banner-landing) {
         @include absolute(right 0 bottom 0 left 0);
         height: 10rem;
         background: linear-gradient(to bottom, rgba($white, 0) 0%, rgba($white, 1) 78%, rgba($white, 1) 100%);
@@ -78,6 +78,8 @@ img {
 
 @for $i from 1 through length($banner-bg-list) {
     .bg-#{nth($banner-bg-list, $i)} {
+        background-attachment: fixed;
+        background-position: center center;
         background-image: url('#{$banner-bg-image-url}#{nth($banner-bg-list, $i)}.jpg');
     }
 }

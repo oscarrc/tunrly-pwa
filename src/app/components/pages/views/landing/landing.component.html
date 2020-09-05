@@ -3,24 +3,26 @@
         <!-- Begin | Landing Page Banner [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
         <div class="banner landing-banner bg-landing" [style.background-image]="'url('+ backgroundImage + ')'">
             <header id="landing-header">
-            <div class="container d-flex align-items-center py-3">
-              <a routerLink="/home" class="brand">
-                <img [src]="brand.logo" alt="{{brand.name}}">
-              </a>
+                <div class="container d-flex align-items-center py-3">
+                <a routerLink="/home" class="brand">
+                    <img [src]="brand.logo" alt="{{brand.name}}">
+                </a>
 
-              <ul class="header-auto-options ml-auto d-flex align-items-center">
-                <li><a class="link" (click)="openLoginModal()">Sign in</a></li>
-                <li><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
-                            (click)="openLoginModal()">Sign up</button></li>
-              </ul>
-            </div>
-          </header>
+                <ul class="header-auto-options ml-auto d-flex align-items-center">
+                    <li><button type="button" class="btn btn-pill btn-air btn-sm btn-primary"
+                                (click)="openLoginModal()">Login</button></li>
+                </ul>
+                </div>
+            </header>
             <div class="banner-content">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-md-10 mx-auto text-center">
                             <h1>World's best music app</h1>
                             <p class="font-lg">More than 10 millions free music & 15 millions paid music track. Listen now!</p>
+                        </div>
+                        <div class="col-lg-4 col-md-10 mx-auto text-center">
+                            <h2>Join now for free</h2>
                         </div>
                     </div>
                 </div>
@@ -29,7 +31,7 @@
         <!-- End | Landing Page Banner -->
 
         <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
-        <div class="landing-section">
+        <!-- <div class="landing-section">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto text-center mb-5">
@@ -64,25 +66,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End | Landing Section -->
-
-        <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
-        <div class="landing-section light-section" *ngIf="events.length > 0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto mb-5 text-center">
-                        <h3>Upcoming Events</h3>
-                        <p class="font-md">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4 col-lg-6 col-12 pb-4" *ngFor="let event of events">
-                        <app-event-card [musicEvent]="event"></app-event-card>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div> -->
         <!-- End | Landing Section -->
 
         <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
@@ -90,7 +74,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto text-center mb-5">
-                        <h3>Trending Artist</h3>
+                        <h3>Trending Artists</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -108,6 +92,24 @@
             </div>
         </div>
         <!-- End | Landing Section -->
+
+        <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
+        <!-- <div class="landing-section light-section" *ngIf="events.length > 0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto mb-5 text-center">
+                        <h3>Upcoming Events</h3>
+                        <p class="font-md">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-12 pb-4" *ngFor="let event of events">
+                        <app-event-card [musicEvent]="event"></app-event-card>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- End | Landing Section -->       
 
         <app-footer></app-footer>
     </perfect-scrollbar>
