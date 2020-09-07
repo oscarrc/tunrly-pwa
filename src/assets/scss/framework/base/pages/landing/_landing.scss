@@ -29,6 +29,10 @@
     @include media-breakpoint-down(sm) {
         height: $landing-banner-height-sm;
     }
+
+    &:after{
+        display: none;
+    }
 }
 
 // Styling for landing page section
