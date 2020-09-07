@@ -26,6 +26,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
             password: new FormControl('', [
                 Validators.required
             ]),
+            remember: new FormControl(),
         });
     }
 
@@ -35,6 +36,10 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
 
     get password() {
         return this.login.get('password');
+    }
+
+    get remember() {
+        return this.login.get('remember');
     }
 
     submitLogin() {
