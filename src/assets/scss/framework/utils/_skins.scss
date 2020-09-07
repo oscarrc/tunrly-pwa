@@ -39,8 +39,12 @@ body {
         #sidebar {
             background-color: $gray-900;
 
-            .toggle-menu span {
+            .toggle-menu span{
                 background-color: $gray-400;
+            }
+
+            #hideSidebar {
+                color: $gray-400;
             }
         }
 
