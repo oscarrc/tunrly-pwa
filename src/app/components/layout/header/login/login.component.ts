@@ -20,11 +20,10 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
 
     ngOnInit() {
         this.login = new FormGroup({
-            userName: new FormControl('listen_app@kri8thm.com', [
-                Validators.required,
-                Validators.email
+            userName: new FormControl('', [
+                Validators.required
             ]),
-            password: new FormControl('123456789', [
+            password: new FormControl('', [
                 Validators.required
             ]),
         });

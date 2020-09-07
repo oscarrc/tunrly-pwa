@@ -111,6 +111,10 @@ body {
             background-color: $gray-800;
         }
 
+        .card-frosted{
+            background-color: $gray-alpha;
+        }
+
         .list-group-item, [class^='border-'],
         [class*=' border-'],
         .social-login,
@@ -170,6 +174,12 @@ body {
             &:after {
                 background: linear-gradient(to bottom, rgba($gray-800, 1) 0%, rgba($gray-800, 0) 100%);
             }
+        }
+
+        .input-group-text{
+            background-color: $gray-700;
+            border-color: $gray-600;
+            color: $gray-500;
         }
     }
 }
