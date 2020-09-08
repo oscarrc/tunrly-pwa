@@ -1,5 +1,5 @@
-<div class="song-h--img">
-    <img [src]="song?.cover_url" alt="{{song?.name}}" [class]="imageBorderRadiusClass">
+<div *ngIf="song.image" class="song-h--img">
+    <img [src]="song?.image[song.image.length - 1]" alt="{{song?.name}}" [class]="imageBorderRadiusClass">
 </div>
 <div class="song-h--desc">
     <span class="text-truncate song-h--name" title="{{song?.name}}">{{song?.name}}</span>

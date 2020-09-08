@@ -72,7 +72,7 @@ const routes: Routes = [
                 component: ArtistsComponent
             },
             {
-                path: 'artist/:id/details',
+                path: 'artist/:name',
                 component: ArtistDetailsComponent,
             },
             {
@@ -80,7 +80,7 @@ const routes: Routes = [
                 component: SongsComponent
             },
             {
-                path: 'song/:id/details',
+                path: 'song/:name/:artist',
                 component: SongDetailsComponent
             },
             {
@@ -88,7 +88,7 @@ const routes: Routes = [
                 component: AlbumsComponent
             },
             {
-                path: 'album/:id/details',
+                path: 'album/:name/:artist',
                 component: AlbumDetailsComponent
             },
             {

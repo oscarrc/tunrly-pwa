@@ -15,27 +15,17 @@ export class SecondaryCardComponent implements OnInit {
         let hash = 0;
         let str = value.toString();
 
-        for (var i = 0; i < str.length; i++) {
+        for (let i = 0; i < str.length; i++) {
             hash = str.charCodeAt(i) + ((hash << 5) - hash);
         }
 
-        var c = (hash & 0x00FFFFFF)
+        let c = (hash & 0x00FFFFFF)
             .toString(16)
             .toUpperCase();
     
         return "#00000".substring(0, 7 - c.length) + c;
     }
 
-    intToRGB(value:number){
-        var c = (value & 0x00FFFFFF)
-            .toString(16)
-            .toUpperCase();
-    
-        return "#00000".substring(0, 7 - c.length) + c;
-    }
-
-    ngOnInit() {
-       console.log( this.intToRGB(this.item.count))
-    }
+    ngOnInit() {}
 
 }

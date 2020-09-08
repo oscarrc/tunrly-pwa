@@ -59,6 +59,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             title: 'Top Tracks',
             subTitle: 'Popular tracks this week',
             page: '/tracks',
+            loading: true,
             items: []
         };
         
@@ -74,6 +75,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             title: 'Trending Artists',
             subTitle: 'What everyone listens to',
             page: '/artists',
+            loading: true,
             items: []
         };
         
@@ -89,6 +91,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             title: 'Hot tags',
             subTitle: 'This tags are hot',
             page: '/tags',
+            loading: true,
             items: []
         };
         
