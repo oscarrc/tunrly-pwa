@@ -42,7 +42,9 @@
               "node_modules/slick-carousel/slick/slick.min.js"
             ],
             "allowedCommonJsDependencies": [
-              "chart.js"
+              "chart.js",
+              "fingerprintjs2",
+              "ua-parser-js"
             ]
           },
           "configurations": {
