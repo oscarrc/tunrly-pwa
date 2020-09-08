@@ -1,12 +1,13 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { SongsConfigService } from '../../../../services/songs-config.service';
 import { LoadingService } from '../../../../services/loading.service';
-import { ArtistsConfigService } from '../../../../services/artists-config.service';
 import { PlaylistConfigService } from '../../../../services/playlist-config.service';
 import { RadioConfigService } from '../../../../services/radio-config.service';
 import { GenresConfigService } from '../../../../services/genres-config.service';
 import { EventsConfigService } from '../../../../services/events-config.service';
+import { TrackService } from '../../../../services/track.service';
+import { ArtistService } from '../../../../services/artist.service';
+import { TagService } from '../../../../services/tag.service';
 
 
 @Component({
@@ -19,8 +20,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     carouselArrowPosClass2 = 'arrow-pos-2';
     carouselArrowPosClass3 = 'arrow-pos-3';
 
-    songsList: any = [];
-    topCharts: any = {};
+    topTracks: any = {};
+    topArtists: any = {};
+    topTags: any = {};
     newRelease: any = {};
     artists: any = {};
     retro: any = {};
@@ -32,25 +34,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
     secondaryEvents: any = [];
 
     constructor(private loadingService: LoadingService,
-                private artistsConfigService: ArtistsConfigService,
-                private songsConfigService: SongsConfigService,
                 private playlistConfigService: PlaylistConfigService,
                 private radioConfigService: RadioConfigService,
                 private genresConfigService: GenresConfigService,
-                private eventsConfigService: EventsConfigService) { }
+                private eventsConfigService: EventsConfigService,
+                private trackService: TrackService,
+                private artistService: ArtistService,
+                private tagService: TagService) { }
 
-    ngOnInit() {
-        this.songsList = this.songsConfigService.songsList;
-        // Just takes first 6 index of array for ui
-        this.songsList = this.songsList.slice(0, 6);
-
-        this.initTopCharts();
-        this.initNewRelease();
-        this.initEvents();
-        this.initArtists();
-        this.initRetro();
-        this.initPlaylist();
-        this.initRadio();
+    ngOnInit() {        
+        this.initTopTracks();
+        this.initTopArtists();
+        this.initTopTags();
         this.initGenres();
     }
 
@@ -58,14 +53,51 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.loadingService.stopLoading();
     }
 
-    // Initialize top charts object for section
-    initTopCharts() {
-        this.topCharts = {
-            title: 'Top Charts',
-            subTitle: 'Listen top chart',
-            page: '/songs',
-            items: this.songsConfigService.songsList
+    // Initialize top tracks object
+    initTopTracks() {
+        this.topTracks = {
+            title: 'Top Tracks',
+            subTitle: 'Popular tracks this week',
+            page: '/tracks',
+            items: []
         };
+        
+        this.trackService.getTop('', 1, 10).subscribe(
+            res => this.topTracks.items = res,
+            err => console.log(err)
+        )
+    }
+
+    // Initialize top tracks object
+    initTopArtists() {
+        this.topArtists = {
+            title: 'Trending Artists',
+            subTitle: 'What everyone listens to',
+            page: '/artists',
+            items: []
+        };
+        
+        this.artistService.getTop('', 1, 10).subscribe(
+            res => this.topArtists.items = res,
+            err => console.log(err)
+        );
+    }
+
+    // Initialize top tracks object
+    initTopTags() {
+        this.topTags = {
+            title: 'Hot tags',
+            subTitle: 'This tags are hot',
+            page: '/tags',
+            items: []
+        };
+        
+        this.tagService.getTop(1, 10).subscribe(
+            res => this.topTags.items = res,
+            err => console.log(err)
+        )
+
+        console.log(this.topTags)
     }
 
     // Initialize new release music object for section
@@ -74,7 +106,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             title: 'New Releases',
             subTitle: 'Listen recently release music',
             page: '/songs',
-            items: this.songsConfigService.songsList
+            items: []
         };
     }
 
@@ -84,23 +116,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.secondaryEvents = this.eventsConfigService.eventsList.slice(1, 3);
     }
 
-    // Initialize music artists object for section
-    initArtists() {
-        this.artists = {
-            title: 'Featured Artists',
-            subTitle: 'Select you best to listen',
-            page: '/artists',
-            items: this.artistsConfigService.artistsList
-        };
-    }
-
     // Initialize retro music object for section
     initRetro() {
         this.retro = {
             title: 'Retro Classic',
             subTitle: 'Old is gold',
             page: '/songs',
-            items: this.songsConfigService.songsList
+            items: []
         };
     }
 
@@ -116,7 +138,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         // Add songs in playlist
         const playlistItems = this.playlist.items;
         for (const playlistItem of playlistItems) {
-            playlistItem.songs = this.songsConfigService.songsList;
+            playlistItem.songs = []
         }
     }
 

@@ -49,6 +49,11 @@
                 color: $white;
             }
         }
+
+        .no-image{
+            min-height: 100px;
+            width: 100%;
+        }
     }
 
     .custom-card--link {

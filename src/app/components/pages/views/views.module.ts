@@ -38,6 +38,10 @@ import { PurchasesComponent } from './analytics/purchases/purchases.component';
 import { StatisticsComponent } from './analytics/statistics/statistics.component';
 import { ReferralsComponent } from './analytics/referrals/referrals.component';
 
+import { TrackService } from '../../../services/track.service';
+import { ArtistService } from '../../../services/artist.service';
+import { TagService } from '../../../services/tag.service';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
 };
@@ -175,6 +179,9 @@ const routes: Routes = [
         RouterModule.forChild(routes)
     ],
     providers: [
+        TrackService,
+        ArtistService,
+        TagService,
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
             useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

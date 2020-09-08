@@ -14,7 +14,7 @@
     <ngx-slick-carousel [class]="classes" [config]="sliderConfig">
         <div ngxSlickItem *ngFor="let item of section?.items" class="slide">
             <app-image-card *ngIf="imageCard" [item]="item" [imageBorderRadiusClass]="imageBorderRadiusClass"
-                            [routeLink]="artistRouteLink ? '/artist/' + item.id + '/details' : ''"></app-image-card>
+                            [routeLink]="artistRouteLink ? '/artist/' + item.name : ''"></app-image-card>
 
             <app-primary-card *ngIf="primaryCard" [song]="item" [showOptions]="showImageOptions"
                               [imageBorderRadiusClass]="imageBorderRadiusClass"></app-primary-card>
