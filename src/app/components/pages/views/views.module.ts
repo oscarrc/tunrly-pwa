@@ -43,6 +43,7 @@ import { TrackService } from '../../../services/track.service';
 import { ArtistService } from '../../../services/artist.service';
 import { AlbumService } from '../../../services/album.service';
 import { TagService } from '../../../services/tag.service';
+import { PlaylistService } from '../../../services/playlist.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -80,6 +81,14 @@ const routes: Routes = [
             {
                 path: 'artist/:name',
                 component: ArtistDetailsComponent,
+            },
+            {
+                path: 'playlists',
+                component: ArtistsComponent
+            },
+            {
+                path: 'playlist/:id',
+                component: ArtistsComponent
             },
             {
                 path: 'songs',
