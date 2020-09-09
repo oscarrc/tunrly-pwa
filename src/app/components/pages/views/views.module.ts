@@ -14,6 +14,7 @@ import { PartialsModule } from '../../partials/partials.module';
 import { CoreModule } from '../../../core/core.module';
 import { LayoutModule } from '../../layout/layout.module';
 import { GenresComponent } from './genres/genres.component';
+import { GenreDetailsComponent } from './genres/genre-details/genre-details.component';
 import { MusicComponent } from './music/music.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
@@ -63,6 +64,10 @@ const routes: Routes = [
             {
                 path: 'genres',
                 component: GenresComponent,
+            },
+            {
+                path: 'genre/:name',
+                component: GenreDetailsComponent,
             },
             {
                 path: 'music',
@@ -145,6 +150,7 @@ const routes: Routes = [
         ViewsComponent,
         HomeComponent,
         GenresComponent,
+        GenreDetailsComponent,
         MusicComponent,
         ArtistsComponent,
         ArtistDetailsComponent,

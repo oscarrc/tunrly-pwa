@@ -4,12 +4,12 @@
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <!-- Top Tracks -->
-    <app-section *ngIf="topTracks" [section]="topTracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section *ngIf="topTracks.items.length" [section]="topTracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
                  [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!-- Top Artists -->
-    <app-section *ngIf="topArtists" [section]="topArtists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+    <app-section *ngIf="topArtists.items.length" [section]="topArtists" [carouselButtonPositionClass]="carouselArrowPosClass2"
                  [imageCard]="true" [artistRouteLink]="true">
     </app-section>
 
@@ -34,7 +34,7 @@
     </app-section> -->
 
     <!-- Genres -->
-    <app-section *ngIf="topTags" [section]="topTags" [carouselButtonPositionClass]="carouselArrowPosClass1"
+    <app-section *ngIf="topTags.items.length" [section]="topTags" [carouselButtonPositionClass]="carouselArrowPosClass1"
                  [secondaryCard]="true">
     </app-section>
 </div>

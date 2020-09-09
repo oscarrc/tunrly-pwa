@@ -11,6 +11,14 @@ export class TagService {
     constructor(private httpClient: HttpClient) {
     }
 
+    getTag(tag: string, type: string, page: number, limit: number){
+        return this.httpClient.get(this.tagURL + tag, { params: {
+            type: type,
+            page: page.toString(),
+            limit: limit.toString()
+        }});
+    }
+
     getTop(page: number, limit: number){
         return this.httpClient.get(this.tagURL, { params: {
             page: page.toString(),

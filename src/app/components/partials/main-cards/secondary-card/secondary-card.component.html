@@ -1,6 +1,6 @@
 <div class="custom-card">
     <div class="custom-card--img">
-        <a [routerLink]="'/tag/' + item.name">
+        <a [routerLink]="'/genre/' + item.name">
             <img *ngIf="item.image" [src]="item?.image" alt="{{item?.name}}" [class]="imageBorderRadiusClass">
             <div *ngIf="!item.image" class="no-image" [class]="imageBorderRadiusClass"  [style.background-color]="getBgColor(item.count)"></div>
             <span class="bg-blur">{{ item?.name | titlecase }}</span>

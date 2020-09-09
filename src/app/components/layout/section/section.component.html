@@ -3,7 +3,7 @@
     <div class="heading">
         <div class="d-flex flex-wrap align-items-end">
             <div class="flex-grow-1">
-                <h4>{{section?.title}}</h4>
+                <h4>{{section?.title | titlecase}}</h4>
                 <p>{{section?.subTitle}}</p>
             </div>
             <a class="btn btn-sm btn-pill btn-air btn-primary" routerLink="{{section?.page}}">View All</a>
