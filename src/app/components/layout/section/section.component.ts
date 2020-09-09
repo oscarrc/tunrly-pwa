@@ -16,7 +16,7 @@ export class SectionComponent implements OnInit {
     @Input() imageBorderRadiusClass = 'card-img--radius-lg';
     @Input() carouselButtonPositionClass;
     @Input() fourSlideCarousel = false;
-    @Input() artistRouteLink = false;
+    @Input() type:string;
 
     sliderConfig: any = {};
 

@@ -17,8 +17,7 @@
     <div class="section">
         <div class="row custom-card-list">
             <div class="col-xl-custom col-lg-5 col-sm-6" *ngFor="let artist of artists">
-                <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'" [imageSrc]="artist?.image.thumbnail[0] || artist?.image.background[0]"
-                                [routeLink]="'/artist/' + artist.name"></app-image-card>
+                <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'" type="artist"></app-image-card>
             </div>
         </div>
     </div>

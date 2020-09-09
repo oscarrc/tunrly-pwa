@@ -7,7 +7,11 @@ import {Component, Input, OnInit} from '@angular/core';
 export class SecondaryCardComponent implements OnInit {
 
     @Input() item: any = {};
+    @Input() type: string;
     @Input() imageBorderRadiusClass = 'card-img--radius-md';
+
+    bgcolor:string;
+    routerLink:string;
 
     constructor() { }
 
@@ -26,6 +30,22 @@ export class SecondaryCardComponent implements OnInit {
         return "#00000".substring(0, 7 - c.length) + c;
     }
 
-    ngOnInit() {}
+    getRandom(elements: Array<any>){
+        const size = elements.length;
+        const rand = Math.floor(Math.random() * size);
+        return elements[rand];
+    }
+
+    ngOnInit() {
+        switch(this.type){
+            case 'genre':
+                this.routerLink = `/genre/${this.item.name}`;
+                break;
+            case 'playlist':                
+                const track = this.getRandom(this.item.tracks);
+                this.item.image = track.image[track.image.length - 1];
+                this.routerLink = `/playlist/${this.item._id}`;                
+        }
+    }
 
 }

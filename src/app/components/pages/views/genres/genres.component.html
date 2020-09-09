@@ -11,8 +11,8 @@
         </span>
     </div>
     <div class="section row custom-card-list">
-        <div class="col-xl-custom col-lg-5 col-sm-3" *ngFor="let genre of genres | slice:(page-1)*limit:page*limit">
-            <app-secondary-card [item]="genre"></app-secondary-card>
+        <div class="col-xl-custom col-lg-5 col-sm-3" *ngFor="let genre of genres | slice:(page-1)*limit:page*limit">            
+            <app-secondary-card [item]="genre" type="genre"></app-secondary-card>
         </div>
     </div>
 </div>

@@ -4,23 +4,23 @@
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <!-- Tracks -->
-    <app-section *ngIf="tracks.items.length" [section]="tracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section *ngIf="tracks?.items?.length" [section]="tracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
                 [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!--  Artists -->
-    <app-section *ngIf="artists.items.length" [section]="artists" [carouselButtonPositionClass]="carouselArrowPosClass2"
-                [imageCard]="true" [artistRouteLink]="true">
+    <app-section *ngIf="artists?.items?.length" [section]="artists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+                [imageCard]="true" type="artist">
     </app-section>
 
     <!--  Albums -->
-    <app-section *ngIf="albums.items.length" [section]="albums" [carouselButtonPositionClass]="carouselArrowPosClass2"
-                [primaryCard]="true">
+    <app-section *ngIf="albums?.items?.length" [section]="albums" [carouselButtonPositionClass]="carouselArrowPosClass2"
+                [imageCard]="true" type="album">
     </app-section>
 
     <!--  Playlists  -->
-    <app-section *ngIf="playlists.items.length" [section]="playlists" [carouselButtonPositionClass]="carouselArrowPosClass2"
-        [primaryCard]="true">
+    <app-section *ngIf="playlists?.items?.length" [section]="playlists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+                [secondaryCard]="true" type="playlist">
     </app-section>
 </div>
 <!-- End | Main Container -->

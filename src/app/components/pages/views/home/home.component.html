@@ -10,7 +10,7 @@
 
     <!-- Top Artists -->
     <app-section *ngIf="topArtists.items.length" [section]="topArtists" [carouselButtonPositionClass]="carouselArrowPosClass2"
-                 [imageCard]="true" [artistRouteLink]="true">
+                 [imageCard]="true" type="artist">
     </app-section>
 
     <!-- New Release -->
@@ -35,7 +35,7 @@
 
     <!-- Genres -->
     <app-section *ngIf="topTags.items.length" [section]="topTags" [carouselButtonPositionClass]="carouselArrowPosClass1"
-                 [secondaryCard]="true">
+                 [secondaryCard]="true" type="genre">
     </app-section>
 </div>
 <!-- End | Main Container -->

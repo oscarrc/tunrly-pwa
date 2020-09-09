@@ -10,7 +10,7 @@
             <div class="search-item-body row">
                 <div class="col-xl-2 col-md-4 col-6" *ngFor="let artist of artistsList">
                     <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'"
-                                    [routeLink]="'/artist/' + artist.id + '/details'"></app-image-card>
+                                    type="artist"></app-image-card>
                 </div>
             </div>
         </div>
