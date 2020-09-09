@@ -71,7 +71,6 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
         }
     }
 
-
     playAllSongs() {
         this.audioPlayerService.playNowPlaylist(this.artistDetails);
     }

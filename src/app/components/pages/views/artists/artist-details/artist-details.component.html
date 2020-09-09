@@ -87,7 +87,7 @@
                 <div class="row">
                     <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let artist of artistDetails?.similar">
                         <app-image-card [item]="artist" [imageBorderRadiusClass]="imageBorderRadiusClass"
-                            [routeLink]="'/artist/' + artist.name" [imageSrc]="artist?.image.thumbnail[0]"></app-image-card>
+                            [routeLink]="'/artist/' + artist.name" [imageSrc]="artist?.image.thumbnail[0] || artist?.image.background[0]"></app-image-card>
                     </div>
                 </div>
             </div>

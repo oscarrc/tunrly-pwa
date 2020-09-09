@@ -13,58 +13,73 @@ export class MenuConfig {
                         page: '/home'
                     },
                     {
-                        title: 'Genres',
-                        icon: 'la la-diamond',
-                        page: '/genres'
-                    },
-                    {
-                        title: 'Free Music',
-                        icon: 'la la-music',
-                        page: '/music'
-                    },
-                    {
                         title: 'Artists',
                         icon: 'la la-microphone',
                         page: '/artists'
                     },
                     {
-                        title: 'Stations',
-                        icon: 'la la-bullseye',
-                        page: '/stations'
+                        title: 'Tracks',
+                        icon: 'la la-music',
+                        page: '/songs'
                     },
-                    { section: 'Your Music' },
                     {
-                        title: 'Analytics',
-                        icon: 'la la-bar-chart',
-                        page: '/analytics'
+                        title: 'Genres',
+                        icon: 'la la-diamond',
+                        page: '/genres'
                     },
+                    {
+                        title: 'Playlists',
+                        icon: 'la la-play-circle',
+                        page: '/playlists'
+                    },
+                    // {
+                    //     title: 'Artists',
+                    //     icon: 'la la-microphone',
+                    //     page: '/artists'
+                    // },
+                    // {
+                    //     title: 'Stations',
+                    //     icon: 'la la-bullseye',
+                    //     page: '/stations'
+                    // },
+                    { section: 'Your Music' },
+                    // {
+                    //     title: 'Analytics',
+                    //     icon: 'la la-bar-chart',
+                    //     page: '/analytics'
+                    // },
                     {
                         title: 'Favorites',
                         icon: 'la la-heart-o',
                         page: '/favorites'
                     },
                     {
+                        title: 'Playlists',
+                        icon: 'la la-list',
+                        page: '/playlists'
+                    },
+                    {
                         title: 'History',
                         icon: 'la la-history',
                         page: '/history'
                     },
-                    { section: 'Music Events' },
-                    {
-                        title: 'Events',
-                        icon: 'la la-calendar',
-                        page: '/events'
-                    },
-                    {
-                        title: 'Add Event',
-                        icon: 'la la-home',
-                        page: '/add-event'
-                    },
-                    { section: 'Extra Pages' },
-                    {
-                        title: 'Error',
-                        icon: 'la la-times-circle-o',
-                        page: '/404'
-                    }
+                    // { section: 'Music Events' },
+                    // {
+                    //     title: 'Events',
+                    //     icon: 'la la-calendar',
+                    //     page: '/events'
+                    // },
+                    // {
+                    //     title: 'Add Event',
+                    //     icon: 'la la-home',
+                    //     page: '/add-event'
+                    // },
+                    // { section: 'Extra Pages' },
+                    // {
+                    //     title: 'Error',
+                    //     icon: 'la la-times-circle-o',
+                    //     page: '/404'
+                    // }
                 ]
             },
             userMenu: {

@@ -4,14 +4,13 @@
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
   <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
-    <div class="container-header">
-        <span class="title">{{songs.record}} Results</span>
-        <div class="ml-auto d-flex align-items-center">
-            <select class="select" name="sort" id="sort">
-                <option selected="">Popular</option>
-                <option value="0">A-Z</option>
-                <option value="1">Z-A</option>
-            </select>
+    <div class="container-header d-flex justify-content-between">
+        <span class="title">Browse top tracks</span>
+        <div class="d-flex align-items-center">
+            <span>
+                <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
+                <button type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+            </span>
             <a class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
                 <ng-template #gridViewButton>
@@ -26,12 +25,12 @@
     <div class="section">
         <div class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
-                <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let song of songs.list">
+                <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let song of songs">
                     <app-primary-card [song]="song" [showOptions]="true"></app-primary-card>
                 </div>
             </ng-container>
             <ng-template #listView>
-                <div class="col-xl-6 col-lg-12" *ngFor="let song of songs.list; let i = index">
+                <div class="col-xl-6 col-lg-12" *ngFor="let song of songs; let i = index">
                     <app-song-list-view [songNumber]="i+1" [song]="song" [icon]="'la-ellipsis-h'"></app-song-list-view>
                 </div>
             </ng-template>
