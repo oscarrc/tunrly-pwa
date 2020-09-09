@@ -10,9 +10,6 @@ export class SecondaryCardComponent implements OnInit {
     @Input() type: string;
     @Input() imageBorderRadiusClass = 'card-img--radius-md';
 
-    bgcolor:string;
-    routerLink:string;
-
     constructor() { }
 
     getBgColor(value:number){
@@ -37,15 +34,6 @@ export class SecondaryCardComponent implements OnInit {
     }
 
     ngOnInit() {
-        switch(this.type){
-            case 'genre':
-                this.routerLink = `/genre/${this.item.name}`;
-                break;
-            case 'playlist':                
-                const track = this.getRandom(this.item.tracks);
-                this.item.image = track.image[track.image.length - 1];
-                this.routerLink = `/playlist/${this.item._id}`;                
-        }
     }
 
 }

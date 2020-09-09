@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-event-countdown-card',
-    templateUrl: './event-countdown-card.component.html'
+    selector: 'app-description-countdown-card',
+    templateUrl: './description-countdown-card.component.html'
 })
 export class EventCountdownCardComponent implements OnInit {
 
-    @Input() musicEvent: any = {};
+    @Input() item: any = {};
     @Input() eventBorderRadiusClass = 'bg-img-radius-lg';
 
     countText: any = {};

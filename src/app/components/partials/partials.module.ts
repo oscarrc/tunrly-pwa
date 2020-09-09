@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { PrimaryCardComponent } from './main-cards/primary-card/primary-card.component';
 import { SecondaryCardComponent } from './main-cards/secondary-card/secondary-card.component';
-import { EventCardComponent } from './event-cards/event-card/event-card.component';
-import { EventCountdownCardComponent } from './event-cards/event-countdown-card/event-countdown-card.component';
+import { EventCardComponent } from './description-cards/description-card/description-card.component';
+import { EventCountdownCardComponent } from './description-cards/description-countdown-card/description-countdown-card.component';
 import { TruncatePipe } from '../../core/pipes/truncate.pipe';
 import { SongListViewComponent } from './song-list-view/song-list-view.component';
 import { SongOptionsComponent } from './song-options/song-options.component';

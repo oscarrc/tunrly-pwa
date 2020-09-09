@@ -12,6 +12,7 @@ export class SectionComponent implements OnInit {
     @Input() imageCard = false;
     @Input() primaryCard = false;
     @Input() secondaryCard = false;
+    @Input() descriptionCard = false;
     @Input() showImageOptions = false;
     @Input() imageBorderRadiusClass = 'card-img--radius-lg';
     @Input() carouselButtonPositionClass;

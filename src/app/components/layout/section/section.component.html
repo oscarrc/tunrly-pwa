@@ -20,6 +20,9 @@
 
             <app-secondary-card *ngIf="secondaryCard" [item]="item" [type]="type" [imageBorderRadiusClass]="imageBorderRadiusClass">
             </app-secondary-card>
+
+            <app-description-card *ngIf="descriptionCard" [item]="item" [type]="type">
+            </app-description-card>
         </div>
     </ngx-slick-carousel>
 </div>
