@@ -12,8 +12,9 @@
                 <div class="col-xl-8 col-lg-6">
                     <h5>{{songDetails.name}}</h5>
                     <p><a routerLink="{{ '/artist/' +  songDetails.artist }}">{{songDetails.artist}}</a></p>
+                    <p [innerHTML]="songDetails.wiki.summary"></p>
                     <div class="text-warning tags">
-                        <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of songDetails.tags"><span class="badge badge-pill badge-warning mr-2">{{tag}}</span></a>
+                        <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of songDetails.tags"><span class="badge badge-pill badge-warning mr-2">{{tag | titlecase}}</span></a>
                     </div>
                     <span class="badge badge-pill badge-warning mt-3" *ngIf="songDetails.premium">Premium</span>
                     <div class="mt-4">
@@ -40,10 +41,6 @@
         <!-- Begin | Line Tabs [[ Find at scss/framework/components/line-tabs.scss ]] -->
         <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="songDetails" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab"
-                   aria-controls="overview" aria-selected="true">Overview</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" id="lyrics-tab" data-toggle="tab" href="#lyrics" role="tab"
                    aria-controls="lyrics" aria-selected="false">Lyrics</a>
             </li>
@@ -55,9 +52,6 @@
         <!-- End | Line Tabs -->
         <!-- Begin | Tab Content -->
         <div class="tab-content" id="songDetailsContent">
-            <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-                <p [innerHTML]="songDetails.wiki.content"></p>
-            </div>
             <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab" [innerHTML]="songDetails.lyrics"></div>
             <div class="tab-pane fade show" id="similar" role="tabpanel" aria-labelledby="similar-tab">
                 <div class="row custom-card-list">

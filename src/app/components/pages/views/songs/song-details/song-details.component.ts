@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../../services/loading.service';
-import { SongsConfigService } from '../../../../../services/songs-config.service';
 import { AudioPlayerService } from '../../../../../services/audio-player.service';
 import { TrackService } from '../../../../../services/track.service';
 
@@ -21,7 +20,6 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private songsConfigService: SongsConfigService,
                 private audioPlayerService: AudioPlayerService,
                 private trackService: TrackService) {
         this.routeSubscription = this.route.params.subscribe(param => {
@@ -48,27 +46,13 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getSimilar(){
-        if(!this.songDetails.similar || this.songDetails.similar == 0){
+        if(!this.songDetails.similar || this.songDetails.similar.length == 0){
             this.trackService.getSimilar(this.songDetails._id).subscribe(
                 res => this.songDetails.similar = res,
                 err => console.log(err)
             )
         }
     }
-
-    // Set an array for ratings stars.
-    // setRatingsView() {
-    //     this.songDetails.ratingsView = [];
-    //     const ratings = Math.trunc(this.songDetails.ratings);
-    //     for (let i = 0; i < ratings; i++) {
-    //         this.songDetails.ratingsView.push(Config.STAR);
-    //     }
-
-    //     // Push half star in array
-    //     if (this.songDetails.ratings % 1) {
-    //         this.songDetails.ratingsView.push(Config.HALF_STAR);
-    //     }
-    // }
 
     addInPlayer() {
         this.audioPlayerService.playSong(this.songDetails);

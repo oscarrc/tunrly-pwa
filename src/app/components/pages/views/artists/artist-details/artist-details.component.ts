@@ -3,10 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../../services/loading.service';
-import { ArtistsConfigService } from '../../../../../services/artists-config.service';
-import { SongsConfigService } from '../../../../../services/songs-config.service';
 import { AudioPlayerService } from '../../../../../services/audio-player.service';
-import { Config } from '../../../../../config/config';
+import { ArtistService } from '../../../../../services/artist.service';
 
 @Component({
     selector: 'app-artist-details',
@@ -15,18 +13,19 @@ import { Config } from '../../../../../config/config';
 export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     artistId: number;
+    artistName: string
     artistDetails: any;
-
+    imageBorderRadiusClass: string = "card-img--radius-lg";
+    
     routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private artistsConfigService: ArtistsConfigService,
-                private songsConfigService: SongsConfigService,
-                private audioPlayerService: AudioPlayerService) {
+                private audioPlayerService: AudioPlayerService,
+                private artistService: ArtistService) {
         this.routeSubscription = this.route.params.subscribe(param => {
-            if (param.id) {
-                this.artistId = parseInt(param.id, 10);
+            if (param.name) {
+                this.artistName = param.name;
                 this.getArtistDetails();
             }
         });
@@ -40,25 +39,39 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     getArtistDetails() {
-        this.artistDetails = this.artistsConfigService.getArtistByIb(this.artistId);
-        this.artistDetails.songs = this.songsConfigService.songsList;
-        this.artistDetails.record = 124;
-        this.setRatingsView();
+        this.artistService.getInfo(this.artistName).subscribe(
+            res => this.artistDetails = res,
+            err => console.log(err)
+        )
     }
 
-    // Set an array for ratings stars.
-    setRatingsView() {
-        this.artistDetails.ratingsView = [];
-        const ratings = Math.trunc(this.artistDetails.ratings);
-        for (let i = 0; i < ratings; i++) {
-            this.artistDetails.ratingsView.push(Config.STAR);
-        }
-
-        // Push half star in array
-        if (this.artistDetails.ratings % 1) {
-            this.artistDetails.ratingsView.push(Config.HALF_STAR);
+    getTracks(){
+        if(!this.artistDetails.tracks || this.artistDetails.tracks.length == 0){
+            this.artistService.getTracks(this.artistDetails._id).subscribe(
+                res => this.artistDetails.tracks = res,
+                err => console.log(err)
+            )
         }
     }
+
+    getAlbums(){
+        if(!this.artistDetails.albums || this.artistDetails.albums.length == 0){
+            this.artistService.getAlbums(this.artistDetails._id).subscribe(
+                res => this.artistDetails.albums = res,
+                err => console.log(err)
+            )
+        }
+    }
+
+    getSimilar(){
+        if(!this.artistDetails.similar || this.artistDetails.similar.length == 0){
+            this.artistService.getSimilar(this.artistDetails._id).subscribe(
+                res => this.artistDetails.similar = res,
+                err => console.log(err)
+            )
+        }
+    }
+
 
     playAllSongs() {
         this.audioPlayerService.playNowPlaylist(this.artistDetails);

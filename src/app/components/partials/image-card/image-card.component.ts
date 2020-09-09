@@ -10,6 +10,7 @@ export class ImageCardComponent implements OnInit {
 
     @Input() item: any;
     @Input() routeLink: any;
+    @Input() imageSrc: any;
     @Input() imageBorderRadiusClass = 'card-img--radius-lg';
 
     constructor(private searchService: SearchService) { }

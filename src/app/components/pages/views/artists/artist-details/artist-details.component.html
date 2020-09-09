@@ -6,15 +6,15 @@
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
-            <img [src]="artistDetails.cover_url" alt="{{artistDetails.name}}" class="card-img--radius-lg">
+            <img [src]="artistDetails.image.thumbnail.length > 0 ? artistDetails.image.thumbnail[artistDetails.image.thumbnail.length -1] : 'assets/images/cover/extralarge.png'" alt="{{artistDetails.name}}" class="card-img--radius-lg">
         </div>
         <div class="col-xl-9 col-lg-8 col-sm-7">
             <div class="row pt-4">
                 <div class="col-xl-8 col-lg-6">
                     <h5>{{artistDetails.name}}</h5>
-                    <p>DOB: {{artistDetails.dob}}</p>
-                    <div class="text-warning stars">
-                        <i class="la {{rating}}" *ngFor="let rating of artistDetails.ratingsView"></i>
+                    <p [innerHTML]="artistDetails.wiki.summary"></p>                                       
+                    <div class="text-warning tags mb-4">
+                        <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of artistDetails.tags"><span class="badge badge-pill badge-warning mr-2">{{tag | titlecase}}</span></a>
                     </div>
                     <div class="mt-4">
                       <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
@@ -37,16 +37,16 @@
         <!-- Begin | Line Tabs [[ Find at scss/framework/components/line-tabs.scss ]] -->
         <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="artistDetails" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="song-tab" data-toggle="tab" href="#song" role="tab"
+                <a class="nav-link active" id="song-tab" data-toggle="tab" href="#song" role="tab" (click)="getTracks()"
                    aria-controls="song" aria-selected="true">Top Songs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="album-tab" data-toggle="tab" href="#album" role="tab"
+                <a class="nav-link" id="album-tab" data-toggle="tab" href="#album" role="tab" (click)="getAlbums()"
                    aria-controls="album" aria-selected="false">Top Albums</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab"
-                   aria-controls="bio" aria-selected="false">Biography</a>
+                <a class="nav-link" id="similar-tab" data-toggle="tab" href="#similar" role="tab" (click)="getSimilar()"
+                   aria-controls="similar" aria-selected="false">Similar</a>
             </li>
         </ul>
         <!-- End | Line Tabs -->
@@ -65,35 +65,29 @@
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
-                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.songs; let i = index">
-                        <app-song-list-view [songNumber]="i+1" [song]="song" [icon]="'la-ellipsis-h'"></app-song-list-view>
-                    </div>
+                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.tracks; let i = index">                    
+                        <app-song-list-view [songNumber]="i+1" [song]="song"></app-song-list-view>
+                    </div>  
                 </div>
             </div>
             <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album-tab">
-                <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
-                <div class="container-header">
-                    <span class="title">{{artistDetails.record}} Results</span>
-                    <select class="select ml-auto" name="sort-2" id="sort-2">
-                        <option value="0">Popular</option>
-                        <option value="1">A-Z</option>
-                        <option value="2">Z-A</option>
-                    </select>
-                </div>
-                <!-- End | Container header -->
-                <div class="row custom-card-list">
-                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.songs; let i = index">
-                        <app-song-list-view [songNumber]="i+1" [song]="song" [icon]="'la-ellipsis-h'"></app-song-list-view>
+                <div class="row">
+                    <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let album of artistDetails.albums">
+                        <app-image-card [item]="album" [imageBorderRadiusClass]="imageBorderRadiusClass"
+                            [routeLink]="'/album/' + album.name + '/' + album.artist" [imageSrc]="album?.image[album.image.length - 1]"></app-image-card>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="bio" role="tabpanel" aria-labelledby="bio-tab">
-                <div class="bio-content" [innerHTML]="artistDetails.bio"></div>
+            <div class="tab-pane fade" id="similar" role="tabpanel" aria-labelledby="similar-tab">
+                <div class="row">
+                    <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let artist of artistDetails.similar">
+                        <app-image-card [item]="artist" [imageBorderRadiusClass]="imageBorderRadiusClass"
+                            [routeLink]="'/artist/' + artist.name" [imageSrc]="artist?.image.thumbnail[0]"></app-image-card>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Begin | Tab Content -->
     </div>
     <!-- End | Section -->
-
-    <app-comment></app-comment>
 </div>
