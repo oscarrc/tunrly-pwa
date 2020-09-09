@@ -1,0 +1,42 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-playlist"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <div class="row section text-center text-md-left">
+        <div class="col-xl-3 col-lg-4 col-sm-5">
+            <img [src]="playlistDetails?.image ? playlistDetails?.image : 'assets/images/cover/extralarge.png'" alt="{{playlistDetails?.name}}" class="card-img--radius-lg">
+        </div>
+        <div class="col-xl-9 col-lg-8 col-sm-7">
+            <div class="row pt-4">
+                <div class="col-xl-8 col-lg-6">
+                    <h5>{{playlistDetails?.name}}</h5>
+                    <p *ngIf="playlistDetails?.user.username">by <a routerLink="{{ '/user/' +  playlistDetails.user.username }}">{{playlistDetails?.user.username}}</a></p>
+                    <p [innerHTML]="playlistDetails?.description"></p> 
+                    <div class="text-warning tags mb-4">
+                        <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of playlistDetails?.tags"><span class="badge badge-pill badge-warning mr-2">{{tag | titlecase}}</span></a>
+                    </div>
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
+                                (click)="playAllSongs()">Play All</button>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="pt-3 pt-lg-0 text-lg-right btn-inline">
+                        <button type="button" class="btn btn-pill btn-air btn-danger btn-icon-only"><i class="la la-heart-o"></i></button>
+                        <button type="button" class="btn btn-pill btn-air btn-brand btn-icon-only"><i class="la la-share-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="row section custom-card-list">
+        <div class="col-xl-6 col-lg-12" *ngFor="let song of playlistDetails?.tracks; let i = index">
+            <app-song-list-view [songNumber]="i+1" [song]="song" [imageSrc]="song.image[0]" [icon]="'la-ellipsis-h'"></app-song-list-view>
+        </div>
+    </div>
+    <!-- End | Section -->
+</div>
+<!-- End | Main Container -->

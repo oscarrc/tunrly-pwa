@@ -20,6 +20,7 @@ import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
 import { SongsComponent } from './songs/songs.component';
 import { SongDetailsComponent } from './songs/song-details/song-details.component';
+import { PlaylistDetailsComponent } from './playlists/playlist-details/playlist-details.component';
 import { StationsComponent } from './stations/stations.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HistoryComponent } from './history/history.component';
@@ -88,7 +89,7 @@ const routes: Routes = [
             },
             {
                 path: 'playlist/:id',
-                component: ArtistsComponent
+                component: PlaylistDetailsComponent
             },
             {
                 path: 'songs',
@@ -163,6 +164,7 @@ const routes: Routes = [
         MusicComponent,
         ArtistsComponent,
         ArtistDetailsComponent,
+        PlaylistDetailsComponent,
         SongsComponent,
         SongDetailsComponent,
         StationsComponent,
@@ -198,6 +200,7 @@ const routes: Routes = [
         TrackService,
         ArtistService,
         AlbumService,
+        PlaylistService,
         TagService,
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

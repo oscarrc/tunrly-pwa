@@ -13,7 +13,6 @@ import { AlbumService } from '../../../../../services/album.service';
 })
 export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    albumId: number;
     albumName: string;
     artistName: string;
     artistDetails: any;
