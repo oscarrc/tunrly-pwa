@@ -3,8 +3,15 @@
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
+    <div class="container-header d-flex justify-content-between">
+        <span class="title">Browse top genres</span>
+        <span>
+            <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
+            <button [disabled]="page==genres.length/limit" type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+        </span>
+    </div>
     <div class="section row custom-card-list">
-        <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let genre of genres">
+        <div class="col-xl-custom col-lg-5 col-sm-3" *ngFor="let genre of genres | slice:(page-1)*limit:page*limit">
             <app-secondary-card [item]="genre"></app-secondary-card>
         </div>
     </div>

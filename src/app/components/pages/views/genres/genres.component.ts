@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../services/loading.service';
-import { GenresConfigService } from '../../../../services/genres-config.service';
-import { SongsConfigService } from '../../../../services/songs-config.service';
+import { TagService } from '../../../../services/tag.service';
 
 @Component({
     selector: 'app-genres',
@@ -11,10 +10,11 @@ import { SongsConfigService } from '../../../../services/songs-config.service';
 export class GenresComponent implements OnInit, AfterViewInit {
 
     genres: any = [];
+    page: number = 1;
+    limit: number = 10;
 
     constructor(private loadingService: LoadingService,
-                private songsConfigService: SongsConfigService,
-                private genresConfigService: GenresConfigService) { }
+                private tagService: TagService) { }
 
     ngOnInit() {
         this.initGenres();
@@ -24,9 +24,20 @@ export class GenresComponent implements OnInit, AfterViewInit {
         this.loadingService.stopLoading();
     }
 
+    nextPage(){
+        this.page = this.page + 1;
+    }
+
+    prevPage(){
+        this.page = this.page - 1;
+    }
+
     // Initialize music genres
     initGenres() {
-        this.genres = this.genresConfigService.genresList;
+        this.tagService.getTop(this.page, this.limit).subscribe(
+            res => this.genres = res,
+            err => console.log(err)
+        )
     }
 
 }
