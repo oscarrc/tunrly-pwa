@@ -6,15 +6,15 @@
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
-            <img [src]="artistDetails.image.thumbnail.length > 0 ? artistDetails.image.thumbnail[artistDetails.image.thumbnail.length -1] : 'assets/images/cover/extralarge.png'" alt="{{artistDetails.name}}" class="card-img--radius-lg">
+            <img [src]="artistDetails?.image.thumbnail.length > 0 ? artistDetails.image.thumbnail[artistDetails.image.thumbnail.length -1] : 'assets/images/cover/extralarge.png'" alt="{{artistDetails?.name}}" class="card-img--radius-lg">
         </div>
         <div class="col-xl-9 col-lg-8 col-sm-7">
             <div class="row pt-4">
                 <div class="col-xl-8 col-lg-6">
-                    <h5>{{artistDetails.name}}</h5>
-                    <p [innerHTML]="artistDetails.wiki.summary"></p>                                       
+                    <h5>{{artistDetails?.name}}</h5>
+                    <p [innerHTML]="artistDetails?.wiki?.summary"></p>                                       
                     <div class="text-warning tags mb-4">
-                        <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of artistDetails.tags"><span class="badge badge-pill badge-warning mr-2">{{tag | titlecase}}</span></a>
+                        <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of artistDetails?.tags"><span class="badge badge-pill badge-warning mr-2">{{tag | titlecase}}</span></a>
                     </div>
                     <div class="mt-4">
                       <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
@@ -56,7 +56,7 @@
             <div class="tab-pane fade show active" id="song" role="tabpanel" aria-labelledby="song-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header">
-                    <span class="title">{{artistDetails.record}} Results</span>
+                    <span class="title">{{artistDetails?.record}} Results</span>
                     <select class="select ml-auto" name="sort-1" id="sort-1">
                         <option value="0">Popular</option>
                         <option value="1">A-Z</option>
@@ -65,14 +65,14 @@
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
-                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.tracks; let i = index">                    
+                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails?.tracks; let i = index">                    
                         <app-song-list-view [songNumber]="i+1" [song]="song"></app-song-list-view>
                     </div>  
                 </div>
             </div>
             <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album-tab">
                 <div class="row">
-                    <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let album of artistDetails.albums">
+                    <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let album of artistDetails?.albums">
                         <app-image-card [item]="album" [imageBorderRadiusClass]="imageBorderRadiusClass"
                             [routeLink]="'/album/' + album.name + '/' + album.artist" [imageSrc]="album?.image[album.image.length - 1]"></app-image-card>
                     </div>
@@ -80,7 +80,7 @@
             </div>
             <div class="tab-pane fade" id="similar" role="tabpanel" aria-labelledby="similar-tab">
                 <div class="row">
-                    <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let artist of artistDetails.similar">
+                    <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let artist of artistDetails?.similar">
                         <app-image-card [item]="artist" [imageBorderRadiusClass]="imageBorderRadiusClass"
                             [routeLink]="'/artist/' + artist.name" [imageSrc]="artist?.image.thumbnail[0]"></app-image-card>
                     </div>
