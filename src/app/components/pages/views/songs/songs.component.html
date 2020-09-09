@@ -7,16 +7,16 @@
     <div class="container-header d-flex justify-content-between">
         <span class="title">Browse top tracks</span>
         <div class="d-flex align-items-center">
-            <span>
-                <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
-                <button type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
-            </span>
             <a class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
                 <ng-template #gridViewButton>
                     <i class="ion-md-apps"></i>
                 </ng-template>
             </a>
+            <div class="ml-2">
+                <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
+                <button type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+            </div>
         </div>
     </div>
     <!-- End | Container header -->

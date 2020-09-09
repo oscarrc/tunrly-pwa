@@ -2,9 +2,6 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../services/loading.service';
 import { PlaylistConfigService } from '../../../../services/playlist-config.service';
-import { RadioConfigService } from '../../../../services/radio-config.service';
-import { GenresConfigService } from '../../../../services/genres-config.service';
-import { EventsConfigService } from '../../../../services/events-config.service';
 import { TrackService } from '../../../../services/track.service';
 import { ArtistService } from '../../../../services/artist.service';
 import { TagService } from '../../../../services/tag.service';
@@ -35,9 +32,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     constructor(private loadingService: LoadingService,
                 private playlistConfigService: PlaylistConfigService,
-                private radioConfigService: RadioConfigService,
-                private genresConfigService: GenresConfigService,
-                private eventsConfigService: EventsConfigService,
                 private trackService: TrackService,
                 private artistService: ArtistService,
                 private tagService: TagService) { }
@@ -46,7 +40,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.initTopTracks();
         this.initTopArtists();
         this.initTopTags();
-        this.initGenres();
     }
 
     ngAfterViewInit() {
@@ -58,7 +51,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.topTracks = {
             title: 'Top Tracks',
             subTitle: 'Popular tracks this week',
-            page: '/tracks',
+            page: '/songs',
             loading: true,
             items: []
         };
@@ -90,7 +83,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.topTags = {
             title: 'Hot tags',
             subTitle: 'This genres are hot',
-            page: '/tags',
+            page: '/genres',
             loading: true,
             items: []
         };
@@ -102,33 +95,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
         console.log(this.topTags)
     }
-
-    // Initialize new release music object for section
-    initNewRelease() {
-        this.newRelease = {
-            title: 'New Releases',
-            subTitle: 'Listen recently release music',
-            page: '/songs',
-            items: []
-        };
-    }
-
-    // Initialize music events object for section
-    initEvents() {
-        this.mainEvent = this.eventsConfigService.eventsList[0];
-        this.secondaryEvents = this.eventsConfigService.eventsList.slice(1, 3);
-    }
-
-    // Initialize retro music object for section
-    initRetro() {
-        this.retro = {
-            title: 'Retro Classic',
-            subTitle: 'Old is gold',
-            page: '/songs',
-            items: []
-        };
-    }
-
+ 
     // Initialize music playlist object for section
     initPlaylist() {
         this.playlist = {
@@ -144,25 +111,4 @@ export class HomeComponent implements OnInit, AfterViewInit {
             playlistItem.songs = []
         }
     }
-
-    // Initialize radio object for section
-    initRadio() {
-        this.radio = {
-            title: 'Radio',
-            subTitle: 'Listen live now',
-            page: '/stations',
-            items: this.radioConfigService.radioList
-        };
-    }
-
-    // Initialize music genres object for section
-    initGenres() {
-        this.genres = {
-            title: 'Genres',
-            subTitle: 'Select you genre',
-            page: '/genres',
-            items: this.genresConfigService.genresList
-        };
-    }
-
 }
