@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     initTopTags() {
         this.topTags = {
             title: 'Hot tags',
-            subTitle: 'This tags are hot',
+            subTitle: 'This genres are hot',
             page: '/tags',
             loading: true,
             items: []

@@ -55,13 +55,8 @@
         <div class="tab-content" id="artistDetailsContent">
             <div class="tab-pane fade show active" id="song" role="tabpanel" aria-labelledby="song-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
-                <div class="container-header">
-                    <span class="title">{{artistDetails?.record}} Results</span>
-                    <select class="select ml-auto" name="sort-1" id="sort-1">
-                        <option value="0">Popular</option>
-                        <option value="1">A-Z</option>
-                        <option value="2">Z-A</option>
-                    </select>
+                <div class="container-header d-flex justify-content-end pb-3">
+                    <a class="btn btn-sm btn-pill btn-air btn-primary" routerLink="">View All</a>
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
@@ -71,6 +66,11 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album-tab">
+                <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+                <div class="container-header d-flex justify-content-end pb-3">
+                    <a class="btn btn-sm btn-pill btn-air btn-primary" routerLink="">View All</a>
+                </div>
+                <!-- End | Container header -->
                 <div class="row">
                     <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let album of artistDetails?.albums">
                         <app-image-card [item]="album" [imageBorderRadiusClass]="imageBorderRadiusClass"
@@ -79,6 +79,11 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="similar" role="tabpanel" aria-labelledby="similar-tab">
+                <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+                <div class="container-header d-flex justify-content-end pb-3">
+                    <a class="btn btn-sm btn-pill btn-air btn-primary" routerLink="">View All</a>
+                </div>
+                <!-- End | Container header -->
                 <div class="row">
                     <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let artist of artistDetails?.similar">
                         <app-image-card [item]="artist" [imageBorderRadiusClass]="imageBorderRadiusClass"

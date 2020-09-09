@@ -53,7 +53,12 @@
         <!-- Begin | Tab Content -->
         <div class="tab-content" id="songDetailsContent">
             <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab" [innerHTML]="songDetails?.lyrics"></div>
-            <div class="tab-pane fade show" id="similar" role="tabpanel" aria-labelledby="similar-tab">
+            <div class="tab-pane fade show" id="similar" role="tabpanel" aria-labelledby="similar-tab">                
+                <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+                <div class="container-header d-flex justify-content-end pb-3">
+                    <a class="btn btn-sm btn-pill btn-air btn-primary" routerLink="">View All</a>
+                </div>
+                <!-- End | Container header -->
                 <div class="row custom-card-list">
                     <div class="col-xl-6 col-lg-12" *ngFor="let song of songDetails?.similar; let i = index">                    
                         <app-song-list-view [songNumber]="i+1" [song]="song"></app-song-list-view>
