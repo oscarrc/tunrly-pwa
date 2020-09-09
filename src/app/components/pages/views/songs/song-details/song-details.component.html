@@ -52,7 +52,17 @@
         <!-- End | Line Tabs -->
         <!-- Begin | Tab Content -->
         <div class="tab-content" id="songDetailsContent">
-            <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab" [innerHTML]="songDetails?.lyrics"></div>
+            <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab">
+                <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+                <div class="container-header d-flex pb-3">
+                    <h6 class="mx-auto text-center">{{songDetails?.artist}}'s {{songDetails?.name}} lyrics</h6>
+                </div>
+                <!-- End | Container header -->
+                <div class="row custom-card-list">
+                    <div class="col-12 text-center"  [innerHTML]="songDetails?.lyrics">
+                    </div>  
+                </div>
+            </div>
             <div class="tab-pane fade show" id="similar" role="tabpanel" aria-labelledby="similar-tab">                
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header d-flex justify-content-end pb-3">
