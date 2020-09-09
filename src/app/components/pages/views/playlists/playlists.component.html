@@ -1,0 +1,26 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-playlist"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+    <div class="container-header d-flex justify-content-between">
+        <span class="title">User contributed playlists</span>
+        <span>
+            <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
+            <button type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+        </span>
+    </div>
+    <!-- End | Container header -->
+
+     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+     <div class="section">
+        <div class="row custom-card-list">
+            <div class="col-xl-custom col-lg-5 col-sm-6" *ngFor="let playlist of playlists">
+                <app-description-card [item]="playlist"  type="playlist"></app-description-card>
+            </div>
+        </div>
+    </div>
+    <!-- End | Section -->
+</div>
+<!-- End | Main Container -->

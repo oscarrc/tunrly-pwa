@@ -20,6 +20,7 @@ import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
 import { SongsComponent } from './songs/songs.component';
 import { SongDetailsComponent } from './songs/song-details/song-details.component';
+import { PlaylistsComponent } from './playlists/playlists.compontent';
 import { PlaylistDetailsComponent } from './playlists/playlist-details/playlist-details.component';
 import { StationsComponent } from './stations/stations.component';
 import { FavoritesComponent } from './favorites/favorites.component';
@@ -85,7 +86,7 @@ const routes: Routes = [
             },
             {
                 path: 'playlists',
-                component: ArtistsComponent
+                component: PlaylistsComponent
             },
             {
                 path: 'playlist/:id',
@@ -164,6 +165,7 @@ const routes: Routes = [
         MusicComponent,
         ArtistsComponent,
         ArtistDetailsComponent,
+        PlaylistsComponent,
         PlaylistDetailsComponent,
         SongsComponent,
         SongDetailsComponent,

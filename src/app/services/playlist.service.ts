@@ -14,4 +14,15 @@ export class PlaylistService {
     getInfo(id: string){
         return this.httpClient.get(this.playlistURL + id);
     }
+
+    get(user: string, page:number, limit:number){
+        let params = {            
+            page: page.toString(),
+            limit: limit.toString()
+        }
+
+        if(user) params["user"] = user;
+
+        return this.httpClient.get(this.playlistURL, { params: params });
+    }
 }
