@@ -10,6 +10,7 @@ export class SongListViewComponent implements OnInit {
 
     @Input() song: any = {};
     @Input() songNumber: number;
+    @Input() imageSrc: any;
     @Input() imageBorderRadiusClass = 'card-img--radius-sm';
     @Input() icon = 'la-ellipsis-v';
     @Input() playlist: any;

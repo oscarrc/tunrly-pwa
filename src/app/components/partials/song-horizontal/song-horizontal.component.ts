@@ -14,6 +14,7 @@ export class SongHorizontalComponent implements OnInit {
 
     @Input() song: any = {};
     @Input() largeImage = false;
+    @Input() imageSrc: any;
     @Input() imageBorderRadiusClass = 'card-img--radius-sm';
     @Input() playlist: any;
     @Input() routeLink = '';

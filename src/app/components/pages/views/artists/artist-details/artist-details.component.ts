@@ -11,8 +11,7 @@ import { ArtistService } from '../../../../../services/artist.service';
     templateUrl: './artist-details.component.html'
 })
 export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
-
-    artistId: number;
+    
     artistName: string
     artistDetails: any;
     imageBorderRadiusClass: string = "card-img--radius-lg";

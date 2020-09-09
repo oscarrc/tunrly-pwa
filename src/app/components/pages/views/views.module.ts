@@ -40,6 +40,7 @@ import { ReferralsComponent } from './analytics/referrals/referrals.component';
 
 import { TrackService } from '../../../services/track.service';
 import { ArtistService } from '../../../services/artist.service';
+import { AlbumService } from '../../../services/album.service';
 import { TagService } from '../../../services/tag.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -181,6 +182,7 @@ const routes: Routes = [
     providers: [
         TrackService,
         ArtistService,
+        AlbumService,
         TagService,
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
