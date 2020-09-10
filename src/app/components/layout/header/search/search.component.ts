@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { SearchService } from '../../../../services/search.service';
 import { Subscription } from 'rxjs';
 
+//TODO content loader placeholder
+
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html'
