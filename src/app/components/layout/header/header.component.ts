@@ -1,4 +1,5 @@
 import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
@@ -24,6 +25,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     searchSubscription: Subscription;
     skinSubscription: Subscription;
 
+    searchForm: any;
+    pressEnter: boolean = false;
+
     constructor(@Inject(DOCUMENT) private document: Document,
                 private searchService: SearchService,
                 private simpleModalService: SimpleModalService,
@@ -36,6 +40,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.searchForm = new FormGroup({
+            query: new FormControl('', [
+                Validators.required
+            ])
+        });
+
         this.currentUser = this.localStorageService.getCurrentUser();
         const themeSkin = this.localStorageService.getThemeSkin();
         if (themeSkin) {
@@ -52,6 +62,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 this.headerClasses = 'bg-' + Config.THEME_CLASSES[skin.header];
             }
         });
+    }
+
+    doSearch(){
+        if(this.searchForm.valid){
+            this.searchService.doSearch(this.searchForm.get('query').value).subscribe(
+                res => {
+                    this.searchService.searchResult = res
+                    if(res) this.showSearchResults();
+                },
+                err => console.log(err)
+            )
+        }
     }
 
     showSearchResults() {
@@ -76,6 +98,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     openSidebar() {
         this.document.body.classList.add(Config.classes.openSidebar);
+    }
+
+    toggleSearchFocus(){
+        if( !this.pressEnter && this.searchService.searchResult ){
+            this.showSearchResults();
+        }
+        this.pressEnter = !this.pressEnter
     }
 
     ngOnDestroy() {

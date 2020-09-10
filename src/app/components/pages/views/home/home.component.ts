@@ -87,8 +87,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
             res => this.topTags.items = res,
             err => console.log(err)
         )
-
-        console.log(this.topTags)
     }
  
     // Initialize music playlist object for section

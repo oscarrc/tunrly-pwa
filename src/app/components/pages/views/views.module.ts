@@ -125,6 +125,14 @@ const routes: Routes = [
                 path: 'track/:name/:artist',
                 component: TrackDetailsComponent
             },
+            {
+                path: 'track/search',
+                component: TrackDetailsComponent
+            },
+            {
+                path: 'search/:type',
+                component: TrackDetailsComponent
+            },
             // {
             //     path: 'albums',
             //     component: AlbumsComponent

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SongsConfigService } from '../../../../services/songs-config.service';
-import { AlbumsConfigService } from '../../../../services/albums-config.service';
-import { ArtistsConfigService } from '../../../../services/artists-config.service';
 import { SearchService } from '../../../../services/search.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-search',
@@ -12,29 +10,29 @@ import { SearchService } from '../../../../services/search.service';
 })
 export class SearchComponent implements OnInit {
 
-    songsList: any = [];
-    albumsList: any = [];
-    artistsList: any = [];
+    searchSubscription: Subscription;
+    tracks: any = {};
+    albums: any = {};
+    artists: any = {};
+    playlists: any = {};
+    page: number = 1;
+    limit: number = 10;
 
     constructor(private router: Router,
-                private songsConfigService: SongsConfigService,
-                private albumsConfigService: AlbumsConfigService,
-                private artistsConfigService: ArtistsConfigService,
                 private searchService: SearchService) { }
 
     ngOnInit() {
-        this.songsList = this.songsConfigService.songsList;
-        this.songsList = this.songsList.slice(0, 3);
-
-        this.albumsList = this.albumsConfigService.albumsList;
-        this.albumsList = this.albumsList.slice(2, 5);
-
-        this.artistsList = this.artistsConfigService.artistsList;
-        this.artistsList = this.artistsList.slice(0, 6);
+        this.searchSubscription = this.searchService.searchStatus.subscribe((value) => {
+            console.log(value)
+            this.tracks = value.tracks;
+            this.albums = value.albums;
+            this.artists = value.artists;
+            this.playlists = value.playlists
+        });
     }
 
     goToPage(page) {
-        page = '/' + page;
+        page = 'search/' + page;
         this.searchService.hideSearchResult();
         this.router.navigate([page]);
     }

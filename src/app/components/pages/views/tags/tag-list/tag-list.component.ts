@@ -50,11 +50,9 @@ export class TagListComponent implements OnInit, AfterViewInit {
     }
     
     getTag(){
-        console.log(this[this.type]);
         this.tagService.getTag(this.tagName, this.type, this.page, this.limit).subscribe(
             res => { 
                 this[this.type] = res;
-                console.log(this[this.type]);
             },
             err => console.log(err)
         )
