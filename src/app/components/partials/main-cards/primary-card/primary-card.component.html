@@ -3,9 +3,9 @@
     <div [class]="classes">
         <!-- Begin | Custom Card Info -->
         <div class="custom-card--info" *ngIf="showOptions">
-            <ul class="custom-card--labels d-flex" *ngIf="song?.premium || song?.favorite">
-                <li *ngIf="song?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
-                <li *ngIf="song?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
+            <ul class="custom-card--labels d-flex" *ngIf="track?.premium || track?.favorite">
+                <li *ngIf="track?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
+                <li *ngIf="track?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
             </ul>
             <!-- Custom Card Options Dropdown -->
             <div class="dropdown dropdown-icon">
@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li class="dropdown-item">
-                        <a [href]="song?.url" class="dropdown-link" download>
+                        <a [href]="track?.url" class="dropdown-link" download>
                             <i class="la la-download"></i>
                         </a>
                     </li>
@@ -38,14 +38,14 @@
         </div>
         <!-- End | Custom Card Info -->
         <a (click)="addInPlayer()">
-            <img [src]="song?.image[song.image.length - 1] || 'assets/images/cover/large.png'" alt="{{song?.name}}">
+            <img [src]="track?.image[track.image.length - 1] || 'assets/images/cover/large.png'" alt="{{track?.name}}">
         </a>
     </div>
 
     <!-- Custom Card Options Dropdown -->
-    <a class="custom-card--link mt-2" [routerLink]="'/track/' + song.name + '/' + song.artist">
-        <h6 class="text-truncate" title="{{song?.name}}">{{song?.name}}</h6>
-        <p class="text-truncate" title="{{song?.artist}}" *ngIf="song?.artist">{{song?.artist}}</p>
+    <a class="custom-card--link mt-2" [routerLink]="'/track/' + track.name + '/' + track.artist">
+        <h6 class="text-truncate" title="{{track?.name}}">{{track?.name}}</h6>
+        <p class="text-truncate" title="{{track?.artist}}" *ngIf="track?.artist">{{track?.artist}}</p>
     </a>
 </div>
 <!-- Begin | Custom Card [[ Find at scss/framework/components/custom-card/custom-card.scss ]] -->

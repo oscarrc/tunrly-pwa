@@ -8,7 +8,7 @@ import { AudioPlayerService } from '../../../../services/audio-player.service';
 })
 export class PrimaryCardComponent implements OnInit {
 
-    @Input() song: any = {};
+    @Input() track: any = {};
     @Input() showOptions = false;
     @Input() imageBorderRadiusClass = 'card-img--radius-lg';
 
@@ -22,7 +22,7 @@ export class PrimaryCardComponent implements OnInit {
     }
 
     addFavorite() {
-        this.song.favorite = true;
+        this.track.favorite = true;
     }
 
     addInQueue() {
@@ -32,7 +32,7 @@ export class PrimaryCardComponent implements OnInit {
     }
 
     addInPlayer() {
-        this.audioPlayerService.playSong(this.song);
+        this.audioPlayerService.playSong(this.track);
     }
 
 }

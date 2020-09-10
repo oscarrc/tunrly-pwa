@@ -15,7 +15,7 @@
         <div ngxSlickItem *ngFor="let item of section?.items" class="slide">
             <app-image-card *ngIf="imageCard" [item]="item" [type]="type" [imageBorderRadiusClass]="imageBorderRadiusClass"></app-image-card>
 
-            <app-primary-card *ngIf="primaryCard" [song]="item" [showOptions]="showImageOptions"
+            <app-primary-card *ngIf="primaryCard" [track]="item" [showOptions]="showImageOptions"
                               [imageBorderRadiusClass]="imageBorderRadiusClass"></app-primary-card>
 
             <app-secondary-card *ngIf="secondaryCard" [item]="item" [type]="type" [imageBorderRadiusClass]="imageBorderRadiusClass">
