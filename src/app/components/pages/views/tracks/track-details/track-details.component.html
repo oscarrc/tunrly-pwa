@@ -66,7 +66,7 @@
             <div class="tab-pane fade show" id="similar" role="tabpanel" aria-labelledby="similar-tab">                
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header d-flex justify-content-end pb-3">
-                    <a class="btn btn-sm btn-pill btn-air btn-primary" routerLink="">View All</a>
+                    <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/track/' + trackDetails?._id + '/similar'">View All</a>
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
