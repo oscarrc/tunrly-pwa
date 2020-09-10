@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
@@ -10,17 +10,18 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class SearchService {
 
-    private search:any = false;
+    private search:any = [];
     private searchURL = environment.api + '/search/';
     searchStatus: BehaviorSubject<any> = new BehaviorSubject(this.search);
+    hideSearch: EventEmitter<boolean> = new EventEmitter(false);
 
     constructor(private httpClient: HttpClient) { }
 
-    get searchResult() {
+    get searchResults() {
         return this.search;
     }
 
-    set searchResult(value) {
+    set searchResults(value) {
         this.search = value;
         this.searchStatus.next(value);
     }
@@ -34,6 +35,6 @@ export class SearchService {
     }
 
     hideSearchResult() {
-        this.searchResult = true;
+        this.hideSearch.emit(true);
     }
 }

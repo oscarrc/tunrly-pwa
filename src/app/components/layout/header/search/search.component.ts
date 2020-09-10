@@ -23,7 +23,6 @@ export class SearchComponent implements OnInit {
 
     ngOnInit() {
         this.searchSubscription = this.searchService.searchStatus.subscribe((value) => {
-            console.log(value)
             this.tracks = value.tracks;
             this.albums = value.albums;
             this.artists = value.artists;
@@ -32,8 +31,8 @@ export class SearchComponent implements OnInit {
     }
 
     goToPage(page) {
-        page = 'search/' + page;
         this.searchService.hideSearchResult();
+        page = 'search/' + page;        
         this.router.navigate([page]);
     }
 

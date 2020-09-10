@@ -41,6 +41,7 @@ import { TotalSongsComponent } from './analytics/total-songs/total-songs.compone
 import { PurchasesComponent } from './analytics/purchases/purchases.component';
 import { StatisticsComponent } from './analytics/statistics/statistics.component';
 import { ReferralsComponent } from './analytics/referrals/referrals.component';
+import { SearchResultsComponent } from './search/search-results.component';
 
 import { TrackService } from '../../../services/track.service';
 import { ArtistService } from '../../../services/artist.service';
@@ -131,7 +132,7 @@ const routes: Routes = [
             },
             {
                 path: 'search/:type',
-                component: TrackDetailsComponent
+                component: SearchResultsComponent
             },
             // {
             //     path: 'albums',
@@ -224,7 +225,8 @@ const routes: Routes = [
         TotalSongsComponent,
         PurchasesComponent,
         StatisticsComponent,
-        ReferralsComponent
+        ReferralsComponent,
+        SearchResultsComponent
     ],
     imports: [
         CommonModule,

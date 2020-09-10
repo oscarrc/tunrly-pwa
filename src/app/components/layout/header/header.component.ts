@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.headerClasses = 'bg-' + Config.THEME_CLASSES[themeSkin.header];
         }
 
-        this.searchSubscription = this.searchService.searchStatus.subscribe((value) => {
+        this.searchSubscription = this.searchService.hideSearch.subscribe((value) => {
             if (value) {
                 this.hideSearchResults();
             }
@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if(this.searchForm.valid){
             this.searchService.doSearch(this.searchForm.get('query').value).subscribe(
                 res => {
-                    this.searchService.searchResult = res
+                    this.searchService.searchResults = res
                     if(res) this.showSearchResults();
                 },
                 err => console.log(err)
@@ -101,7 +101,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     toggleSearchFocus(){
-        if( !this.pressEnter && this.searchService.searchResult ){
+        if( !this.pressEnter && this.searchService.searchResults.length ){
             this.showSearchResults();
         }
         this.pressEnter = !this.pressEnter
