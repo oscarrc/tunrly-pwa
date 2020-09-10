@@ -5,10 +5,10 @@ import { SearchService } from '../../../services/search.service';
 import { AudioPlayerService } from '../../../services/audio-player.service';
 
 @Component({
-    selector: 'app-song-horizontal',
-    templateUrl: './song-horizontal.component.html'
+    selector: 'app-track-horizontal',
+    templateUrl: './track-horizontal.component.html'
 })
-export class SongHorizontalComponent implements OnInit {
+export class TrackHorizontalComponent implements OnInit {
 
     @HostBinding('class') classes = 'song-h';
 

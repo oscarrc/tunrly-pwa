@@ -9,7 +9,7 @@ import { EventCountdownCardComponent } from './description-cards/description-cou
 import { TruncatePipe } from '../../core/pipes/truncate.pipe';
 import { SongListViewComponent } from './song-list-view/song-list-view.component';
 import { SongOptionsComponent } from './song-options/song-options.component';
-import { SongHorizontalComponent } from './song-horizontal/song-horizontal.component';
+import { TrackHorizontalComponent } from './track-horizontal/track-horizontal.component';
 import { ImageCardComponent } from './image-card/image-card.component';
 import { CommentComponent } from './comment/comment.component';
 import { ThemeSettingsComponent } from './theme-settings/theme-settings.component';
@@ -24,7 +24,7 @@ import { CountdownComponent } from './countdown/countdown.component';
         TruncatePipe,
         SongListViewComponent,
         SongOptionsComponent,
-        SongHorizontalComponent,
+        TrackHorizontalComponent,
         ImageCardComponent,
         CommentComponent,
         ThemeSettingsComponent,
@@ -37,7 +37,7 @@ import { CountdownComponent } from './countdown/countdown.component';
         EventCountdownCardComponent,
         SongListViewComponent,
         SongOptionsComponent,
-        SongHorizontalComponent,
+        TrackHorizontalComponent,
         ImageCardComponent,
         CommentComponent,
         ThemeSettingsComponent
