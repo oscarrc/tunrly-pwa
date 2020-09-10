@@ -14,7 +14,7 @@ import { PartialsModule } from '../../partials/partials.module';
 import { CoreModule } from '../../../core/core.module';
 import { LayoutModule } from '../../layout/layout.module';
 import { TagsComponent } from './tags/tags.component';
-import { GenreDetailsComponent } from './tags/tag-details/genre-details.component';
+import { TagDetailsComponent } from './tags/tag-details/tag-details.component';
 import { MusicComponent } from './music/music.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
@@ -70,7 +70,11 @@ const routes: Routes = [
             },
             {
                 path: 'tag/:name',
-                component: GenreDetailsComponent,
+                component: TagDetailsComponent,
+            },
+            {
+                path: 'tag/:name/:type',
+                component: TagDetailsComponent,
             },
             {
                 path: 'music',
@@ -78,6 +82,10 @@ const routes: Routes = [
             },
             {
                 path: 'artists',
+                component: ArtistsComponent
+            },
+            {
+                path: 'artist/:id/similar',
                 component: ArtistsComponent
             },
             {
@@ -97,11 +105,19 @@ const routes: Routes = [
                 component: TracksComponent
             },
             {
+                path: 'track/:id/similar',
+                component: TracksComponent
+            },
+            {
                 path: 'track/:name/:artist',
                 component: TrackDetailsComponent
             },
             {
                 path: 'albums',
+                component: AlbumsComponent
+            },
+            {
+                path: 'album/:id/similar',
                 component: AlbumsComponent
             },
             {
@@ -161,7 +177,7 @@ const routes: Routes = [
         ViewsComponent,
         HomeComponent,
         TagsComponent,
-        GenreDetailsComponent,
+        TagDetailsComponent,
         MusicComponent,
         ArtistsComponent,
         ArtistDetailsComponent,
