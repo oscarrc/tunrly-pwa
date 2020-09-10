@@ -105,6 +105,10 @@ const routes: Routes = [
                 component: TracksComponent
             },
             {
+                path: 'track/:id',
+                component: TracksComponent
+            },
+            {
                 path: 'track/:id/similar',
                 component: TracksComponent
             },

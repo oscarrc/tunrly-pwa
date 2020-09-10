@@ -16,6 +16,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
     country: string = '';
     name: string = '';
     id: string = '';
+    type: string='';
     page: number = 1;
     limit: number = 10;
 
@@ -25,6 +26,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
                 private loadingService: LoadingService,
                 private artistService: ArtistService) {
                     this.routeSubscription = this.route.params.subscribe(param => {
+                        this.type = this.route.snapshot.url[2]?.path;
                         this.id = param.id;       
                         this.name = param.name;
                         this.getContent();
@@ -49,10 +51,12 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
     }
 
     getContent(){
-        if(this.id){
-            this.getSimilar()
-        }else if(this.name){
-            this.getArtists()
+        switch(this.type){
+            case "similar":
+                this.getSimilar();
+                break;
+            default:
+                this.getArtists();
         }
     }
 
