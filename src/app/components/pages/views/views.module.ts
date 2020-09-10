@@ -89,6 +89,14 @@ const routes: Routes = [
                 component: ArtistsComponent
             },
             {
+                path: 'artist/:id/albums',
+                component: AlbumsComponent
+            },
+            {
+                path: 'artist/:id/tracks',
+                component: TracksComponent
+            },
+            {
                 path: 'artist/:name',
                 component: ArtistDetailsComponent,
             },

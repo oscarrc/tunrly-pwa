@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../services/loading.service';
 import { TrackService } from '../../../../services/track.service';
+import { ArtistService } from '../../../../services/artist.service';
 
 @Component({
     selector: 'app-tracks',
@@ -23,7 +24,8 @@ export class TracksComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private trackService: TrackService) { 
+                private trackService: TrackService,
+                private artistService: ArtistService) { 
                     this.routeSubscription = this.route.params.subscribe(param => {
                         this.type = this.route.snapshot.url[2]?.path;
                         this.id = param.id;
@@ -52,6 +54,9 @@ export class TracksComponent implements OnInit, AfterViewInit {
             case "similar":
                 this.getSimilar();
                 break;
+            case "tracks":
+                this.getArtistTracks();
+                break;
             default:
                 this.getTracks();
                 break;
@@ -61,6 +66,13 @@ export class TracksComponent implements OnInit, AfterViewInit {
     // Initialize songs
     getTracks() {
         this.trackService.getTop(this.country, this.page, this.limit).subscribe(
+            res => this.tracks = res,
+            err => console.log(err)
+        )
+    }
+
+    getArtistTracks() {
+        this.artistService.getTracks(this.id).subscribe(
             res => this.tracks = res,
             err => console.log(err)
         )
