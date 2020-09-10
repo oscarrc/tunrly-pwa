@@ -5,7 +5,7 @@
         <div class="search-item">
             <div class="search-item-header">
                 <span class="search-item-title">Tracks</span>
-                <a class="search-item-link ml-auto" (click)="goToPage('tracks')">View All</a>
+                <a *ngIf="tracks?.matches.length" class="search-item-link ml-auto" (click)="goToPage('tracks')">View All</a>
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-4 col-sm-6 col-12" *ngFor="let track of tracks?.matches | slice:0:6">
@@ -22,7 +22,7 @@
         <div class="search-item">
             <div class="search-item-header">
                 <span class="search-item-title">Artists</span>
-                <a class="search-item-link ml-auto" (click)="goToPage('artists')">View All</a>
+                <a *ngIf="artists?.matches.length" class="search-item-link ml-auto" (click)="goToPage('artists')">View All</a>
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-2 col-md-4 col-6" *ngFor="let artist of artists?.matches | slice:0:6">
@@ -40,7 +40,7 @@
         <div class="search-item">
             <div class="search-item-header">
                 <span class="search-item-title">Albums</span>
-                <a class="search-item-link ml-auto" (click)="goToPage('albums')">View All</a>
+                <a *ngIf="albums?.matches.length" class="search-item-link ml-auto" (click)="goToPage('albums')">View All</a>
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-2 col-md-4 col-6" *ngFor="let album of albums?.matches | slice:0:6">
@@ -58,7 +58,7 @@
         <div class="search-item">
             <div class="search-item-header">
                 <span class="search-item-title">Playlists</span>
-                <a class="search-item-link ml-auto" (click)="goToPage('playlists')">View All</a>
+                <a *ngIf="playlists?.matches?.length" class="search-item-link ml-auto" (click)="goToPage('playlists')">View All</a>
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-4 col-sm-6 col-12" *ngFor="let playlist of playlists?.matches | slice:0:6">

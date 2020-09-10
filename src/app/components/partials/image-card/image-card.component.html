@@ -1,7 +1,8 @@
 <div class="custom-card" *ngIf="routeLink; else withoutLink">
     <a class="custom-card--link" routerLink="{{routeLink}}">
         <img [src]="imageSrc || 'assets/images/cover/extralarge.png'" alt="{{item?.name}}" [class]="imageBorderRadiusClass">
-        <h6 class="mb-0 mt-2">{{item?.name}}</h6>
+        <h6 class="mb-0 mt-2 text-truncate">{{item?.name}}</h6>
+        <p class="text-truncate" title="{{item?.artist}}" *ngIf="item?.artist">{{item?.artist}}</p>
     </a>
 </div>
 
@@ -9,7 +10,8 @@
     <div class="custom-card">
         <a class="custom-card--link">
             <img [src]="imageSrc || 'assets/images/cover/extralarge.png'" alt="{{item?.name}}" [class]="imageBorderRadiusClass">
-            <h6 class="mb-0 mt-2">{{item?.name}}</h6>
+            <h6 class="mb-0 mt-2 text-truncate">{{item?.name}}</h6>
+            <p class="text-truncate" title="{{item?.artist}}" *ngIf="item?.artist">{{item?.artist}}</p>
         </a>
     </div>
 </ng-template>
