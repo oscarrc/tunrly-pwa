@@ -14,7 +14,6 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
 
     artists: any = [];
     country: string = '';
-    name: string = '';
     id: string = '';
     type: string='';
     page: number = 1;
@@ -27,8 +26,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
                 private artistService: ArtistService) {
                     this.routeSubscription = this.route.params.subscribe(param => {
                         this.type = this.route.snapshot.url[2]?.path;
-                        this.id = param.id;       
-                        this.name = param.name;
+                        this.id = param.id;
                         this.getContent();
                     });
                 }
