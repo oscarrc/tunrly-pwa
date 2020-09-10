@@ -1,7 +1,7 @@
 <div class="song-h--img">
-    <img [src]="imageSrc || (song.image?.length ? song?.image[0] : 'assets/images/cover/small.png')" alt="{{song?.name}}" [class]="imageBorderRadiusClass">
+    <img [src]="imageSrc || (track.image?.length ? track?.image[0] : 'assets/images/cover/small.png')" alt="{{track?.name}}" [class]="imageBorderRadiusClass">
 </div>
 <div class="song-h--desc">
-    <span class="text-truncate song-h--name" title="{{song?.name}}">{{song?.name}}</span>
-    <p class="text-truncate song-h--artist" title="{{song?.artist}}" *ngIf="song?.artist">{{song?.artist}}</p>
+    <span class="text-truncate song-h--name" title="{{track?.name}}">{{track?.name}}</span>
+    <p class="text-truncate song-h--artist" title="{{track?.artist}}" *ngIf="track?.artist">{{track?.artist}}</p>
 </div>

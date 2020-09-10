@@ -1,7 +1,7 @@
 <div class="song-list--item-number">{{songNumber < 10 ? '0' + songNumber : songNumber}}</div>
 
-<app-track-horizontal [song]="song" [imageBorderRadiusClass]="imageBorderRadiusClass" [imageSrc]="imageSrc" [playlist]="playlist"
-                     [songIndex]="songIndex"></app-track-horizontal>
+<app-track-horizontal [track]="song" [imageBorderRadiusClass]="imageBorderRadiusClass" [imageSrc]="imageSrc" [playlist]="playlist"
+                     [trackIndex]="songIndex"></app-track-horizontal>
 
 <ul class="custom-card--labels d-flex ml-auto">
     <li *ngIf="song?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>

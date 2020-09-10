@@ -12,13 +12,13 @@ export class TrackHorizontalComponent implements OnInit {
 
     @HostBinding('class') classes = 'song-h';
 
-    @Input() song: any = {};
+    @Input() track: any = {};
     @Input() largeImage = false;
     @Input() imageSrc: any;
     @Input() imageBorderRadiusClass = 'card-img--radius-sm';
     @Input() playlist: any;
     @Input() routeLink = '';
-    @Input() songIndex: number;
+    @Input() trackIndex: number;
 
     constructor(private router: Router,
                 private searchService: SearchService,
@@ -28,12 +28,12 @@ export class TrackHorizontalComponent implements OnInit {
         this.searchService.hideSearchResult();
         if (this.playlist) {
             // Add playlist in audio play and play selected song
-            this.audioPlayerService.playNowPlaylist(this.playlist, this.songIndex);
+            this.audioPlayerService.playNowPlaylist(this.playlist, this.trackIndex);
         } else if (this.routeLink) {
             this.router.navigate([this.routeLink]);
         } else {
             // Play selected song
-            this.audioPlayerService.playSong(this.song);
+            this.audioPlayerService.playSong(this.track);
         }
     }
 

@@ -24,7 +24,7 @@
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-4 col-sm-6 col-12" *ngFor="let song of songsList">
-                    <app-track-horizontal [song]="song" class="song-h song-h--sm"></app-track-horizontal>
+                    <app-track-horizontal [track]="song" class="song-h song-h--sm"></app-track-horizontal>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-4 col-sm-6 col-12" *ngFor="let album of albumsList">
-                    <app-track-horizontal [song]="album" class="song-h song-h--sm"
+                    <app-track-horizontal [track]="album" class="song-h song-h--sm"
                                          [routeLink]="'/album/' + album.id + '/details'"></app-track-horizontal>
                 </div>
             </div>
