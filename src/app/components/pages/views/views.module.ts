@@ -15,6 +15,7 @@ import { CoreModule } from '../../../core/core.module';
 import { LayoutModule } from '../../layout/layout.module';
 import { TagsComponent } from './tags/tags.component';
 import { TagDetailsComponent } from './tags/tag-details/tag-details.component';
+import { TagListComponent } from './tags/tag-list/tag-list.component';
 import { MusicComponent } from './music/music.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
@@ -74,10 +75,10 @@ const routes: Routes = [
             },
             {
                 path: 'tag/:name/:type',
-                component: TagDetailsComponent,
+                component: TagListComponent,
             },
             {
-                path: 'music',
+                path: 'music',  
                 component: MusicComponent,
             },
             {
@@ -186,6 +187,7 @@ const routes: Routes = [
         HomeComponent,
         TagsComponent,
         TagDetailsComponent,
+        TagListComponent,
         MusicComponent,
         ArtistsComponent,
         ArtistDetailsComponent,
