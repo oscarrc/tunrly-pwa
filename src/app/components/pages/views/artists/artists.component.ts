@@ -55,6 +55,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
                 break;
             default:
                 this.getArtists();
+                break;
         }
     }
 

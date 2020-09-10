@@ -54,6 +54,7 @@ export class TracksComponent implements OnInit, AfterViewInit {
                 break;
             default:
                 this.getTracks();
+                break;
         }
     }
 

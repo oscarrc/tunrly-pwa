@@ -121,10 +121,6 @@ const routes: Routes = [
                 component: AlbumsComponent
             },
             {
-                path: 'album/:id/similar',
-                component: AlbumsComponent
-            },
-            {
                 path: 'album/:name/:artist',
                 component: AlbumDetailsComponent
             },
