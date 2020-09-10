@@ -33,8 +33,8 @@
 
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="row section custom-card-list">
-        <div class="col-xl-6 col-lg-12" *ngFor="let song of albumDetails?.tracks; let i = index">
-            <app-song-list-view [songNumber]="i+1" [song]="song" [imageSrc]="albumDetails.image[0]" [icon]="'la-ellipsis-h'"></app-song-list-view>
+        <div class="col-xl-6 col-lg-12" *ngFor="let track of albumDetails?.tracks; let i = index">
+            <app-track-list-view [trackNumber]="i+1" [track]="track" [imageSrc]="albumDetails.image[0]" [icon]="'la-ellipsis-h'"></app-track-list-view>
         </div>
     </div>
     <!-- End | Section -->

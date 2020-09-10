@@ -60,8 +60,8 @@
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
-                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails?.tracks; let i = index">                    
-                        <app-song-list-view [songNumber]="i+1" [song]="song"></app-song-list-view>
+                    <div class="col-xl-6 col-lg-12" *ngFor="let track of artistDetails?.tracks; let i = index">                    
+                        <app-track-list-view [trackNumber]="i+1" [track]="track"></app-track-list-view>
                     </div>  
                 </div>
             </div>
