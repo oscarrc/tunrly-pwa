@@ -4,12 +4,12 @@ import { LoadingService } from '../../../../services/loading.service';
 import { TagService } from '../../../../services/tag.service';
 
 @Component({
-    selector: 'app-genres',
-    templateUrl: './genres.component.html'
+    selector: 'app-tags',
+    templateUrl: './tags.component.html'
 })
-export class GenresComponent implements OnInit, AfterViewInit {
+export class TagsComponent implements OnInit, AfterViewInit {
 
-    genres: any = [];
+    tags: any = [];
     page: number = 1;
     limit: number = 10;
 
@@ -17,7 +17,7 @@ export class GenresComponent implements OnInit, AfterViewInit {
                 private tagService: TagService) { }
 
     ngOnInit() {
-        this.initGenres();
+        this.initTags();
     }
 
     ngAfterViewInit() {
@@ -32,10 +32,10 @@ export class GenresComponent implements OnInit, AfterViewInit {
         this.page = this.page - 1;
     }
 
-    // Initialize music genres
-    initGenres() {
+    // Initialize music tags
+    initTags() {
         this.tagService.getTop(this.page, this.limit).subscribe(
-            res => this.genres = res,
+            res => this.tags = res,
             err => console.log(err)
         )
     }

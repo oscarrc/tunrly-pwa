@@ -13,8 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { PartialsModule } from '../../partials/partials.module';
 import { CoreModule } from '../../../core/core.module';
 import { LayoutModule } from '../../layout/layout.module';
-import { GenresComponent } from './genres/genres.component';
-import { GenreDetailsComponent } from './genres/genre-details/genre-details.component';
+import { TagsComponent } from './tags/tags.component';
+import { GenreDetailsComponent } from './tags/tag-details/genre-details.component';
 import { MusicComponent } from './music/music.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
@@ -65,11 +65,11 @@ const routes: Routes = [
                 component: HomeComponent,
             },
             {
-                path: 'genres',
-                component: GenresComponent,
+                path: 'tags',
+                component: TagsComponent,
             },
             {
-                path: 'genre/:name',
+                path: 'tag/:name',
                 component: GenreDetailsComponent,
             },
             {
@@ -160,7 +160,7 @@ const routes: Routes = [
     declarations: [
         ViewsComponent,
         HomeComponent,
-        GenresComponent,
+        TagsComponent,
         GenreDetailsComponent,
         MusicComponent,
         ArtistsComponent,

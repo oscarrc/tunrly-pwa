@@ -4,15 +4,15 @@
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <div class="container-header d-flex justify-content-between">
-        <span class="title">Browse top genres</span>
+        <span class="title">Browse top tags</span>
         <span>
             <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
-            <button [disabled]="page==genres.length/limit" type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+            <button [disabled]="page==tags.length/limit" type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
         </span>
     </div>
     <div class="section row custom-card-list">
-        <div class="col-xl-custom col-lg-5 col-sm-3" *ngFor="let genre of genres | slice:(page-1)*limit:page*limit">            
-            <app-secondary-card [item]="genre" type="genre"></app-secondary-card>
+        <div class="col-xl-custom col-lg-5 col-sm-3" *ngFor="let tag of tags | slice:(page-1)*limit:page*limit">            
+            <app-secondary-card [item]="tag" type="tag"></app-secondary-card>
         </div>
     </div>
 </div>

@@ -20,12 +20,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     topTracks: any = {};
     topArtists: any = {};
     topTags: any = {};
-    newRelease: any = {};
-    artists: any = {};
-    retro: any = {};
     playlist: any = {};
-    radio: any = {};
-    genres: any = {};
 
     mainEvent: any = {};
     secondaryEvents: any = [];
@@ -82,8 +77,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     initTopTags() {
         this.topTags = {
             title: 'Hot tags',
-            subTitle: 'This genres are hot',
-            page: '/genres',
+            subTitle: 'This tags are hot',
+            page: '/tags',
             loading: true,
             items: []
         };

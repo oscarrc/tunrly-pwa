@@ -23,9 +23,9 @@ export class MenuConfig {
                         page: '/songs'
                     },
                     {
-                        title: 'Genres',
+                        title: 'Tags',
                         icon: 'la la-diamond',
-                        page: '/genres'
+                        page: '/tags'
                     },
                     {
                         title: 'Playlists',
