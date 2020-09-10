@@ -74,7 +74,7 @@
                 <div class="row">
                     <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let album of artistDetails?.albums">
                         <app-image-card [item]="album" [imageBorderRadiusClass]="imageBorderRadiusClass"
-                            type="artist"></app-image-card>
+                            type="album"></app-image-card>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                 <div class="row">
                     <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let artist of artistDetails?.similar">
                         <app-image-card [item]="artist" [imageBorderRadiusClass]="imageBorderRadiusClass"
-                            [type]="artist"></app-image-card>
+                            type="artist"></app-image-card>
                     </div>
                 </div>
             </div>
