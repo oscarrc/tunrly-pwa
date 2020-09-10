@@ -1,14 +1,14 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-song-options',
-    templateUrl: './song-options.component.html'
+    selector: 'app-track-options',
+    templateUrl: './track-options.component.html'
 })
-export class SongOptionsComponent implements OnInit {
+export class TrackOptionsComponent implements OnInit {
 
     @HostBinding('class') class = 'dropleft';
 
-    @Input() song: any;
+    @Input() track: any;
     @Input() icon = '';
 
     constructor() { }
@@ -18,7 +18,7 @@ export class SongOptionsComponent implements OnInit {
     }
 
     addFavorite() {
-        this.song.favorite = true;
+        this.track.favorite = true;
     }
 
     addToPlayList() {

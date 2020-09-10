@@ -15,7 +15,7 @@
         </a>
     </li>
     <li class="dropdown-item">
-        <a [href]="song?.url" class="dropdown-link" download>
+        <a [href]="track?.url" class="dropdown-link" download>
             <i class="la la-download"></i>
             <span>Download</span>
         </a>
@@ -27,7 +27,7 @@
         </a>
     </li>
     <li class="dropdown-item">
-        <a class="dropdown-link" [routerLink]="'/track/' + song.id + '/details'">
+        <a class="dropdown-link" [routerLink]="'/track/' + track.id + '/details'">
             <i class="la la-info-circle"></i>
             <span>Song Info</span>
         </a>
