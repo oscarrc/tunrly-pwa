@@ -12,6 +12,4 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
 //TODO implement capacitor for APK creation
-//TODO rename song to track
-//TODO rename genre to tag
 //TODO Implement missing lists
