@@ -4,12 +4,12 @@ import { LoadingService } from '../../../../services/loading.service';
 import { TrackService } from '../../../../services/track.service';
 
 @Component({
-    selector: 'app-songs',
-    templateUrl: './songs.component.html'
+    selector: 'app-tracks',
+    templateUrl: './tracks.component.html'
 })
-export class SongsComponent implements OnInit, AfterViewInit {
+export class TracksComponent implements OnInit, AfterViewInit {
 
-    songs: any = [];
+    tracks: any = [];
     gridView = false;
     country: string = '';
     page: number = 1;
@@ -39,7 +39,7 @@ export class SongsComponent implements OnInit, AfterViewInit {
     // Initialize songs
     initSongs() {
         this.trackService.getTop(this.country, this.page, this.limit).subscribe(
-            res => this.songs = res,
+            res => this.tracks = res,
             err => console.log(err)
         )
     }

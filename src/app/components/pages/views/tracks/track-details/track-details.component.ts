@@ -7,14 +7,14 @@ import { AudioPlayerService } from '../../../../../services/audio-player.service
 import { TrackService } from '../../../../../services/track.service';
 
 @Component({
-    selector: 'app-song-details',
-    templateUrl: './song-details.component.html'
+    selector: 'app-track-details',
+    templateUrl: './track-details.component.html'
 })
-export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    songName: string;
-    songArtist: string;
-    songDetails: any;
+    trackName: string;
+    trackArtist: string;
+    trackDetails: any;
 
     routeSubscription: Subscription;
 
@@ -24,8 +24,8 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
                 private trackService: TrackService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.name) {
-                this.songName = param.name;
-                this.songArtist = param.artist;
+                this.trackName = param.name;
+                this.trackArtist = param.artist;
                 this.getSongDetails();
             }
         });
@@ -39,23 +39,23 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getSongDetails() {
-        this.trackService.getInfo(this.songName, this.songArtist).subscribe(
-            res => this.songDetails = res,
+        this.trackService.getInfo(this.trackName, this.trackArtist).subscribe(
+            res => this.trackDetails = res,
             err => console.log(err)
         )
     }
 
     getSimilar(){
-        if(!this.songDetails.similar || this.songDetails.similar.length == 0){
-            this.trackService.getSimilar(this.songDetails._id).subscribe(
-                res => this.songDetails.similar = res,
+        if(!this.trackDetails.similar || this.trackDetails.similar.length == 0){
+            this.trackService.getSimilar(this.trackDetails._id).subscribe(
+                res => this.trackDetails.similar = res,
                 err => console.log(err)
             )
         }
     }
 
     addInPlayer() {
-        this.audioPlayerService.playSong(this.songDetails);
+        this.audioPlayerService.playSong(this.trackDetails);
     }
 
     ngOnDestroy() {

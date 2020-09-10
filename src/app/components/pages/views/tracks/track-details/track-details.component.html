@@ -3,25 +3,25 @@
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
-    <div *ngIf="songDetails" class="row section text-center text-md-left">
+    <div *ngIf="trackDetails" class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
-            <img [src]="songDetails.image.length > 0 ? songDetails.image[songDetails.image.length -1] : 'assets/images/cover/extralarge.png'" alt="{{songDetails?.name}}" class="card-img--radius-lg">
+            <img [src]="trackDetails.image.length > 0 ? trackDetails.image[trackDetails.image.length -1] : 'assets/images/cover/extralarge.png'" alt="{{trackDetails?.name}}" class="card-img--radius-lg">
         </div>
         <div class="col-xl-9 col-lg-8 col-sm-7">
             <div class="row pt-4">
                 <div class="col-xl-8 col-lg-6">
-                    <h5>{{songDetails.name}}</h5>
-                    <p><a routerLink="{{ '/artist/' +  songDetails?.artist }}">{{songDetails?.artist}}</a></p>
-                    <p [innerHTML]="songDetails?.wiki?.summary"></p>
+                    <h5>{{trackDetails.name}}</h5>
+                    <p><a routerLink="{{ '/artist/' +  trackDetails?.artist }}">{{trackDetails?.artist}}</a></p>
+                    <p [innerHTML]="trackDetails?.wiki?.summary"></p>
                     <div class="text-warning tags">
-                        <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of songDetails?.tags"><span class="badge badge-pill badge-warning mr-2">{{tag | titlecase}}</span></a>
+                        <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of trackDetails?.tags"><span class="badge badge-pill badge-warning mr-2">{{tag | titlecase}}</span></a>
                     </div>
-                    <span class="badge badge-pill badge-warning mt-3" *ngIf="songDetails.premium">Premium</span>
+                    <span class="badge badge-pill badge-warning mt-3" *ngIf="trackDetails.premium">Premium</span>
                     <div class="mt-4">
                         <button type="button" class="btn btn-pill btn-air btn-bold btn-danger mr-2"
                                 (click)="addInPlayer()">Play</button>
                         <button type="button" class="btn btn-pill btn-air btn-bold btn-success"
-                                routerLink="{{ '/album/' +  songDetails.album.name + '/' + songDetails.album.artist }}">View album</button>
+                                routerLink="{{ '/album/' +  trackDetails.album.name + '/' + trackDetails.album.artist }}">View album</button>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6">
@@ -39,7 +39,7 @@
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="section">
         <!-- Begin | Line Tabs [[ Find at scss/framework/components/line-tabs.scss ]] -->
-        <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="songDetails" role="tablist">
+        <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="trackDetails" role="tablist">
             <li class="nav-item">
                 <a class="nav-link" id="lyrics-tab" data-toggle="tab" href="#lyrics" role="tab"
                    aria-controls="lyrics" aria-selected="false">Lyrics</a>
@@ -51,15 +51,15 @@
         </ul>
         <!-- End | Line Tabs -->
         <!-- Begin | Tab Content -->
-        <div class="tab-content" id="songDetailsContent">
+        <div class="tab-content" id="trackDetailsContent">
             <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header d-flex pb-3">
-                    <h6 class="mx-auto text-center">{{songDetails?.artist}}'s {{songDetails?.name}} lyrics</h6>
+                    <h6 class="mx-auto text-center">{{trackDetails?.artist}}'s {{trackDetails?.name}} lyrics</h6>
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
-                    <div class="col-12 text-center"  [innerHTML]="songDetails?.lyrics">
+                    <div class="col-12 text-center"  [innerHTML]="trackDetails?.lyrics">
                     </div>  
                 </div>
             </div>
@@ -70,8 +70,8 @@
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
-                    <div class="col-xl-6 col-lg-12" *ngFor="let song of songDetails?.similar; let i = index">                    
-                        <app-song-list-view [songNumber]="i+1" [song]="song"></app-song-list-view>
+                    <div class="col-xl-6 col-lg-12" *ngFor="let track of trackDetails?.similar; let i = index">                    
+                        <app-song-list-view [songNumber]="i+1" [song]="track"></app-song-list-view>
                     </div>  
                 </div>         
             </div>

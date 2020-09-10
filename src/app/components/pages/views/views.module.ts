@@ -18,8 +18,8 @@ import { GenreDetailsComponent } from './tags/tag-details/genre-details.componen
 import { MusicComponent } from './music/music.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
-import { SongsComponent } from './songs/songs.component';
-import { SongDetailsComponent } from './songs/song-details/song-details.component';
+import { TracksComponent } from './tracks/tracks.component';
+import { TrackDetailsComponent } from './tracks/track-details/track-details.component';
 import { PlaylistsComponent } from './playlists/playlists.compontent';
 import { PlaylistDetailsComponent } from './playlists/playlist-details/playlist-details.component';
 import { StationsComponent } from './stations/stations.component';
@@ -28,7 +28,7 @@ import { HistoryComponent } from './history/history.component';
 import { EventsComponent } from './events/events.component';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { AddEventComponent } from './events/add-event/add-event.component';
-import { AddMusicComponent } from './songs/add-music/add-music.component';
+import { AddMusicComponent } from './tracks/add-music/add-music.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { UserPlanComponent } from './user/user-plan/user-plan.component';
 import { SettingsComponent } from './user/settings/settings.component';
@@ -93,12 +93,12 @@ const routes: Routes = [
                 component: PlaylistDetailsComponent
             },
             {
-                path: 'songs',
-                component: SongsComponent
+                path: 'tracks',
+                component: TracksComponent
             },
             {
-                path: 'song/:name/:artist',
-                component: SongDetailsComponent
+                path: 'track/:name/:artist',
+                component: TrackDetailsComponent
             },
             {
                 path: 'albums',
@@ -167,8 +167,8 @@ const routes: Routes = [
         ArtistDetailsComponent,
         PlaylistsComponent,
         PlaylistDetailsComponent,
-        SongsComponent,
-        SongDetailsComponent,
+        TracksComponent,
+        TrackDetailsComponent,
         StationsComponent,
         FavoritesComponent,
         HistoryComponent,

@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.topTracks = {
             title: 'Top Tracks',
             subTitle: 'Popular tracks this week',
-            page: '/songs',
+            page: '/tracks',
             loading: true,
             items: []
         };

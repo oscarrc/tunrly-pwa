@@ -62,9 +62,9 @@ export class GenreDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
                     items: res["album"]
                 };
                 this.tracks = {
-                    title: this.tagName + " songs",
+                    title: this.tagName + " tracks",
                     subTitle: '',
-                    page: '/songs',
+                    page: '/tracks',
                     loading: true,
                     items: res["track"]
                 };

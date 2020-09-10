@@ -20,7 +20,7 @@ export class MenuConfig {
                     {
                         title: 'Tracks',
                         icon: 'la la-music',
-                        page: '/songs'
+                        page: '/tracks'
                     },
                     {
                         title: 'Tags',
