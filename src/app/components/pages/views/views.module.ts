@@ -77,10 +77,10 @@ const routes: Routes = [
                 path: 'tag/:name/:type',
                 component: TagListComponent,
             },
-            {
-                path: 'music',  
-                component: MusicComponent,
-            },
+            // {
+            //     path: 'music',  
+            //     component: MusicComponent,
+            // },
             {
                 path: 'artists',
                 component: ArtistsComponent
@@ -125,10 +125,10 @@ const routes: Routes = [
                 path: 'track/:name/:artist',
                 component: TrackDetailsComponent
             },
-            {
-                path: 'albums',
-                component: AlbumsComponent
-            },
+            // {
+            //     path: 'albums',
+            //     component: AlbumsComponent
+            // },
             {
                 path: 'album/:name/:artist',
                 component: AlbumDetailsComponent
@@ -137,37 +137,41 @@ const routes: Routes = [
                 path: 'add-music',
                 component: AddMusicComponent
             },
+            // {
+            //     path: 'stations',
+            //     component: StationsComponent
+            // },
+            // {
+            //     path: 'analytics',
+            //     component: AnalyticsComponent
+            // },
+            // {
+            //     path: 'events',
+            //     component: EventsComponent
+            // },
+            // {
+            //     path: 'event/:id/details',
+            //     component: EventDetailsComponent
+            // },
+            // {
+            //     path: 'add-event',
+            //     component: AddEventComponent
+            // },
             {
-                path: 'stations',
-                component: StationsComponent
+                path: 'user',
+                component: UserProfileComponent
             },
             {
-                path: 'analytics',
-                component: AnalyticsComponent
-            },
-            {
-                path: 'favorites',
+                path: 'user/favorites',
                 component: FavoritesComponent
             },
             {
-                path: 'history',
+                path: 'user/history',
                 component: HistoryComponent
             },
             {
-                path: 'events',
-                component: EventsComponent
-            },
-            {
-                path: 'event/:id/details',
-                component: EventDetailsComponent
-            },
-            {
-                path: 'add-event',
-                component: AddEventComponent
-            },
-            {
-                path: 'profile',
-                component: UserProfileComponent
+                path: 'user/playlists',
+                component: PlaylistsComponent
             },
             {
                 path: 'plan',

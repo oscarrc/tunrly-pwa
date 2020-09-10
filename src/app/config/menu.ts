@@ -51,17 +51,17 @@ export class MenuConfig {
                     {
                         title: 'Favorites',
                         icon: 'la la-heart-o',
-                        page: '/favorites'
+                        page: '/user/favorites'
                     },
                     {
                         title: 'Playlists',
                         icon: 'la la-list',
-                        page: '/playlists'
+                        page: '/user/playlists'
                     },
                     {
                         title: 'History',
                         icon: 'la la-history',
-                        page: '/history'
+                        page: '/user/history'
                     },
                     // { section: 'Music Events' },
                     // {
