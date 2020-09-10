@@ -7,10 +7,10 @@ import { AudioPlayerService } from '../../../../../services/audio-player.service
 import { TagService } from '../../../../../services/tag.service';
 
 @Component({
-    selector: 'app-genre-details',
-    templateUrl: './genre-details.component.html'
+    selector: 'app-tag-details',
+    templateUrl: './tag-details.component.html'
 })
-export class GenreDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     carouselArrowPosClass1 = 'arrow-pos-1';
     carouselArrowPosClass2 = 'arrow-pos-2';
     carouselArrowPosClass3 = 'arrow-pos-3';
