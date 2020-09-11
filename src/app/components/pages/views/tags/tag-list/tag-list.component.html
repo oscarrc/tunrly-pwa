@@ -1,4 +1,9 @@
-<app-banner></app-banner>
+<app-banner 
+    [backgroundImage]="type == 'artists' ? (((this[type] | random)?.image?.background | random) || ((this[type] | random)?.images?.thumbnail | random)) 
+        : (type == 'albums' || type == 'tracks' ? ((this[type] | random)?.image | last) 
+        : (type == 'playlists' ? ( ( this[type]?.tracks | random )?.image|last) : ('')))"
+    [blur]="type == 'albums' || type == 'tracks'">                        
+</app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">

@@ -56,28 +56,28 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.artists = {
                     title: this.tagName + " artists",
                     subTitle: '',
-                    page: '/artists',
+                    page: '/tag/' + this.tagName + '/artists',
                     loading: true,
                     items: res["artist"]
                 };
                 this.albums = {
                     title: this.tagName + " albums",
                     subTitle: '',
-                    page: '/albums',
+                    page: '/tag/' + this.tagName + '/albums',
                     loading: true,
                     items: res["album"]
                 };
                 this.tracks = {
                     title: this.tagName + " tracks",
                     subTitle: '',
-                    page: '/tracks',
+                    page: '/tag/' + this.tagName + '/tracks',
                     loading: true,
                     items: res["track"]
                 };
                 this.playlists =  {
                     title: this.tagName + " playlists",
                     subTitle: '',
-                    page: '/playlists',
+                    page: '/tag/' + this.tagName + '/playlists',
                     loading: true,
                     items: res["playlist"]
                 };             
