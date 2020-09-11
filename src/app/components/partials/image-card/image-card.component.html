@@ -1,17 +1,45 @@
-<div class="custom-card" *ngIf="routeLink; else withoutLink">
+<div class="custom-card"  *ngIf="routeLink; else withoutLink">
+    <div class="custom-card--img card-img--radius-lg">
+        <div class="custom-card--info">
+            <ul class="custom-card--labels d-flex">
+                <li *ngIf="item?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
+                <li *ngIf="item?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
+            </ul>
+            <div class="dropdown dropdown-icon d-flex">
+                <a *ngIf="!item?.favorite" href="javascript:;" (click)="addFavorite()" role="button" >
+                    <span class="badge badge-pill badge-transparent"><i class="la la-heart"></i></span>
+                </a>
+            </div>
+        </div>
+        <a class="custom-card--link" routerLink="{{routeLink}}">
+            <img [src]="imageSrc || 'assets/images/cover/extralarge.png'" alt="{{item?.name}}" [class]="imageBorderRadiusClass">
+        </a>
+    </div>
+
     <a class="custom-card--link" routerLink="{{routeLink}}">
-        <img [src]="imageSrc || 'assets/images/cover/extralarge.png'" alt="{{item?.name}}" [class]="imageBorderRadiusClass">
         <h6 class="mb-0 mt-2 text-truncate">{{item?.name}}</h6>
         <p class="text-truncate" title="{{item?.artist}}" *ngIf="item?.artist">{{item?.artist}}</p>
-    </a>
+    </a>   
 </div>
 
 <ng-template #withoutLink>
     <div class="custom-card">
-        <a class="custom-card--link">
+        <div class="custom-card--img card-img--radius-lg">
+            <div class="custom-card--info">
+                <ul class="custom-card--labels d-flex">
+                    <li *ngIf="item?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
+                    <li *ngIf="item?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
+                </ul>
+                <div class="dropdown dropdown-icon d-flex">
+                    <a *ngIf="!item?.favorite" href="javascript:;" (click)="addFavorite()" role="button" >
+                        <span class="badge badge-pill badge-transparent"><i class="la la-heart"></i></span>
+                    </a>
+                </div>
+            </div>            
             <img [src]="imageSrc || 'assets/images/cover/extralarge.png'" alt="{{item?.name}}" [class]="imageBorderRadiusClass">
-            <h6 class="mb-0 mt-2 text-truncate">{{item?.name}}</h6>
-            <p class="text-truncate" title="{{item?.artist}}" *ngIf="item?.artist">{{item?.artist}}</p>
-        </a>
+        </div>
+        
+        <h6 class="mb-0 mt-2 text-truncate">{{item?.name}}</h6>
+        <p class="text-truncate" title="{{item?.artist}}" *ngIf="item?.artist">{{item?.artist}}</p>
     </div>
 </ng-template>

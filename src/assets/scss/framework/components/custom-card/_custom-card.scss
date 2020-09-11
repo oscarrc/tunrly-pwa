@@ -64,7 +64,7 @@
         h6 {
             color: $gray-900;
             margin-bottom: .25rem;
-        }
+        }     
     }
 
     &:hover {
@@ -97,6 +97,10 @@
             @include icon-size($card-badge-font-size);
             @include table-cell-middle;
         }
+    }
+
+    .badge.badge-transparent{
+        background: transparent;
     }
 }
 

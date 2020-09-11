@@ -27,6 +27,10 @@ export class ImageCardComponent implements OnInit {
         return images[rand];
     }
 
+    addFavorite(){
+        this.item.favorite = true;
+    }
+
     ngOnInit() {
         switch(this.type){
             case "artist":
