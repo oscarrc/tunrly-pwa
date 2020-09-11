@@ -1,4 +1,4 @@
-<app-banner></app-banner>
+<app-banner [backgroundImage] = "((playlists | random)?.tracks | random)?.image | last" [blur] = "true"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
