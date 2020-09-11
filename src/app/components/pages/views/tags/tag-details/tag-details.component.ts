@@ -16,6 +16,7 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     carouselArrowPosClass3 = 'arrow-pos-3';
 
     tagName: any;
+    background: any;
     artists: any = {};
     albums: any = {};
     tracks: any = {};
@@ -42,6 +43,12 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
+    }
+
+    getRandom(elements: Array<any>){
+        const size = elements.length;
+        const rand = Math.floor(Math.random() * size) + 1;
+        return elements[rand];
     }
 
     getTags(type: string){
@@ -75,6 +82,10 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
                     loading: true,
                     items: res["playlist"]
                 };
+
+                while(!this.background){
+                    this.background = this.getRandom((this.getRandom(this.artists.items)).image.background);
+                }                
             },
             err => console.log(err)
         )

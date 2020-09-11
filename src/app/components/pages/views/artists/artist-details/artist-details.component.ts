@@ -14,6 +14,8 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     
     artistName: string
     artistDetails: any;
+    background: any;
+    thumbnail: any;
     imageBorderRadiusClass: string = "card-img--radius-lg";
     
     routeSubscription: Subscription;
@@ -39,15 +41,29 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
 
     getArtistDetails() {
         this.artistService.getInfo(this.artistName).subscribe(
-            res => this.artistDetails = res,
+            res => {
+                this.artistDetails = res;                
+                this.thumbnail = this.artistDetails.image?.thumbnail ? this.getRandomImage(this.artistDetails.image.thumbnail) : 
+                                    this.artistDetails.image?.background ? this.getRandomImage(this.artistDetails.image.background) : '';
+                this.background = this.artistDetails.image?.background ? this.getRandomImage(this.artistDetails.image.background) : 
+                                    this.artistDetails.image?.thumbnail ? this.getRandomImage(this.artistDetails.image.thumbnail) : '';
+            },
             err => console.log(err)
         )
+    }
+
+    getRandomImage(images: Array<string>){
+        const size = images.length;
+        const rand = Math.floor(Math.random() * size) + 1;
+        return images[rand];
     }
 
     getTracks(){
         if(!this.artistDetails.tracks || this.artistDetails.tracks.length == 0){
             this.artistService.getTracks(this.artistDetails._id).subscribe(
-                res => this.artistDetails.tracks = res,
+                res => {
+                    this.artistDetails.tracks = res
+                },
                 err => console.log(err)
             )
         }
