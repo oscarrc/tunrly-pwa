@@ -54,7 +54,8 @@ img {
 // Styling for page banners
 .banner {
     background-size: cover;
-    background-position: center center;
+    background-attachment: fixed;
+    background-position: top center;
     height: $banner-height;
     margin: 0 #{-$wrapper-padding-x};
     position: relative;

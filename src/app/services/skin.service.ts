@@ -9,6 +9,7 @@ import { Config } from '../config/config';
 export class SkinService {
 
     themeSkin: EventEmitter<any> = new EventEmitter();
+    bannerBg: EventEmitter<any> = new EventEmitter();
 
     constructor(private localStorageService: LocalStorageService) { }
 
@@ -19,5 +20,13 @@ export class SkinService {
     set skin(value) {
         this.themeSkin.emit(value);
         this.localStorageService.setLocalStorage(Config.THEME_SKIN, value);
+    }
+
+    get background() {
+        return this.bannerBg;
+    }
+
+    set background(value) {
+        this.bannerBg.emit(value);
     }
 }

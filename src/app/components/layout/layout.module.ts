@@ -25,6 +25,7 @@ import { ProfileComponent } from './header/profile/profile.component';
 import { LanguageComponent } from './header/language/language.component';
 import { SearchComponent } from './header/search/search.component';
 import { LoginComponent } from './header/login/login.component';
+import { BannerComponent } from './banner/banner.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -43,7 +44,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ProfileComponent,
         LanguageComponent,
         SearchComponent,
-        LoginComponent
+        LoginComponent,
+        BannerComponent
     ],
     exports: [
         AsideLeftComponent,
@@ -56,7 +58,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SectionComponent,
         ProfileComponent,
         SearchComponent,
-        LoginComponent
+        LoginComponent,
+        BannerComponent
     ],
     imports: [
         CommonModule,
