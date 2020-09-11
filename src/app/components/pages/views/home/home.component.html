@@ -1,4 +1,4 @@
-<app-banner [backgroundImage]="((topArtists?.items | random).image.background | random) || (topArtists?.items | random).image.thumbnail | random"></app-banner>
+<app-banner [backgroundImage]="((topArtists?.items | random)?.image?.background | random) || ((topArtists?.items | random)?.image?.thumbnail | random)"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">

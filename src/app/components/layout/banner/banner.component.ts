@@ -20,7 +20,7 @@ export class BannerComponent implements OnInit {
     }
 
     ngOnInit() {   
-        this.bgSubscription = this.skinService.bannerBg.subscribe((bg) => {
+        this.bgSubscription = this.skinService.bannerBg.subscribe((bg) => {           
             if(bg) {
                 this.backgroundImage = bg;
             }

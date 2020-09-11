@@ -25,8 +25,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     mainEvent: any = {};
     secondaryEvents: any = [];
 
-    background:string;
-
     constructor(private loadingService: LoadingService,
                 private playlistConfigService: PlaylistConfigService,
                 private trackService: TrackService,
@@ -76,12 +74,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         };
         
         this.artistService.getTop('', 1, 10).subscribe(
-            res => {
-                this.topArtists.items = res;
-                while(!this.background){
-                    this.background = this.getRandom((this.getRandom(this.topArtists.items)).image.background);
-                } 
-            },
+            res => this.topArtists.items = res,
             err => console.log(err)
         );
     }
