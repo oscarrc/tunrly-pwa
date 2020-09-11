@@ -8,8 +8,11 @@
                 <li *ngIf="track?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
             </ul>
             <!-- Custom Card Options Dropdown -->
-            <div class="dropdown dropdown-icon">
-                <a href="javascript:;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown dropdown-icon d-flex">                
+                <a *ngIf="!track?.favorite" href="javascript:;" (click)="addFavorite()" role="button" >
+                    <i class="la la-heart"></i>
+                </a>
+                <a class="ml-auto" href="javascript:;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="ion-md-more"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">

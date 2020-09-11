@@ -39,7 +39,8 @@
         }
 
         .dropdown {
-            @include absolute(top 1.25rem right 1rem);
+            @include absolute(top 1.25rem left 1rem);
+            width: calc(100% - 2rem);
             visibility: hidden;
             opacity: 0;
             transition: $transition-short;

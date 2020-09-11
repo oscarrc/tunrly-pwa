@@ -35,8 +35,8 @@ export class ImageCardComponent implements OnInit {
                                 this.item.image?.background ? this.getRandomImage(this.item.image.background) : '';
                 break;
             case "album":
-                this.routeLink = `/album/${this.item.name}/${this.item.artist}`;
-                this.imageSrc = this.item.image[this.item.image.length - 1];
+                this.routeLink = `/album/${this.item?.name}/${this.item?.artist}`;
+                this.imageSrc = this.item.image[this.item?.image?.length - 1];
                 break;
         }
     }
