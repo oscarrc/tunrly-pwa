@@ -9,6 +9,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { ChartsModule } from 'ng2-charts';
 
 import { RandomPipe } from '../../../core/pipes/random.pipe';
+import { LastPipe } from '../../../core/pipes/last.pipe';
 
 import { ViewsComponent } from './views.component';
 import { HomeComponent } from './home/home.component';
@@ -199,6 +200,7 @@ const routes: Routes = [
 @NgModule({
     declarations: [        
         RandomPipe,
+        LastPipe,
         ViewsComponent,
         HomeComponent,
         TagsComponent,

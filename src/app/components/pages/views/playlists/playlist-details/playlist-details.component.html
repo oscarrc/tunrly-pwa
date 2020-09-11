@@ -1,10 +1,10 @@
-<app-banner [backgroundImage]="playlistDetails?.image" [blur]="true"></app-banner>
+<app-banner [backgroundImage]="(playlistDetails?.tracks | random).image | last" [blur]="true"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
-            <img [src]="playlistDetails?.image ? playlistDetails?.image : 'assets/images/cover/extralarge.png'" alt="{{playlistDetails?.name}}" class="card-img--radius-lg">
+            <img [src]="((playlistDetails?.tracks | random).image | last )|| 'assets/images/cover/extralarge.png'" alt="{{playlistDetails?.name}}" class="card-img--radius-lg">
         </div>
         <div class="col-xl-9 col-lg-8 col-sm-7">
             <div class="row pt-4">

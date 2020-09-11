@@ -16,7 +16,6 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     carouselArrowPosClass3 = 'arrow-pos-3';
 
     tagName: any;
-    background: any;
     artists: any = {};
     albums: any = {};
     tracks: any = {};
@@ -81,11 +80,7 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
                     page: '/playlists',
                     loading: true,
                     items: res["playlist"]
-                };
-
-                while(!this.background){
-                    this.background = this.getRandom((this.getRandom(this.artists.items)).image.background);
-                }                
+                };             
             },
             err => console.log(err)
         )

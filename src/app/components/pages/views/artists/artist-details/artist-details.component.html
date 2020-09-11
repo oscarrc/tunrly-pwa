@@ -1,11 +1,11 @@
-<app-banner [backgroundImage]="background"></app-banner>
+<app-banner [backgroundImage]="(artistDetails?.image.background | random) || (artistDetails?.images.thumbnail | random)"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
-            <img [src]="thumbnail || 'assets/images/cover/extralarge.png'" alt="{{artistDetails?.name}}" class="card-img--radius-lg">
+            <img [src]="(artistDetails?.image.thumbnail | random) || (artistDetails?.image.background | random) || 'assets/images/cover/extralarge.png'" alt="{{artistDetails?.name}}" class="card-img--radius-lg">
         </div>
         <div class="col-xl-9 col-lg-8 col-sm-7">
             <div class="row pt-4">

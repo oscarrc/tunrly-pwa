@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     mainEvent: any = {};
     secondaryEvents: any = [];
 
+    background:string;
+
     constructor(private loadingService: LoadingService,
                 private playlistConfigService: PlaylistConfigService,
                 private trackService: TrackService,
@@ -39,6 +41,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
+    }
+
+    getRandom(elements: Array<any>){
+        const size = elements.length;
+        const rand = Math.floor(Math.random() * size) + 1;
+        return elements[rand];
     }
 
     // Initialize top tracks object
@@ -68,7 +76,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
         };
         
         this.artistService.getTop('', 1, 10).subscribe(
-            res => this.topArtists.items = res,
+            res => {
+                this.topArtists.items = res;
+                while(!this.background){
+                    this.background = this.getRandom((this.getRandom(this.topArtists.items)).image.background);
+                } 
+            },
             err => console.log(err)
         );
     }

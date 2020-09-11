@@ -1,10 +1,10 @@
-<app-banner [backgroundImage]="trackDetails?.image[trackDetails.image.length -1]" [blur]="true"></app-banner>
+<app-banner [backgroundImage]="trackDetails?.image | last" [blur]="true"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <div *ngIf="trackDetails" class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
-            <img [src]="trackDetails.image.length > 0 ? trackDetails.image[trackDetails.image.length -1] : 'assets/images/cover/extralarge.png'" alt="{{trackDetails?.name}}" class="card-img--radius-lg">
+            <img [src]="(trackDetails?.image | last) || 'assets/images/cover/extralarge.png'" alt="{{trackDetails?.name}}" class="card-img--radius-lg">
         </div>
         <div class="col-xl-9 col-lg-8 col-sm-7">
             <div class="row pt-4">

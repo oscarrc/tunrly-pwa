@@ -1,5 +1,6 @@
-<app-banner [backgroundImage]="background"></app-banner>
+<app-banner [backgroundImage]="(artists?.items | random)?.image?.background | random"></app-banner>
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+
 <div class="main-container">
     <!-- Tracks -->
     <app-section *ngIf="tracks?.items?.length" [section]="tracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
