@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SearchService } from '../../../../services/search.service';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-search',
     templateUrl: './search.component.html'
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
     searchSubscription: Subscription;
     tracks: any = {};
@@ -36,6 +36,10 @@ export class SearchComponent implements OnInit {
         this.searchService.hideSearchResult();
         page = 'search/' + page;        
         this.router.navigate([page]);
+    }
+
+    ngOnDestroy() {
+        this.searchSubscription.unsubscribe();
     }
 
 }

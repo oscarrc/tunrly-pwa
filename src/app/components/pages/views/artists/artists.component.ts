@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { ArtistService } from '../../../../services/artist.service';
     templateUrl: './artists.component.html'
 })
 //TODO paginate similar
-export class ArtistsComponent implements OnInit, AfterViewInit {
+export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     artists: any = [];
     country: string = '';
@@ -73,4 +73,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
         )
     }
 
+    ngOnDestroy() {
+        this.routeSubscription.unsubscribe();
+    }
 }

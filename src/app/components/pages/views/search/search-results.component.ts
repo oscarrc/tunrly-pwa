@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { LoadingService } from '../../../../services/loading.service';
     selector: 'app-search-results',
     templateUrl: './search-results.component.html'
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent implements OnInit, OnDestroy{
 
     searchSubscription: Subscription;
     routeSubscription: Subscription;
@@ -50,5 +50,10 @@ export class SearchResultsComponent implements OnInit {
             this.artists = value.artists;
             this.playlists = value.playlists
         });
+    }
+
+    ngOnDestroy() {
+        this.searchSubscription.unsubscribe();
+        this.routeSubscription.unsubscribe();
     }
 }

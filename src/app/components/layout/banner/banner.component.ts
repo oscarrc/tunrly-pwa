@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SkinService } from '../../../services/skin.service';
 
@@ -6,7 +6,7 @@ import { SkinService } from '../../../services/skin.service';
     selector: 'app-banner',
     templateUrl: './banner.component.html'
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent implements OnInit, OnDestroy {
     @Input() backgroundImage: String;
     @Input() blur: Boolean = false;
     
@@ -31,6 +31,10 @@ export class BannerComponent implements OnInit {
         }else{
             this.skinService.background.emit(this.getRandomBackground())
         }
+    }
+
+    ngOnDestroy() {
+        this.bgSubscription.unsubscribe();
     }
 
 }

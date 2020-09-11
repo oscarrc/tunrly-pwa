@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { ArtistService } from '../../../../services/artist.service';
     selector: 'app-tracks',
     templateUrl: './tracks.component.html'
 })
-export class TracksComponent implements OnInit, AfterViewInit {
+export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
 
     tracks: any = [];
     gridView = false;
@@ -83,5 +83,9 @@ export class TracksComponent implements OnInit, AfterViewInit {
             res => this.tracks = res,
             err => console.log(err)
         )
+    }
+
+    ngOnDestroy(){
+        this.routeSubscription.unsubscribe();
     }
 }

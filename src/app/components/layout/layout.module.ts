@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { YouTubePlayerModule } from "@angular/youtube-player";
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -69,6 +70,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PartialsModule,
         RouterModule,
         ReactiveFormsModule,
+        YouTubePlayerModule,
         SimpleModalModule.forRoot({container: document.body})
     ],
     entryComponents: [ //No longer required?
