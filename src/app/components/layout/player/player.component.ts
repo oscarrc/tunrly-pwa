@@ -2,11 +2,12 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
-import { SongsConfigService } from '../../../services/songs-config.service';
+
+import { AudioPlayerService } from '../../../services/audio-player.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { SkinService } from '../../../services/skin.service';
 import { Config } from '../../../config/config';
-import * as Amplitude from 'amplitudejs';
+;
 
 @Component({
     selector: 'app-player',
@@ -14,33 +15,37 @@ import * as Amplitude from 'amplitudejs';
 })
 export class PlayerComponent implements OnInit, OnDestroy {
 
-    song: any = {};
+    track: any = {};
+    index: number = 0;
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'open-right-sidebar';
     playerClass = 'player-primary';
     videoSize: number;
+    repeat: boolean = false;
+    shuffle: boolean = false;
 
     skinSubscription: Subscription;
+    playlistSubscription: Subscription;
+    nowPlayingSubscription: Subscription;
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 private localStorageService: LocalStorageService,
-                private songsConfigService: SongsConfigService,
+                private audioPlayerService: AudioPlayerService,
                 private skinService: SkinService) { }
 
     ngOnInit() {
         this.initVideo();
-
-        this.song = this.songsConfigService.defaultSong;
-
-        Amplitude.init({
-            songs: [ this.song ]
-        });
-
+       
         const themeSkin = this.localStorageService.getThemeSkin();
         
         if (themeSkin) {
             this.playerClass = 'player-' + Config.THEME_CLASSES[themeSkin.player];
         }
+
+        this.nowPlayingSubscription = this.audioPlayerService.nowPlaying.subscribe((index) => {
+            this.track = this.audioPlayerService.getTrack(index);
+            this.index = index;
+        });
 
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
             if (skin) {
@@ -75,8 +80,21 @@ export class PlayerComponent implements OnInit, OnDestroy {
         }
     }
 
+    playNext(){
+        this.audioPlayerService.playNext(this.index);
+    }
+
+    playPrev(){
+        this.audioPlayerService.playPrev(this.index);
+    }
+
+    playPause(){
+
+    }
+
     ngOnDestroy() {
         this.skinSubscription.unsubscribe();
+        this.nowPlayingSubscription.unsubscribe();
     }
 
 }

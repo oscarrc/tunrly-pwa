@@ -38,7 +38,6 @@ export class TrackHorizontalComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.playlist)
         if (this.largeImage) {
             this.classes += ' song-h--lg';
         } else {

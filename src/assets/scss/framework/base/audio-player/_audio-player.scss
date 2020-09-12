@@ -134,12 +134,12 @@
 }
 
 // Play and pause button styles
-.amplitude-play-pause {
+.track-play-pause {
     .ion-md-pause {
         display: none;
     }
 
-    &.amplitude-playing {
+    &.track-playing {
         .ion-md-pause {
             display: inline-block;
         }

@@ -21,7 +21,7 @@ export class TrackListViewComponent implements OnInit {
 
     ngOnInit() {
         if (this.playlist) {
-            this.classes += ' amplitude-song-container amplitude-play-pause';
+            this.classes += ' track-song-container track-play-pause';
         }
     }
 
