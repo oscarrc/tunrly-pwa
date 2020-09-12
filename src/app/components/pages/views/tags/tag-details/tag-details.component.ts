@@ -86,7 +86,7 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         )
     }
 
-    playSong() {
+    playTrack() {
     }
 
     playAlbum() {

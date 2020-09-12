@@ -1,30 +1,42 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import * as Amplitude from 'amplitudejs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AudioPlayerService {
+    private playlist: any = {
+        tracks: []
+    };
+
+    nowPlaying: EventEmitter<any> = new EventEmitter();
+    currentPlaylist: BehaviorSubject<any> = new BehaviorSubject(this.playlist);
 
     constructor() { }
 
-    playSong(song) {
-        Amplitude.removeSong(0);
-        Amplitude.playNow(song);
+    get trackIndex() {
+        return this.nowPlaying;
     }
 
-    playlistKayName(playlistName) {
-        return playlistName.toLowerCase().replace(' ', '_');
+    set trackIndex(index) {
+        this.nowPlaying.emit(index);
     }
 
-    playNowPlaylist(playlist, songIndex = 0) {
-        const listName = this.playlistKayName(playlist.name);
-        Amplitude.removeSong(0);
-        if (!Amplitude.getActivePlaylist()) {
-            Amplitude.addPlaylist(listName, {name: listName}, playlist.songs);
-        }
-        Amplitude.playPlaylistSongAtIndex(songIndex, listName);
-        const song = playlist.songs[songIndex];
-        Amplitude.playNow(song);
+    playTrack(track) {
+        this.playlist.tracks.unshift(track);
+        this.currentPlaylist.next(this.playlist);
+        this.nowPlaying.emit(0);
+        console.log(this.playlist)
+    }
+
+    addToPlaylist(track){
+        this.playlist.tracks.push(track);
+    }
+
+    playNowPlaylist(playlist, index = 0) {
+        this.playlist = playlist;
+        this.currentPlaylist.next(this.playlist);
+        this.nowPlaying.emit(index);
     }
 }

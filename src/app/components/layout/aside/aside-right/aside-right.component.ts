@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 
-import { PlaylistConfigService } from '../../../../services/playlist-config.service';
-import { SongsConfigService } from '../../../../services/songs-config.service';
+import { AudioPlayerService } from '../../../../services/audio-player.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-aside-right',
@@ -12,29 +12,26 @@ export class AsideRightComponent implements OnInit, OnDestroy {
     @HostBinding('id') id = 'rightSidebar';
 
     playlist: any = {};
-    private playlistSubscription;
+    nowPlaying: number = 0;
 
-    constructor(private playlistConfigService: PlaylistConfigService,
-                private songsConfigService: SongsConfigService) { }
+    private playlistSubscription: Subscription;
+    private nowPlayingSubscription: Subscription;
+
+    constructor(private audioPlayerService: AudioPlayerService) { }
 
     ngOnInit() {
-        this.setDefaultPlaylist();
-        this.playlistSubscription = this.playlistConfigService.currentPlaylist.subscribe((playlist) => {
+        this.playlistSubscription = this.audioPlayerService.currentPlaylist.subscribe((playlist) => {
             this.playlist = playlist;
         });
-    }
 
-    setDefaultPlaylist() {
-        this.playlist = {
-            id: 1,
-            name: 'Listen Special',
-            cover_url: './assets/images/background/horizontal/1.jpg',
-            songs: this.songsConfigService.songsList
-        };
+        this.nowPlayingSubscription = this.audioPlayerService.nowPlaying.subscribe((index) => {
+            this.nowPlaying = index;
+        });
     }
 
     ngOnDestroy() {
         this.playlistSubscription.unsubscribe();
+        this.nowPlayingSubscription.unsubscribe();
     }
 
 }

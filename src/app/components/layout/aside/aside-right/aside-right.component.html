@@ -1,9 +1,9 @@
-<div class="right-sidebar-header">{{playlist.name ? playlist.name : 'Playlist Name'}}</div>
+<div class="right-sidebar-header">{{playlist.artist ? playlist.artist + ' - ' : ''}}{{playlist.name ? playlist.name : 'Now playing'}}</div>
 <perfect-scrollbar class="right-sidebar-body">
-    <ul class="list-group list-group-flush song-list" *ngIf="playlist.songs; else noDataFound">
+    <ul class="list-group list-group-flush song-list" *ngIf="playlist; else noDataFound">
         <!-- Begin | Custom List Item -->
-        <li class="custom-list--item list-group-item" *ngFor="let track of playlist.songs; let i = index">
-            <app-track-list-view [trackNumber]="i+1" [track]="track" [icon]="'la-ellipsis-h'" [playlist]="playlist" [trackIndex]="i">
+        <li class="custom-list--item list-group-item" *ngFor="let track of playlist.tracks; let i = index">
+            <app-track-list-view [trackNumber]="i+1" [track]="track" [icon]="'la-ellipsis-h'" [playlist]="playlist" [trackIndex]="i" [imageSrc]="playlist?.image[0]">
             </app-track-list-view>
         </li>
         <!-- End | Custom List Item -->

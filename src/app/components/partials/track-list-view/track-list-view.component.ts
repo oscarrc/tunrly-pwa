@@ -15,6 +15,7 @@ export class TrackListViewComponent implements OnInit {
     @Input() icon = 'la-ellipsis-v';
     @Input() playlist: any;
     @Input() trackIndex: number;
+    @Input() nowPlaying: number;
 
     constructor() { }
 

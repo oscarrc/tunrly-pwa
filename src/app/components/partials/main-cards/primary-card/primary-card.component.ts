@@ -32,7 +32,7 @@ export class PrimaryCardComponent implements OnInit {
     }
 
     addInPlayer() {
-        this.audioPlayerService.playSong(this.track);
+        this.audioPlayerService.playTrack(this.track);
     }
 
 }

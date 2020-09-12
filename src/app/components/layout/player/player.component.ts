@@ -18,6 +18,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'open-right-sidebar';
     playerClass = 'player-primary';
+    videoSize: number;
 
     skinSubscription: Subscription;
 
@@ -27,6 +28,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 private skinService: SkinService) { }
 
     ngOnInit() {
+        this.initVideo();
+
         this.song = this.songsConfigService.defaultSong;
 
         Amplitude.init({
@@ -34,6 +37,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         });
 
         const themeSkin = this.localStorageService.getThemeSkin();
+        
         if (themeSkin) {
             this.playerClass = 'player-' + Config.THEME_CLASSES[themeSkin.player];
         }
@@ -43,6 +47,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.playerClass = 'player-' + Config.THEME_CLASSES[skin.player];
             }
         });
+    }
+
+    initVideo(){
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+        this.videoSize = document.getElementById("audioPlayer").clientHeight;
     }
 
     changeVolumeIcon(event) {

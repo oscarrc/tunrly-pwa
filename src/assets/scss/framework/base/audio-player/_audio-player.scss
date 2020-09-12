@@ -87,7 +87,7 @@
     .song-image {
         @include flex($player-cover-image-width);
 
-        img {
+        img, iframe {
             border-top-left-radius: $radius-md;
             border-bottom-left-radius: $radius-md;
         }

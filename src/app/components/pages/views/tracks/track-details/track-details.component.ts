@@ -55,7 +55,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     addInPlayer() {
-        this.audioPlayerService.playSong(this.trackDetails);
+        this.audioPlayerService.playTrack(this.trackDetails);
     }
 
     ngOnDestroy() {
