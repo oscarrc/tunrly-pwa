@@ -46,7 +46,7 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
    
     playAllSongs() {
-        this.audioPlayerService.playNowPlaylist(this.playlistDetails.tracks);
+        this.audioPlayerService.playNowPlaylist(this.playlistDetails);
     }
 
     ngOnDestroy() {

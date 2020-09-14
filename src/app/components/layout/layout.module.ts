@@ -28,6 +28,8 @@ import { SearchComponent } from './header/search/search.component';
 import { LoginComponent } from './header/login/login.component';
 import { BannerComponent } from './banner/banner.component';
 
+import { ToTimePipe } from '../../core/pipes/toTime.pipe';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
 };
@@ -46,7 +48,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         LanguageComponent,
         SearchComponent,
         LoginComponent,
-        BannerComponent
+        BannerComponent,
+        ToTimePipe
     ],
     exports: [
         AsideLeftComponent,

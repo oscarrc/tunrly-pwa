@@ -1,4 +1,4 @@
-<a class="btn btn-icon-only w-auto h-auto text-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<a class="btn btn-icon-only w-auto h-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i [class]="icon"></i>
 </a>
 <ul class="dropdown-menu">
@@ -21,7 +21,7 @@
         </a>
     </li>
     <li class="dropdown-item">
-        <a class="dropdown-link" [routerLink]="'/track/' + track.name + '/' + track.artist">
+        <a class="dropdown-link" [routerLink]="'/track/' + track?.name + '/' + track?.artist">
             <i class="la la-info-circle"></i>
             <span>Song Info</span>
         </a>

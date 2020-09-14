@@ -84,6 +84,10 @@
     list-style: none;
     align-items: center;
 
+    a{
+        color: $gray-400;
+    }
+
     > li + li {
         margin-left: .75rem;
     }

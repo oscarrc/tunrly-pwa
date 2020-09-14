@@ -15,14 +15,27 @@ import { Config } from '../../../config/config';
 })
 export class PlayerComponent implements OnInit, OnDestroy {
 
+    player: any;
     track: any = {};
-    index: number = 0;
+    state: number = -1;
+    time: number;
+    buffered: number;
+    duration: number;
+    timer: any;
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'open-right-sidebar';
     playerClass = 'player-primary';
     videoSize: number;
-    repeat: boolean = false;
-    shuffle: boolean = false;
+    videoOptions = {
+        autoplay: 1,
+        controls: 0
+    };
+    playerOptions = {
+        index: 0,
+        shuffle: false,
+        repeat: false
+    };
+    
 
     skinSubscription: Subscription;
     playlistSubscription: Subscription;
@@ -34,7 +47,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 private skinService: SkinService) { }
 
     ngOnInit() {
-        this.initVideo();
+        this.init();
        
         const themeSkin = this.localStorageService.getThemeSkin();
         
@@ -42,9 +55,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
             this.playerClass = 'player-' + Config.THEME_CLASSES[themeSkin.player];
         }
 
-        this.nowPlayingSubscription = this.audioPlayerService.nowPlaying.subscribe((index) => {
-            this.track = this.audioPlayerService.getTrack(index);
-            this.index = index;
+        this.nowPlayingSubscription = this.audioPlayerService.playerOptions.subscribe((options) => {            
+            this.track = this.audioPlayerService.track;
+            this.playerOptions = options;
+            console.log(options);
         });
 
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
@@ -54,15 +68,49 @@ export class PlayerComponent implements OnInit, OnDestroy {
         });
     }
 
-    initVideo(){
+    init(){
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         document.body.appendChild(tag);
         this.videoSize = document.getElementById("audioPlayer").clientHeight;
     }
 
-    changeVolumeIcon(event) {
+    ready(event){
+        this.player = event.target;        
+        this.duration = this.player.getDuration();
+
+        this.timer = setInterval( () => {
+            this.time = this.player.getCurrentTime();
+            this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
+        })
+    }
+
+    stateChange(event){
+        const state = event.data;
+
+        this.state = state;
+
+        switch(state){
+            case -1: //No comenzado
+                this.playPause();
+                break;
+            case 0: //Terminado
+                this.playNext();
+                break;
+            case 1: //Reproduciondo
+                break;
+            case 2: //Pausa
+                break;
+            case 3: //Buffering
+                break;
+            case 5: //Encolado
+                break;
+        }
+    }
+
+    setVolume(event) {
         const value = event.target.value;
+        
         if (value < 1) {
             this.volumeIcon = 'ion-md-volume-mute';
         } else if (value > 0 && value < 70) {
@@ -70,6 +118,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
         } else if (value > 70) {
             this.volumeIcon = 'ion-md-volume-high';
         }
+
+        this.player.setVolume(value);
+    }
+
+    toggleOptions(option){
+        this.audioPlayerService.setOption(option);
     }
 
     openPlaylist() {
@@ -81,20 +135,27 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playNext(){
-        this.audioPlayerService.playNext(this.index);
+        this.audioPlayerService.playNext();
     }
 
     playPrev(){
-        this.audioPlayerService.playPrev(this.index);
+        this.audioPlayerService.playPrev();
     }
 
     playPause(){
+        const state = this.player.getPlayerState();
 
+        if(state == 1){            
+            this.player.pauseVideo();
+        }else{            
+            this.player.playVideo();
+        }
     }
 
     ngOnDestroy() {
         this.skinSubscription.unsubscribe();
         this.nowPlayingSubscription.unsubscribe();
+        clearInterval(this.timer);
     }
 
 }

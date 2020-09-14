@@ -1,4 +1,4 @@
-<div class="right-sidebar-header">{{playlist.artist ? playlist.artist + ' - ' : ''}}{{playlist.name ? playlist.name : 'Now playing'}}</div>
+<div class="right-sidebar-header">{{playlist.artist ? playlist.artist + ' - ' : ''}}{{playlist.name ? playlist.name : 'Now playing'}}{{ playlist?.user?.name ? "by" + playlist?.user?.name : ""}}</div>
 <perfect-scrollbar class="right-sidebar-body">
     <ul class="list-group list-group-flush song-list" *ngIf="playlist; else noDataFound">
         <!-- Begin | Custom List Item -->

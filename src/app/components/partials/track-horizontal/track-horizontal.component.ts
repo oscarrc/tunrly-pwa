@@ -28,7 +28,7 @@ export class TrackHorizontalComponent implements OnInit {
         this.searchService.hideSearchResult();
         if (this.playlist) {
             // Add playlist in audio play and play selected song
-            this.audioPlayerService.playNowPlaylist(this.playlist, this.trackIndex);
+            this.audioPlayerService.playNowPlaylist(this.playlist);
         } else if (this.routeLink) {
             this.router.navigate([this.routeLink]);
         } else {
