@@ -7,7 +7,8 @@ import { AudioPlayerService } from '../../../services/audio-player.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { SkinService } from '../../../services/skin.service';
 import { Config } from '../../../config/config';
-;
+
+//TODO Ability to make video bigger
 
 @Component({
     selector: 'app-player',
@@ -38,7 +39,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
         repeat: false
     };
     
-
     skinSubscription: Subscription;
     playlistSubscription: Subscription;
     nowPlayingSubscription: Subscription;

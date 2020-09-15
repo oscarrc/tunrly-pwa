@@ -3,6 +3,7 @@ import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { AudioPlayerService } from '../../../../services/audio-player.service';
 import { Subscription } from 'rxjs';
 
+//TODO save and clear playlist
 @Component({
     selector: 'app-aside-right',
     templateUrl: './aside-right.component.html'
