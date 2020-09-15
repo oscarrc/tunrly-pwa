@@ -16,6 +16,7 @@ export class TrackListViewComponent implements OnInit {
     @Input() playlist: any;
     @Input() trackIndex: number;
     @Input() nowPlaying: number;
+    @Input() highlight: number = -1;
 
     constructor() { }
 

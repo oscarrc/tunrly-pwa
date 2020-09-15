@@ -1,4 +1,4 @@
-<div class="song-list--item-number">{{trackNumber < 10 ? '0' + trackNumber : trackNumber}}</div>
+<div class="song-list--item-number" [class]="{ 'text-primary': highlight >= 0 && highlight == trackIndex }">{{trackNumber < 10 ? '0' + trackNumber : trackNumber}}</div>
 
 <app-track-horizontal [track]="track" [imageBorderRadiusClass]="imageBorderRadiusClass" [imageSrc]="imageSrc" [playlist]="playlist"
                      [trackIndex]="trackIndex"></app-track-horizontal>

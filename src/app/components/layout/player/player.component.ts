@@ -58,7 +58,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.nowPlayingSubscription = this.audioPlayerService.playerOptions.subscribe((options) => {            
             this.track = this.audioPlayerService.track;
             this.playerOptions = options;
-            console.log(options);
         });
 
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
@@ -66,6 +65,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.playerClass = 'player-' + Config.THEME_CLASSES[skin.player];
             }
         });
+    }
+
+    ngOnDestroy() {
+        this.skinSubscription.unsubscribe();
+        this.nowPlayingSubscription.unsubscribe();
+        clearInterval(this.timer);
     }
 
     init(){
@@ -150,12 +155,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
         }else{            
             this.player.playVideo();
         }
-    }
-
-    ngOnDestroy() {
-        this.skinSubscription.unsubscribe();
-        this.nowPlayingSubscription.unsubscribe();
-        clearInterval(this.timer);
     }
 
 }
