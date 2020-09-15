@@ -3,7 +3,7 @@
 
     <!-- Begin | Audio Player Progress -->
     <div id="progress-container">
-        <input type="range" class="track-song-slider"  min="0" max="100" [value]="(time * 100 / duration) || 0" step=".01">
+        <input type="range" class="track-song-slider"  min="0" max="100" [value]="(time * 100 / duration) - 0.1 || 0" step=".001">
         <progress class="audio-progress audio-progress--played track-song-played-progress" min="0" max="100" [value]="(time * 100 / duration) || 0"></progress>
         <progress class="audio-progress audio-progress--buffered track-buffered-progress" min="0" max="100" [value]="buffered || 0"></progress>
     </div>
@@ -59,7 +59,7 @@
                 <i [class]="volumeIcon"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right volume-dropdown-menu">
-                <input type="range" class="track-volume-slider" value="100" (change)="setVolume($event)">
+                <input type="range" id="volume" class="track-volume-slider" value="100" (change)="setVolume($event)">
             </div>
         </div>
 

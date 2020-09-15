@@ -21,6 +21,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     time: number;
     buffered: number;
     duration: number;
+    volume: number;
     timer: any;
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'open-right-sidebar';
@@ -48,12 +49,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.init();
-       
+
         const themeSkin = this.localStorageService.getThemeSkin();
         
         if (themeSkin) {
             this.playerClass = 'player-' + Config.THEME_CLASSES[themeSkin.player];
         }
+
+        this.volume = parseInt((<HTMLInputElement>document.getElementById('volume')).value);
 
         this.nowPlayingSubscription = this.audioPlayerService.playerOptions.subscribe((options) => {            
             this.track = this.audioPlayerService.track;
@@ -83,7 +86,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     ready(event){
         this.player = event.target;        
         this.duration = this.player.getDuration();
-
+        this.player?.setVolume(this.volume);
         this.timer = setInterval( () => {
             this.time = this.player.getCurrentTime();
             this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
@@ -114,17 +117,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     setVolume(event) {
-        const value = event.target.value;
+        this.volume = event.target.value;
         
-        if (value < 1) {
+        if (this.volume < 1) {
             this.volumeIcon = 'ion-md-volume-mute';
-        } else if (value > 0 && value < 70) {
+        } else if (this.volume > 0 && this.volume < 70) {
             this.volumeIcon = 'ion-md-volume-low';
-        } else if (value > 70) {
+        } else if (this.volume > 70) {
             this.volumeIcon = 'ion-md-volume-high';
         }
 
-        this.player.setVolume(value);
+        this.player?.setVolume(this.volume);
     }
 
     toggleOptions(option){
@@ -156,5 +159,4 @@ export class PlayerComponent implements OnInit, OnDestroy {
             this.player.playVideo();
         }
     }
-
 }
