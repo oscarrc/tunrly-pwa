@@ -21,8 +21,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
     time: number;
     buffered: number;
     duration: number;
-    volume: number;
+    volume: number;  
     timer: any;
+    seekTo: number = 0;
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'open-right-sidebar';
     playerClass = 'player-primary';
@@ -148,6 +149,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     playPrev(){
         this.audioPlayerService.playPrev();
+    }
+
+    seekStart(event){
+        this.seekTo = event.target.value;
+    }
+
+    seekEnd(event){
+        const time = (this.duration * event.target.value)/100;
+        this.player?.seekTo(time, true);
+        this.seekTo = 0;
     }
 
     playPause(){
