@@ -13,6 +13,7 @@
     <div class="audio">
         <div class="song-image">
             <youtube-player *ngIf="track?.source"
+                id="videoPlayer"
                 [videoId]="track.source" 
                 suggestedQuality="highres"
                 [height]="videoSize" 

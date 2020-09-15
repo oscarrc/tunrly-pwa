@@ -91,6 +91,16 @@
             border-top-left-radius: $radius-md;
             border-bottom-left-radius: $radius-md;
         }
+
+        #videoPlayer{   
+            &:after {
+                content: '';
+                @include absolute(top 0 bottom 0 left 0);      
+                width: $player-cover-image-width;         
+                border-top-left-radius: $radius-md;
+                border-bottom-left-radius: $radius-md; 
+            }
+        }
     }
 
     .song-info {
