@@ -10,12 +10,14 @@ export class TrackOptionsComponent implements OnInit {
     @HostBinding('class') class = 'dropleft';
 
     @Input() track: any;
+    @Input() trackIndex: number = -1;
     @Input() icon = '';
 
     constructor(private audioPlayerService: AudioPlayerService) { }
 
     ngOnInit() {
         this.icon = 'la ' + this.icon;
+        console.log(this.trackIndex);
     }
 
     addFavorite() {
@@ -24,6 +26,10 @@ export class TrackOptionsComponent implements OnInit {
 
     addToPlayList() {
         this.audioPlayerService.addToPlaylist(this.track);
+    }
+
+    removeFromPlaylist() {
+        this.audioPlayerService.removeFromPlaylist(this.trackIndex);
     }
 
     shareSong() {

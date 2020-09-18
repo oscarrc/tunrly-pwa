@@ -66,13 +66,14 @@ export class AudioPlayerService {
 
     addToPlaylist(track){
         this.playlist.tracks.push(track);
+        this.currentPlaylist.next(this.playlist);
     }
 
     playNowPlaylist(playlist) {
         this.playlist = playlist;
         this.currentPlaylist.next(this.playlist);
         this.options.index = 0;
-        this.playerOptions.emit(this.options);;
+        this.playerOptions.emit(this.options);
     }
 
     removeFromPlaylist(index){

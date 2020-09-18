@@ -8,10 +8,16 @@
             <span>Favorite</span>
         </a>
     </li>
-    <li class="dropdown-item">
+    <li class="dropdown-item" *ngIf="trackIndex == null">
         <a class="dropdown-link" (click)="addToPlayList()">
             <i class="la la-plus"></i>
             <span>Add to Playlist</span>
+        </a>
+    </li>
+    <li class="dropdown-item" *ngIf="trackIndex >= 0">
+        <a class="dropdown-link" (click)="removeFromPlaylist()">
+            <i class="la la-minus"></i>
+            <span>Remove from playlist</span>
         </a>
     </li>
     <li class="dropdown-item">

@@ -12,22 +12,22 @@
                 <a *ngIf="!track?.favorite" href="javascript:;" (click)="addFavorite()" role="button" >
                     <span class="badge badge-pill badge-transparent"><i class="la la-heart"></i></span>
                 </a>
-                <a class="ml-auto" href="javascript:;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="ml-auto" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="ion-md-more"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-item">
-                        <a href="javascript:;" class="dropdown-link" (click)="addFavorite()">
+                        <a class="dropdown-link" (click)="addFavorite()">
                             <i class="la la-heart-o"></i>
                         </a>
                     </li>
                     <li class="dropdown-item">
-                        <a href="javascript:;" class="dropdown-link" (click)="addInQueue()">
+                        <a class="dropdown-link" (click)="addToPlayList()">
                             <i class="la la-plus"></i>
                         </a>
                     </li>
                     <li class="dropdown-item">
-                        <a href="javascript:;" class="dropdown-link" (click)="shareSong()">
+                        <a class="dropdown-link" (click)="shareSong()">
                             <i class="la la-share-alt"></i>
                         </a>
                     </li>
