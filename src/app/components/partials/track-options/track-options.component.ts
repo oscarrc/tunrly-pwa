@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { AudioPlayerService } from '../../../services/audio-player.service';
 
 @Component({
     selector: 'app-track-options',
@@ -11,7 +12,7 @@ export class TrackOptionsComponent implements OnInit {
     @Input() track: any;
     @Input() icon = '';
 
-    constructor() { }
+    constructor(private audioPlayerService: AudioPlayerService) { }
 
     ngOnInit() {
         this.icon = 'la ' + this.icon;
@@ -22,6 +23,7 @@ export class TrackOptionsComponent implements OnInit {
     }
 
     addToPlayList() {
+        this.audioPlayerService.addToPlaylist(this.track);
     }
 
     shareSong() {

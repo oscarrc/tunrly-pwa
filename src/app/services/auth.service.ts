@@ -9,6 +9,7 @@ export class AuthService {
     private authURL = environment.api + '/auth/'
     private token:string;
     private session:string;
+    private user:any;
 
     constructor(private httpClient: HttpClient) {
     }

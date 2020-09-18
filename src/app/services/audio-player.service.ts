@@ -59,6 +59,11 @@ export class AudioPlayerService {
         this.playerOptions.emit(this.options);
     }
 
+    playIndex(index: number){
+        this.options.index = index;
+        this.playerOptions.emit(this.options);
+    }
+
     addToPlaylist(track){
         this.playlist.tracks.push(track);
     }

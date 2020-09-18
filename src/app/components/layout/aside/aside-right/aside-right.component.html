@@ -2,7 +2,7 @@
 <perfect-scrollbar class="right-sidebar-body">
     <ul class="list-group list-group-flush song-list" *ngIf="playlist; else noDataFound">
         <!-- Begin | Custom List Item -->
-        <li class="custom-list--item list-group-item" *ngFor="let track of playlist.tracks; let i = index">
+        <li class="custom-list--item list-group-item" *ngFor="let track of playlist.tracks; let i = index" (click) = playTrack(i)>
             <app-track-list-view [trackNumber]="i+1" [track]="track" [icon]="'la-ellipsis-h'" [playlist]="playlist" [trackIndex]="i" [highlight]="nowPlaying" [imageSrc]="playlist?.image ? playlist?.image[0] : ''">
             </app-track-list-view>
         </li>
