@@ -27,7 +27,6 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private PlayerService: PlayerService,
                 private tagService: TagService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param) {

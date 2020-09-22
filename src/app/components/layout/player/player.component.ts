@@ -45,7 +45,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 private localStorageService: LocalStorageService,
-                private PlayerService: PlayerService,
+                private playerService: PlayerService,
                 private skinService: SkinService) { }
 
     ngOnInit() {
@@ -59,8 +59,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
         this.volume = parseInt((<HTMLInputElement>document.getElementById('volume')).value);
 
-        this.nowPlayingSubscription = this.PlayerService.playerOptions.subscribe((options) => {            
-            this.track = this.PlayerService.track;
+        this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
+            this.track = this.playerService.track;
             this.playerOptions = options;
         });
 
@@ -132,7 +132,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     toggleOptions(option){
-        this.PlayerService.setOption(option);
+        this.playerService.setOption(option);
     }
 
     openPlaylist() {
@@ -144,11 +144,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playNext(){
-        this.PlayerService.playNext();
+        this.playerService.playNext();
     }
 
     playPrev(){
-        this.PlayerService.playPrev();
+        this.playerService.playPrev();
     }
 
     seekStart(event){

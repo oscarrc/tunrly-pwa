@@ -13,7 +13,7 @@ export class TrackOptionsComponent implements OnInit {
     @Input() trackIndex: number = -1;
     @Input() icon = '';
 
-    constructor(private PlayerService: PlayerService) { }
+    constructor(private playerService: PlayerService) { }
 
     ngOnInit() {
         this.icon = 'la ' + this.icon;
@@ -24,11 +24,11 @@ export class TrackOptionsComponent implements OnInit {
     }
 
     addToPlayList() {
-        this.PlayerService.addToPlaylist(this.track);
+        this.playerService.addToPlaylist(this.track);
     }
 
     removeFromPlaylist() {
-        this.PlayerService.removeFromPlaylist(this.trackIndex);
+        this.playerService.removeFromPlaylist(this.trackIndex);
     }
 
     shareSong() {

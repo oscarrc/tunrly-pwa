@@ -22,18 +22,18 @@ export class TrackHorizontalComponent implements OnInit {
 
     constructor(private router: Router,
                 private searchService: SearchService,
-                private PlayerService: PlayerService) { }
+                private playerService: PlayerService) { }
 
     @HostListener('click') onClick() {
         this.searchService.hideSearchResult();
         if (this.playlist) {
             // Add playlist in audio play and play selected song
-            this.PlayerService.playNowPlaylist(this.playlist);
+            this.playerService.playNowPlaylist(this.playlist);
         } else if (this.routeLink) {
             this.router.navigate([this.routeLink]);
         } else {
             // Play selected song
-            this.PlayerService.playTrack(this.track);
+            this.playerService.playTrack(this.track);
         }
     }
 

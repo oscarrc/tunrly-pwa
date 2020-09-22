@@ -18,14 +18,14 @@ export class AsideRightComponent implements OnInit, OnDestroy {
     private playlistSubscription: Subscription;
     private nowPlayingSubscription: Subscription;
 
-    constructor(private PlayerService: PlayerService) { }
+    constructor(private playerService: PlayerService) { }
 
     ngOnInit() {
-        this.playlistSubscription = this.PlayerService.currentPlaylist.subscribe((playlist) => {
+        this.playlistSubscription = this.playerService.currentPlaylist.subscribe((playlist) => {
             this.playlist = playlist;
         });
 
-        this.nowPlayingSubscription = this.PlayerService.playerOptions.subscribe((options) => {
+        this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {
             this.nowPlaying = options.index;
         });
     }
@@ -36,7 +36,7 @@ export class AsideRightComponent implements OnInit, OnDestroy {
     }
 
     playTrack(index: number){
-        this.PlayerService.playIndex(index);
+        this.playerService.playIndex(index);
     }
 
 }

@@ -22,7 +22,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private PlayerService: PlayerService,
+                private playerService: PlayerService,
                 private albumService: AlbumService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param) {
@@ -49,7 +49,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
    
     playAllSongs() {
-        this.PlayerService.playNowPlaylist(this.albumDetails);
+        this.playerService.playNowPlaylist(this.albumDetails);
     }
 
     ngOnDestroy() {

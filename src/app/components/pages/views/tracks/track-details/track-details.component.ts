@@ -20,7 +20,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private PlayerService: PlayerService,
+                private playerService: PlayerService,
                 private trackService: TrackService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.name) {
@@ -55,7 +55,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     addInPlayer() {
-        this.PlayerService.playTrack(this.trackDetails);
+        this.playerService.playTrack(this.trackDetails);
     }
 
     ngOnDestroy() {

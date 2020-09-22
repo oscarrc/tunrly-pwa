@@ -20,7 +20,7 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private PlayerService: PlayerService,
+                private playerService: PlayerService,
                 private artistService: ArtistService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.name) {
@@ -74,7 +74,7 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     playAllSongs() {
-        this.PlayerService.playNowPlaylist(this.artistDetails);
+        this.playerService.playNowPlaylist(this.artistDetails);
     }
 
     ngOnDestroy() {

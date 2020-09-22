@@ -14,7 +14,7 @@ export class PrimaryCardComponent implements OnInit {
 
     classes = '';
 
-    constructor(private PlayerService: PlayerService) {
+    constructor(private playerService: PlayerService) {
     }
 
     ngOnInit() {
@@ -26,14 +26,14 @@ export class PrimaryCardComponent implements OnInit {
     }
 
     addToPlayList() {
-        this.PlayerService.addToPlaylist(this.track);
+        this.playerService.addToPlaylist(this.track);
     }
     
     shareSong() {
     }
 
     addInPlayer() {
-        this.PlayerService.playTrack(this.track);
+        this.playerService.playTrack(this.track);
     }
 
 }
