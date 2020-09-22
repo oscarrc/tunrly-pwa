@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../../services/loading.service';
-import { AudioPlayerService } from '../../../../../services/audio-player.service';
+import { PlayerService } from '../../../../../services/player.service';
 import { AlbumService } from '../../../../../services/album.service';
 
 
@@ -22,7 +22,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private audioPlayerService: AudioPlayerService,
+                private PlayerService: PlayerService,
                 private albumService: AlbumService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param) {
@@ -49,7 +49,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
    
     playAllSongs() {
-        this.audioPlayerService.playNowPlaylist(this.albumDetails);
+        this.PlayerService.playNowPlaylist(this.albumDetails);
     }
 
     ngOnDestroy() {

@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class AudioPlayerService {
+export class PlayerService {
     private playlist: any = {
         tracks: []
     };

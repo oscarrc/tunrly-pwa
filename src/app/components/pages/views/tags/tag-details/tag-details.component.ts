@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../../services/loading.service';
-import { AudioPlayerService } from '../../../../../services/audio-player.service';
+import { PlayerService } from '../../../../../services/player.service';
 import { TagService } from '../../../../../services/tag.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private audioPlayerService: AudioPlayerService,
+                private PlayerService: PlayerService,
                 private tagService: TagService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param) {

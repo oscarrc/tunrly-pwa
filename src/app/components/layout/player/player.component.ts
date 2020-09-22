@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 
-import { AudioPlayerService } from '../../../services/audio-player.service';
+import { PlayerService } from '../../../services/player.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { SkinService } from '../../../services/skin.service';
 import { Config } from '../../../config/config';
@@ -45,7 +45,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 private localStorageService: LocalStorageService,
-                private audioPlayerService: AudioPlayerService,
+                private PlayerService: PlayerService,
                 private skinService: SkinService) { }
 
     ngOnInit() {
@@ -59,8 +59,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
         this.volume = parseInt((<HTMLInputElement>document.getElementById('volume')).value);
 
-        this.nowPlayingSubscription = this.audioPlayerService.playerOptions.subscribe((options) => {            
-            this.track = this.audioPlayerService.track;
+        this.nowPlayingSubscription = this.PlayerService.playerOptions.subscribe((options) => {            
+            this.track = this.PlayerService.track;
             this.playerOptions = options;
         });
 
@@ -132,7 +132,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     toggleOptions(option){
-        this.audioPlayerService.setOption(option);
+        this.PlayerService.setOption(option);
     }
 
     openPlaylist() {
@@ -144,11 +144,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playNext(){
-        this.audioPlayerService.playNext();
+        this.PlayerService.playNext();
     }
 
     playPrev(){
-        this.audioPlayerService.playPrev();
+        this.PlayerService.playPrev();
     }
 
     seekStart(event){

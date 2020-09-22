@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { AudioPlayerService } from '../../../services/audio-player.service';
+import { PlayerService } from '../../../services/player.service';
 
 @Component({
     selector: 'app-track-options',
@@ -13,11 +13,10 @@ export class TrackOptionsComponent implements OnInit {
     @Input() trackIndex: number = -1;
     @Input() icon = '';
 
-    constructor(private audioPlayerService: AudioPlayerService) { }
+    constructor(private PlayerService: PlayerService) { }
 
     ngOnInit() {
         this.icon = 'la ' + this.icon;
-        console.log(this.trackIndex);
     }
 
     addFavorite() {
@@ -25,11 +24,11 @@ export class TrackOptionsComponent implements OnInit {
     }
 
     addToPlayList() {
-        this.audioPlayerService.addToPlaylist(this.track);
+        this.PlayerService.addToPlaylist(this.track);
     }
 
     removeFromPlaylist() {
-        this.audioPlayerService.removeFromPlaylist(this.trackIndex);
+        this.PlayerService.removeFromPlaylist(this.trackIndex);
     }
 
     shareSong() {

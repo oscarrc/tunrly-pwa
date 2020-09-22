@@ -2,7 +2,7 @@ import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/co
 import { Router } from '@angular/router';
 
 import { SearchService } from '../../../services/search.service';
-import { AudioPlayerService } from '../../../services/audio-player.service';
+import { PlayerService } from '../../../services/player.service';
 
 @Component({
     selector: 'app-track-horizontal',
@@ -22,18 +22,18 @@ export class TrackHorizontalComponent implements OnInit {
 
     constructor(private router: Router,
                 private searchService: SearchService,
-                private audioPlayerService: AudioPlayerService) { }
+                private PlayerService: PlayerService) { }
 
     @HostListener('click') onClick() {
         this.searchService.hideSearchResult();
         if (this.playlist) {
             // Add playlist in audio play and play selected song
-            this.audioPlayerService.playNowPlaylist(this.playlist);
+            this.PlayerService.playNowPlaylist(this.playlist);
         } else if (this.routeLink) {
             this.router.navigate([this.routeLink]);
         } else {
             // Play selected song
-            this.audioPlayerService.playTrack(this.track);
+            this.PlayerService.playTrack(this.track);
         }
     }
 

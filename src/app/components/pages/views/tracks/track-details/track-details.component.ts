@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../../services/loading.service';
-import { AudioPlayerService } from '../../../../../services/audio-player.service';
+import { PlayerService } from '../../../../../services/player.service';
 import { TrackService } from '../../../../../services/track.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
-                private audioPlayerService: AudioPlayerService,
+                private PlayerService: PlayerService,
                 private trackService: TrackService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.name) {
@@ -55,7 +55,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     addInPlayer() {
-        this.audioPlayerService.playTrack(this.trackDetails);
+        this.PlayerService.playTrack(this.trackDetails);
     }
 
     ngOnDestroy() {

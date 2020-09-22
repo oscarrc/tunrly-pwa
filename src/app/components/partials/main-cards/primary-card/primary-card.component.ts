@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { AudioPlayerService } from '../../../../services/audio-player.service';
+import { PlayerService } from '../../../../services/player.service';
 
 @Component({
     selector: 'app-primary-card',
@@ -14,7 +14,7 @@ export class PrimaryCardComponent implements OnInit {
 
     classes = '';
 
-    constructor(private audioPlayerService: AudioPlayerService) {
+    constructor(private PlayerService: PlayerService) {
     }
 
     ngOnInit() {
@@ -26,14 +26,14 @@ export class PrimaryCardComponent implements OnInit {
     }
 
     addToPlayList() {
-        this.audioPlayerService.addToPlaylist(this.track);
+        this.PlayerService.addToPlaylist(this.track);
     }
     
     shareSong() {
     }
 
     addInPlayer() {
-        this.audioPlayerService.playTrack(this.track);
+        this.PlayerService.playTrack(this.track);
     }
 
 }

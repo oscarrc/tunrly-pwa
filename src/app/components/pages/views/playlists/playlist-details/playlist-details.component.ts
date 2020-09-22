@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../../services/loading.service';
-import { AudioPlayerService } from '../../../../../services/audio-player.service';
+import { PlayerService } from '../../../../../services/player.service';
 import { PlaylistService } from '../../../../../services/playlist.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
 
     constructor(private route: ActivatedRoute,
         private loadingService: LoadingService,
-        private audioPlayerService: AudioPlayerService,
+        private PlayerService: PlayerService,
         private playlistService: PlaylistService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param) {
@@ -46,7 +46,7 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
    
     playAllSongs() {
-        this.audioPlayerService.playNowPlaylist(this.playlistDetails);
+        this.PlayerService.playNowPlaylist(this.playlistDetails);
     }
 
     ngOnDestroy() {

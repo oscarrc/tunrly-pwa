@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 
-import { AudioPlayerService } from '../../../../services/audio-player.service';
+import { PlayerService } from '../../../../services/player.service';
 import { Subscription } from 'rxjs';
 
 //TODO save and clear playlist
@@ -18,14 +18,14 @@ export class AsideRightComponent implements OnInit, OnDestroy {
     private playlistSubscription: Subscription;
     private nowPlayingSubscription: Subscription;
 
-    constructor(private audioPlayerService: AudioPlayerService) { }
+    constructor(private PlayerService: PlayerService) { }
 
     ngOnInit() {
-        this.playlistSubscription = this.audioPlayerService.currentPlaylist.subscribe((playlist) => {
+        this.playlistSubscription = this.PlayerService.currentPlaylist.subscribe((playlist) => {
             this.playlist = playlist;
         });
 
-        this.nowPlayingSubscription = this.audioPlayerService.playerOptions.subscribe((options) => {
+        this.nowPlayingSubscription = this.PlayerService.playerOptions.subscribe((options) => {
             this.nowPlaying = options.index;
         });
     }
@@ -36,7 +36,7 @@ export class AsideRightComponent implements OnInit, OnDestroy {
     }
 
     playTrack(index: number){
-        this.audioPlayerService.playIndex(index);
+        this.PlayerService.playIndex(index);
     }
 
 }
