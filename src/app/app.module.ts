@@ -18,7 +18,7 @@ export function jwtOptionsFactory(cookieService: CookieService) {
     return {
         tokenGetter: () => cookieService.get('token'),
         allowedDomains: ['localhost:3000'],
-        disallowedRoutes: ['http://localhost:3000/']
+        // disallowedRoutes: ['http://localhost:3000/']
     };
 }
 

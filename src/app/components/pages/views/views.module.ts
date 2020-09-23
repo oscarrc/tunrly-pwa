@@ -52,6 +52,8 @@ import { AlbumService } from '../../../services/album.service';
 import { TagService } from '../../../services/tag.service';
 import { PlaylistService } from '../../../services/playlist.service';
 
+import { AuthGuard } from '../../../core/guards/route.guard';    
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
 };
@@ -60,11 +62,8 @@ const routes: Routes = [
     {
         path: '',
         component: ViewsComponent,
+        // canActivate: [AuthGuard],
         children: [
-            {
-                path: '',
-                component: HomeComponent
-            },
             {
                 path: 'home',
                 component: HomeComponent,

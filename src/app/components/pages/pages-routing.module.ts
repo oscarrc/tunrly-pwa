@@ -13,16 +13,6 @@ const routes: Routes = [
     {
         path: '404',
         component: ErrorComponent
-    },
-    {
-        path: 'pages',
-        component: PagesComponent,
-        children: [
-            {
-                path: '',
-                loadChildren: () => import('./views/views.module').then(m => m.ComponentsModule)
-            }
-        ]
     }
 ];
 
