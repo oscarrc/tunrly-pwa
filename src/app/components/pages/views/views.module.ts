@@ -62,7 +62,7 @@ const routes: Routes = [
     {
         path: '',
         component: ViewsComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'home',

@@ -6,18 +6,36 @@ import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({ providedIn: 'root' }) 
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(private router: Router, private authService: AuthService) { }
 
+    private handleRefresh(){
+        this.authService.logout();
+        location.reload(true);
+    }
+
+    private handleError(){
+        //TODO handle error with toast or something
+    }
+
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError(err => {
-            if (err.status === 404) {
-                this.router.navigate(['/404']);
+        return next.handle(request).pipe(catchError((err:any) => {            
+            switch(err.status){
+                case 404:
+                    this.router.navigate(['/404']);
+                    break;
+                case 401:
+                    this.handleRefresh();
+                    break;
+                case 403:
+                    this.router.navigate(['/home']);
+                    break;
+                default:
+                    this.handleError();
             }
 
-            const error = err.error.message;
-            return throwError(error);
+            return throwError(err.error);
         }))
     }
 }

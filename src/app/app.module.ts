@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -12,7 +12,9 @@ import { LoaderComponent } from './components/layout/loader/loader.component';
 import { LoadingService } from './services/loading.service';
 import { MenuConfigService } from './services/menu-config.service';
 import { SongsConfigService } from './services/songs-config.service';
+import { AuthService } from './services/auth.service';
 
+import {ErrorInterceptor} from './core/interceptors/error.interceptor'
 
 export function jwtOptionsFactory(cookieService: CookieService) {
     return {
@@ -43,7 +45,13 @@ export function jwtOptionsFactory(cookieService: CookieService) {
     providers: [
         LoadingService,
         MenuConfigService,
-        SongsConfigService
+        SongsConfigService,
+        AuthService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ErrorInterceptor,
+            multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })
