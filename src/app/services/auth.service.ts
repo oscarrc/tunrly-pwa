@@ -12,7 +12,6 @@ export class AuthService {
     private isLoggedIn: boolean = false;
     
     constructor(private httpClient: HttpClient,
-                private router: Router,
                 private cookieService: CookieService) {
     }
 
@@ -29,9 +28,9 @@ export class AuthService {
                 sessionStorage.setItem('user', JSON.stringify(res['user']));
 
                 this.user = res['user'];
-                this.cookieService.set("token", res['token'], 0, '/', null, true);
-                this.cookieService.set("device", device, remember ? date : 0, '/', null, true);
-                this.cookieService.set("session", res['session'], remember ? date : 0, '/', null, true);
+                this.cookieService.set("token", res['token'], 0, '/');
+                this.cookieService.set("device", device, remember ? date : 0, '/');
+                this.cookieService.set("session", res['session'], remember ? date : 0, '/');
 
                 this.isLoggedIn = true;
 
@@ -40,18 +39,17 @@ export class AuthService {
             err => {
                 return err
             }
-        )
-           
-        );
+        ));
     }
 
-    logout(device: string = this.user.device){
+    logout(){
+        const device = this.cookieService.get("device");
+
         return this.httpClient.delete(this.authURL, { params: { device:device } }).pipe(tap(
             res => {
                 sessionStorage.removeItem('user');
 
-                this.cookieService.delete("token");
-                this.cookieService.delete("session");
+                this.cookieService.deleteAll();
 
                 this.isLoggedIn = false;
 
@@ -71,7 +69,7 @@ export class AuthService {
                 date.setFullYear(date.getFullYear() + 1);
                 sessionStorage.setItem('user', JSON.stringify(res['user']));
 
-                this.cookieService.set("token", res['token'], 0, '/', null, true);
+                this.cookieService.set("token", res['token'], 0, '/');
                 this.cookieService.set("session", res['session']);
 
                 this.isLoggedIn = true;
