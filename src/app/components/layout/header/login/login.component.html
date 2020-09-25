@@ -5,15 +5,15 @@
         </div>
         <h6 class="modal-title text-center mb-3">Login into Tunrly.com</h6>
         <div class="modal-body">
-            <form action="#" [formGroup]="login" class="mx-4 pb-2" (ngSubmit)="submitLogin()" [ngClass]="formSubmitted ? 'submitted' : ''">                
+            <form action="#" [formGroup]="login" class="mx-4 pb-2" (ngSubmit)="submitLogin(login)" [ngClass]="formSubmitted ? 'submitted' : ''">                
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">@</div>
                         </div>
-                        <input type="text" formControlName="userName" id="userName" class="form-control" placeholder="Username or email" required>
-                        <div class="invalid-feedback" *ngIf="(formSubmitted && userName.invalid) && (userName.dirty || userName.touched)" ngClass="d-block">
-                            <span *ngIf="userName.errors.required">Please fill this field</span>
+                        <input type="text" formControlName="user" id="user" class="form-control" placeholder="Username or email" required>
+                        <div class="invalid-feedback" *ngIf="(formSubmitted && user.invalid) && (user.dirty || user.touched)" ngClass="d-block">
+                            <span *ngIf="user.errors.required">Please fill this field</span>
                         </div>
                     </div>                    
                 </div>
@@ -25,6 +25,7 @@
                         <input type="password" formControlName="password" id="password" class="form-control" placeholder="Password" minlength="4" required>
                         <div class="invalid-feedback" *ngIf="(formSubmitted && password.invalid) && (password.dirty || password.touched)" ngClass="d-block">
                             <span *ngIf="password.errors.required">Please fill this field</span>
+                            <span *ngIf="password.errors.pattern">Invalid password</span>
                         </div>
                     </div>
                 </div>

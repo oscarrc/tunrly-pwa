@@ -11,8 +11,8 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(private router: Router, private authService: AuthService) { }
 
     private handleRefresh(){
-        this.authService.logout();
-        location.reload(true);
+        // this.authService.logout();
+        // location.reload(true);
     }
 
     private handleError(){
@@ -20,6 +20,8 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        //TODO see if its possible to renew the token before making the actual request
+
         return next.handle(request).pipe(catchError((err:any) => {            
             switch(err.status){
                 case 404:

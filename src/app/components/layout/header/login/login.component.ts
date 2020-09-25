@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 
-import { LocalStorageService } from '../../../../services/local-storage.service';
-import { Config } from '../../../../config/config';
+import { AuthService } from '../../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -12,52 +12,54 @@ import { Config } from '../../../../config/config';
 export class LoginComponent extends SimpleModalComponent<any, any> implements OnInit {
 
     login: any;
+    device: string = "device";
     formSubmitted = false;
 
-    constructor(private localStorageService: LocalStorageService) {
+    constructor(private router:Router,
+                private authService:AuthService) {
         super();
     }
 
     ngOnInit() {
         this.login = new FormGroup({
-            userName: new FormControl('', [
+            user: new FormControl('', [
                 Validators.required
             ]),
             password: new FormControl('', [
-                Validators.required
+                Validators.required,
+                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
             ]),
-            remember: new FormControl(),
+            remember: new FormControl(false),
         });
     }
 
-    get userName() {
-        return this.login.get('userName');
+    get user() {
+        return this.login.get('user').value;
     }
 
     get password() {
-        return this.login.get('password');
+        return this.login.get('password').value;
     }
 
     get remember() {
-        return this.login.get('remember');
+        return this.login.get('remember').value;
     }
 
-    submitLogin() {
+    submitLogin(login) {
         this.formSubmitted = true;
+
         if (this.login.invalid) {
             return false;
         }
 
-        // You can replace this object with your user object
-        const user = {
-            id: 1,
-            role: 'ADMIN',
-            userName: this.login.controls.userName.value,
-            image: './assets/images/users/thumb.jpg',
-            name: 'Halo Admin'
-        };
-        this.localStorageService.setLocalStorage(Config.CURRENT_USER, user);
-        this.close();
+        this.authService.login(login.value.user, login.value.password, login.value.remember, this.device).subscribe(
+            res => {
+                if (res){
+                    this.router.navigate(['/home']);
+                    this.close();
+                }
+            }
+        );
     }
 
 }
