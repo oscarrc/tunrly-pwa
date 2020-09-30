@@ -43,7 +43,7 @@
             ],
             "allowedCommonJsDependencies": [
               "chart.js",
-              "fingerprintjs2",
+              "@fingerprintjs/fingerprintjs",
               "ua-parser-js"
             ]
           },

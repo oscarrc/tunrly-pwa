@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { JwtModule, JWT_OPTIONS, JwtInterceptor } from '@auth0/angular-jwt';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -19,8 +19,7 @@ import {ErrorInterceptor} from './core/interceptors/error.interceptor'
 export function jwtOptionsFactory(cookieService: CookieService) {
     return {
         tokenGetter: () => cookieService.get('token'),
-        allowedDomains: ['localhost:3000'],
-        // disallowedRoutes: ['http://localhost:3000/']
+        allowedDomains: ['localhost:3000']
     };
 }
 
@@ -47,6 +46,7 @@ export function jwtOptionsFactory(cookieService: CookieService) {
         MenuConfigService,
         SongsConfigService,
         AuthService,
+        JwtInterceptor,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorInterceptor,

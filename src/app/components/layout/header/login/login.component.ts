@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent extends SimpleModalComponent<any, any> implements OnInit {
 
     login: any;
-    device: string = "device";
+    device: string;
     formSubmitted = false;
 
     constructor(private router:Router,
@@ -20,7 +20,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         super();
     }
 
-    ngOnInit() {
+    ngOnInit() {  
         this.login = new FormGroup({
             user: new FormControl('', [
                 Validators.required
@@ -52,7 +52,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
             return false;
         }
 
-        this.authService.login(login.value.user, login.value.password, login.value.remember, this.device).subscribe(
+        this.authService.login(login.value.user, login.value.password, login.value.remember).subscribe(
             res => {
                 if (res){
                     this.router.navigate(['/home']);
