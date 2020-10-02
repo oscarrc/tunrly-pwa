@@ -18,6 +18,10 @@ export class AuthService {
             let fingerprint = Fingerprint2.x64hash128(values.join(''), 31);         
             this.fingerprint =  fingerprint;
         })
+
+        if(this.session !== ''){
+            this.isLoggedIn = true;
+        }
     }
 
     public get loggedIn(): boolean{
@@ -30,7 +34,7 @@ export class AuthService {
 
     login(user: string, password: string, remember: boolean){
         return this.httpClient.post(this.authURL, { user: user, password: password, device: this.fingerprint }).pipe(tap(
-            res => {                
+            res => {
                 let date = new Date();
                 
                 date.setFullYear(date.getFullYear() + 1);
