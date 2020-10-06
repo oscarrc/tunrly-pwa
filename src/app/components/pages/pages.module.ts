@@ -14,6 +14,7 @@ import { PartialsModule } from '../partials/partials.module';
 import { ComponentsModule } from './views/views.module';
 import { CoreModule } from '../../core/core.module';
 import { LandingComponent } from './views/landing/landing.component';
+import { ValidationComponent } from './views/validation/validation.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -24,6 +25,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PagesComponent,
         ErrorComponent,
         LandingComponent,
+        ValidationComponent
     ],
     imports: [
         CommonModule,

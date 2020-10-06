@@ -26,6 +26,7 @@ import { ProfileComponent } from './header/profile/profile.component';
 import { LanguageComponent } from './header/language/language.component';
 import { SearchComponent } from './header/search/search.component';
 import { LoginComponent } from './header/login/login.component';
+import { ValidationComponent } from './header/validation/validation.component';
 import { BannerComponent } from './banner/banner.component';
 
 import { ToTimePipe } from '../../core/pipes/toTime.pipe';
@@ -48,6 +49,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         LanguageComponent,
         SearchComponent,
         LoginComponent,
+        ValidationComponent,
         BannerComponent,
         ToTimePipe
     ],

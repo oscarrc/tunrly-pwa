@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LandingComponent } from './views/landing/landing.component';
 import { ErrorComponent } from './views/error/error.component';
-import { PagesComponent } from './pages.component';
+import { ValidationComponent } from './views/validation/validation.component';
 
 const routes: Routes = [
     {
@@ -13,6 +13,10 @@ const routes: Routes = [
     {
         path: '404',
         component: ErrorComponent
+    },
+    {
+        path: 'validation/:action/:token',
+        component: ValidationComponent
     }
 ];
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -51,6 +51,7 @@ import { ArtistService } from '../../../services/artist.service';
 import { AlbumService } from '../../../services/album.service';
 import { TagService } from '../../../services/tag.service';
 import { PlaylistService } from '../../../services/playlist.service';
+import { ValidationService } from '../../../services/validation.service';
 
 import { AuthGuard } from '../../../core/guards/route.guard';    
 
@@ -193,7 +194,7 @@ const routes: Routes = [
                 component: SettingsComponent
             }
         ]
-    },
+    }
 ];
 
 @NgModule({
@@ -242,12 +243,16 @@ const routes: Routes = [
         ChartsModule,
         RouterModule.forChild(routes)
     ],
+    exports: [
+        PerfectScrollbarModule
+    ],
     providers: [
         TrackService,
         ArtistService,
         AlbumService,
         PlaylistService,
         TagService,
+        ValidationService,
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
             useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

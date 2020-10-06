@@ -1,64 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 
-import { AuthService } from '../../../../services/auth.service';
-import { Router } from '@angular/router';
+import { ValidationService } from '../../../../services/validation.service';
 
 @Component({
-    selector: 'app-validation',
+    selector: 'app-validation-modal',
     templateUrl: './validation.component.html'
 })
 export class ValidationComponent extends SimpleModalComponent<any, any> implements OnInit {
 
-    login: any;
-    device: string;
-    formSubmitted = false;
-
-    constructor(private router:Router,
-                private authService:AuthService) {
+    constructor(private validationService:ValidationService) {
         super();
     }
 
-    ngOnInit() {  
-        this.login = new FormGroup({
-            user: new FormControl('', [
-                Validators.required
-            ]),
-            password: new FormControl('', [
-                Validators.required,
-                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
-            ]),
-            remember: new FormControl(false),
-        });
-    }
+    email:string;
+    disabled: boolean;
 
-    get user() {
-        return this.login.get('user').value;
-    }
-
-    get password() {
-        return this.login.get('password').value;
-    }
-
-    get remember() {
-        return this.login.get('remember').value;
-    }
-
-    submitLogin(login) {
-        this.formSubmitted = true;
-
-        if (this.login.invalid) {
-            return false;
+    ngOnInit() {
+        if(!this.email){
+            this.close();
+        }else{
+            this.sendValidation();
         }
+    }
 
-        this.authService.login(login.value.user, login.value.password, login.value.remember).subscribe(
-            res => {
-                if (res){
-                    this.router.navigate(['/home']);
-                    this.close();
-                }
-            }
+    sendValidation(){
+        this.disabled = true;
+        this.validationService.create(this.email, 0).subscribe().add(
+            () => setTimeout( () => { this.disabled = false }, 60000 )
         );
     }
 

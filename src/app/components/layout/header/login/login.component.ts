@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
+import { SimpleModalService } from 'ngx-simple-modal';
 
 import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
+import { ValidationComponent } from '../../../layout/header/validation/validation.component';
 
 @Component({
     selector: 'app-login',
@@ -12,10 +14,10 @@ import { Router } from '@angular/router';
 export class LoginComponent extends SimpleModalComponent<any, any> implements OnInit {
 
     login: any;
-    device: string;
     formSubmitted = false;
 
     constructor(private router:Router,
+                private simpleModalService: SimpleModalService,
                 private authService:AuthService) {
         super();
     }
@@ -54,8 +56,12 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
 
         this.authService.login(login.value.user, login.value.password, login.value.remember).subscribe(
             res => {
-                if (res){
-                    this.router.navigate(['/home']);
+                 this.router.navigate(['/home']);
+                 this.close();
+            },
+            err => {
+                if( err.error.name === "NotActive"){
+                    this.simpleModalService.addModal(ValidationComponent, { email: this.user });
                     this.close();
                 }
             }

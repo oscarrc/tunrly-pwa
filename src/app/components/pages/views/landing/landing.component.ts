@@ -5,6 +5,8 @@ import { LoginComponent } from '../../../layout/header/login/login.component';
 import { EventsConfigService } from '../../../../services/events-config.service';
 import { LoadingService } from '../../../../services/loading.service';
 import { ArtistsConfigService } from '../../../../services/artists-config.service';
+import { ValidationComponent } from '../../../layout/header/validation/validation.component';
+
 import { Config } from '../../../../config/config';
 
 @Component({
@@ -19,6 +21,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
     trendingArtists: any = [];
     sliderConfig: any = {};
     backgroundImage: string = "";
+    modal: any;
 
     constructor(private loadingService: LoadingService,
                 private simpleModalService: SimpleModalService,
@@ -28,7 +31,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
         this.brand = this.config.config.brand;
     }
 
-    ngOnInit() {
+    ngOnInit() {        
         this.initEvents();
         this.initTrendingArtists();
         this.backgroundImage = this.getRandomBackground();
@@ -82,12 +85,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
     }
 
     openLoginModal() {
-        const modal = this.simpleModalService.addModal(LoginComponent, {})
-        .subscribe((isConfirmed) => {
-            if (isConfirmed) {
-            } else {
-            }
-        });
+        this.simpleModalService.addModal(LoginComponent, {});
     }
 
     getRandomBackground(){
