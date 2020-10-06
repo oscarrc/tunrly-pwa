@@ -2,64 +2,42 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 
-import { AuthService } from '../../../../services/auth.service';
-import { Router } from '@angular/router';
+import { ValidationService } from '../../../../services/validation.service';
 
 @Component({
-    selector: 'app-validation',
-    templateUrl: './validation.component.html'
+    selector: 'app-forgotten',
+    templateUrl: './forgotten.component.html'
 })
-export class ValidationComponent extends SimpleModalComponent<any, any> implements OnInit {
+export class ForgottenComponent extends SimpleModalComponent<any, any> implements OnInit {
 
-    login: any;
+    forgotten: any;
     device: string;
     formSubmitted = false;
 
-    constructor(private router:Router,
-                private authService:AuthService) {
+    constructor( private validationService:ValidationService) {
         super();
     }
 
     ngOnInit() {  
-        this.login = new FormGroup({
+        this.forgotten = new FormGroup({
             user: new FormControl('', [
-                Validators.required
+                Validators.email
             ]),
-            password: new FormControl('', [
-                Validators.required,
-                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
-            ]),
-            remember: new FormControl(false),
         });
     }
 
     get user() {
-        return this.login.get('user').value;
+        return this.forgotten.get('user').value;
     }
 
-    get password() {
-        return this.login.get('password').value;
-    }
-
-    get remember() {
-        return this.login.get('remember').value;
-    }
-
-    submitLogin(login) {
+    submitForgotten(forgotten) {
         this.formSubmitted = true;
 
-        if (this.login.invalid) {
+        if (this.forgotten.invalid) {
             return false;
         }
 
-        this.authService.login(login.value.user, login.value.password, login.value.remember).subscribe(
-            res => {
-                if (res){
-                    this.router.navigate(['/home']);
-                    this.close();
-                }
-            }
-        );
+        this.validationService.create(forgotten.value.user, 1).subscribe().add( () => this.close())
     }
 
 }

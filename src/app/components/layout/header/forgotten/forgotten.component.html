@@ -3,10 +3,11 @@
         <div class="modal-header border-bottom-0 pb-0">
             <button type="button" class="close" (click)="close()">&times;</button>
         </div>
-        <h6 class="modal-title text-center mb-3">Login into Tunrly.com</h6>
+        <h6 class="modal-title text-center">Forgotten password?</h6>
         <div class="modal-body">
-            <form action="#" [formGroup]="login" class="mx-4 pb-2" (ngSubmit)="submitLogin(login)" [ngClass]="formSubmitted ? 'submitted' : ''">                
+            <form action="#" [formGroup]="forgotten" class="mx-4 pb-2" (ngSubmit)="submitForgotten(forgotten)" [ngClass]="formSubmitted ? 'submitted' : ''">                
                 <div class="form-group">
+                    <label class="mb-4">Enter your username or email and we'll send you an email to reset your password.</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">@</div>
@@ -17,28 +18,8 @@
                         </div>
                     </div>                    
                 </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text"><i class="ion-md-lock"></i></div>
-                        </div>
-                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="Password" minlength="4" required>
-                        <div class="invalid-feedback" *ngIf="(formSubmitted && password.invalid) && (password.dirty || password.touched)" ngClass="d-block">
-                            <span *ngIf="password.errors.required">Please fill this field</span>
-                            <span *ngIf="password.errors.pattern">Invalid password</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">                                            
-                    <div class="input-group">
-                        <div class="custom-control custom-radio custom-control-inline pt-2">
-                            <input type="checkbox" id="remember" formControlName="remember" class="custom-control-input">
-                            <label for="remember" class="custom-control-label">Remember me</label>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-block btn-bold btn-air btn-primary load-page">Login</button>
-                <p class="text-center pt-4">Forgotten password? <a href="">Click here</a>.</p>
+                
+                <button type="submit" class="btn btn-block btn-bold btn-air btn-primary load-page mt-4">Submit</button>
             </form>
         </div>
     </div>

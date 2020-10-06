@@ -6,6 +6,7 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
 import { ValidationComponent } from '../../../layout/header/validation/validation.component';
+import { ForgottenComponent } from '../../../layout/header/forgotten/forgotten.component';
 
 @Component({
     selector: 'app-login',
@@ -45,6 +46,11 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
 
     get remember() {
         return this.login.get('remember').value;
+    }
+
+    openForgotten(){
+        this.close();
+        this.simpleModalService.addModal(ForgottenComponent,{});
     }
 
     submitLogin(login) {
