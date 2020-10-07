@@ -52,6 +52,7 @@ import { AlbumService } from '../../../services/album.service';
 import { TagService } from '../../../services/tag.service';
 import { PlaylistService } from '../../../services/playlist.service';
 import { ValidationService } from '../../../services/validation.service';
+import { UserService } from '../../../services/user.service';
 
 import { AuthGuard } from '../../../core/guards/route.guard';    
 
@@ -252,6 +253,7 @@ const routes: Routes = [
         AlbumService,
         PlaylistService,
         TagService,
+        UserService,
         ValidationService,
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
