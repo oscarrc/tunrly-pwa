@@ -17,6 +17,7 @@ export class ValidationComponent implements OnInit, AfterViewInit, OnDestroy{
     success: boolean;
     error: string;
 
+    //TODO handle password reset
     constructor(private loadingService: LoadingService,
                 private validationService: ValidationService,
                 private route: ActivatedRoute,) {
