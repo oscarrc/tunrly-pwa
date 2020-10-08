@@ -14,6 +14,7 @@ export class ValidationComponent extends SimpleModalComponent<any, any> implemen
     }
 
     email:string;
+    title:string;
     disabled: boolean;
 
     ngOnInit() {

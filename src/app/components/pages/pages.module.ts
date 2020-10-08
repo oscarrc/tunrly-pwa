@@ -15,6 +15,7 @@ import { ComponentsModule } from './views/views.module';
 import { CoreModule } from '../../core/core.module';
 import { LandingComponent } from './views/landing/landing.component';
 import { ValidationComponent } from './views/validation/validation.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -29,6 +30,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         PagesRoutingModule,
         PerfectScrollbarModule,
         SlickCarouselModule,

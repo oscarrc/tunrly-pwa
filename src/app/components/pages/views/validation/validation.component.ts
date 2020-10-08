@@ -1,21 +1,25 @@
-import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../services/loading.service';
 import { ValidationService } from '../../../../services/validation.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-validation',
     templateUrl: './validation.component.html'
 })
-export class ValidationComponent implements OnInit, AfterViewInit, OnDestroy{
+export class ValidationComponent implements OnInit, OnDestroy{
     routeSubscription: Subscription;
     action: number;
     token: string;
-    password: string;
     success: boolean;
     error: string;
+    done: boolean = false;
+
+    reset: any;
+    formSubmitted = false;
 
     //TODO handle password reset
     constructor(private loadingService: LoadingService,
@@ -27,17 +31,54 @@ export class ValidationComponent implements OnInit, AfterViewInit, OnDestroy{
         });
     }
 
-    ngOnInit() {
-        this.validationService.validate(this.token, this.action, this.password).subscribe( 
-            res => { this.success = true },
-            err => { this.success = false; this.error = err.error.message;}
-        ).add(() => {
-            this.loadingService.stopLoading()
-       });
+    get password() {
+        return this.reset.get('password').value;
     }
 
-    ngAfterViewInit() {
-        
+    get repeatpassword() {
+        return this.reset.get('repeatpassword').value;
+    }
+
+    doValidate(password:string = null){
+        return this.validationService.validate(this.token, this.action, password).subscribe( 
+            res => { this.success = true },
+            err => { this.success = false; this.error = err.error.message;}
+        )
+    }
+
+    ngOnInit() {
+        this.reset = new FormGroup({
+            password: new FormControl('', [
+                Validators.required,
+                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+            ]),
+            repeatpassword: new FormControl('', [
+                Validators.required
+            ])
+        });
+
+        if( this.action == 1){              
+            this.done = false;      
+            this.loadingService.stopLoading();
+        }else{
+            this.done = true;
+            this.doValidate().add(() => {
+                this.loadingService.stopLoading()
+           });
+        }
+    }
+
+    doReset(reset){
+        this.formSubmitted = true;
+
+        if (this.reset.invalid) {
+            return false;
+        }
+
+        this.doValidate(reset.value.password).add(() => {
+            this.loadingService.stopLoading();
+            this.done = true;
+        });
     }
 
     ngOnDestroy(){

@@ -2,12 +2,12 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 
 import { LoginComponent } from '../../../layout/header/login/login.component';
-import { EventsConfigService } from '../../../../services/events-config.service';
-import { LoadingService } from '../../../../services/loading.service';
-import { ArtistsConfigService } from '../../../../services/artists-config.service';
 import { ValidationComponent } from '../../../layout/header/validation/validation.component';
+import { LoadingService } from '../../../../services/loading.service';
+import { UserService } from '../../../../services/user.service';
 
 import { Config } from '../../../../config/config';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-landing',
@@ -17,24 +17,47 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
     config: Config;
     brand: any = {};
-    events: any = [];
-    trendingArtists: any = [];
     sliderConfig: any = {};
+    trendingArtists: any = [];
     backgroundImage: string = "";
-    modal: any;
+    registration: any;
+    formSubmitted: boolean = false;
 
     constructor(private loadingService: LoadingService,
-                private simpleModalService: SimpleModalService,
-                private eventsConfigService: EventsConfigService,
-                private artistsConfigService: ArtistsConfigService) {
+                private userService: UserService,
+                private simpleModalService: SimpleModalService) {
         this.config = new Config();
         this.brand = this.config.config.brand;
     }
 
-    ngOnInit() {        
-        this.initEvents();
-        this.initTrendingArtists();
+    ngOnInit() {
         this.backgroundImage = this.getRandomBackground();
+
+        this.registration = new FormGroup({
+            username: new FormControl('', [
+                Validators.required
+            ]),
+            email: new FormControl('', [
+                Validators.required,
+                Validators.email
+            ]),
+            firstname: new FormControl('', [
+                Validators.required
+            ]),
+            lastname: new FormControl('', [
+                Validators.required
+            ]),
+            password: new FormControl('', [
+                Validators.required,
+                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+            ]),
+            repeatpassword: new FormControl('', [
+                Validators.required
+            ]),
+            tac: new FormControl('', [
+                Validators.required
+            ])
+        });
 
         this.sliderConfig = {
             arrows: false,
@@ -74,18 +97,36 @@ export class LandingComponent implements OnInit, AfterViewInit {
         this.loadingService.stopLoading();
     }
 
-    initEvents() {
-        this.events = this.eventsConfigService.eventsList;
-        this.events.splice(3, 1);
-    }
-
-    initTrendingArtists() {
-        this.trendingArtists = this.artistsConfigService.artistsList;
-        this.trendingArtists.splice(6, 2);
-    }
-
     openLoginModal() {
         this.simpleModalService.addModal(LoginComponent, {});
+    }
+
+    openValidationModal(email) {
+        this.simpleModalService.addModal(ValidationComponent, {email: email, title: "Your Tunrly.com account has been created"});
+    }
+
+    register(registration){
+        this.formSubmitted = true;
+        
+        if (this.registration.invalid) {
+            return false;
+        }
+
+        let user = registration.value;
+
+        delete user.tac;
+        delete user.repeatpassword;
+
+        this.userService.create(user).subscribe(
+            res => {
+                registration.reset();
+                this.formSubmitted = false;
+                this.openValidationModal(user.email);
+            },
+            err => {
+                console.log(err)
+            }
+        )
     }
 
     getRandomBackground(){

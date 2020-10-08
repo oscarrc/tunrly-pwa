@@ -1,10 +1,43 @@
 <perfect-scrollbar style="height: 100vh">
-    <div class="d-flex align-items-center justify-content-center h-100">
+    <div *ngIf="done == true" class="d-flex align-items-center justify-content-center h-100">
         <div class="text-center px-3">
             <h1 class="display-4">{{ success ? 'Success' : 'Error' }}</h1>
             <p *ngIf="success">Your {{ action == 0 ? 'account has been validated' : 'password has been changed.'}} <br> Now you can login to your account and start listening to some tunes.</p>
             <p *ngIf="!success">There was an error while {{ action == 0 ? 'validating your account' : 'changing your password'}}: <br> <strong>{{ error }}</strong></p>
             <button class="mt-2" type="button" routerLink="/home" class="load-page btn btn-pill btn-air btn-brand">Go To Homepage</button>
+        </div>
+    </div>
+
+    <div *ngIf="done == false" class="d-flex align-items-center justify-content-center h-100">
+        <div class="text-center px-3">
+            <h2>Enter your new password</h2>
+            <form action="#" [formGroup]="reset" class="px-4 py-4 mt-4 card" (ngSubmit)="doReset(reset)" [ngClass]="formSubmitted ? 'submitted' : ''">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="ion-md-lock"></i></div>
+                        </div>
+                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="Enter password" minlength="4" required>
+                        <div class="invalid-feedback" *ngIf="(formSubmitted && password.invalid) && (password.dirty || password.touched)" ngClass="d-block">
+                            <span *ngIf="password.errors.required">Please fill this field</span>
+                            <span *ngIf="password.errors.pattern">Invalid password</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="ion-md-lock"></i></div>
+                        </div>
+                        <input type="password" formControlName="repeatpassword" id="repeatpassword" class="form-control" placeholder="Repeat password" minlength="4" required>
+                        <div class="invalid-feedback" *ngIf="(formSubmitted && repeatpassword.invalid) && (repeatpassword.dirty || repeatpassword.touched)" ngClass="d-block">
+                            <span *ngIf="repeatpassword.errors.required">Please fill this field</span>
+                            <span *ngIf="repeatpassword.errors.pattern">Invalid password</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-bold btn-air btn-primary load-page">Change password</button>
+            </form>
         </div>
     </div>
 </perfect-scrollbar>

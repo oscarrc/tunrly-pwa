@@ -89,6 +89,10 @@ body {
             }
         }
 
+        .custom-control-checkbox{
+            z-index: 1000;
+        }
+
         .btn-outline-secondary, .btn-outline-dark {
             color: $white;
             background-color: $gray-700;
