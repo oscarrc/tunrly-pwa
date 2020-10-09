@@ -12,7 +12,7 @@
                           <div class="input-group-text">@</div>
                         </div>
                         <input type="text" formControlName="user" id="user" class="form-control" placeholder="Username or email" required>
-                        <div class="invalid-feedback d-block  text-right" *ngIf="formSubmitted">
+                        <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
                             <span *ngIf="login.controls.user.errors.required">Please fill this field</span>
                         </div>
                     </div>                    

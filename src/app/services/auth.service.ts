@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service';
 import { tap } from 'rxjs/operators';
 import Fingerprint2 from '@fingerprintjs/fingerprintjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +20,7 @@ export class AuthService {
             this.fingerprint =  fingerprint;
         })
 
+        //TODO this doesn't work, check logged in status on load and redirect according
         if(this.session && this.session !== ''){
             this.isLoggedIn = true;
         }
