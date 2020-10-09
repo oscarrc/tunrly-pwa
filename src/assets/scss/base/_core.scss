@@ -226,7 +226,3 @@ img {
 .col-xl-custom {
     @include flex(20%);
 }
-
-.submitted .form-control.ng-invalid{
-    border-color: $red;
-}

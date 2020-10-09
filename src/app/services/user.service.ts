@@ -12,7 +12,7 @@ export class UserService {
     }
 
     check(value){
-        return this.httpClient.get(this.userURL, { params: { value } });
+        return this.httpClient.get(this.userURL  + '/check', { params: { value } });
     }
 
     get(){

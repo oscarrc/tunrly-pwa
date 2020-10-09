@@ -20,8 +20,7 @@ export class ValidationComponent implements OnInit, OnDestroy{
 
     reset: any;
     formSubmitted = false;
-
-    //TODO handle password reset
+   
     constructor(private loadingService: LoadingService,
                 private validationService: ValidationService,
                 private route: ActivatedRoute,) {

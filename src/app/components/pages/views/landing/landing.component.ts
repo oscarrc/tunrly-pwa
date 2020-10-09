@@ -5,6 +5,8 @@ import { LoginComponent } from '../../../layout/header/login/login.component';
 import { ValidationComponent } from '../../../layout/header/validation/validation.component';
 import { LoadingService } from '../../../../services/loading.service';
 import { UserService } from '../../../../services/user.service';
+import { AvailabilityValidator } from '../../../../core/validators/availability.validator';
+import { PasswordValidator } from '../../../../core/validators/password.validator';
 
 import { Config } from '../../../../config/config';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -35,25 +37,32 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
         this.registration = new FormGroup({
             username: new FormControl('', [
-                Validators.required
-            ]),
+                    Validators.required,
+                    Validators.pattern('^([a-z0-9]+(?:[ _.-][a-z0-9]+)*){5,15}$')
+                ],
+                AvailabilityValidator.checkAvailability(this.userService)
+            ),
             email: new FormControl('', [
-                Validators.required,
-                Validators.email
-            ]),
+                    Validators.required,
+                    Validators.email
+                ],
+                AvailabilityValidator.checkAvailability(this.userService)
+            ),
             firstname: new FormControl('', [
                 Validators.required
             ]),
             lastname: new FormControl('', [
                 Validators.required
             ]),
-            password: new FormControl('', [
-                Validators.required,
-                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
-            ]),
-            repeatpassword: new FormControl('', [
-                Validators.required
-            ]),
+            passgroup: new FormGroup({
+                password: new FormControl('', [
+                    Validators.required,
+                    Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                ]),
+                repeatpassword: new FormControl('', [
+                    Validators.required
+                ])
+            }, PasswordValidator.checkPassword() ),
             tac: new FormControl('', [
                 Validators.required
             ])
@@ -111,7 +120,6 @@ export class LandingComponent implements OnInit, AfterViewInit {
         if (this.registration.invalid) {
             return false;
         }
-
         let user = registration.value;
 
         delete user.tac;

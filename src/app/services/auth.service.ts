@@ -19,7 +19,7 @@ export class AuthService {
             this.fingerprint =  fingerprint;
         })
 
-        if(this.session !== ''){
+        if(this.session && this.session !== ''){
             this.isLoggedIn = true;
         }
     }

@@ -1,0 +1,7 @@
+.submitted .form-control.ng-invalid, .submitted .form-group.ng-invalid .form-control{
+    border-color: $red;
+}
+
+.input-group-prepend{
+    height: 2.5rem;
+}

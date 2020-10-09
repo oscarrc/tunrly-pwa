@@ -29,8 +29,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
                 Validators.required
             ]),
             password: new FormControl('', [
-                Validators.required,
-                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                Validators.required
             ]),
             remember: new FormControl(false),
         });

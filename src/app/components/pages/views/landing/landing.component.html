@@ -31,6 +31,13 @@
                                                     <div class="input-group-text">@</div>
                                                 </div>
                                                 <input type="text" class="form-control" id="username" formControlName="username" placeholder="Username">
+                                                <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
+                                                    <span *ngIf="registration.controls.username.errors?.required">Please fill this field</span>
+                                                    <span *ngIf="registration.controls.username.errors?.pattern">Username must be between 5 and 15 characters long, start and end with a letter. Only (. - _) are permitted</span>
+                                                </div>
+                                                <div class="invalid-feedback d-block text-right">
+                                                    <span *ngIf="registration.controls.username.errors?.notAvailable">Username already taken</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-row form-group">
@@ -39,6 +46,13 @@
                                                     <div class="input-group-text"><i class="ion-md-mail"></i></div>
                                                 </div>
                                                 <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+                                                <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
+                                                    <span *ngIf="registration.controls.email.errors?.required">Please fill this field</span>
+                                                    <span *ngIf="registration.controls.email.errors?.email">Enter a valid email address</span>
+                                                </div>
+                                                <div class="invalid-feedback d-block text-right">
+                                                    <span *ngIf="registration.controls.email.errors?.notAvailable">Email already taken</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-row form-group">
@@ -47,27 +61,44 @@
                                                     <div class="input-group-text"><i class="ion-md-person"></i></div>
                                                 </div>
                                                 <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="First name">
+                                                <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
+                                                    <span *ngIf="registration.controls.firstname.errors?.required">Please fill this field</span>
+                                                </div>
                                             </div>
                                             <div class="col-6 input-group">
                                                 <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Last name">
+                                                <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
+                                                    <span *ngIf="registration.controls.lastname.errors?.required">Please fill this field</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-row form-group">
+                                        <div class="form-row form-group" formGroupName="passgroup">
                                             <div class="col-6 input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text"><i class="ion-md-lock"></i></div>
                                                 </div>
                                                 <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+                                                <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
+                                                    <span *ngIf="registration.controls.passgroup.controls.password.errors?.required">Please fill this field</span>
+                                                    <span *ngIf="registration.controls.passgroup.controls.password.errors?.pattern">Password must be between 8 - 15 characters length and contain, at least, one upper case letter, one lower case letter, and one numeric digit</span>
+                                                </div>
                                             </div>
                                             <div class="col-6 input-group">
                                                 <input type="password" class="form-control" id="repeatpassword" formControlName="repeatpassword" placeholder="Repeat password">
+                                                <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
+                                                    <span *ngIf="registration.controls.passgroup.controls.repeatpassword.errors?.required && !registration.controls.passgroup.errors?.equal">Please fill this field</span>
+                                                    <span *ngIf="registration.controls.passgroup.errors?.equal">Passwords don't match</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-row form-group">                                            
                                             <div class="col-12 input-group">
                                                 <div class="custom-control custom-radio custom-control-inline pt-2">
                                                     <input type="checkbox" id="tac" formControlName="tac" name="eventType" class="custom-control-checkbox custom-control-input">
-                                                    <label for="free" class="custom-control-label">By creating an account I accept the terms and conditions.</label>
+                                                    <label for="free" class="custom-control-label">By creating an account I accept the terms and conditions.</label>                                                    
+                                                </div>
+                                                <div class="invalid-feedback d-block text-left pl-4" *ngIf="formSubmitted">
+                                                    <span *ngIf="registration.controls.tac.errors?.required">You must accept our terms and conditions</span>
                                                 </div>
                                             </div>
                                         </div>
