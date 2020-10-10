@@ -54,7 +54,7 @@ import { PlaylistService } from '../../../services/playlist.service';
 import { ValidationService } from '../../../services/validation.service';
 import { UserService } from '../../../services/user.service';
 
-import { AuthGuard } from '../../../core/guards/route.guard';    
+import { AuthGuard } from '../../../core/guards/auth.guard';    
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true

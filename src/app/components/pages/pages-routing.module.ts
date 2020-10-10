@@ -5,9 +5,12 @@ import { LandingComponent } from './views/landing/landing.component';
 import { ErrorComponent } from './views/error/error.component';
 import { ValidationComponent } from './views/validation/validation.component';
 
+import { LoginGuard } from '../../core/guards/login.guard';
+
 const routes: Routes = [
     {
         path: '',
+        canActivate:[LoginGuard],
         component: LandingComponent
     },
     {
