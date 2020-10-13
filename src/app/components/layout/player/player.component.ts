@@ -100,19 +100,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.state = state;
 
         switch(state){
-            case -1: //No comenzado
+            case -1: //Not started
                 this.playPause();
                 break;
-            case 0: //Terminado
+            case 0: //Finished
                 this.playNext();
                 break;
-            case 1: //Reproduciondo
+            case 1: //Playing
                 break;
             case 2: //Pausa
                 break;
             case 3: //Buffering
                 break;
-            case 5: //Encolado
+            case 5: //Queued
                 break;
         }
     }
