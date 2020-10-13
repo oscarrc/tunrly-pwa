@@ -15,7 +15,7 @@
     list-style: none;
     .language-item {
         @include flex(50%);
-        input[type="checkbox"] {
+        input[type="checkbox"], input[type="radio"] {
             @include absolute(left -10000px);
             &:checked + label {
                 background-color: $gray-100;
