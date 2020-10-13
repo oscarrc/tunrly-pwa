@@ -13,7 +13,7 @@
                         </div>
                         <input type="text" formControlName="user" id="user" class="form-control" placeholder="Username or email" required>
                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
-                            <span *ngIf="login.controls.user.errors.required">Please fill this field</span>
+                            <span *ngIf="login.controls.user.errors?.required">Please fill this field</span>
                         </div>
                     </div>                    
                 </div>
@@ -24,7 +24,7 @@
                         </div>
                         <input type="password" formControlName="password" id="password" class="form-control" placeholder="Password" minlength="4" required>
                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
-                            <span *ngIf="login.controls.password.errors.required">Please fill this field</span>
+                            <span *ngIf="login.controls.password.errors?.required">Please fill this field</span>
                         </div>
                     </div>
                 </div>
