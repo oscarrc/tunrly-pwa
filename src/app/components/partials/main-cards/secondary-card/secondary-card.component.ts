@@ -12,21 +12,6 @@ export class SecondaryCardComponent implements OnInit {
 
     constructor() { }
 
-    getBgColor(value:number){
-        let hash = 0;
-        let str = value.toString();
-
-        for (let i = 0; i < str.length; i++) {
-            hash = str.charCodeAt(i) + ((hash << 5) - hash);
-        }
-
-        let c = (hash & 0x00FFFFFF)
-            .toString(16)
-            .toUpperCase();
-    
-        return "#00000".substring(0, 7 - c.length) + c;
-    }
-
     getRandom(elements: Array<any>){
         const size = elements.length;
         const rand = Math.floor(Math.random() * size);
