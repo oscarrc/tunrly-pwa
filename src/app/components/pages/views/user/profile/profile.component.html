@@ -8,14 +8,23 @@
                 <div class="col-xl-4 col-md-5">
                     <div class="card h-auto">
                         <div class="card-body text-center">
-                            <div class="avatar avatar-xl avatar-circle mx-auto mb-4">
-                                <img [src]="userProfile.image" alt="user">
+                            <div class="avatar avatar-xl avatar-circle mx-auto mb-4" [style.background-color]="userProfile._id | toColor">
+                                <img *ngIf="userProfile.image" [src]="userProfile.image" [alt]="userProfile.username">
+                                <div *ngIf="!userProfile.image" class="initials">
+                                    {{ userProfile.username | slice:0:2 | uppercase}}
+                                </div>
                             </div>
                             <h6 class="mb-3">{{userProfile.name}}</h6>
-                            <p class="mb-1">Preferred by: 420x420(px)</p>
+                            <p class="mb-1">Preferred: 420x420(px)</p>
                             <p>Minimum: 128x128(px)</p>
                             <button type="button" class="btn btn-danger btn-air">Change Image</button>
                         </div>
+                    </div>
+                    
+                    <div class="plan-info-card text-center px-sm-5 py-sm-4 p-3">
+                        <h6>Have a LastFM account?</h6>
+                        <p>Use it to scrobble your tracks!</p>
+                        <button type="button" class="btn btn-pill btn-air btn-danger" routerLink="/plan">Login with LastFM</button>
                     </div>
                 </div>
                 <div class="col-xl-8 col-md-7">
@@ -24,33 +33,23 @@
                             <form action="#" class="row">
                                 <div class="col-xl-6 form-group">
                                     <label for="firstName" class="form-label">First Name</label>
-                                    <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="userProfile.firstName">
+                                    <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="userProfile.firstname">
                                 </div>
                                 <div class="col-xl-6 form-group">
                                     <label for="lastName" class="form-label">Last Name</label>
-                                    <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="userProfile.lastName">
+                                    <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="userProfile.lastname">
                                 </div>
                                 <div class="col-12 form-group">
-                                    <label for="displayName" class="form-label">Display Name</label>
-                                    <input type="text" id="displayName" name="displayName" class="form-control" [(ngModel)]="userProfile.name">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" id="email" name="email" class="form-control" [(ngModel)]="userProfile.email">
                                 </div>
                                 <div class="col-xl-6 form-group">
-                                    <label for="userType" class="form-label">User Type</label>
-                                    <select name="userType" id="userType" class="form-control" [(ngModel)]="userProfile.userRole">
-                                        <option value="Admin">Admin</option>
-                                        <option value="Artist">Artist</option>
-                                        <option value="Producer">Producer</option>
-                                        <option value="User">User</option>
-                                    </select>
+                                    <label for="username" class="form-label">Email</label>
+                                    <input type="text" id="username" name="username" class="form-control" [(ngModel)]="userProfile.username">
                                 </div>
                                 <div class="col-xl-6 form-group">
                                     <label for="loc" class="form-label">Location</label>
-                                    <input type="text" id="loc" name="loc" class="form-control" [(ngModel)]="userProfile.location">
-                                </div>
-                                <div class="col-12 form-group">
-                                    <label for="about" class="form-label">About</label>
-                                    <textarea name="about" id="about" cols="30" rows="5" class="form-control"
-                                              [(ngModel)]="userProfile.description"></textarea>
+                                    <input type="text" id="loc" name="loc" class="form-control" [(ngModel)]="userProfile.country">
                                 </div>
                                 <div class="col-12">
                                     <button type="button" class="btn btn-primary btn-air">Save Changes</button>
@@ -58,10 +57,26 @@
                             </form>
                         </div>
                     </div>
-                    <div class="plan-info-card text-center px-sm-5 py-sm-4 p-3">
-                        <h6>No plan selected yet</h6>
-                        <p>Your 30 days free subscription is going to expired within 2 days please select you plan.</p>
-                        <button type="button" class="btn btn-pill btn-air btn-success" routerLink="/plan">Select Plan</button>
+                    <div class="card h-auto">
+                        <div class="card-body">
+                            <form action="#" class="row">
+                                <div class="col-12">
+                                    <label for="loc" class="form-label">Change your password</label>
+                                </div>
+                                <div class="col-xl-4 form-group">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Old Password">
+                                </div>
+                                <div class="col-xl-4 form-group">
+                                    <input type="password" id="newPassword" name="newPassword" class="form-control" placeholder="New Password">
+                                </div>
+                                <div class="col-xl-4 form-group">
+                                    <input type="password" id="repeatPassword" name="repeatPassword" class="form-control" placeholder="Repeat Password">
+                                </div>
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary btn-air">Changes Password</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
