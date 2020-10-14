@@ -1,7 +1,12 @@
 <div class="dropdown">
     <a class="d-flex align-items-center py-2 text-white" role="button" (click)="closeSearchResult()"
        id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="avatar avatar-sm avatar-circle"><img [src]="user.image" alt="user"></div>
+        <div class="avatar avatar-sm avatar-circle" [style.background-color]="user._id | toColor">
+            <img *ngIf="user.image" [src]="user.image" [alt]="user.username">
+            <div *ngIf="!user.image" class="initials">
+                {{ user.username | slice:0:2 | uppercase}}
+            </div>
+        </div>
         <span class="pl-2">{{user.name}}</span>
     </a>
    

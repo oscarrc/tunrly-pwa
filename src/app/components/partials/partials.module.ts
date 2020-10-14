@@ -14,6 +14,7 @@ import { ImageCardComponent } from './image-card/image-card.component';
 import { CommentComponent } from './comment/comment.component';
 import { ThemeSettingsComponent } from './theme-settings/theme-settings.component';
 import { CountdownComponent } from './countdown/countdown.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import { CountdownComponent } from './countdown/countdown.component';
     ],
     imports: [
         CommonModule,
+        CoreModule,
         RouterModule
     ]
 })

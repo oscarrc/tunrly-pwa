@@ -4,7 +4,7 @@ import { LoadingService } from '../../../../../services/loading.service';
 
 @Component({
     selector: 'app-user-profile',
-    templateUrl: './user-profile.component.html'
+    templateUrl: './profile.component.html'
 })
 export class UserProfileComponent implements OnInit, AfterViewInit {
 

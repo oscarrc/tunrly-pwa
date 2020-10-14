@@ -3,10 +3,10 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { LoadingService } from '../../../../../services/loading.service';
 
 @Component({
-    selector: 'app-settings',
+    selector: 'app-user-settings',
     templateUrl: './settings.component.html'
 })
-export class SettingsComponent implements OnInit, AfterViewInit {
+export class UserSettingsComponent implements OnInit, AfterViewInit {
 
     settings: any;
 

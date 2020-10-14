@@ -13,6 +13,8 @@ import { DefaultSimpleModalOptionConfig } from 'ngx-simple-modal';
 import { defaultSimpleModalOptions } from 'ngx-simple-modal';
 import { ContentLoaderModule } from '@ngneat/content-loader';
 
+import { CoreModule } from 'src/app/core/core.module';
+
 import { AsideLeftComponent } from './aside/aside-left/aside-left.component';
 import { AsideLeftHeaderComponent } from './aside/aside-left/aside-left-header/aside-left-header.component';
 import { MenuSectionComponent } from './aside/menu-section/menu-section.component';
@@ -71,6 +73,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
     imports: [
         CommonModule,
+        CoreModule,
         PerfectScrollbarModule,
         SlickCarouselModule,
         ContentLoaderModule,

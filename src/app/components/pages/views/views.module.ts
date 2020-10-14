@@ -33,9 +33,9 @@ import { EventsComponent } from './events/events.component';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { AddEventComponent } from './events/add-event/add-event.component';
 import { AddMusicComponent } from './tracks/add-music/add-music.component';
-import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { UserProfileComponent } from './user/profile/profile.component';
 import { UserPlanComponent } from './user/user-plan/user-plan.component';
-import { SettingsComponent } from './user/settings/settings.component';
+import { UserSettingsComponent } from './user/settings/settings.component';
 import { AlbumsComponent } from './albums/albums.component';
 import { AlbumDetailsComponent } from './albums/album-details/album-details.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
@@ -191,7 +191,7 @@ const routes: Routes = [
             },
             {
                 path: 'settings',
-                component: SettingsComponent
+                component: UserSettingsComponent
             }
         ]
     }
@@ -222,7 +222,7 @@ const routes: Routes = [
         AddMusicComponent,
         UserProfileComponent,
         UserPlanComponent,
-        SettingsComponent,
+        UserSettingsComponent,
         AlbumsComponent,
         AlbumDetailsComponent,
         AnalyticsComponent,

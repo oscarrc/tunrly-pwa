@@ -87,12 +87,7 @@ export class MenuConfig {
                     {
                         title: 'Profile',
                         icon: 'ion-md-contact',
-                        page: '/profile'
-                    },
-                    {
-                        title: 'Your Plan',
-                        icon: 'ion-md-radio-button-off',
-                        page: '/plan'
+                        page: '/user'
                     },
                     {
                         title: 'Settings',

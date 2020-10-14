@@ -4,6 +4,11 @@
 .avatar {
     border-radius: $avatar-border-radius;
     overflow: hidden;
+
+    .initials{
+        color: $white;
+        text-align: center;
+    }
 }
 
 .avatar-circle {
@@ -12,8 +17,14 @@
 
 //== Generate avatar sizing classes
 @for $i from 1 through length($avatar-size-list) {
-    .avatar-#{nth($avatar-size-list, $i)} {
+    .avatar-#{nth($avatar-size-list, $i)}{
         width: $i + rem;
         height: $i + rem;
+
+        .initials {
+            font-size: $i  / 2 + rem;
+            line-height: $i;
+            letter-spacing: $i / 40 + rem;
+        }
     }
 }

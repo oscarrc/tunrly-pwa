@@ -57,7 +57,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.userSubscription = this.userService.user.subscribe( user => {
             this.currentUser = user;
-            console.log(user)
         });
 
         this.searchSubscription = this.searchService.hideSearch.subscribe((value) => {
