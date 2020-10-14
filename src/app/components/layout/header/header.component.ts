@@ -7,6 +7,7 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { LanguageComponent } from './language/language.component';
 import { SearchService } from '../../../services/search.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { UserService } from '../../../services/user.service';
 import { SkinService } from '../../../services/skin.service';
 import { Config } from '../../../config/config';
 
@@ -22,8 +23,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     language: any = {};
     currentUser: any = {};
 
-    searchSubscription: Subscription;
-    skinSubscription: Subscription;
+    private searchSubscription: Subscription;
+    private skinSubscription: Subscription;
+    private userSubscription: Subscription;
 
     searchForm: any;
     pressEnter: boolean = false;
@@ -32,6 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 private searchService: SearchService,
                 private simpleModalService: SimpleModalService,
                 private localStorageService: LocalStorageService,
+                private userService: UserService,
                 private skinService: SkinService) {
         this.language = {
             title: 'Language',
@@ -46,17 +49,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
             ])
         });
 
-        this.currentUser = this.localStorageService.getCurrentUser();
         const themeSkin = this.localStorageService.getThemeSkin();
+       
         if (themeSkin) {
             this.headerClasses = 'bg-' + Config.THEME_CLASSES[themeSkin.header];
         }
+
+        this.userSubscription = this.userService.user.subscribe( user => {
+            this.currentUser = user;
+            console.log(user)
+        });
 
         this.searchSubscription = this.searchService.hideSearch.subscribe((value) => {
             if (value) {
                 this.hideSearchResults();
             }
         });
+
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
             if (skin) {
                 this.headerClasses = 'bg-' + Config.THEME_CLASSES[skin.header];
@@ -88,12 +97,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     openLanguagesModal() {
         this.hideSearchResults();
-        const modal = this.simpleModalService.addModal(LanguageComponent, {})
-            .subscribe((isConfirmed) => {
-                if (isConfirmed) {
-                } else {
-                }
-            });
+        this.simpleModalService.addModal(LanguageComponent, {});
     }
 
     openSidebar() {
@@ -110,6 +114,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.searchSubscription.unsubscribe();
         this.skinSubscription.unsubscribe();
+        this.userSubscription.unsubscribe();
     }
 
 }

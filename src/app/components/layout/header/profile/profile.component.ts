@@ -2,8 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { MenuConfigService } from '../../../../services/menu-config.service';
 import { SearchService } from '../../../../services/search.service';
-import { LoginComponent } from '../login/login.component';
-import {SimpleModalService} from 'ngx-simple-modal';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
     selector: 'app-profile',
@@ -17,25 +16,18 @@ export class ProfileComponent implements OnInit {
 
     constructor(private searchService: SearchService,
                 private menuConfigService: MenuConfigService,
-                private simpleModalService: SimpleModalService) {
+                private authService: AuthService) {
         this.userMenu = this.menuConfigService.userMenuItems;
     }
 
     ngOnInit() {
     }
 
+    logout(){
+        this.authService.logout();
+    }
+
     closeSearchResult() {
         this.searchService.hideSearchResult();
     }
-
-    openLoginModal() {
-        this.closeSearchResult();
-        const modal = this.simpleModalService.addModal(LoginComponent, {})
-        .subscribe((isConfirmed) => {
-            if (isConfirmed) {
-            } else {
-            }
-        });
-    }
-
 }

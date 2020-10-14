@@ -4,7 +4,6 @@ import { SimpleModalComponent } from 'ngx-simple-modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 
 import { AuthService } from '../../../../services/auth.service';
-import { Router } from '@angular/router';
 import { ValidationComponent } from '../../../layout/header/validation/validation.component';
 import { ForgottenComponent } from '../../../layout/header/forgotten/forgotten.component';
 
@@ -17,8 +16,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     login: any;
     formSubmitted = false;
 
-    constructor(private router:Router,
-                private simpleModalService: SimpleModalService,
+    constructor(private simpleModalService: SimpleModalService,
                 private authService:AuthService) {
         super();
     }
@@ -60,8 +58,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         }
 
         this.authService.login(login.value.user, login.value.password, login.value.remember).subscribe(
-            res => {
-                 this.router.navigate(['/home']);
+            res => {                 
                  this.close();
             },
             err => {

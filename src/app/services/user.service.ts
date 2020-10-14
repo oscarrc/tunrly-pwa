@@ -1,18 +1,28 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ 
+    providedIn: "root"
+})
+
 export class UserService {
     private userURL = environment.api + '/user/';
+    private userSource: BehaviorSubject<any> = new BehaviorSubject({});
 
+    user: Observable<any> = this.userSource.asObservable();
+    
     constructor(private httpClient: HttpClient) {
     }
 
+    
     check(value){
         return this.httpClient.get(this.userURL  + '/check', { params: { value } });
+    }
+   
+    set(user){
+        this.userSource.next(user);
     }
 
     get(){
