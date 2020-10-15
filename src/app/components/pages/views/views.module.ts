@@ -34,7 +34,7 @@ import { EventDetailsComponent } from './events/event-details/event-details.comp
 import { AddEventComponent } from './events/add-event/add-event.component';
 import { AddMusicComponent } from './tracks/add-music/add-music.component';
 import { UserProfileComponent } from './user/profile/profile.component';
-import { UserPlanComponent } from './user/user-plan/user-plan.component';
+import { UserPlanComponent } from './user/plan/plan.component';
 import { UserSettingsComponent } from './user/settings/settings.component';
 import { AlbumsComponent } from './albums/albums.component';
 import { AlbumDetailsComponent } from './albums/album-details/album-details.component';
