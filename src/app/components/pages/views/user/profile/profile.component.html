@@ -30,47 +30,48 @@
                 <div class="col-xl-8 col-md-7">
                     <div class="card h-auto">
                         <div class="card-body">
-                            <form action="#" class="row">
+                            <form [formGroup]="profileForm" (ngSubmit)="saveProfile(profileForm)" [ngClass]="profileSubmitted ? 'submitted' : ''" class="row">
+                                <div class="col-12 form-group">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input disabled type="text" id="email" name="email" class="form-control" formControlName="email">
+                                </div>
                                 <div class="col-xl-6 form-group">
                                     <label for="firstName" class="form-label">First Name</label>
-                                    <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="userProfile.firstname">
+                                    <input [disabled]="!edit" type="text" id="firstName" name="firstName" class="form-control" formControlName="firstname">
                                 </div>
                                 <div class="col-xl-6 form-group">
                                     <label for="lastName" class="form-label">Last Name</label>
-                                    <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="userProfile.lastname">
-                                </div>
-                                <div class="col-12 form-group">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="text" id="email" name="email" class="form-control" [(ngModel)]="userProfile.email">
+                                    <input [disabled]="!edit" type="text" id="lastName" name="lastName" class="form-control" formControlName="lastname">
                                 </div>
                                 <div class="col-xl-6 form-group">
-                                    <label for="username" class="form-label">Email</label>
-                                    <input type="text" id="username" name="username" class="form-control" [(ngModel)]="userProfile.username">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input [disabled]="!edit" type="text" id="username" name="username" class="form-control" formControlName="username">
                                 </div>
                                 <div class="col-xl-6 form-group">
                                     <label for="loc" class="form-label">Location</label>
-                                    <input type="text" id="loc" name="loc" class="form-control" [(ngModel)]="userProfile.country">
+                                    <input [disabled]="!edit" type="text" id="loc" name="loc" class="form-control" formControlName="country">
                                 </div>
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-primary btn-air">Save Changes</button>
+                                    <button *ngIf="edit" type="submit" class="btn btn-primary btn-air">Save Changes</button>
+                                    <button *ngIf="!edit" (click)="toggleEdit()" type="button" class="btn btn-primary btn-air">Edit profile</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="card h-auto">
                         <div class="card-body">
-                            <form action="#" class="row">
+                            <form [formGroup]="passwordForm" (ngSubmit)="changePassword(passwordForm)" [ngClass]="passwordSubmitted ? 'submitted' : ''" class="row">
                                 <div class="col-12">
                                     <label for="loc" class="form-label">Change your password</label>
                                 </div>
                                 <div class="col-xl-4 form-group">
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="Old Password">
+                                    <input type="password" id="oldpassword" name="oldpassword" class="form-control" placeholder="Current Password" formControlName="oldpassword">
                                 </div>
-                                <div class="col-xl-4 form-group">
-                                    <input type="password" id="newPassword" name="newPassword" class="form-control" placeholder="New Password">
-                                </div>
-                                <div class="col-xl-4 form-group">
-                                    <input type="password" id="repeatPassword" name="repeatPassword" class="form-control" placeholder="Repeat Password">
+                                <div class="form-group" formGroupName="passgroup">
+                                    <div class="col-xl-4">
+                                        <input type="password" id="password" name="password" class="form-control" placeholder="New Password" formControlName="password">
+                                        <input type="password" id="repeatPassword" name="repeatPassword" class="form-control" placeholder="Repeat Password" formControlName="repeatpassword">
+                                    </div>
                                 </div>
                                 <div class="col-12">
                                     <button type="button" class="btn btn-primary btn-air">Changes Password</button>
