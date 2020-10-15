@@ -21,7 +21,13 @@ export class UserService {
         return this.httpClient.get(this.userURL  + '/check', { params: { value } });
     }
    
-    set(user){
+    set(user){        
+        if(user){
+            sessionStorage.setItem('user', JSON.stringify(user));
+        }else{
+            sessionStorage.removeItem('user');
+        }
+        
         this.userSource.next(user);
     }
 

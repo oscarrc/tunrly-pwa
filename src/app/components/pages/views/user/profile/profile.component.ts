@@ -26,43 +26,51 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private loadingService: LoadingService, private userService: UserService) { }
 
     toggleEdit(){
-        this.edit = !this.edit;
+        this.profileSubmitted = false;
+        this.edit = !this.edit;        
+        this.profileForm.enable();
     }
 
     initProfileForm(user){
         this.profileForm = new FormGroup({
-            email: new FormControl('', [
+            email: new FormControl({value: user.email, disabled: true}, [
                     Validators.required,
                     Validators.email
-                ],
-                AvailabilityValidator.checkAvailability(this.userService)
+                ]
             ),
             
-            firstname: new FormControl('', [
+            firstname: new FormControl(user.firstname, [
                 Validators.required
             ]),
-            lastname: new FormControl('', [
+            lastname: new FormControl(user.lastname, [
                 Validators.required
             ]),
-            username: new FormControl('', [
+            username: new FormControl(user.username, [
                     Validators.required,
                     Validators.pattern('^([a-z0-9]+(?:[ _.-][a-z0-9]+)*){5,15}$')
                 ],
-                AvailabilityValidator.checkAvailability(this.userService)
+                // AvailabilityValidator.checkAvailability(this.userService)
             ),
-            country: new FormControl('', [
-                Validators.required
-            ]),
+            country: new FormControl(user.country),
+        });
+
+        this.profileForm.disable();
+
+        this.profileForm.get('username').valueChanges.subscribe( username => {
+            if(username != this.userProfile.username){
+                this.profileForm.get('username').setAsyncValidators(AvailabilityValidator.checkAvailability(this.userService));
+            }else{
+                this.profileForm.get('username').clearAsyncValidators(AvailabilityValidator.checkAvailability(this.userService));
+            }
         })
     }
 
     initPasswordForm(){
-        this.passwordForm = new FormGroup({
-            oldpassword: new FormControl('', [
-                Validators.required,
-                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
-            ]),
-            passgroup: new FormGroup({
+        this.passwordForm = new FormGroup({            
+                oldpassword: new FormControl('', [
+                    Validators.required,
+                    Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                ]),
                 password: new FormControl('', [
                     Validators.required,
                     Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
@@ -70,8 +78,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
                 repeatpassword: new FormControl('', [
                     Validators.required
                 ])
-            }, PasswordValidator.checkPassword() ),
-        })
+            }, PasswordValidator.checkPassword() );
     }
 
     saveProfile(profile){
@@ -83,8 +90,9 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.userService.update(profile.value).subscribe(
             res => {
-                this.profileSubmitted = false;
-                this.userService.set(res)
+                profile.disable();
+                this.userService.set(res);
+                this.toggleEdit();
             },
             err => {
                 console.log(err)
@@ -99,10 +107,10 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
             return false;
         }
 
-        this.userService.updatePassword(passwords.controls.oldpassword.value, passwords.controls.newpassword.value).subscribe(
+        this.userService.updatePassword(passwords.controls.oldpassword.value, passwords.controls.password.value).subscribe(
             res => {
                 this.passwordSubmitted = false;
-                console.log(res)
+                passwords.reset();
             },
             err => {
                 console.log(err)

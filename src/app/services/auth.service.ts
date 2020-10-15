@@ -52,8 +52,7 @@ export class AuthService {
                 let date = new Date();
                 
                 date.setFullYear(date.getFullYear() + 1);
-                sessionStorage.setItem('user', JSON.stringify(res['user']));
-                
+                                
                 this.userService.set(res['user']);
                 this.cookieService.set("uid", res['user']['_id'], 0, '/');
                 this.cookieService.set("token", res['token'], 0, '/');
@@ -82,7 +81,7 @@ export class AuthService {
                 return err
             },
             () => {                            
-                sessionStorage.removeItem('user');
+                this.userService.set(null);
                 this.cookieService.deleteAll();
                 this.isLoggedIn = false;                
                 this.router.navigate(['/']);
@@ -98,7 +97,6 @@ export class AuthService {
                 let date = new Date();
                
                 date.setFullYear(date.getFullYear() + 1);
-                sessionStorage.setItem('user', JSON.stringify(res['user']));
 
                 this.userService.set(res['user']);
                 this.cookieService.set("token", res['token'], 0, '/');
@@ -111,7 +109,7 @@ export class AuthService {
             err => {
                 this.isLoggedIn = false;
                 this.cookieService.deleteAll();
-                sessionStorage.removeItem('user');
+                this.userService.set(null);
                 return err
             }
         ));
