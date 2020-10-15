@@ -4,7 +4,7 @@ import { LoadingService } from '../../../../../services/loading.service';
 
 @Component({
     selector: 'app-user-plan',
-    templateUrl: './user-plan.component.html'
+    templateUrl: './plan.component.html'
 })
 export class UserPlanComponent implements OnInit, AfterViewInit {
 
