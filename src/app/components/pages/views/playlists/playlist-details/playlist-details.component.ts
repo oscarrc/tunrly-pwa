@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoadingService } from '../../../../../services/loading.service';
 import { PlayerService } from '../../../../../services/player.service';
 import { PlaylistService } from '../../../../../services/playlist.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-playlist-details',
@@ -21,7 +22,8 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
     constructor(private route: ActivatedRoute,
         private loadingService: LoadingService,
         private playerService: PlayerService,
-        private playlistService: PlaylistService) {
+        private playlistService: PlaylistService,
+        private userService: UserService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param) {
                 this.playlistId = param.id;
@@ -35,6 +37,17 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
+    }
+
+    addFavorite() {
+        this.userService.setFavorite(this.playlistDetails._id, 'playlist').subscribe(
+            res => { this.userService.set(res) },
+            err => {}
+        )
+    }
+
+    isFavorite(){
+        return this.userService.isFavorite(this.playlistDetails._id, 'playlist');
     }
 
     // Initialize static data for display

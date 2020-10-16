@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { PlayerService } from '../../../../services/player.service';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
     selector: 'app-primary-card',
@@ -14,7 +15,8 @@ export class PrimaryCardComponent implements OnInit {
 
     classes = '';
 
-    constructor(private playerService: PlayerService) {
+    constructor(private playerService: PlayerService, private userService: UserService) {
+        
     }
 
     ngOnInit() {
@@ -22,7 +24,14 @@ export class PrimaryCardComponent implements OnInit {
     }
 
     addFavorite() {
-        this.track.favorite = true;
+        this.userService.setFavorite(this.track._id, 'track').subscribe(
+            res => { this.userService.set(res); },
+            err => {}
+        )
+    }
+
+    isFavorite(){
+        return this.userService.isFavorite(this.track._id, 'track')
     }
 
     addToPlayList() {

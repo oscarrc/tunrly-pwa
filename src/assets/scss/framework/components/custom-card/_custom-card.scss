@@ -35,7 +35,7 @@
 
         .custom-card--labels {
             @include absolute(top 1.25rem left 1rem);
-            z-index: 2;
+            z-index: 5;
         }
 
         .dropdown {
@@ -136,4 +136,8 @@
 
 .card-img--radius-sm {
     border-radius: $card-img-radius-sm;
+}
+
+.clickable{
+    cursor: pointer
 }

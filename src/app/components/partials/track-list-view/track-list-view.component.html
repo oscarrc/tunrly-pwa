@@ -4,7 +4,6 @@
                      [trackIndex]="trackIndex"></app-track-horizontal>
 
 <ul class="custom-card--labels d-flex ml-auto">
-    <li *ngIf="track?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
-    <li *ngIf="track?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
+    <li *ngIf="isFavorite()"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
     <li class="ml-4"><app-track-options [icon]="icon" [track]="track" [trackIndex]="trackIndex"></app-track-options></li>
 </ul>

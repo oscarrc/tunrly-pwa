@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoadingService } from '../../../../../services/loading.service';
 import { PlayerService } from '../../../../../services/player.service';
 import { TrackService } from '../../../../../services/track.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-track-details',
@@ -21,7 +22,8 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
                 private playerService: PlayerService,
-                private trackService: TrackService) {
+                private trackService: TrackService,
+                private userService: UserService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.name) {
                 this.trackName = param.name;
@@ -36,6 +38,17 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
+    }
+
+    addFavorite() {
+        this.userService.setFavorite(this.trackDetails._id, 'track').subscribe(
+            res => { this.userService.set(res) },
+            err => {}
+        )
+    }
+
+    isFavorite(){
+        return this.userService.isFavorite(this.trackDetails._id, 'track');
     }
 
     getSongDetails() {

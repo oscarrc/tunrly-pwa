@@ -1,6 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 import { SearchService } from '../../../services/search.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
     selector: 'app-image-card',
@@ -15,7 +16,7 @@ export class ImageCardComponent implements OnInit {
     routeLink: string;
     imageSrc: string;
 
-    constructor(private searchService: SearchService) { }
+    constructor(private searchService: SearchService, private userService: UserService) { }
 
     @HostListener('click') onClick() {
         this.searchService.hideSearchResult();
@@ -27,8 +28,15 @@ export class ImageCardComponent implements OnInit {
         return images[rand];
     }
 
-    addFavorite(){
-        this.item.favorite = true;
+    addFavorite() {
+        this.userService.setFavorite(this.item._id, this.type).subscribe(
+            res => { this.userService.set(res) },
+            err => {}
+        )
+    }
+
+    isFavorite(){
+        return this.userService.isFavorite(this.item._id, this.type);
     }
 
     ngOnInit() {

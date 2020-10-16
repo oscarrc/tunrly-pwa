@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoadingService } from '../../../../../services/loading.service';
 import { PlayerService } from '../../../../../services/player.service';
 import { ArtistService } from '../../../../../services/artist.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-artist-details',
@@ -21,7 +22,8 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
                 private playerService: PlayerService,
-                private artistService: ArtistService) {
+                private artistService: ArtistService,
+                private userService: UserService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.name) {
                 this.artistName = param.name;
@@ -35,6 +37,17 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
+    }
+
+    addFavorite() {
+        this.userService.setFavorite(this.artistDetails._id, 'artist').subscribe(
+            res => { this.userService.set(res) },
+            err => {}
+        )
+    }
+
+    isFavorite(){
+        return this.userService.isFavorite(this.artistDetails._id, 'artist');
     }
 
     getArtistDetails() {

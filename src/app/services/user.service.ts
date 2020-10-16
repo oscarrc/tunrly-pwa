@@ -51,6 +51,11 @@ export class UserService {
         return this.httpClient.patch(this.userURL + '/favorites', {favId, type});
     }
 
+    isFavorite(favId: string, type: string): boolean{
+        const favorites = this.userSource.getValue().favorite;
+        return favorites[type].findIndex( f => {return f._id == favId} ) >= 0;
+    }
+
     addToHistory(track: string){
         return this.httpClient.patch(this.userURL + '/history', { track });
     }

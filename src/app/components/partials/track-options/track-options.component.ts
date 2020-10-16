@@ -1,5 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { PlayerService } from '../../../services/player.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
     selector: 'app-track-options',
@@ -13,14 +14,17 @@ export class TrackOptionsComponent implements OnInit {
     @Input() trackIndex: number = -1;
     @Input() icon = '';
 
-    constructor(private playerService: PlayerService) { }
+    constructor(private playerService: PlayerService, private userService: UserService) { }
 
     ngOnInit() {
         this.icon = 'la ' + this.icon;
     }
 
     addFavorite() {
-        this.track.favorite = true;
+        this.userService.setFavorite(this.track._id, 'track').subscribe(
+            res => { this.userService.set(res) },
+            err => {}
+        )
     }
 
     addToPlayList() {

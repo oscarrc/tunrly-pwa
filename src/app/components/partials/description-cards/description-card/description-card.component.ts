@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-description-card',
@@ -10,7 +11,7 @@ export class EventCardComponent implements OnInit {
     @Input() type:string;
     @Input() eventBorderRadiusClass = 'bg-img-radius-lg';
 
-    constructor() { }
+    constructor(private userService: UserService) { }
 
     getRandom(elements: Array<any>){
         const size = elements.length;
@@ -18,6 +19,16 @@ export class EventCardComponent implements OnInit {
         return elements[rand];
     }
 
+    isFavorite(){
+        return this.userService.isFavorite(this.item._id, this.type);
+    }
+
+    addFavorite(){
+        this.userService.setFavorite(this.item._id, this.type).subscribe(
+            res => { this.userService.set(res) },
+            err => {}
+        )
+    }
 
     ngOnInit() {
         this.eventBorderRadiusClass = this.eventBorderRadiusClass + ' h-100 event event-h bg-img';

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoadingService } from '../../../../../services/loading.service';
 import { PlayerService } from '../../../../../services/player.service';
 import { AlbumService } from '../../../../../services/album.service';
+import { UserService } from '../../../../../services/user.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
                 private playerService: PlayerService,
-                private albumService: AlbumService) {
+                private albumService: AlbumService,
+                private userService: UserService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param) {
                 this.albumName = param.name;
@@ -38,6 +40,17 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
+    }
+
+    addFavorite() {
+        this.userService.setFavorite(this.albumDetails._id, 'album').subscribe(
+            res => { this.userService.set(res) },
+            err => {}
+        )
+    }
+
+    isFavorite(){
+        return this.userService.isFavorite(this.albumDetails._id, 'album');
     }
 
     // Initialize static data for display

@@ -1,4 +1,14 @@
 <div [class]="eventBorderRadiusClass" [ngStyle]="{'background-image': 'url(' + item.image + ')'}">
+    <div class="custom-card--info px-2 py-2">
+        <ul class="custom-card--labels d-flex">
+            <li *ngIf="isFavorite()" (click)="addFavorite()"><span class="badge badge-pill badge-danger clickable"><i class="la la-heart"></i></span></li>
+        </ul>
+        <div class="dropdown dropdown-icon d-flex">
+            <a *ngIf="!isFavorite()" href="javascript:;" (click)="addFavorite()" role="button" >
+                <span class="badge badge-pill badge-transparent"><i class="la la-heart"></i></span>
+            </a>
+        </div>
+    </div>
     <div class="event-content p-4">
         <a [routerLink]="'/' + type + '/' + item._id"><h6>{{item.name}}</h6></a>
         <div [innerHTML]="item.description | truncate"></div>

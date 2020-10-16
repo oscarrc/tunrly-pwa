@@ -2,11 +2,10 @@
     <div class="custom-card--img card-img--radius-lg">
         <div class="custom-card--info">
             <ul class="custom-card--labels d-flex">
-                <li *ngIf="item?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
-                <li *ngIf="item?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
+                <li *ngIf="isFavorite()" (click)="addFavorite()"><span class="badge badge-pill badge-danger clickable"><i class="la la-heart"></i></span></li>
             </ul>
             <div class="dropdown dropdown-icon d-flex">
-                <a *ngIf="!item?.favorite" href="javascript:;" (click)="addFavorite()" role="button" >
+                <a *ngIf="!isFavorite()" href="javascript:;" (click)="addFavorite()" role="button" >
                     <span class="badge badge-pill badge-transparent"><i class="la la-heart"></i></span>
                 </a>
             </div>

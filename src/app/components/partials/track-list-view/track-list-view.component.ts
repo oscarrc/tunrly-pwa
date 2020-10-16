@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { UserService } from '../../../services/user.service';
 
 @Component({
     selector: 'app-track-list-view',
@@ -18,7 +19,7 @@ export class TrackListViewComponent implements OnInit {
     @Input() nowPlaying: number;
     @Input() highlight: number = -1;
 
-    constructor() { }
+    constructor(private userService: UserService) { }
 
     ngOnInit() {
         if (this.playlist) {
@@ -26,4 +27,7 @@ export class TrackListViewComponent implements OnInit {
         }
     }
 
+    isFavorite(){
+        return this.userService.isFavorite(this.track._id, 'track')
+    }
 }
