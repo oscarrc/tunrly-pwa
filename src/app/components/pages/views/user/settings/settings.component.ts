@@ -3,7 +3,6 @@ import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { LoadingService } from '../../../../../services/loading.service';
 import { UserService } from '../../../../../services/user.service';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-user-settings',
@@ -12,10 +11,27 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     settings: any;
+    settingsForm: any;
 
     private userSubscription: Subscription;
 
     constructor(private loadingService: LoadingService, private userService: UserService) { }
+
+    clearHistory(){
+        this.userService.update({ history: [] }).subscribe(
+            res => { this.userService.set(res) },
+            err => {}
+        )
+    }
+
+    saveSettings(){
+        const lastSettings = this.settings;
+        this.userService.update({settings: this.settings}).subscribe(
+            res => { this.userService.set(res) },
+            err => { this.settings = lastSettings }
+        )
+        console.log(this.settings)
+    }
 
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe( user => {
