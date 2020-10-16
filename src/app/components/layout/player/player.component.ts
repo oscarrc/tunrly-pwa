@@ -24,7 +24,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     time: number;
     buffered: number;
     duration: number;
-    volume: number;  
+    volume: number;
+    quality: number;  
     timer: any;
     seekTo: number = 0;
     volumeIcon = 'ion-md-volume-low';
@@ -40,9 +41,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
         shuffle: false,
         repeat: false
     };
+    qualityOptions = ["hd1080","hd720","large","medium"]
     
     skinSubscription: Subscription;
     playlistSubscription: Subscription;
+    userSubscription: Subscription;
     nowPlayingSubscription: Subscription;
 
     constructor(@Inject(DOCUMENT) private document: Document,
@@ -60,7 +63,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
             this.playerClass = 'player-' + Config.THEME_CLASSES[themeSkin.player];
         }
 
-        this.volume = parseInt((<HTMLInputElement>document.getElementById('volume')).value);
+        this.userSubscription = this.userService.user.subscribe(
+            user => {
+                this.volume = (user.settings.volume + 1)/3 * 75;
+                this.quality = user.settings.quality;
+            }
+        )
 
         this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
             this.track = this.playerService.track;            

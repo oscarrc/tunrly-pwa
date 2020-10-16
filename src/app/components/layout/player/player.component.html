@@ -15,7 +15,7 @@
             <youtube-player *ngIf="track?.source"
                 id="videoPlayer"
                 [videoId]="track.source" 
-                suggestedQuality="highres"
+                [suggestedQuality]="qualityOptions[quality]"
                 [height]="videoSize" 
                 [width]="videoSize" 
                 [playerVars]= "videoOptions"
@@ -60,7 +60,7 @@
                 <i [class]="volumeIcon"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right volume-dropdown-menu">
-                <input type="range" id="volume" class="track-volume-slider" value="100" (change)="setVolume($event)">
+                <input type="range" id="volume" class="track-volume-slider" [value]="this.volume" (change)="setVolume($event)">
             </div>
         </div>
 
