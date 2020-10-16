@@ -15,6 +15,13 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private loadingService: LoadingService,
                 private userService: UserService) { }
 
+    clearHistory(){
+        this.userService.update({history: []}).subscribe(
+            res => { this.userService.set(res) },
+            err => {}
+        )
+    }
+
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe(
             user => { 
