@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { PlayerService } from '../../../services/player.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { SkinService } from '../../../services/skin.service';
+import { UserService } from '../../../services/user.service';
+
 import { Config } from '../../../config/config';
 
 //TODO Ability to make video bigger
@@ -45,6 +47,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 private localStorageService: LocalStorageService,
+                private userService: UserService,
                 private playerService: PlayerService,
                 private skinService: SkinService) { }
 
@@ -60,8 +63,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.volume = parseInt((<HTMLInputElement>document.getElementById('volume')).value);
 
         this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
-            this.track = this.playerService.track;
+            this.track = this.playerService.track;            
             this.playerOptions = options;
+            this.userService.addToHistory(this.track._id).subscribe(
+                res => { this.userService.set(res) }
+            );
         });
 
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {

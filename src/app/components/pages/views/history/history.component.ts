@@ -1,34 +1,37 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
 import { LoadingService } from '../../../../services/loading.service';
-import { SongsConfigService } from '../../../../services/songs-config.service';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
     selector: 'app-history',
     templateUrl: './history.component.html'
 })
-export class HistoryComponent implements OnInit, AfterViewInit {
+export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
     songs: any = {};
+    private userSubscription: any;
 
     constructor(private loadingService: LoadingService,
-                private songsConfigService: SongsConfigService) { }
+                private userService: UserService) { }
 
     ngOnInit() {
-        this.initSongs();
+        this.userSubscription = this.userService.user.subscribe(
+            user => { 
+                this.songs = {
+                    title: 'History',
+                    subTitle: 'You recently listen',
+                    list: user.history
+                };
+            }
+        )
     }
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
     }
 
-    // Initialize song object for section
-    initSongs() {
-        this.songs = {
-            title: 'History',
-            subTitle: 'You recently listen',
-            list: this.songsConfigService.songsList
-        };
+    ngOnDestroy(){
+        this.userSubscription.unsubscribe();
     }
-
 }
