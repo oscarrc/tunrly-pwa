@@ -10,8 +10,7 @@
         </div>
         <hr>
     </div>
-
-    <ngx-slick-carousel [class]="classes" [config]="sliderConfig">
+    <ngx-slick-carousel [class]="classes" [config]="sliderConfig">        
         <div ngxSlickItem *ngFor="let item of section?.items" class="slide">
             <app-image-card *ngIf="imageCard" [item]="item" [type]="type" [imageBorderRadiusClass]="imageBorderRadiusClass"></app-image-card>
 

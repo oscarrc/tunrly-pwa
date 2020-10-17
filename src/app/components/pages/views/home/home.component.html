@@ -2,6 +2,16 @@
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
+    <!-- Recommended -->
+    <app-section *ngIf="recommended?.items?.length" [section]="recommended" [carouselButtonPositionClass]="carouselArrowPosClass3"
+                 [primaryCard]="true" [showImageOptions]="true">
+    </app-section>
+
+    <!-- History -->
+    <app-section *ngIf="history?.items?.length" [section]="history" [carouselButtonPositionClass]="carouselArrowPosClass3"
+                 [primaryCard]="true" [showImageOptions]="true">
+    </app-section>
+
     <!-- Top Tracks -->
     <app-section *ngIf="topTracks.items.length" [section]="topTracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
                  [primaryCard]="true" [showImageOptions]="true">

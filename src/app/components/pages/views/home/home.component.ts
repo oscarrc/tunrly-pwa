@@ -5,6 +5,8 @@ import { PlaylistConfigService } from '../../../../services/playlist-config.serv
 import { TrackService } from '../../../../services/track.service';
 import { ArtistService } from '../../../../services/artist.service';
 import { TagService } from '../../../../services/tag.service';
+import { UserService } from '../../../../services/user.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,7 +14,8 @@ import { TagService } from '../../../../services/tag.service';
     templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-
+    // private userSubscription: Subscription;
+    
     carouselArrowPosClass1 = 'arrow-pos-1';
     carouselArrowPosClass2 = 'arrow-pos-2';
     carouselArrowPosClass3 = 'arrow-pos-3';
@@ -21,6 +24,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     topArtists: any = {};
     topTags: any = {};
     playlist: any = {};
+    history: any = {};
+    recommended: any = {};
 
     mainEvent: any = {};
     secondaryEvents: any = [];
@@ -29,9 +34,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 private playlistConfigService: PlaylistConfigService,
                 private trackService: TrackService,
                 private artistService: ArtistService,
-                private tagService: TagService) { }
+                private tagService: TagService,
+                private userService: UserService) { }
 
-    ngOnInit() {        
+    ngOnInit() {
+        this.userService.user.subscribe( user => {
+            if(user.settings.personalResults){
+                this.initHistory(user.history.slice(0,9));
+                this.initRecommended(user.favorite);
+            }            
+        }).unsubscribe();
+
         this.initTopTracks();
         this.initTopArtists();
         this.initTopTags();
@@ -40,6 +53,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.loadingService.stopLoading();
     }
+
+    // ngOnDestroy(){
+    //     this.userSubscription.unsubscribe();
+    // }
 
     getRandom(elements: Array<any>){
         const size = elements.length;
@@ -109,5 +126,39 @@ export class HomeComponent implements OnInit, AfterViewInit {
         for (const playlistItem of playlistItems) {
             playlistItem.songs = []
         }
+    }
+
+    //Initialize user history
+    initHistory(history) {
+        this.history = {
+            title: 'Listen again',
+            subTitle: 'Re-listen some of your songs',
+            page: '/user/history',
+            loading: true,
+            items: history.sort( (a, b) => { return 0.5 - Math.random() })
+        };
+    }
+
+    //Initialize user recommendations
+    initRecommended(favorites) {
+        let tracks = [];
+
+        favorites.track.forEach( track => {
+            tracks = tracks.concat(track.similar.slice(0,5))
+        });
+
+        favorites.artist.forEach( artist => {
+            artist.similar.slice(0,5).forEach( similar => {
+                tracks = tracks.concat(similar.tracks)
+            })
+        })
+
+        this.recommended = {
+            title: 'Just for you',
+            subTitle: 'We thought you may like these',
+            page: '/user/favorites',
+            loading: true,
+            items: tracks.sort( (a, b) => { return 0.5 - Math.random() }).slice(0,10)
+        };
     }
 }
