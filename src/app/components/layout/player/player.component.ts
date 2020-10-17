@@ -73,9 +73,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
             this.track = this.playerService.track;            
             this.playerOptions = options;
-            this.userService.addToHistory(this.track._id).subscribe(
-                res => { this.userService.set(res) }
-            );
+            if(this.track){
+                this.userService.addToHistory(this.track._id).subscribe(
+                    res => { this.userService.set(res) }
+                );
+            }
         });
 
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {

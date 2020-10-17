@@ -38,7 +38,7 @@ export class PlayerService {
 
         if(this.options.repeat && this.options.index == this.playlist.tracks.length - 1) index = -1;
 
-        if(this.playlist.tracks.length > this.options.index){
+        if(this.playlist.tracks?.length > this.options.index){
             index = this.options.shuffle ?  Math.floor(Math.random()* this.playlist.tracks.length) : index + 1;
             this.options.index = index;
         }
