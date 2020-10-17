@@ -9,23 +9,33 @@ import { UserService } from '../../../../services/user.service';
 })
 export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    songs: any = {};
+    tracks: any = {};
+    page: number = 1;
+    limit: number = 10;
+
     private userSubscription: any;
 
     constructor(private loadingService: LoadingService,
                 private userService: UserService) { }
 
-    clearHistory(){
-        this.userService.update({history: []}).subscribe(
-            res => { this.userService.set(res) },
-            err => {}
-        )
+    nextPage(){
+        const count = this.tracks.list.length;
+
+        if((count / this.limit) < this.page){
+            this.page++
+        }
+    }
+
+    prevPage(){
+        if(this.page > 1){
+            this.page--
+        }
     }
 
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe(
             user => { 
-                this.songs = {
+                this.tracks = {
                     title: 'History',
                     subTitle: 'You recently listen',
                     list: user.history

@@ -7,15 +7,18 @@
         <div class="heading">
             <div class="d-flex flex-wrap align-items-end">
                 <div class="flex-grow-1">
-                    <h4>{{songs?.title}}</h4>
-                    <p>{{songs?.subTitle}}</p>
+                    <h4>{{tracks?.title}}</h4>
+                    <p>{{tracks?.subTitle}}</p>
                 </div>
-                <button (click)="clearHistory()" class="btn btn-sm btn-pill btn-air btn-primary">Clear All</button>
+                <span>
+                    <button type="button" (click)="prevPage()" [disabled]="page == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
+                    <button type="button" (click)="nextPage()" [disabled]="tracks.list.length / limit <= page" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
+                </span>
             </div>
             <hr>
         </div>
         <div class="row custom-card-list">
-            <div class="col-xl-6 col-lg-12" *ngFor="let track of songs.list; let i = index">
+            <div class="col-xl-6 col-lg-12" *ngFor="let track of tracks.list | slice:(page-1)*limit:page*limit; let i = index">
                 <app-track-list-view [trackNumber]="i+1" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
             </div>
         </div>
