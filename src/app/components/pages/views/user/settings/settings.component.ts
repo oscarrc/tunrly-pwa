@@ -30,7 +30,6 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
             res => { this.userService.set(res) },
             err => { this.settings = lastSettings }
         )
-        console.log(this.settings)
     }
 
     ngOnInit() {
