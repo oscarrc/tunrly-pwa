@@ -20,7 +20,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
     playlists: any = {};
     type: string = "";
     page: number = 1;
-    limit: number = 10;
+    limit: number = 12;
     gridView = false;
 
     constructor(private route: ActivatedRoute,

@@ -15,12 +15,12 @@
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="section">
         <div *ngIf="!loading"  class="row custom-card-list">
-            <div class="col-6 col-md-2 col-sm-4" *ngFor="let artist of artists">
+            <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let artist of artists">
                 <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'" type="artist"></app-image-card>
             </div>
         </div>
         <div *ngIf="loading == true"  class="row custom-card-list">
-            <div class="col-6 col-md-2 col-sm-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] ">
+            <div class="col-6 col-md-2 col-sm-4 col-xl-2 mb-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
                 <content-loader 
                     speed="2"
                     width="300"

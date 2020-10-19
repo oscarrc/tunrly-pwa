@@ -57,7 +57,7 @@
 
                     <div class="row custom-card-list">
                         <ng-container *ngIf="gridView; else listView">
-                            <div class="col-xl-2 col-lg-3 col-sm-4" *ngFor="let track of favorites.track">
+                            <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let track of favorites.track">
                                 <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
                             </div>
                         </ng-container>
@@ -88,7 +88,7 @@
                     <!-- End | Container header -->
 
                     <div class="row custom-card-list">
-                        <div class="col-xl-2 col-lg-3 col-sm-4" *ngFor="let album of favorites.album | slice:(page.album-1)*limit:page.album*limit">
+                        <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let album of favorites.album | slice:(page.album-1)*limit:page.album*limit">
                             <app-image-card [item]="album" type="album"></app-image-card>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                     <!-- End | Container header -->
 
                     <div class="row custom-card-list">
-                        <div class="col-xl-2 col-lg-3 col-sm-4" *ngFor="let artist of favorites.artist | slice:(page.artist-1)*limit:page.artist*limit">
+                        <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let artist of favorites.artist | slice:(page.artist-1)*limit:page.artist*limit">
                             <app-image-card [item]="artist" type="artist"></app-image-card>
                         </div>
                     </div>

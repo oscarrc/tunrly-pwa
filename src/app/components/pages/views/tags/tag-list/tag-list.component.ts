@@ -19,7 +19,7 @@ export class TagListComponent implements OnInit, AfterViewInit, OnDestroy {
     playlists: any = [];
     gridView = false;
     page: number = 1;
-    limit: number = 10;
+    limit: number = 12;
 
     routeSubscription: Subscription;
 

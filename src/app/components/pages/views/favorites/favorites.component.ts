@@ -13,7 +13,7 @@ export class FavoritesComponent implements OnInit, AfterViewInit, OnDestroy {
     songs: any = {};
     favorites: any = {};
     gridView:boolean = false;
-    limit:number = 10;
+    limit:number = 12;
     page = {
         artist: 1,
         album: 1,

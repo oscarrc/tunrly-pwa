@@ -11,7 +11,7 @@ export class TagsComponent implements OnInit, AfterViewInit {
 
     tags: any = [];
     page: number = 1;
-    limit: number = 10;
+    limit: number = 12;
     loading: boolean = true;
 
     constructor(private loadingService: LoadingService,

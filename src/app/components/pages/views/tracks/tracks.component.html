@@ -24,7 +24,7 @@
     <div class="section">
         <div class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
-                <div class="col-xl-custom col-lg-5 col-sm-3" *ngFor="let track of tracks">
+                <div class="col-lg-5 col-sm-3" *ngFor="let track of tracks">
                     <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
                 </div>
             </ng-container>
