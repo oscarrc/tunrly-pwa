@@ -11,6 +11,7 @@ export class PlaylistsComponent implements OnInit, AfterViewInit {
     playlists: any = [];
     page: number = 1;
     limit: number = 10;
+    loading: boolean = true;
 
     constructor(private loadingService: LoadingService,
         private playlistService: PlaylistService) {}
@@ -31,8 +32,13 @@ export class PlaylistsComponent implements OnInit, AfterViewInit {
 
     // Initialize songs
     initPlaylists() {
+        this.loading = true;
+
         this.playlistService.get(null, this.page, this.limit).subscribe(
-            res => this.playlists = res,
+            res => {
+                this.loading = false;
+                this.playlists = res;
+            },
             err => console.log(err)
         )
     }

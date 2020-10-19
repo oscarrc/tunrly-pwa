@@ -36,7 +36,30 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-    ngOnInit() {
+    ngOnInit() {    
+        this.artists = {
+            title: this.tagName + " artists",
+            page: '/tag/' + this.tagName + '/tracks',
+            loading: true
+        };
+        this.albums = {
+            title: this.tagName + " albums",
+            page: '/tag/' + this.tagName + '/albums',          
+            subTitle: '',
+            loading: true
+        };
+        this.tracks = {
+            title: this.tagName + " tracks",
+            page: '/tag/' + this.tagName + '/tracks',            
+            subTitle: '',
+            loading: true
+        };
+        this.playlists = {
+            title: this.tagName + " playlists",
+            page: '/tag/' + this.tagName + '/playlists',            
+            subTitle: '',
+            loading: true
+        };
     }
 
     ngAfterViewInit() {
@@ -52,34 +75,14 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     getTags(type: string){
         this.tagService.getTag(this.tagName, type, 1, 10).subscribe(
             res => { 
-                this.artists = {
-                    title: this.tagName + " artists",
-                    subTitle: '',
-                    page: '/tag/' + this.tagName + '/artists',
-                    loading: true,
-                    items: res["artist"]
-                };
-                this.albums = {
-                    title: this.tagName + " albums",
-                    subTitle: '',
-                    page: '/tag/' + this.tagName + '/albums',
-                    loading: true,
-                    items: res["album"]
-                };
-                this.tracks = {
-                    title: this.tagName + " tracks",
-                    subTitle: '',
-                    page: '/tag/' + this.tagName + '/tracks',
-                    loading: true,
-                    items: res["track"]
-                };
-                this.playlists =  {
-                    title: this.tagName + " playlists",
-                    subTitle: '',
-                    page: '/tag/' + this.tagName + '/playlists',
-                    loading: true,
-                    items: res["playlist"]
-                };             
+                this.artists.loading = false,
+                this.artists.items= res["artist"]    
+                this.albums.loading = false,
+                this.albums.items= res["album"]    
+                this.tracks.loading = false,
+                this.tracks.items= res["track"]    
+                this.playlists.loading = false,
+                this.playlists.items= res["playlist"]        
             },
             err => console.log(err)
         )

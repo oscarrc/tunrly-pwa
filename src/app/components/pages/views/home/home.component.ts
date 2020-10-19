@@ -75,7 +75,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         };
         
         this.trackService.getTop('', 1, 10).subscribe(
-            res => this.topTracks.items = res,
+            res => {
+                this.topTracks.items = res;
+                this.topTracks.loading = false;
+            },
             err => console.log(err)
         )
     }
@@ -91,7 +94,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         };
         
         this.artistService.getTop('', 1, 10).subscribe(
-            res => this.topArtists.items = res,
+            res => {
+                this.topArtists.items = res;
+                this.topArtists.loading = false;
+            },
             err => console.log(err)
         );
     }
@@ -107,7 +113,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         };
         
         this.tagService.getTop(1, 10).subscribe(
-            res => this.topTags.items = res,
+            res => {
+                this.topTags.items = res;
+                this.topTags.loading = false;
+            },
             err => console.log(err)
         )
     }
@@ -134,7 +143,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             title: 'Listen again',
             subTitle: 'Re-listen some of your songs',
             page: '/user/history',
-            loading: true,
+            loading: false,
             items: history.sort( (a, b) => { return 0.5 - Math.random() })
         };
     }
@@ -149,7 +158,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
         favorites.artist.forEach( artist => {
             artist.similar.slice(0,5).forEach( similar => {
-                tracks = tracks.concat(similar.tracks)
+                tracks = tracks.concat(similar.tracks);
             })
         })
 
@@ -157,7 +166,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             title: 'Just for you',
             subTitle: 'We thought you may like these',
             page: '/user/favorites',
-            loading: true,
+            loading: false,
             items: tracks.sort( (a, b) => { return 0.5 - Math.random() }).slice(0,10)
         };
     }

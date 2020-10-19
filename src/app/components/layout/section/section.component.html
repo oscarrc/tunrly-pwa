@@ -10,7 +10,7 @@
         </div>
         <hr>
     </div>
-    <ngx-slick-carousel [class]="classes" [config]="sliderConfig">        
+    <ngx-slick-carousel *ngIf="!section.loading" [class]="classes" [config]="sliderConfig">        
         <div ngxSlickItem *ngFor="let item of section?.items" class="slide">
             <app-image-card *ngIf="imageCard" [item]="item" [type]="type" [imageBorderRadiusClass]="imageBorderRadiusClass"></app-image-card>
 
@@ -22,6 +22,23 @@
 
             <app-description-card *ngIf="descriptionCard" [item]="item" [type]="type">
             </app-description-card>
+        </div>
+    </ngx-slick-carousel>
+
+    <ngx-slick-carousel *ngIf="section.loading" [class]="classes" [config]="sliderConfig">        
+        <div ngxSlickItem *ngFor="let item of [0,1,2,3,4,5]" class="slide">
+            <content-loader 
+                speed="2"
+                width="300"
+                height="346"
+                viewBox="0 0 300 346"
+                backgroundColor="#f3f3f3"
+                foregroundColor="#ecebeb"
+            >
+                <svg:rect x="0" y="0" rx="2" ry="2" width="300" height="300" /> 
+                <svg:rect x="0" y="308" rx="0" ry="0" width="200" height="20" /> 
+                <svg:rect x="0" y="331" rx="0" ry="0" width="164" height="15" />
+            </content-loader>
         </div>
     </ngx-slick-carousel>
 </div>

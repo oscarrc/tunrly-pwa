@@ -54,6 +54,7 @@ import { PlaylistService } from '../../../services/playlist.service';
 import { ValidationService } from '../../../services/validation.service';
 
 import { AuthGuard } from '../../../core/guards/auth.guard';    
+import { ContentLoaderModule } from '@ngneat/content-loader';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -239,6 +240,7 @@ const routes: Routes = [
         ReactiveFormsModule,
         PerfectScrollbarModule,
         PartialsModule,
+        ContentLoaderModule,
         CoreModule,
         LayoutModule,
         ChartsModule,

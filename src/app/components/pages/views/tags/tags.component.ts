@@ -12,6 +12,7 @@ export class TagsComponent implements OnInit, AfterViewInit {
     tags: any = [];
     page: number = 1;
     limit: number = 10;
+    loading: boolean = true;
 
     constructor(private loadingService: LoadingService,
                 private tagService: TagService) { }
@@ -34,8 +35,12 @@ export class TagsComponent implements OnInit, AfterViewInit {
 
     // Initialize music tags
     initTags() {
+        this.loading = true;
         this.tagService.getTop(this.page, this.limit).subscribe(
-            res => this.tags = res,
+            res => {
+                this.loading = false;
+                this.tags = res;
+            },
             err => console.log(err)
         )
     }

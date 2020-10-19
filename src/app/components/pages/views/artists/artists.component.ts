@@ -18,6 +18,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
     type: string='';
     page: number = 1;
     limit: number = 10;
+    loading: boolean = true;
 
     routeSubscription: Subscription;
 
@@ -49,6 +50,8 @@ export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getContent(){
+        this.loading = true;
+
         switch(this.type){
             case "similar":
                 this.getSimilar();
@@ -61,14 +64,20 @@ export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     getArtists() {
         this.artistService.getTop(this.country, this.page, this.limit).subscribe(
-            res => this.artists = res,
+            res => {
+                this.loading = false;
+                this.artists = res
+            },
             err => console.log(err)
         )
     }
 
     getSimilar() {
         this.artistService.getSimilar(this.id).subscribe(
-            res => this.artists = res,
+            res => {
+                this.loading = false;
+                this.artists = res;
+            },
             err => console.log(err)
         )
     }

@@ -11,7 +11,7 @@
     <div class="container-header d-flex justify-content-between">
         <span class="title">Top {{ tagName | titlecase }} {{type | titlecase}}</span>
         <div class="d-flex align-items-center">
-            <a *ngIf="tracks" class="icon" (click)="gridView = !gridView">
+            <a *ngIf="type == 'tracks'" class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
                 <ng-template #gridViewButton>
                     <i class="ion-md-apps"></i>
@@ -29,7 +29,7 @@
     <div class="section">
         <div *ngIf="tracks" class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
-                <div class="col-xl-custom col-lg-5 col-sm-3" *ngFor="let track of tracks | slice:(page-1)*limit:page*limit">
+                <div class="col-6 col-xl-2 col-lg-4 col-sm-6" *ngFor="let track of tracks | slice:(page-1)*limit:page*limit">
                     <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
                 </div>
             </ng-container>
@@ -41,20 +41,20 @@
         </div>
 
         <div *ngIf="albums" class="row custom-card-list">
-            <div class="col-xl-2 col-lg-4 col-sm-6" *ngFor="let album of albums | slice:(page-1)*limit:page*limit">
+            <div class="col-6 col-xl-2 col-lg-4 col-sm-6" *ngFor="let album of albums | slice:(page-1)*limit:page*limit">
                 <app-image-card [item]="album" type="album"
                                 [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
             </div>
         </div>
 
         <div *ngIf="artists" class="row custom-card-list">
-            <div class="col-xl-custom col-lg-5 col-sm-6" *ngFor="let artist of artists | slice:(page-1)*limit:page*limit">
+            <div class="col-6 col-xl-2 col-lg-4 col-sm-6" *ngFor="let artist of artists | slice:(page-1)*limit:page*limit">
                 <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'" type="artist"></app-image-card>
             </div>
         </div>
 
         <div *ngIf="playlists" class="row custom-card-list">
-            <div class="col-xl-custom col-lg-5 col-sm-6" *ngFor="let playlist of playlists | slice:(page-1)*limit:page*limit">
+            <div class="col-lg-5 col-sm-6" *ngFor="let playlist of playlists | slice:(page-1)*limit:page*limit">
                 <app-description-card [item]="playlist"  type="playlist"></app-description-card>
             </div>
         </div>

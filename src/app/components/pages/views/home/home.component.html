@@ -3,23 +3,28 @@
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <!-- Recommended -->
-    <app-section *ngIf="recommended?.items?.length" [section]="recommended" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section  [section]="recommended" [carouselButtonPositionClass]="carouselArrowPosClass3"
                  [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!-- History -->
-    <app-section *ngIf="history?.items?.length" [section]="history" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section [section]="history" [carouselButtonPositionClass]="carouselArrowPosClass3"
                  [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!-- Top Tracks -->
-    <app-section *ngIf="topTracks.items.length" [section]="topTracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section  [section]="topTracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
                  [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!-- Top Artists -->
-    <app-section *ngIf="topArtists.items.length" [section]="topArtists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+    <app-section  [section]="topArtists" [carouselButtonPositionClass]="carouselArrowPosClass2"
                  [imageCard]="true" type="artist">
+    </app-section>
+
+    <!-- Tags -->
+    <app-section *ngIf="topTags.items.length && !topArtists.loading" [section]="topTags" [carouselButtonPositionClass]="carouselArrowPosClass1"
+                 [secondaryCard]="true" type="tag">
     </app-section>
 
     <!-- New Release -->
@@ -41,10 +46,5 @@
     <!-- <app-section *ngIf="radio" [section]="radio" [carouselButtonPositionClass]="carouselArrowPosClass2"
                  [imageCard]="true">
     </app-section> -->
-
-    <!-- Tags -->
-    <app-section *ngIf="topTags.items.length" [section]="topTags" [carouselButtonPositionClass]="carouselArrowPosClass1"
-                 [secondaryCard]="true" type="tag">
-    </app-section>
 </div>
 <!-- End | Main Container -->

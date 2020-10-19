@@ -3,22 +3,22 @@
 
 <div class="main-container">
     <!-- Tracks -->
-    <app-section *ngIf="tracks?.items?.length" [section]="tracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section [section]="tracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
                 [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!--  Artists -->
-    <app-section *ngIf="artists?.items?.length" [section]="artists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+    <app-section [section]="artists" [carouselButtonPositionClass]="carouselArrowPosClass2"
                 [imageCard]="true" type="artist">
     </app-section>
 
     <!--  Albums -->
-    <app-section *ngIf="albums?.items?.length" [section]="albums" [carouselButtonPositionClass]="carouselArrowPosClass2"
+    <app-section [section]="albums" [carouselButtonPositionClass]="carouselArrowPosClass2"
                 [imageCard]="true" type="album">
     </app-section>
 
     <!--  Playlists  -->
-    <app-section *ngIf="playlists?.items?.length" [section]="playlists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+    <app-section [section]="playlists" [carouselButtonPositionClass]="carouselArrowPosClass2"
                 [descriptionCard]="true" type="playlist">
     </app-section>
 </div>
