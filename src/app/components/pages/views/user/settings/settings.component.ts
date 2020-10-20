@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
 import { LoadingService } from '../../../../../services/loading.service';
 import { UserService } from '../../../../../services/user.service';
+import { AuthService } from '../../../../../services/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +16,7 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private userSubscription: Subscription;
 
-    constructor(private loadingService: LoadingService, private userService: UserService) { }
+    constructor(private loadingService: LoadingService, private userService: UserService, private authService: AuthService) { }
 
     clearHistory(){
         this.userService.update({ history: [] }).subscribe(
@@ -30,6 +31,10 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
             res => { this.userService.set(res) },
             err => { this.settings = lastSettings }
         )
+    }
+
+    closeAllSessions(){
+        this.authService.logout(false);
     }
 
     ngOnInit() {

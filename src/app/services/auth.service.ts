@@ -70,10 +70,10 @@ export class AuthService {
         ));
     }
 
-    logout(){
+    logout(device:boolean = true){
         const fingerprint = this.cookieService.get("fingerprint");
 
-        return this.httpClient.delete(this.authURL, { params: { device: fingerprint } }).subscribe(
+        return this.httpClient.delete(this.authURL, { params: device ? { device: fingerprint } : {} }).subscribe(
             res => {                
                 return res["success"];
             },
