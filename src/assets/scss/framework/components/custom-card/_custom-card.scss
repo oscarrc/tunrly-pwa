@@ -2,9 +2,13 @@
 @import "config";
 
 .custom-card-list {
-    .custom-card, .song-list--item {
+    .custom-card, .song-list--item, .song-list--loader {
         margin-bottom: $card-margin-y;
     }
+}
+
+.custom-card--loader{
+    overflow: hidden;
 }
 
 // Styling for custom card
@@ -134,7 +138,7 @@
     border-radius: $card-img-radius-md;
 }
 
-.card-img--radius-sm {
+.card-img--radius-sm, .card-img--radius-sm{
     border-radius: $card-img-radius-sm;
 }
 

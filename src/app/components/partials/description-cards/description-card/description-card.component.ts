@@ -5,7 +5,7 @@ import { UserService } from 'src/app/services/user.service';
     selector: 'app-description-card',
     templateUrl: './description-card.component.html'
 })
-export class EventCardComponent implements OnInit {
+export class DescriptionCardComponent implements OnInit {
 
     @Input() item: any = {};
     @Input() type:string;

@@ -1,0 +1,31 @@
+<div class="song-list--loader">
+    <div class="song-list--item-number">{{trackNumber < 10 ? '0' + trackNumber : trackNumber}}</div>
+    <div class="song-h song-h--sm">        
+        <div class="song-h--img card-img--radius-sm">
+            <content-loader 
+                speed="2"
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                backgroundColor="#f3f3f3"
+                foregroundColor="#ecebeb"
+            >
+                <svg:rect x="0" y="0" rx="2" ry="2" width="32" height="32"/> 
+            </content-loader >
+        </div>
+        <div class="song-h--desc">
+            <content-loader 
+                speed="2"
+                width="500"
+                height="55"
+                viewBox="0 0 300 55"
+                backgroundColor="#f3f3f3"
+                foregroundColor="#ecebeb"
+            >
+                
+                <svg:rect x="0" y="0" rx="0" ry="0" width="300" height="25" /> 
+                <svg:rect x="0" y="35" rx="0" ry="0" width="150" height="20" /> 
+            </content-loader >
+        </div>
+    </div>
+</div>

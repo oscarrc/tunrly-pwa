@@ -143,6 +143,10 @@ body {
             background-color: $gray-800;
         }
 
+        .custom-card .custom-card--link svg {
+            width: auto;
+        }
+
         .custom-card .custom-card--link h6, #audioPlayer .btn {
             color: $gray-400;
         }
@@ -155,7 +159,7 @@ body {
             color: $gray-500 !important;
         }
 
-        .song-list--item .song-list--item-number, #settingsWrapper .theme-settings-body {
+        .song-list--item .song-list--item-number, .song-list--loader .song-list--item-number, #settingsWrapper .theme-settings-body {
             color: $gray-700;
         }
 

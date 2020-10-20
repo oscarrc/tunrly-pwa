@@ -19,6 +19,7 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
     type: string='';
     page: number = 1;
     limit: number = 10;
+    loading: boolean = true;
 
     routeSubscription: Subscription;
 
@@ -50,6 +51,7 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
     }
 
     getContent(){
+        this.loading = true;
         switch(this.type){
             case "similar":
                 this.getSimilar();
@@ -66,21 +68,30 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
     // Initialize songs
     getTracks() {
         this.trackService.getTop(this.country, this.page, this.limit).subscribe(
-            res => this.tracks = res,
+            res => {
+                this.loading = false;
+                this.tracks = res
+            },
             err => console.log(err)
         )
     }
 
     getArtistTracks() {
         this.artistService.getTracks(this.id).subscribe(
-            res => this.tracks = res,
+            res => {
+                this.loading = false;
+                this.tracks = res
+            },
             err => console.log(err)
         )
     }
 
     getSimilar() {
         this.trackService.getSimilar(this.id).subscribe(
-            res => this.tracks = res,
+            res => {
+                this.loading = false;
+                this.tracks = res
+            },
             err => console.log(err)
         )
     }

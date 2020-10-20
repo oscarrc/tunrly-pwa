@@ -19,7 +19,7 @@
     }
 }
 
-.song-list--item {
+.song-list--item, .song-list--loader {
     @include flexBox();
     align-items: center;
     width: 100%;
@@ -52,6 +52,10 @@
     }
 }
 
+.song-list--loader svg{
+    width: 32px;
+}
+
 .song-h {
     @include flexBox();
     align-items: center;
@@ -72,8 +76,11 @@
         .song-h--img {
             max-width: $song-item-image-width-sm;
         }
-        .song-h--desc {
+        .song-h--desc{
             width: calc(100% - #{$song-item-image-width-sm});
+            svg {
+                width: 250px
+            }
         }
     }
 }
