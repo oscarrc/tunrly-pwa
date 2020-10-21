@@ -33,12 +33,13 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         const themeSkin = this.localStorageService.getThemeSkin();
+        
         if (themeSkin) {
             this.sidebarClass = 'sidebar-' + Config.THEME_CLASSES[themeSkin.sidebar];
         }
 
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
-            if (skin) {
+            if (skin == 'dark') {
                 this.sidebarClass = 'sidebar-' + Config.THEME_CLASSES[skin.sidebar];
             }
         });
