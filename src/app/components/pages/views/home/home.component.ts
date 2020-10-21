@@ -1,12 +1,10 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../services/loading.service';
-import { PlaylistConfigService } from '../../../../services/playlist-config.service';
 import { TrackService } from '../../../../services/track.service';
 import { ArtistService } from '../../../../services/artist.service';
 import { TagService } from '../../../../services/tag.service';
 import { UserService } from '../../../../services/user.service';
-import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -31,7 +29,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     secondaryEvents: any = [];
 
     constructor(private loadingService: LoadingService,
-                private playlistConfigService: PlaylistConfigService,
                 private trackService: TrackService,
                 private artistService: ArtistService,
                 private tagService: TagService,
@@ -127,14 +124,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
           title: 'Your Playlist',
           subTitle: 'You best to listen',
           page: '/playlist',
-          items: this.playlistConfigService.playlist
+          items: []
         };
-
-        // Add songs in playlist
-        const playlistItems = this.playlist.items;
-        for (const playlistItem of playlistItems) {
-            playlistItem.songs = []
-        }
     }
 
     //Initialize user history

@@ -19,20 +19,16 @@ import { LayoutModule } from '../../layout/layout.module';
 import { TagsComponent } from './tags/tags.component';
 import { TagDetailsComponent } from './tags/tag-details/tag-details.component';
 import { TagListComponent } from './tags/tag-list/tag-list.component';
-import { MusicComponent } from './music/music.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
 import { TracksComponent } from './tracks/tracks.component';
 import { TrackDetailsComponent } from './tracks/track-details/track-details.component';
 import { PlaylistsComponent } from './playlists/playlists.compontent';
 import { PlaylistDetailsComponent } from './playlists/playlist-details/playlist-details.component';
-import { StationsComponent } from './stations/stations.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HistoryComponent } from './history/history.component';
-import { EventsComponent } from './events/events.component';
-import { EventDetailsComponent } from './events/event-details/event-details.component';
-import { AddEventComponent } from './events/add-event/add-event.component';
-import { AddMusicComponent } from './tracks/add-music/add-music.component';
+// import { EventsComponent } from './events/events.component';
+// import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { UserProfileComponent } from './user/profile/profile.component';
 import { UserPlanComponent } from './user/plan/plan.component';
 import { UserPlaylistsComponent } from './user/playlists/playlists.compontent';
@@ -83,10 +79,6 @@ const routes: Routes = [
                 path: 'tag/:name/:type',
                 component: TagListComponent,
             },
-            // {
-            //     path: 'music',  
-            //     component: MusicComponent,
-            // },
             {
                 path: 'artists',
                 component: ArtistsComponent
@@ -139,26 +131,14 @@ const routes: Routes = [
                 path: 'search/:type',
                 component: SearchResultsComponent
             },
-            // {
-            //     path: 'albums',
-            //     component: AlbumsComponent
-            // },
             {
                 path: 'album/:name/:artist',
                 component: AlbumDetailsComponent
-            },
+            },          
             {
-                path: 'add-music',
-                component: AddMusicComponent
+                path: 'analytics',
+                component: AnalyticsComponent
             },
-            // {
-            //     path: 'stations',
-            //     component: StationsComponent
-            // },
-            // {
-            //     path: 'analytics',
-            //     component: AnalyticsComponent
-            // },
             // {
             //     path: 'events',
             //     component: EventsComponent
@@ -166,10 +146,6 @@ const routes: Routes = [
             // {
             //     path: 'event/:id/details',
             //     component: EventDetailsComponent
-            // },
-            // {
-            //     path: 'add-event',
-            //     component: AddEventComponent
             // },
             {
                 path: 'user',
@@ -208,20 +184,16 @@ const routes: Routes = [
         TagsComponent,
         TagDetailsComponent,
         TagListComponent,
-        MusicComponent,
         ArtistsComponent,
         ArtistDetailsComponent,
         PlaylistsComponent,
         PlaylistDetailsComponent,
         TracksComponent,
         TrackDetailsComponent,
-        StationsComponent,
         FavoritesComponent,
         HistoryComponent,
-        EventsComponent,
-        EventDetailsComponent,
-        AddEventComponent,
-        AddMusicComponent,
+        // EventsComponent,
+        // EventDetailsComponent,
         UserProfileComponent,
         UserPlanComponent,
         UserSettingsComponent,

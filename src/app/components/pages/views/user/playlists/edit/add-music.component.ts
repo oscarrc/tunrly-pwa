@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../../services/loading.service';
+import { LoadingService } from '../../../../../../services/loading.service';
 
 @Component({
-    selector: 'app-add-event',
-    templateUrl: './add-event.component.html'
+    selector: 'app-edit-playlist',
+    templateUrl: './edit-playlist.component.html'
 })
-export class AddEventComponent implements OnInit, AfterViewInit {
+export class EditPlaylistComponent implements OnInit, AfterViewInit {
 
     constructor(private loadingService: LoadingService) { }
 

@@ -10,8 +10,7 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './components/layout/layout.module';
 import { LoaderComponent } from './components/layout/loader/loader.component';
 import { LoadingService } from './services/loading.service';
-import { MenuConfigService } from './services/menu-config.service';
-import { SongsConfigService } from './services/songs-config.service';
+import { MenuConfigService } from './services/menu.service';
 import { AuthService } from './services/auth.service';
 
 import {ErrorInterceptor} from './core/interceptors/error.interceptor'
@@ -44,7 +43,6 @@ export function jwtOptionsFactory(cookieService: CookieService) {
     providers: [
         LoadingService,
         MenuConfigService,
-        SongsConfigService,
         AuthService,
         JwtInterceptor,
         {

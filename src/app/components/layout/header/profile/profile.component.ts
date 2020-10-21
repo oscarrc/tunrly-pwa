@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { MenuConfigService } from '../../../../services/menu-config.service';
+import { MenuConfigService } from '../../../../services/menu.service';
 import { SearchService } from '../../../../services/search.service';
 import { AuthService } from '../../../../services/auth.service';
 
