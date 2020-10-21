@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../../services/loading.service';
-import { EventsConfigService } from '../../../../../services/events-config.service';
 
 @Component({
     selector: 'app-event-details',
@@ -17,8 +16,7 @@ export class EventDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
-                private loadingService: LoadingService,
-                private eventsConfigService: EventsConfigService) {
+                private loadingService: LoadingService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.id) {
                 this.eventId = parseInt(param.id, 10);
@@ -35,7 +33,7 @@ export class EventDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getEventDetails() {
-        this.eventDetails = this.eventsConfigService.getEventByIb(this.eventId);
+        
     }
 
     ngOnDestroy() {
