@@ -35,7 +35,6 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.userService.update({settings: this.settings}).subscribe(
             res => { 
                 this.userService.set(res)
-                this.skinService.skin.emit(res['settings']['dark'] ? 'dark' : 'light');
              },
             err => { this.settings = this.lastSettings }
         )

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable } from 'rxjs';
+import { SkinService } from './skin.service';
 
 @Injectable({ 
     providedIn: "root"
@@ -13,7 +14,7 @@ export class UserService {
 
     user: Observable<any> = this.userSource.asObservable();
     
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient, private skinService: SkinService) {
     }
 
     
@@ -27,7 +28,8 @@ export class UserService {
         }else{
             sessionStorage.removeItem('user');
         }
-        
+
+        this.skinService.skin.emit(user['settings']['dark'] ? 'dark' : 'light')      
         this.userSource.next(user);
     }
 

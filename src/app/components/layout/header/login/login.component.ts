@@ -61,8 +61,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         }
 
         this.authService.login(login.value.user, login.value.password, login.value.remember).subscribe(
-            res => {
-                this.skinService.skin.emit(res['user']['settings']['dark'] ? 'dark' : 'light')           
+            res => {         
                 this.close();
             },
             err => {

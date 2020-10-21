@@ -9,7 +9,7 @@ import { LoadingService } from './services/loading.service';
     selector: 'app-root',
     templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
     title = 'Tunrly.com';
 
     constructor( @Inject(DOCUMENT) private document: Document,
@@ -23,9 +23,7 @@ export class AppComponent implements OnInit {
     skinSubscription: Subscription;
 
 
-    ngOnInit() {
-        this.document.body.classList.add(this.themeClass);
-        
+    ngOnInit() {        
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
             if (skin == 'light') {
                 this.document.body.classList.remove(this.themeClass);
