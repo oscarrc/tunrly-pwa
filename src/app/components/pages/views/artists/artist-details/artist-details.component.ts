@@ -47,7 +47,7 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     isFavorite(){
-        return this.userService.isFavorite(this.artistDetails._id, 'artist');
+        return this.userService.isFavorite(this.artistDetails?._id, 'artist');
     }
 
     getArtistDetails() {

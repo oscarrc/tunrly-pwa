@@ -4,6 +4,8 @@ import { SimpleModalComponent } from 'ngx-simple-modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 
 import { AuthService } from '../../../../services/auth.service';
+import { SkinService } from '../../../../services/skin.service';
+
 import { ValidationComponent } from '../../../layout/header/validation/validation.component';
 import { ForgottenComponent } from '../../../layout/header/forgotten/forgotten.component';
 
@@ -17,7 +19,8 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     formSubmitted = false;
 
     constructor(private simpleModalService: SimpleModalService,
-                private authService:AuthService) {
+                private authService:AuthService,
+                private skinService:SkinService) {
         super();
     }
 
@@ -58,8 +61,9 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         }
 
         this.authService.login(login.value.user, login.value.password, login.value.remember).subscribe(
-            res => {                 
-                 this.close();
+            res => {
+                this.skinService.skin.emit(res['user']['settings']['dark'] ? 'dark' : 'light')           
+                this.close();
             },
             err => {
                 if( err.error.name === "NotActive"){

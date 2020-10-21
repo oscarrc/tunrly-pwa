@@ -20,12 +20,12 @@ export class Config {
             // Brand config
             brand: {
                 logo: './assets/images/logos/logo.svg',
-                name: 'Listen App'
+                name: 'Tunrly.com'
             },
 
             // Theme skin config
             themeSkin: {
-                theme: 'light',
+                theme: 'dark',
                 header: 0,
                 sidebar: 0,
                 player: 0

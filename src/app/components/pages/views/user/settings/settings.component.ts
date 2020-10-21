@@ -3,6 +3,8 @@ import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { LoadingService } from '../../../../../services/loading.service';
 import { UserService } from '../../../../../services/user.service';
 import { AuthService } from '../../../../../services/auth.service';
+import { SkinService } from '../../../../../services/skin.service';
+
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,11 +14,15 @@ import { Subscription } from 'rxjs';
 export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     settings: any;
+    lastSettings: any;
     settingsForm: any;
 
     private userSubscription: Subscription;
 
-    constructor(private loadingService: LoadingService, private userService: UserService, private authService: AuthService) { }
+    constructor(private loadingService: LoadingService, 
+                private userService: UserService, 
+                private authService: AuthService,
+                private skinService: SkinService) { }
 
     clearHistory(){
         this.userService.update({ history: [] }).subscribe(
@@ -26,10 +32,12 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     saveSettings(){
-        const lastSettings = this.settings;
         this.userService.update({settings: this.settings}).subscribe(
-            res => { this.userService.set(res) },
-            err => { this.settings = lastSettings }
+            res => { 
+                this.userService.set(res)
+                this.skinService.skin.emit(res['settings']['dark'] ? 'dark' : 'light');
+             },
+            err => { this.settings = this.lastSettings }
         )
     }
 
@@ -40,6 +48,7 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe( user => {
             this.settings = user.settings;
+            this.lastSettings = this.settings;
         });
     }
 
