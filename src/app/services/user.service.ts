@@ -32,7 +32,7 @@ export class UserService {
     }
 
     get(){
-        return this.httpClient.get(this.userURL); 
+        return this.httpClient.get(this.userURL)
     }
 
     create(user: any){

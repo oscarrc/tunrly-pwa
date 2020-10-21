@@ -35,6 +35,8 @@ import { AddEventComponent } from './events/add-event/add-event.component';
 import { AddMusicComponent } from './tracks/add-music/add-music.component';
 import { UserProfileComponent } from './user/profile/profile.component';
 import { UserPlanComponent } from './user/plan/plan.component';
+import { UserPlaylistsComponent } from './user/playlists/playlists.compontent';
+
 import { UserSettingsComponent } from './user/settings/settings.component';
 import { AlbumsComponent } from './albums/albums.component';
 import { AlbumDetailsComponent } from './albums/album-details/album-details.component';
@@ -183,7 +185,7 @@ const routes: Routes = [
             },
             {
                 path: 'user/playlists',
-                component: PlaylistsComponent
+                component: UserPlaylistsComponent
             },
             {
                 path: 'plan',
@@ -223,6 +225,7 @@ const routes: Routes = [
         UserProfileComponent,
         UserPlanComponent,
         UserSettingsComponent,
+        UserPlaylistsComponent,
         AlbumsComponent,
         AlbumDetailsComponent,
         AnalyticsComponent,

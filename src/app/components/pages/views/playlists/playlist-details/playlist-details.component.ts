@@ -47,7 +47,7 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     isFavorite(){
-        return this.userService.isFavorite(this.playlistDetails._id, 'playlist');
+        return this.playlistDetails?._id ? this.userService.isFavorite(this.playlistDetails._id, 'playlist') : false;
     }
 
     // Initialize static data for display

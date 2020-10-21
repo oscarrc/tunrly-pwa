@@ -25,4 +25,8 @@ export class PlaylistService {
 
         return this.httpClient.get(this.playlistURL, { params: params });
     }
+
+    delete(id){
+        return this.httpClient.delete(this.playlistURL + '/' + id);
+    }
 }

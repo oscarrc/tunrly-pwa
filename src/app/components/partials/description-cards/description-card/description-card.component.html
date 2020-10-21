@@ -1,12 +1,32 @@
-<div [class]="eventBorderRadiusClass" [ngStyle]="{'background-image': 'url(' + item.image + ')'}">
+<div [class]="eventBorderRadiusClass" [ngStyle]="{'background-image': 'url(' + item.image + ')'}" [style.background-color]="item._id | toColor">
     <div class="custom-card--info px-2 py-2">
-        <ul class="custom-card--labels d-flex">
+        <ul *ngIf="!edit" class="custom-card--labels d-flex">
             <li *ngIf="isFavorite()" (click)="addFavorite()"><span class="badge badge-pill badge-danger clickable"><i class="la la-heart"></i></span></li>
         </ul>
         <div class="dropdown dropdown-icon d-flex">
-            <a *ngIf="!isFavorite()" href="javascript:;" (click)="addFavorite()" role="button" >
+            <a *ngIf="!isFavorite() && !edit" href="javascript:;" (click)="addFavorite()" role="button" >
                 <span class="badge badge-pill badge-transparent"><i class="la la-heart"></i></span>
             </a>
+            <a *ngIf="edit == true" class="ml-auto" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="ion-md-more"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-item">
+                    <a class="dropdown-link" (click)="addFavorite()">
+                        <i class="la la-pencil"></i>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a class="dropdown-link" (click)="sharePlaylist()">
+                        <i class="la la-share-alt"></i>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a class="dropdown-link" (click)="deletePlaylist()">
+                        <i class="la la-trash"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="event-content p-4">
