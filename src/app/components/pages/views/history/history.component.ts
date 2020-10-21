@@ -20,9 +20,8 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
     nextPage(){
         const count = this.tracks.list.length;
-
-        if((count / this.limit) < this.page){
-            this.page++
+        if((count / this.limit) > this.page){
+            this.page++;
         }
     }
 

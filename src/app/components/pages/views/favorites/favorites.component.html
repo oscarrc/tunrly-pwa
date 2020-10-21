@@ -63,7 +63,7 @@
                         </ng-container>
                         <ng-template #listView>
                             <div class="col-xl-6 col-lg-12" *ngFor="let track of favorites.track | slice:(page.track-1)*limit:page.track*limit; let i = index">
-                                <app-track-list-view [trackNumber]="i+1" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
+                                <app-track-list-view [trackNumber]="(i + 1 + ((page.track - 1) * limit))"  [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
                             </div>
                         </ng-template>
                     </div>

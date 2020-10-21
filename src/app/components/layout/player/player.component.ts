@@ -49,19 +49,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
     nowPlayingSubscription: Subscription;
 
     constructor(@Inject(DOCUMENT) private document: Document,
-                private localStorageService: LocalStorageService,
                 private userService: UserService,
-                private playerService: PlayerService,
-                private skinService: SkinService) { }
+                private playerService: PlayerService) { }
 
     ngOnInit() {
         this.init();
-
-        const themeSkin = this.localStorageService.getThemeSkin();
-        
-        if (themeSkin) {
-            this.playerClass = 'player-' + Config.THEME_CLASSES[themeSkin.player];
-        }
 
         this.userSubscription = this.userService.user.subscribe(
             user => {
@@ -78,13 +70,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                     res => { this.userService.set(res) }
                 );
             }
-        });
-
-        this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
-            if (skin) {
-                this.playerClass = 'player-' + Config.THEME_CLASSES[skin.player];
-            }
-        });
+        });        
     }
 
     ngOnDestroy() {
