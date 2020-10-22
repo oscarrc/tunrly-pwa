@@ -5,5 +5,10 @@
 
 <ul class="custom-card--labels d-flex ml-auto">
     <li *ngIf="isFavorite()"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
-    <li class="ml-4"><app-track-options [icon]="icon" [track]="track" [trackIndex]="trackIndex"></app-track-options></li>
+    <li class="ml-4">
+        <app-track-options *ngIf="options" [icon]="icon" [track]="track" [trackIndex]="trackIndex"></app-track-options>
+        <a *ngIf="!options" class="btn btn-icon-only w-auto h-auto" (click)="clicked(trackNumber)">
+            <i [class]="icon"></i>
+        </a>
+    </li>
 </ul>

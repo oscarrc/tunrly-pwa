@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable()
 export class PlaylistService {
@@ -24,6 +25,10 @@ export class PlaylistService {
         if(user) params["user"] = user;
 
         return this.httpClient.get(this.playlistURL, { params: params });
+    }
+
+    update(playlist){
+        return this.httpClient.put(this.playlistURL, playlist);
     }
 
     delete(id){

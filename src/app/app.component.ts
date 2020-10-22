@@ -23,7 +23,9 @@ export class AppComponent implements OnInit, OnDestroy {
     skinSubscription: Subscription;
 
 
-    ngOnInit() {        
+    ngOnInit() {
+        this.document.body.classList.add(this.themeClass);
+              
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
             if (skin == 'light') {
                 this.document.body.classList.remove(this.themeClass);

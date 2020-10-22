@@ -12,7 +12,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-item">
-                    <a class="dropdown-link" (click)="addFavorite()">
+                    <a class="dropdown-link" [routerLink]="'/user/' + type + '/' + item._id + '/edit'">
                         <i class="la la-pencil"></i>
                     </a>
                 </li>

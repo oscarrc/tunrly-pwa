@@ -32,7 +32,7 @@ import { HistoryComponent } from './history/history.component';
 import { UserProfileComponent } from './user/profile/profile.component';
 import { UserPlanComponent } from './user/plan/plan.component';
 import { UserPlaylistsComponent } from './user/playlists/playlists.compontent';
-
+import { EditPlaylistComponent } from './user/playlists/edit/edit-playlist.component';
 import { UserSettingsComponent } from './user/settings/settings.component';
 import { AlbumsComponent } from './albums/albums.component';
 import { AlbumDetailsComponent } from './albums/album-details/album-details.component';
@@ -164,6 +164,10 @@ const routes: Routes = [
                 component: UserPlaylistsComponent
             },
             {
+                path: 'user/playlist/:id/edit',
+                component: EditPlaylistComponent
+            },
+            {
                 path: 'plan',
                 component: UserPlanComponent
             },
@@ -198,6 +202,7 @@ const routes: Routes = [
         UserPlanComponent,
         UserSettingsComponent,
         UserPlaylistsComponent,
+        EditPlaylistComponent,
         AlbumsComponent,
         AlbumDetailsComponent,
         AnalyticsComponent,

@@ -17,7 +17,7 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     artistDetails: any;
     imageBorderRadiusClass: string = "card-img--radius-lg";
     
-    routeSubscription: Subscription;
+    private routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,

@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -18,6 +18,9 @@ export class TrackListViewComponent implements OnInit {
     @Input() trackIndex: number;
     @Input() nowPlaying: number;
     @Input() highlight: number = -1;
+    @Input() options: boolean = true;
+
+    @Output() buttonClicked: EventEmitter<number> = new EventEmitter<number>();
 
     constructor(private userService: UserService) { }
 
@@ -25,6 +28,10 @@ export class TrackListViewComponent implements OnInit {
         if (this.playlist) {
             this.classes += ' track-song-container track-play-pause';
         }
+    }
+
+    clicked(index){
+        this.buttonClicked.emit(index);
     }
 
     isFavorite(){

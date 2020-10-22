@@ -4,7 +4,6 @@ import { SimpleModalComponent } from 'ngx-simple-modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 
 import { AuthService } from '../../../../services/auth.service';
-import { SkinService } from '../../../../services/skin.service';
 
 import { ValidationComponent } from '../../../layout/header/validation/validation.component';
 import { ForgottenComponent } from '../../../layout/header/forgotten/forgotten.component';
@@ -19,8 +18,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     formSubmitted = false;
 
     constructor(private simpleModalService: SimpleModalService,
-                private authService:AuthService,
-                private skinService:SkinService) {
+                private authService:AuthService) {
         super();
     }
 
