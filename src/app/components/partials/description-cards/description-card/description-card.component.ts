@@ -47,7 +47,7 @@ export class DescriptionCardComponent implements OnInit {
     ngOnInit() {
         this.eventBorderRadiusClass = this.eventBorderRadiusClass + ' h-100 event event-h bg-img';
 
-        if(this.type == "playlist"){
+        if(this.type == "playlist" && !this.item.image){
             const track = this.getRandom(this.item.tracks);
             this.item.image = track?.image[track?.image.length - 1];
         }

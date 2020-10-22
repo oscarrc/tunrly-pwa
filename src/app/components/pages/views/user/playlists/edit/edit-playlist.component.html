@@ -15,14 +15,21 @@
                                 <label for="name" class="col-md-4 text-md-right col-form-label">Name</label>
                                 <div class="col-md-7">
                                     <input formControlName="name" type="text" id="name" class="form-control">
+                                    <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
+                                        <span *ngIf="playlistForm.controls.name.errors?.required">Please fill this field</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-row form-group">
-                                <label for="image" class="col-md-4 text-md-right col-form-label">Cover Image</label>
+                                <label for="image" class="col-md-4 text-md-right col-form-label">Cover Image<br><small>(Optional)</small></label>
                                 <div class="col-md-7">
                                     <div class="custom-file">
-                                        <input formControlName="image" type="file" class="custom-file-input" id="image">
-                                        <label class="custom-file-label" for="image">Choose file</label>
+                                        <input formControlName="image" type="file" class="custom-file-input" id="image" (change)="onFile($event.target.files)">
+                                        <label class="custom-file-label" for="image">Choose File</label>
+                                        <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
+                                            <span *ngIf="playlistForm.controls.image.errors?.requiredFileType">Filetype must be png or jpg</span>
+                                            <span *ngIf="playlistForm.controls.image.errors?.requiredSize">File must not be greater than 1MB</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -31,6 +38,9 @@
                                 <div class="col-md-7">
                                     <div class="custom-file">
                                         <textarea formControlName="description"  id="description" class="form-control"></textarea>
+                                        <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
+                                            <span *ngIf="playlistForm.controls.description.errors?.required">Please fill this field</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -6,6 +6,8 @@ import { LoadingService } from '../../../../../../services/loading.service';
 import { PlaylistService } from '../../../../../../services/playlist.service';
 import { Subscription } from 'rxjs';
 
+import { FileValidator } from '../../../../../../core/validators/file.validator';
+
 @Component({
     selector: 'app-edit-playlist',
     templateUrl: './edit-playlist.component.html'
@@ -15,7 +17,8 @@ export class EditPlaylistComponent implements OnDestroy{
     playlistForm: any;
     playlist: any;
     formSubmitted: boolean = false;
-
+    files: FileList;
+    
     private routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute, private router: Router, private loadingService: LoadingService, private playlistService: PlaylistService) { 
@@ -25,6 +28,19 @@ export class EditPlaylistComponent implements OnDestroy{
                 this.getPlaylistDetails();
             }
         });
+    }
+   
+    initForm(){
+        this.playlistForm = new FormGroup({
+            name: new FormControl(this.playlist.name, [
+                Validators.required
+            ]),
+            description: new FormControl(this.playlist.description, [
+                Validators.required
+            ]),
+            image: new FormControl(this.playlist.image),
+            public: new FormControl(this.playlist.public),
+        })
     }
 
     getPlaylistDetails(){
@@ -37,38 +53,46 @@ export class EditPlaylistComponent implements OnDestroy{
         )
     }
 
-    savePlaylist(playlist){
-        this.formSubmitted = true;
-
-        if (this.playlistForm.invalid) {
-            return false;
-        }
-
-        playlist = playlist.value;
-
-        playlist.image = playlist.image || this.playlist.image;
-        playlist.tracks = this.playlist.tracks;
-
-        this.playlistService.update(playlist).subscribe(
-            () => this.router.navigate(['/user/playlists'])
-        )
+    imageToBase64(file){
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });        
     }
 
     removeFromPlaylist(number){
         this.playlist.tracks.splice(number - 1, 1);
     }
 
-    initForm(){
-        this.playlistForm = new FormGroup({
-            name: new FormControl(this.playlist.name, [
-                Validators.required
-            ]),
-            description: new FormControl(this.playlist.description, [
-                Validators.required
-            ]),
-            image: new FormControl(this.playlist.image),
-            public: new FormControl(this.playlist.public),
-        })
+    onFile(files: FileList){
+        this.files = files;
+        this.playlistForm.get('image').setValidators([
+            FileValidator.fileExtensions(['png', 'jpg']),
+            FileValidator.maxFileSize(this.files, 1024)
+        ]);
+        this.playlistForm.get('image').updateValueAndValidity();
+    }
+
+    async savePlaylist(playlist){
+        this.formSubmitted = true;
+
+        if (this.playlistForm.invalid) {
+            return false;
+        }
+        
+        playlist = playlist.value;
+
+        if(playlist.image){
+           playlist.image = await this.imageToBase64(this.files[0])
+        }
+
+        playlist.tracks = this.playlist.tracks;
+
+        this.playlistService.update(playlist).subscribe(
+            () => this.router.navigate(['/user/playlists'])
+        )
     }
 
     ngOnDestroy(){

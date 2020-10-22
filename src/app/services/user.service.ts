@@ -29,7 +29,7 @@ export class UserService {
             sessionStorage.removeItem('user');
         }
 
-        this.skinService.skin.emit(user['settings']['dark'] ? 'dark' : 'light')      
+        this.skinService.skin.emit(user['settings']['dark'] ? 'dark' : 'light');
         this.userSource.next(user);
     }
 
