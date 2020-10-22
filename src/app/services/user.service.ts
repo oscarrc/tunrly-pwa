@@ -25,11 +25,11 @@ export class UserService {
     set(user){        
         if(user){
             sessionStorage.setItem('user', JSON.stringify(user));
+            this.skinService.skin.emit(user['settings']['dark'] ? 'dark' : 'light');
         }else{
             sessionStorage.removeItem('user');
         }
 
-        this.skinService.skin.emit(user['settings']['dark'] ? 'dark' : 'light');
         this.userSource.next(user);
     }
 

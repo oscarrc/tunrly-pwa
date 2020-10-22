@@ -80,11 +80,13 @@ export class AuthService {
             err => {
                 return err
             },
-            () => {                            
+            () => {
+                this.cookieService.delete('session');
+                this.cookieService.delete('token');
+                this.cookieService.delete('uid');             
+                this.router.navigate(['/']);                             
                 this.userService.set(null);
-                this.cookieService.deleteAll();
-                this.isLoggedIn = false;                
-                this.router.navigate(['/']);
+                this.isLoggedIn = false;   
             }
         );
     }
