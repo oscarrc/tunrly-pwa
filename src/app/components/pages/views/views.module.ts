@@ -28,6 +28,7 @@ import { PlaylistDetailsComponent } from './playlists/playlist-details/playlist-
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HistoryComponent } from './history/history.component';
 import { UserProfileComponent } from './user/profile/profile.component';
+import { UserComponent } from './user/user.component';
 import { UserPlaylistsComponent } from './user/playlists/playlists.compontent';
 import { EditPlaylistComponent } from './user/playlists/edit/edit-playlist.component';
 import { UserSettingsComponent } from './user/settings/settings.component';
@@ -160,6 +161,10 @@ const routes: Routes = [
             {
                 path: 'user/playlist/:id/edit',
                 component: EditPlaylistComponent
+            },            
+            {
+                path: 'user/:username',
+                component: UserComponent
             },
             {
                 path: 'settings',
@@ -187,6 +192,7 @@ const routes: Routes = [
         FavoritesComponent,
         HistoryComponent,
         UserProfileComponent,
+        UserComponent,
         UserSettingsComponent,
         UserPlaylistsComponent,
         EditPlaylistComponent,
