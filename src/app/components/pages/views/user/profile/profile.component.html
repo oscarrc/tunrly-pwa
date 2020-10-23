@@ -15,9 +15,13 @@
                                 </div>
                             </div>
                             <h6 class="mb-3">{{userProfile.name}}</h6>
-                            <p class="mb-1">Preferred: 420x420(px)</p>
-                            <p>Minimum: 128x128(px)</p>
-                            <button type="button" class="btn btn-danger btn-air">Change Image</button>
+                            <p  [ngClass]="imageSubmitted && imageForm.controls.image.errors?.requiredFileType ? 'text-danger' : ''" class="mb-1">Format: .png or .jpg</p>
+                            <p [ngClass]="imageSubmitted && imageForm.controls.image.errors?.requiredSize ? 'text-danger' : ''" >Max size: 1MB</p>
+                            <form action="#" [formGroup]="imageForm">
+                                <label for="image" class="btn btn-danger btn-air">
+                                    Change Image <input type="file" formControlName="image" id="image" hidden (change)="saveImage($event.target.files)">
+                                </label>
+                            </form>
                         </div>
                     </div>
                     
