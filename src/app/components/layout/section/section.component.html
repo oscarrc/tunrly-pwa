@@ -29,7 +29,7 @@
         <div ngxSlickItem *ngFor="let item of [0,1,2,3,4,5]" class="slide">
             <app-primary-card-loader *ngIf="primaryCard"></app-primary-card-loader>
             <app-secondary-card-loader *ngIf="secondaryCard || imageCard"></app-secondary-card-loader>
-            <app-description-card-loader></app-description-card-loader>
+            <app-description-card-loader *ngIf="descriptionCard"></app-description-card-loader>
         </div>
     </ngx-slick-carousel>
 </div>
