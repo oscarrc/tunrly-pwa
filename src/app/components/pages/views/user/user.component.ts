@@ -21,7 +21,7 @@ export class UserComponent implements OnDestroy{
     }
 
     getUser(username){
-
+        //TODO User public profile
     }
    
     ngOnDestroy(){

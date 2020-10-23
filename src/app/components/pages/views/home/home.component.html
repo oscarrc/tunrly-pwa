@@ -3,48 +3,28 @@
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <!-- Recommended -->
-    <app-section  [section]="recommended" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section  *ngIf="recommended?.loading || recommended?.items.length > 0" [section]="recommended" [carouselButtonPositionClass]="carouselArrowPosClass3"
                  [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!-- History -->
-    <app-section [section]="history" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section *ngIf="history?.loading || history?.items.length > 0" [section]="history" [carouselButtonPositionClass]="carouselArrowPosClass3"
                  [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!-- Top Tracks -->
-    <app-section  [section]="topTracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section  *ngIf="topTracks?.loading || topTracks?.items.length > 0" [section]="topTracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
                  [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!-- Top Artists -->
-    <app-section  [section]="topArtists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+    <app-section  *ngIf="topArtists?.loading || topArtists?.items.length > 0" [section]="topArtists" [carouselButtonPositionClass]="carouselArrowPosClass2"
                  [imageCard]="true" type="artist">
     </app-section>
 
     <!-- Tags -->
-    <app-section *ngIf="topTags.items.length && !topArtists.loading" [section]="topTags" [carouselButtonPositionClass]="carouselArrowPosClass1"
+    <app-section *ngIf="topTags?.loading || topTags?.items.length > 0" [section]="topTags" [carouselButtonPositionClass]="carouselArrowPosClass1"
                  [secondaryCard]="true" type="tag">
     </app-section>
-
-    <!-- New Release -->
-    <!-- <app-section *ngIf="newRelease" [section]="newRelease" [carouselButtonPositionClass]="carouselArrowPosClass3"
-                 [primaryCard]="true" [showImageOptions]="true">
-    </app-section> -->
-
-    <!-- Playlist -->
-    <!-- <app-section *ngIf="playlist" [section]="playlist" [carouselButtonPositionClass]="carouselArrowPosClass1"
-                 [secondaryCard]="true" [fourSlideCarousel]="true">
-    </app-section> -->
-
-    <!-- Retro -->
-    <!-- <app-section *ngIf="retro" [section]="retro" [carouselButtonPositionClass]="carouselArrowPosClass3"
-                 [primaryCard]="true" [showImageOptions]="true">
-    </app-section> -->
-
-    <!-- Radio -->
-    <!-- <app-section *ngIf="radio" [section]="radio" [carouselButtonPositionClass]="carouselArrowPosClass2"
-                 [imageCard]="true">
-    </app-section> -->
 </div>
 <!-- End | Main Container -->
