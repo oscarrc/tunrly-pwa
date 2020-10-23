@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { LoadingService } from '../../../../../../services/loading.service';
 import { PlaylistService } from '../../../../../../services/playlist.service';
+import { PlayerService } from '../../../../../../services/player.service';
 import { Subscription } from 'rxjs';
 
 import { FileValidator } from '../../../../../../core/validators/file.validator';
@@ -18,14 +19,21 @@ export class EditPlaylistComponent implements OnDestroy{
     playlist: any;
     formSubmitted: boolean = false;
     files: FileList;
+    playlistSubscription: Subscription
     
     private routeSubscription: Subscription;
 
-    constructor(private route: ActivatedRoute, private router: Router, private loadingService: LoadingService, private playlistService: PlaylistService) { 
+    constructor(private route: ActivatedRoute, 
+                private router: Router, 
+                private loadingService: LoadingService, 
+                private playlistService: PlaylistService, 
+                private playerService: PlayerService) { 
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.id) {
                 this.playlistId = param.id;
                 this.getPlaylistDetails();
+            }else{
+                this.initNewPlaylist();
             }
         });
     }
@@ -41,6 +49,18 @@ export class EditPlaylistComponent implements OnDestroy{
             image: new FormControl(this.playlist.image),
             public: new FormControl(this.playlist.public),
         })
+    }
+
+    initNewPlaylist(){
+        this.playlistSubscription = this.playerService.currentPlaylist.subscribe(playlist => {
+            this.playlist = {
+                tracks: playlist?.tracks,
+                name: playlist?.name,
+            }
+        });
+        
+        this.loadingService.stopLoading();
+        this.initForm();
     }
 
     getPlaylistDetails(){
@@ -90,9 +110,15 @@ export class EditPlaylistComponent implements OnDestroy{
 
         playlist.tracks = this.playlist.tracks;
 
-        this.playlistService.update(playlist).subscribe(
-            () => this.router.navigate(['/user/playlists'])
-        )
+        if(this.playlistId){
+            this.playlistService.update(playlist).subscribe(
+                () => this.router.navigate(['/user/playlists'])
+            )
+        }else{
+            this.playlistService.create(playlist).subscribe(
+                () => this.router.navigate(['/user/playlists'])
+            )
+        }
     }
 
     ngOnDestroy(){

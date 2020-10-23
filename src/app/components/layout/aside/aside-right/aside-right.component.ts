@@ -14,6 +14,7 @@ export class AsideRightComponent implements OnInit, OnDestroy {
 
     playlist: any = {};
     nowPlaying: number = 0;
+    modified: boolean = false;
 
     private playlistSubscription: Subscription;
     private nowPlayingSubscription: Subscription;
@@ -27,6 +28,7 @@ export class AsideRightComponent implements OnInit, OnDestroy {
 
         this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {
             this.nowPlaying = options.index;
+            this.modified = options.modified;
         });
     }
 

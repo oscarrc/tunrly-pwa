@@ -12,7 +12,8 @@ export class PlayerService {
     private options: any = {
         index: 0,
         shuffle: false,
-        repeat: false
+        repeat: false,
+        modified: false
     };
 
     //TODO  format playlist according to model for saving it
@@ -65,11 +66,14 @@ export class PlayerService {
     }
 
     addToPlaylist(track){
+        this.options.modified = true;
         this.playlist.tracks.push(track);
         this.currentPlaylist.next(this.playlist);
+        this.playerOptions.emit(this.options);
     }
 
     playNowPlaylist(playlist) {
+        this.options.modified = false;
         this.playlist = playlist;
         this.currentPlaylist.next(this.playlist);
         this.options.index = 0;
