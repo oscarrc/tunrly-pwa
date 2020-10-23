@@ -27,21 +27,18 @@ import { PlaylistsComponent } from './playlists/playlists.compontent';
 import { PlaylistDetailsComponent } from './playlists/playlist-details/playlist-details.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HistoryComponent } from './history/history.component';
-// import { EventsComponent } from './events/events.component';
-// import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { UserProfileComponent } from './user/profile/profile.component';
-import { UserPlanComponent } from './user/plan/plan.component';
 import { UserPlaylistsComponent } from './user/playlists/playlists.compontent';
 import { EditPlaylistComponent } from './user/playlists/edit/edit-playlist.component';
 import { UserSettingsComponent } from './user/settings/settings.component';
 import { AlbumsComponent } from './albums/albums.component';
 import { AlbumDetailsComponent } from './albums/album-details/album-details.component';
-import { AnalyticsComponent } from './analytics/analytics.component';
-import { TotalUserComponent } from './analytics/total-user/total-user.component';
-import { TotalSongsComponent } from './analytics/total-songs/total-songs.component';
-import { PurchasesComponent } from './analytics/purchases/purchases.component';
-import { StatisticsComponent } from './analytics/statistics/statistics.component';
-import { ReferralsComponent } from './analytics/referrals/referrals.component';
+import { AdminComponent } from './admin/admin.component';
+import { TotalUserComponent } from './admin/total-user/total-user.component';
+import { TotalSongsComponent } from './admin/total-songs/total-songs.component';
+import { PurchasesComponent } from './admin/purchases/purchases.component';
+import { StatisticsComponent } from './admin/statistics/statistics.component';
+import { ReferralsComponent } from './admin/referrals/referrals.component';
 import { SearchResultsComponent } from './search/search-results.component';
 
 import { TrackService } from '../../../services/track.service';
@@ -136,17 +133,9 @@ const routes: Routes = [
                 component: AlbumDetailsComponent
             },          
             {
-                path: 'analytics',
-                component: AnalyticsComponent
+                path: 'admin',
+                component: AdminComponent
             },
-            // {
-            //     path: 'events',
-            //     component: EventsComponent
-            // },
-            // {
-            //     path: 'event/:id/details',
-            //     component: EventDetailsComponent
-            // },
             {
                 path: 'user',
                 component: UserProfileComponent
@@ -163,13 +152,14 @@ const routes: Routes = [
                 path: 'user/playlists',
                 component: UserPlaylistsComponent
             },
+            
             {
-                path: 'user/playlist/:id/edit',
+                path: 'user/playlist',
                 component: EditPlaylistComponent
             },
             {
-                path: 'plan',
-                component: UserPlanComponent
+                path: 'user/playlist/:id/edit',
+                component: EditPlaylistComponent
             },
             {
                 path: 'settings',
@@ -196,16 +186,13 @@ const routes: Routes = [
         TrackDetailsComponent,
         FavoritesComponent,
         HistoryComponent,
-        // EventsComponent,
-        // EventDetailsComponent,
         UserProfileComponent,
-        UserPlanComponent,
         UserSettingsComponent,
         UserPlaylistsComponent,
         EditPlaylistComponent,
         AlbumsComponent,
         AlbumDetailsComponent,
-        AnalyticsComponent,
+        AdminComponent,
         TotalUserComponent,
         TotalSongsComponent,
         PurchasesComponent,
