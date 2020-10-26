@@ -4,13 +4,7 @@ import { Subscription } from 'rxjs';
 
 
 import { PlayerService } from '../../../services/player.service';
-import { LocalStorageService } from '../../../services/local-storage.service';
-import { SkinService } from '../../../services/skin.service';
 import { UserService } from '../../../services/user.service';
-
-import { Config } from '../../../config/config';
-
-//TODO Ability to make video bigger
 
 @Component({
     selector: 'app-player',

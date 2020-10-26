@@ -16,8 +16,6 @@ export class PlayerService {
         modified: false
     };
 
-    //TODO  format playlist according to model for saving it
-    //      clear playlist function
     playerOptions: EventEmitter<any> = new EventEmitter();
     currentPlaylist: BehaviorSubject<any> = new BehaviorSubject(this.playlist);
 

@@ -23,6 +23,8 @@ export class EditPlaylistComponent implements OnDestroy{
     
     private routeSubscription: Subscription;
 
+    //TODO playlists tags
+
     constructor(private route: ActivatedRoute, 
                 private router: Router, 
                 private loadingService: LoadingService, 
@@ -105,7 +107,7 @@ export class EditPlaylistComponent implements OnDestroy{
         playlist = playlist.value;
 
         if(playlist.image){
-           playlist.image = await this.imageToBase64(this.files[0])
+           playlist.image = await this.imageToBase64(this.files[0]);
         }
 
         playlist.tracks = this.playlist.tracks;
