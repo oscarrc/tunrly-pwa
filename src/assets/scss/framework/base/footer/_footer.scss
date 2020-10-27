@@ -6,7 +6,6 @@
     margin: 0 #{-$wrapper-padding-x};
     padding: $footer-padding-top $footer-padding-x $footer-padding-bottom;
     text-align: center;
-    background-image: url($footer-background-image);
     position: relative;
 
     @include before-after {
