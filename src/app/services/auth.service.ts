@@ -79,16 +79,15 @@ export class AuthService {
             },
             err => {
                 return err
-            },
-            () => {
-                this.cookieService.delete('session');
-                this.cookieService.delete('token');
-                this.cookieService.delete('uid');             
-                this.router.navigate(['/']);                             
-                this.userService.set(null);
-                this.isLoggedIn = false;   
-            }
-        );
+            }            
+        ).add(() => {
+            this.cookieService.delete('session');
+            this.cookieService.delete('token');
+            this.cookieService.delete('uid');             
+            this.router.navigate(['/']);                             
+            this.userService.set(null);
+            this.isLoggedIn = false;   
+        });
     }
 
     refresh(){
