@@ -34,7 +34,7 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.skinSubscription.unsubscribe();
+        this.skinSubscription?.unsubscribe();
     }
 
 }
