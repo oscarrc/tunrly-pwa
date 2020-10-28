@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "listen": {
+    "tunrly": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/listen",
+            "outputPath": "dist/tunrly",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -81,18 +81,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "listen:build"
+            "browserTarget": "tunrly:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "listen:build:production"
+              "browserTarget": "tunrly:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "listen:build"
+            "browserTarget": "tunrly:build"
           }
         },
         "test": {
@@ -139,15 +139,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "listen:serve"
+            "devServerTarget": "tunrly:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "listen:serve:production"
+              "devServerTarget": "tunrly:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "listen"
+  "defaultProject": "tunrly"
 }

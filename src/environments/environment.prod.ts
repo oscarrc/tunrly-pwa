@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'http://localhost:3000/v1'
+  api: 'https://api.tunrly.com/v1'
 };
