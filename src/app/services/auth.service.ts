@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
     private authURL = environment.api + '/auth/';
-    private domain = environment.domain;
+    private domain = environment.domain == 'localhost' ? environment.domain : '.' + environment.domain;
     private fingerprint: string;
     private isLoggedIn: boolean = false;
     private cookieTTL: any = new Date();
@@ -56,6 +56,8 @@ export class AuthService {
                 }else{
                     this.cookieTTL = 0;
                 }
+
+                console.log(this.domain)
                 
                 this.userService.set(res['user']);
                 this.cookieService.set("uid", res['user']['_id'], 0, '/', this.domain);
