@@ -14,11 +14,12 @@ import { MenuConfigService } from './services/menu.service';
 import { AuthService } from './services/auth.service';
 
 import {ErrorInterceptor} from './core/interceptors/error.interceptor'
+import { environment } from '../environments/environment';
 
 export function jwtOptionsFactory(cookieService: CookieService) {
     return {
         tokenGetter: () => cookieService.get('token'),
-        allowedDomains: ['localhost:3000']
+        allowedDomains: ['localhost:3000','api.tunrly.com','dev.tunrly.com']
     };
 }
 
