@@ -22,7 +22,6 @@ export class Config {
                 logo: './assets/images/logos/logo.svg',
                 name: 'Tunrly.com'
             },
-
             // Theme skin config
             themeSkin: {
                 theme: 'dark',

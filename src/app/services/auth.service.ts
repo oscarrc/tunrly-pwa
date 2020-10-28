@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service';
@@ -7,6 +7,7 @@ import { UserService } from './user.service';
 
 import Fingerprint2 from '@fingerprintjs/fingerprintjs';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
     private fingerprint: string;
     private isLoggedIn: boolean = false;
     
-    constructor(private httpClient: HttpClient, private cookieService: CookieService, private userService: UserService, private router: Router ) {
+    constructor(@Inject(DOCUMENT) private document: Document, private httpClient: HttpClient, private cookieService: CookieService, private userService: UserService, private router: Router ) {
         this.init();
     }
 
@@ -54,10 +55,10 @@ export class AuthService {
                 date.setFullYear(date.getFullYear() + 1);
                                 
                 this.userService.set(res['user']);
-                this.cookieService.set("uid", res['user']['_id'], 0, '/');
-                this.cookieService.set("token", res['token'], 0, '/');
-                this.cookieService.set("fingerprint", this.fingerprint, remember ? date : 0, '/');
-                this.cookieService.set("session", res['session'], remember ? date : 0, '/');
+                this.cookieService.set("uid", res['user']['_id'], 0, '/', document.location.hostname);
+                this.cookieService.set("token", res['token'], 0, '/', document.location.hostname);
+                this.cookieService.set("fingerprint", this.fingerprint, remember ? date : 0, '/', document.location.hostname);
+                this.cookieService.set("session", res['session'], remember ? date : 0, '/', document.location.hostname);
 
                 this.isLoggedIn = true;
                 this.router.navigate(['/home']);
