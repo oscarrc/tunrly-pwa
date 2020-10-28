@@ -149,7 +149,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.imageForm.get('image').updateValueAndValidity();
 
-        console.log(this.imageForm);
         if (this.imageForm.invalid) {
             return false;
         }

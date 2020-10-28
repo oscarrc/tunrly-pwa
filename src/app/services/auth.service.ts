@@ -14,7 +14,7 @@ export class AuthService {
     private domain = environment.domain == 'localhost' ? environment.domain : '.' + environment.domain;
     private fingerprint: string;
     private isLoggedIn: boolean = false;
-    private cookieTTL: any = new Date();
+    private cookieTTL: any = 0;
 
     constructor(private httpClient: HttpClient, private cookieService: CookieService, private userService: UserService, private router: Router ) {
         this.init();
@@ -48,17 +48,14 @@ export class AuthService {
 
 
 
-    login(user: string, password: string, remember: boolean){
+    login(user: string, password: string, remember: boolean){        
+        if(remember){
+            let date = new Date();
+            this.cookieTTL.setFullYear(date.getFullYear() + 1);
+        }
+        
         return this.httpClient.post(this.authURL, { user: user, password: password, device: this.fingerprint }).pipe(tap(
             res => {
-                if(remember){
-                    this.cookieTTL.setFullYear(this.cookieTTL.getFullYear() + 1);
-                }else{
-                    this.cookieTTL = 0;
-                }
-
-                console.log(this.domain)
-                
                 this.userService.set(res['user']);
                 this.cookieService.set("uid", res['user']['_id'], 0, '/', this.domain);
                 this.cookieService.set("token", res['token'], 0, '/', this.domain);
