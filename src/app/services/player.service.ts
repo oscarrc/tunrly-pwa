@@ -79,7 +79,7 @@ export class PlayerService {
     }
 
     removeFromPlaylist(index){
-        this.playlist = this.playlist.tracks.slice(index, 1);
+        this.playlist.tracks = this.playlist.tracks.splice(index, 1);
         this.currentPlaylist.next(this.playlist);
     }
 
