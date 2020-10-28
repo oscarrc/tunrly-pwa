@@ -14,7 +14,8 @@ export class AuthService {
     private domain = environment.domain;
     private fingerprint: string;
     private isLoggedIn: boolean = false;
-    
+    private cookieTTL: any = new Date();
+
     constructor(private httpClient: HttpClient, private cookieService: CookieService, private userService: UserService, private router: Router ) {
         this.init();
     }
@@ -50,15 +51,17 @@ export class AuthService {
     login(user: string, password: string, remember: boolean){
         return this.httpClient.post(this.authURL, { user: user, password: password, device: this.fingerprint }).pipe(tap(
             res => {
-                let date = new Date();
+                if(remember){
+                    this.cookieTTL.setFullYear(this.cookieTTL.getFullYear() + 1);
+                }else{
+                    this.cookieTTL = 0;
+                }
                 
-                date.setFullYear(date.getFullYear() + 1);
-                                
                 this.userService.set(res['user']);
                 this.cookieService.set("uid", res['user']['_id'], 0, '/', this.domain);
                 this.cookieService.set("token", res['token'], 0, '/', this.domain);
-                this.cookieService.set("fingerprint", this.fingerprint, remember ? date : 0, '/', this.domain);
-                this.cookieService.set("session", res['session'], remember ? date : 0, '/', this.domain);
+                this.cookieService.set("fingerprint", this.fingerprint, this.cookieTTL, '/', this.domain);
+                this.cookieService.set("session", res['session'], this.cookieTTL, '/', this.domain);
 
                 this.isLoggedIn = true;
                 this.router.navigate(['/home']);
@@ -101,8 +104,8 @@ export class AuthService {
                 date.setFullYear(date.getFullYear() + 1);
 
                 this.userService.set(res['user']);
-                this.cookieService.set("token", res['token'], 0, '/');
-                this.cookieService.set("session", res['session']);
+                this.cookieService.set("token", res['token'], 0, '/', this.domain);
+                this.cookieService.set("session", res['session'], this.cookieTTL, '/', this.domain);
 
                 this.isLoggedIn = true;
                 
