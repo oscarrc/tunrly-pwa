@@ -3,22 +3,22 @@
 
 <div class="main-container">
     <!-- Tracks -->
-    <app-section *ngIf="tracks?.loading || tracks?.items.length > 0" [section]="tracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
+    <app-section *ngIf="tracks?.loading || tracks?.items?.length > 0" [section]="tracks" [carouselButtonPositionClass]="carouselArrowPosClass3"
                 [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 
     <!--  Artists -->
-    <app-section *ngIf="artists?.loading || artists?.items.length > 0" [section]="artists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+    <app-section *ngIf="artists?.loading || artists?.items?.length > 0" [section]="artists" [carouselButtonPositionClass]="carouselArrowPosClass2"
                 [imageCard]="true" type="artist">
     </app-section>
 
     <!--  Albums -->
-    <app-section *ngIf="albums?.loading || albums?.items.length > 0" [section]="albums" [carouselButtonPositionClass]="carouselArrowPosClass2"
+    <app-section *ngIf="albums?.loading || albums?.items?.length > 0" [section]="albums" [carouselButtonPositionClass]="carouselArrowPosClass2"
                 [imageCard]="true" type="album">
     </app-section>
 
     <!--  Playlists  -->
-    <app-section *ngIf="playlists?.loading || playlists?.items.length > 0" [section]="playlists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+    <app-section *ngIf="playlists?.loading || playlists?.items?.length > 0" [section]="playlists" [carouselButtonPositionClass]="carouselArrowPosClass2"
                 [descriptionCard]="true" type="playlist">
     </app-section>
 </div>

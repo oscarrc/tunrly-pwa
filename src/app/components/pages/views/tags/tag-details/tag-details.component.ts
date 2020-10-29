@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LoadingService } from '../../../../../services/loading.service';
-import { PlayerService } from '../../../../../services/player.service';
 import { TagService } from '../../../../../services/tag.service';
 
 @Component({
@@ -31,35 +30,15 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param) {
                 this.tagName = param.name;
-                this.getTags('');
             }
         });
     }
 
     ngOnInit() {    
-        this.artists = {
-            title: this.tagName + " artists",
-            page: '/tag/' + this.tagName + '/tracks',
-            loading: true
-        };
-        this.albums = {
-            title: this.tagName + " albums",
-            page: '/tag/' + this.tagName + '/albums',          
-            subTitle: '',
-            loading: true
-        };
-        this.tracks = {
-            title: this.tagName + " tracks",
-            page: '/tag/' + this.tagName + '/tracks',            
-            subTitle: '',
-            loading: true
-        };
-        this.playlists = {
-            title: this.tagName + " playlists",
-            page: '/tag/' + this.tagName + '/playlists',            
-            subTitle: '',
-            loading: true
-        };
+        this.initTracks()
+        this.initArtists();
+        this.initAlbums();
+        this.initPlaylists();
     }
 
     ngAfterViewInit() {
@@ -72,29 +51,71 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         return elements[rand];
     }
 
-    getTags(type: string){
-        this.tagService.getTag(this.tagName, type, 1, 10).subscribe(
-            res => { 
-                this.artists.loading = false,
-                this.artists.items= res["artist"]    
-                this.albums.loading = false,
-                this.albums.items= res["album"]    
-                this.tracks.loading = false,
-                this.tracks.items= res["track"]    
-                this.playlists.loading = false,
-                this.playlists.items= res["playlist"]        
+    initArtists(){
+        this.artists = {
+            title: this.tagName + " artists",
+            page: '/tag/' + this.tagName + '/tracks',
+            loading: true
+        };
+
+        this.tagService.getTag(this.tagName, 'artists', 1, 10).subscribe(
+            res => {
+                this.artists.items= res;
+                this.artists.loading = false;  
             },
             err => console.log(err)
         )
     }
 
-    playTrack() {
+    initAlbums(){ 
+        this.albums = {
+            title: this.tagName + " albums",
+            page: '/tag/' + this.tagName + '/albums',          
+            subTitle: '',
+            loading: true
+        };
+
+        this.tagService.getTag(this.tagName, 'albums', 1, 10).subscribe(
+            res => { 
+                this.albums.items= res; 
+                this.albums.loading = false; 
+            },
+            err => console.log(err)
+        )
     }
 
-    playAlbum() {
+    initTracks(){         
+        this.tracks = {
+            title: this.tagName + " tracks",
+            page: '/tag/' + this.tagName + '/tracks',            
+            subTitle: '',
+            loading: true
+        };
+
+        this.tagService.getTag(this.tagName, 'tracks', 1, 10).subscribe(
+            res => {
+                this.tracks.items= res;                    
+                this.tracks.loading = false;
+            },
+            err => console.log(err)
+        )
     }
 
-    playArtist() {
+    initPlaylists(){
+        this.playlists = {
+            title: this.tagName + " playlists",
+            page: '/tag/' + this.tagName + '/playlists',            
+            subTitle: '',
+            loading: true
+        };
+
+        this.tagService.getTag(this.tagName, 'playlists', 1, 10).subscribe(
+            res => {  
+                this.playlists.items= res;
+                this.playlists.loading = false     
+            },
+            err => console.log(err)
+        )
     }
 
     ngOnDestroy() {
