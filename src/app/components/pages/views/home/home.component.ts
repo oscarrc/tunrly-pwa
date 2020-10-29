@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.recommended = {
             title: 'Just for you',
             subTitle: 'We thought you may like these',
-            page: '/user/favorites',
+            page: '/user/recommended',
             loading: false,
             items: tracks.sort( (a, b) => { return 0.5 - Math.random() }).slice(0,10)
         };

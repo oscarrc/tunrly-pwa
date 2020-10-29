@@ -78,7 +78,7 @@ export class FavoritesComponent implements OnInit, AfterViewInit, OnDestroy {
         this.songs = {
             title: 'Also Like',
             subTitle: 'Check it out these songs',
-            page: '/songs',
+            page: '/user/recommended',
             items: this.getSimilar()
         };
     }
