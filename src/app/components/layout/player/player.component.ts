@@ -82,8 +82,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     ready(event){
-        this.player = event.target;        
-        this.duration = this.player.getDuration();
+        console.log(1)
+        this.player = event.target;
         this.player?.setVolume(this.volume);
         this.timer = setInterval( () => {
             this.time = this.player.getCurrentTime();
@@ -103,7 +103,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
             case 0: //Finished
                 this.playNext();
                 break;
-            case 1: //Playing
+            case 1: //Playing                
+                this.duration = this.player.getDuration();
                 break;
             case 2: //Pausa
                 break;
