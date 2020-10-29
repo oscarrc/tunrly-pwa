@@ -21,7 +21,7 @@ export class AuthService {
     }
 
     private init(){
-        const user = JSON.parse(sessionStorage.getItem('user'));
+        let user = JSON.parse(sessionStorage.getItem('user'));
 
         Fingerprint2.getPromise().then( (components) => {
             let values = components.map( c => { return c.value })
@@ -30,11 +30,15 @@ export class AuthService {
         })
 
         if(this.session && this.session !== ''){
-            this.isLoggedIn = true;
+            this.isLoggedIn = true;   
         }
 
-        if(user){
-            this.userService.set(user);
+        if(!user){
+            this.userService.get().subscribe(
+                res => { this.userService.set(res) }
+            )
+        }else{
+            this.userService.set(user)
         }
     }
 
