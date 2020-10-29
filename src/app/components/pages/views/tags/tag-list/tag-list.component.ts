@@ -20,6 +20,7 @@ export class TagListComponent implements OnInit, AfterViewInit, OnDestroy {
     gridView = false;
     page: number = 1;
     limit: number = 12;
+    loading: boolean = true;
 
     routeSubscription: Subscription;
 
@@ -53,6 +54,7 @@ export class TagListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.tagService.getTag(this.tagName, this.type, this.page, this.limit).subscribe(
             res => { 
                 this[this.type] = res;
+                this.loading = false;
             },
             err => console.log(err)
         )
