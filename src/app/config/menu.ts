@@ -34,6 +34,11 @@ export class MenuConfig {
                     },
                     { section: 'Your Music' },
                     {
+                        title: 'Recommended',
+                        icon: 'la la-fire',
+                        page: '/user/recommended'
+                    },
+                    {
                         title: 'Favorites',
                         icon: 'la la-heart-o',
                         page: '/user/favorites'
