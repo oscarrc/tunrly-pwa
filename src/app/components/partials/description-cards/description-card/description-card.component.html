@@ -1,4 +1,4 @@
-<div [class]="eventBorderRadiusClass" [ngStyle]="{'background-image': 'url(' + item.image + ')'}" [style.background-color]="item._id | toColor">
+<div *ngIf="item" [class]="eventBorderRadiusClass" [ngStyle]="{'background-image': 'url(' + item.image + ')'}" [style.background-color]="item._id | toColor">
     <div class="custom-card--info px-2 py-2">
         <ul *ngIf="!edit" class="custom-card--labels d-flex">
             <li *ngIf="isFavorite()" (click)="addFavorite()"><span class="badge badge-pill badge-danger clickable"><i class="la la-heart"></i></span></li>
