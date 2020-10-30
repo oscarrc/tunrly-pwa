@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule, JWT_OPTIONS, JwtInterceptor } from '@auth0/angular-jwt';
+import { ToastrModule } from 'ngx-toastr';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -14,7 +16,6 @@ import { MenuConfigService } from './services/menu.service';
 import { AuthService } from './services/auth.service';
 
 import {ErrorInterceptor} from './core/interceptors/error.interceptor'
-import { environment } from '../environments/environment';
 
 export function jwtOptionsFactory(cookieService: CookieService) {
     return {
@@ -30,6 +31,7 @@ export function jwtOptionsFactory(cookieService: CookieService) {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
         LayoutModule,
@@ -39,7 +41,12 @@ export function jwtOptionsFactory(cookieService: CookieService) {
                 useFactory: jwtOptionsFactory,
                 deps: [CookieService]
             }
-          })
+        }),
+        ToastrModule.forRoot({
+            timeOut: 5000,
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true,
+        }),
     ],
     providers: [
         LoadingService,

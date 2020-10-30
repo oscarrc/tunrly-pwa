@@ -4,17 +4,18 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable, throwError, ReplaySubject } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
 import { JwtInterceptor } from '@auth0/angular-jwt';
+import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '../../services/auth.service';
 
 @Injectable({ providedIn: 'root' }) 
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private router: Router, private authService: AuthService, private jwtInterceptor: JwtInterceptor) { }
+    constructor(private router: Router, private authService: AuthService, private jwtInterceptor: JwtInterceptor, private toastr: ToastrService) {}
 
     private refreshing: Boolean = false;
 
-    private handleError(){
-        //TODO handle error with toast or something
+    private handleError(err){
+        this.toastr.error(err.error.message, 'Error');
     }
 
     private handleRefresh(){
@@ -43,15 +44,17 @@ export class ErrorInterceptor implements HttpInterceptor {
                                 return throwError(err);
                             })
                         )
+                    }else{
+                        this.handleError(err)
                     }
                 case 403:
-                    // this.router.navigate(['/home']);
+                    this.handleError(err);
                     return throwError(err);
                 case 404:
                     this.router.navigate(['/404']);
                     return throwError(err);
                 default:
-                    this.handleError();
+                    this.handleError(err);
                     return throwError(err);
             }            
         }))
