@@ -16,13 +16,13 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
     settings: any;
     lastSettings: any;
     settingsForm: any;
+    loading: boolean = false;
 
     private userSubscription: Subscription;
 
     constructor(private loadingService: LoadingService, 
                 private userService: UserService, 
-                private authService: AuthService,
-                private skinService: SkinService) { }
+                private authService: AuthService) { }
 
     clearHistory(){
         this.userService.update({ history: [] }).subscribe(
@@ -32,12 +32,14 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     saveSettings(){
+        this.loading = true;
+
         this.userService.update({settings: this.settings}).subscribe(
             res => { 
                 this.userService.set(res)
              },
             err => { this.settings = this.lastSettings }
-        )
+        ).add( () => this.loading = false )
     }
 
     closeAllSessions(){

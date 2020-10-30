@@ -12,6 +12,7 @@ import { EventCountdownCardComponent } from './description-cards/description-cou
 import { TruncatePipe } from '../../core/pipes/truncate.pipe';
 import { TrackListViewComponent } from './track-list-view/track-list-view.component';
 import { TrackListViewLoaderComponent } from './track-list-view/loader/track-list-view-loader.component';
+import { ButtonComponent } from './button/button.component';
 
 import { TrackOptionsComponent } from './track-options/track-options.component';
 import { TrackHorizontalComponent } from './track-horizontal/track-horizontal.component';
@@ -39,7 +40,8 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
         TrackListViewLoaderComponent,
         CommentComponent,
         ThemeSettingsComponent,
-        CountdownComponent
+        CountdownComponent,
+        ButtonComponent
     ],
     exports: [
         PrimaryCardComponent,
@@ -55,7 +57,8 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
         DescriptionCardLoaderComponent,
         TrackListViewLoaderComponent,
         CommentComponent,
-        ThemeSettingsComponent
+        ThemeSettingsComponent,
+        ButtonComponent
     ],
     imports: [
         CommonModule,

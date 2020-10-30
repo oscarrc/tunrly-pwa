@@ -19,7 +19,8 @@ export class EditPlaylistComponent implements OnDestroy{
     playlist: any;
     formSubmitted: boolean = false;
     files: FileList;
-    playlistSubscription: Subscription
+    playlistSubscription: Subscription;
+    loading: boolean = false;
     
     private routeSubscription: Subscription;
 
@@ -103,7 +104,9 @@ export class EditPlaylistComponent implements OnDestroy{
         if (this.playlistForm.invalid) {
             return false;
         }
-        
+
+        this.loading = true;
+
         playlist = playlist.value;
 
         if(playlist.image){
@@ -114,11 +117,17 @@ export class EditPlaylistComponent implements OnDestroy{
 
         if(this.playlistId){
             this.playlistService.update(playlist).subscribe(
-                () => this.router.navigate(['/user/playlists'])
+                () => {
+                    this.router.navigate(['/user/playlists'])
+                    this.loading = false;
+                }
             )
         }else{
             this.playlistService.create(playlist).subscribe(
-                () => this.router.navigate(['/user/playlists'])
+                () => {
+                    this.router.navigate(['/user/playlists'])
+                    this.loading = false;
+                }
             )
         }
     }

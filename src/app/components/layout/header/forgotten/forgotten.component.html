@@ -14,12 +14,11 @@
                         </div>
                         <input type="text" formControlName="user" id="user" class="form-control" placeholder="Username or email" required>
                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
-                            <span *ngIf="forgotten.controls.user.errors.required">Please fill this field</span>
+                            <span *ngIf="forgotten.controls.user?.errors?.required">Please fill this field</span>
                         </div>
                     </div>                    
                 </div>
-                
-                <button type="submit" class="btn btn-block btn-bold btn-air btn-primary load-page mt-4">Submit</button>
+                <app-button type="submit" text="Submit" class="btn-block" [loading]="loading" classes="btn btn-block btn-bold btn-air btn-primary load-page mt-4"></app-button>
             </form>
         </div>
     </div>

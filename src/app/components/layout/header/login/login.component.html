@@ -36,7 +36,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-block btn-bold btn-air btn-primary load-page">Login</button>
+                <app-button type="submit" text="login" class="btn-block" [loading]="loading" classes="btn btn-block btn-bold btn-air btn-primary load-page"></app-button>
+                
                 <p class="text-center pt-4">Forgotten password? <a (click)="openForgotten()">Click here</a>.</p>
             </form>
         </div>

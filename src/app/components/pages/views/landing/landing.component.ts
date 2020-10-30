@@ -23,6 +23,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
     trendingArtists: any = [];
     backgroundImage: string = "";
     registration: any;
+    loading: boolean = false;
     formSubmitted: boolean = false;
 
     constructor(private loadingService: LoadingService,
@@ -120,6 +121,9 @@ export class LandingComponent implements OnInit, AfterViewInit {
         if (this.registration.invalid) {
             return false;
         }
+
+        this.loading = true;
+
         let user = registration.value;
 
         delete user.tac;
@@ -134,7 +138,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
             err => {
                 console.log(err)
             }
-        )
+        ).add( () => this.loading = false )
     }
 
     getRandomBackground(){

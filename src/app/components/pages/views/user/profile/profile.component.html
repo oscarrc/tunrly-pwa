@@ -73,7 +73,7 @@
                                     <input type="text" id="loc" name="loc" class="form-control" formControlName="country">
                                 </div>
                                 <div class="col-12">
-                                    <button *ngIf="edit" type="submit" class="btn btn-primary btn-air">Save Changes</button>
+                                    <app-button *ngIf="edit" type="submit" text="Save Changes" [loading]="profileLoading" classes="btn btn-primary btn-air"></app-button>
                                     <button *ngIf="!edit" (click)="toggleEdit()" type="button" class="btn btn-primary btn-air">Edit profile</button>
                                 </div>
                             </form>
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-air">Change Password</button>
+                                    <app-button type="submit" text="Change Password" [loading]="passwordLoading" classes="btn btn-primary btn-air"></app-button>
                                 </div>
                             </form>
                         </div>

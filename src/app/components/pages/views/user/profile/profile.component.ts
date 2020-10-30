@@ -22,8 +22,10 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
     imageSubmitted: boolean = false;
     files: FileList;
     profileSubmitted: boolean = false;
+    profileLoading: boolean = false;
     passwordForm: any;
     passwordSubmitted: boolean = false;
+    passwordLoading: boolean = false;
 
     private userSubscription: Subscription;
     
@@ -91,6 +93,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
         if (profile.invalid) {
             return false;
         }
+        this.profileLoading = true;
 
         this.userService.update(profile.value).subscribe(
             res => {
@@ -101,7 +104,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
             err => {
                 console.log(err)
             }
-        )
+        ).add( () => this.profileLoading = false )
     }
 
     changePassword(passwords){
@@ -111,6 +114,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
             return false;
         }
 
+        this.passwordLoading = true;
+
         this.userService.updatePassword(passwords.controls.oldpassword.value, passwords.controls.password.value).subscribe(
             res => {
                 this.passwordSubmitted = false;
@@ -119,7 +124,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
             err => {
                 console.log(err)
             }
-        )
+        ).add(() => this.passwordLoading = false)
     }
 
     initImageForm(){

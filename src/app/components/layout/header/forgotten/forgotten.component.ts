@@ -11,6 +11,7 @@ import { ValidationService } from '../../../../services/validation.service';
 export class ForgottenComponent extends SimpleModalComponent<any, any> implements OnInit {
 
     forgotten: any;
+    loading: boolean = false;
     device: string;
     formSubmitted = false;
 
@@ -37,7 +38,12 @@ export class ForgottenComponent extends SimpleModalComponent<any, any> implement
             return false;
         }
 
-        this.validationService.create(forgotten.value.user, 1).subscribe().add( () => this.close())
+        this.loading = true;
+
+        this.validationService.create(forgotten.value.user, 1).subscribe().add( () => {
+            this.loading = false;
+            this.close();
+        })
     }
 
 }
