@@ -22,7 +22,7 @@ export class ForgottenComponent extends SimpleModalComponent<any, any> implement
     ngOnInit() {  
         this.forgotten = new FormGroup({
             user: new FormControl('', [
-                Validators.email
+                Validators.required
             ]),
         });
     }
