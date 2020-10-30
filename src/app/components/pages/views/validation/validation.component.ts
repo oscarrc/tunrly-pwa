@@ -17,6 +17,7 @@ export class ValidationComponent implements OnInit, OnDestroy{
     success: boolean;
     error: string;
     done: boolean = false;
+    loading: boolean = false;
 
     reset: any;
     formSubmitted = false;
@@ -39,6 +40,8 @@ export class ValidationComponent implements OnInit, OnDestroy{
     }
 
     doValidate(password:string = null){
+        this.loading = true;
+        
         return this.validationService.validate(this.token, this.action, password).subscribe( 
             res => { this.success = true },
             err => { this.success = false; this.error = err.error.message;}
@@ -74,9 +77,12 @@ export class ValidationComponent implements OnInit, OnDestroy{
             return false;
         }
 
+        this.loading = true;
+        
         this.doValidate(reset.value.password).add(() => {
             this.loadingService.stopLoading();
             this.done = true;
+            this.loading = false;
         });
     }
 
