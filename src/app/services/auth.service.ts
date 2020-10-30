@@ -33,7 +33,7 @@ export class AuthService {
             this.isLoggedIn = true;   
         }
 
-        if(!user){
+        if(!user && this.isLoggedIn){
             this.userService.get().subscribe(
                 res => { this.userService.set(res) }
             )
