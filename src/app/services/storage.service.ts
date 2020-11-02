@@ -4,7 +4,7 @@ import {Config} from '../config/config';
 @Injectable({
     providedIn: 'root'
 })
-export class LocalStorageService {
+export class StorageService {
 
     constructor() { }
 

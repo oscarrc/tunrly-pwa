@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { LanguageComponent } from './language/language.component';
 import { SearchService } from '../../../services/search.service';
-import { LocalStorageService } from '../../../services/local-storage.service';
+import { StorageService } from '../../../services/storage.service';
 import { UserService } from '../../../services/user.service';
 import { SkinService } from '../../../services/skin.service';
 import { Config } from '../../../config/config';
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(@Inject(DOCUMENT) private document: Document,
                 private searchService: SearchService,
                 private simpleModalService: SimpleModalService,
-                private localStorageService: LocalStorageService,
+                private storageService: StorageService,
                 private userService: UserService,
                 private skinService: SkinService) {
         this.language = {
@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             ])
         });
 
-        const themeSkin = this.localStorageService.getThemeSkin();
+        const themeSkin = this.storageService.getThemeSkin();
        
         if (themeSkin) {
             this.headerClasses = 'bg-' + Config.THEME_CLASSES[themeSkin.header];
