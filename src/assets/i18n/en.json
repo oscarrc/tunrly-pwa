@@ -86,7 +86,8 @@
 	},
 	"playlists":{
 		"name":"Playlists",
-		"title": "User contributed playlists"
+		"title": "User contributed playlists",
+		"nowplaying": "Now playing"
 	},
 	"sidebar":{
 		"browsemusic":"Browse music",

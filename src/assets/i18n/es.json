@@ -86,7 +86,8 @@
 	},
 	"playlists":{
 		"name":"Playlists",
-		"title": "Listas de reproducción de usuarios"
+		"title": "Listas de reproducción de usuarios",
+		"nowplaying": "Reproduciendo ahora"
 	},
 	"sidebar":{
 		"browsemusic":"Explorar música",

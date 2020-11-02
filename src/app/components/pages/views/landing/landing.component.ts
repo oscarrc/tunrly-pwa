@@ -25,6 +25,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
     registration: any;
     loading: boolean = false;
     formSubmitted: boolean = false;
+    browserLang: string;
 
     constructor(private loadingService: LoadingService,
                 private userService: UserService,
