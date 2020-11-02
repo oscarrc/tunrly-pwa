@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 
 import { SkinService } from './services/skin.service';
 import { LoadingService } from './services/loading.service';
+import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -11,16 +13,28 @@ import { LoadingService } from './services/loading.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
     title = 'Tunrly.com';
-
+    themeClass = 'theme-dark';
+    skinSubscription: Subscription;
+    
     constructor( @Inject(DOCUMENT) private document: Document,
                 private loadingService: LoadingService,
-                private skinService: SkinService) {
+                private skinService: SkinService,
+                private userService: UserService,
+                private authService: AuthService) {
         this.loadingService.startLoading();
+                
+        if(this.authService.loggedIn) this.initUser();
     }
 
-    themeClass = 'theme-dark';
+    initUser(){
+        const user = JSON.parse(sessionStorage.getItem('user'));
 
-    skinSubscription: Subscription;
+        if(!user){
+            this.userService.get().subscribe( user => this.userService.set(user))
+        }else{
+            this.userService.set(user);
+        }
+    }
 
 
     ngOnInit() {

@@ -34,12 +34,17 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
     saveSettings(){
         this.loading = true;
 
-        this.userService.update({settings: this.settings}).subscribe(
+        return this.userService.update({settings: this.settings}).subscribe(
             res => { 
                 this.userService.set(res)
              },
             err => { this.settings = this.lastSettings }
         ).add( () => this.loading = false )
+    }
+
+    changeTheme(){
+        this.loadingService.startLoading();
+        this.saveSettings().add( () => this.loadingService.stopLoading() );
     }
 
     closeAllSessions(){

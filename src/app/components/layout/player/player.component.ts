@@ -51,8 +51,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
         this.userSubscription = this.userService.user.subscribe(
             user => {
-                this.volume = (user?.settings.volume + 1)/3 * 75 || 100;
-                this.quality = user?.settings.quality;
+                this.volume = (user?.settings?.volume + 1)/3 * 75 || 100;
+                this.quality = user?.settings?.quality;
             }
         )
 

@@ -10,7 +10,10 @@ import { AuthService } from '../../services/auth.service';
 
 @Injectable({ providedIn: 'root' }) 
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private router: Router, private authService: AuthService, private jwtInterceptor: JwtInterceptor, private toastr: ToastrService) {}
+    constructor(private router: Router, 
+                private authService: AuthService,
+                private jwtInterceptor: JwtInterceptor, 
+                private toastr: ToastrService) {}
 
     private refreshing: Boolean = false;
 
@@ -35,8 +38,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                 case 401:
                     if(this.authService.loggedIn && !this.refreshing){                                                        
                         this.refreshing = true;
+
                         return this.handleRefresh().pipe(
-                            mergeMap(() => { 
+                            mergeMap(() => {
                                 return this.jwtInterceptor.intercept(req, next);
                             }),
                             catchError( err => {

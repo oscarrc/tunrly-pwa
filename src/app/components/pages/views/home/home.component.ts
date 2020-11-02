@@ -32,11 +32,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 private trackService: TrackService,
                 private artistService: ArtistService,
                 private tagService: TagService,
-                private userService: UserService) { }
+                private userService: UserService) {}
 
     ngOnInit() {
         this.userService.user.subscribe( user => {
-            if(user.settings.personalResults){
+            if(user.settings?.personalResults){
                 this.initHistory(user.history.slice(0,9));
                 this.initRecommended(user.favorite);
             }            

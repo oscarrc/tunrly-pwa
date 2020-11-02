@@ -47,7 +47,7 @@
                 <label for="dark" class="setting-label pr-2">Dark theme</label>
                 <div class="switch switch-primary ml-auto">
                     <input [disabled]="loading" type="checkbox" id="dark" [(ngModel)]="settings.dark"
-                        (change)="saveSettings()">
+                        (change)="changeTheme()">
                     <label for="dark"></label>
                 </div>
             </div>
