@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { JwtModule, JWT_OPTIONS, JwtInterceptor } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -22,6 +24,10 @@ export function jwtOptionsFactory(cookieService: CookieService) {
         tokenGetter: () => cookieService.get('token'),
         allowedDomains: ['localhost:3000','api.tunrly.com','dev.tunrly.com']
     };
+}
+
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
 }
 
 @NgModule({
@@ -47,6 +53,14 @@ export function jwtOptionsFactory(cookieService: CookieService) {
             positionClass: 'toast-bottom-right',
             preventDuplicates: true,
         }),
+        TranslateModule.forRoot({
+            defaultLanguage: 'en',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
     ],
     providers: [
         LoadingService,

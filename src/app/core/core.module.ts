@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { LineTabsDirective } from './directives/line-tabs.directive';
 import { ToColorPipe } from '../core/pipes/toColor.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [CommonModule],
@@ -12,7 +12,8 @@ import { ToColorPipe } from '../core/pipes/toColor.pipe';
     ],
     exports: [
         ToColorPipe,
-        LineTabsDirective
+        LineTabsDirective,
+        TranslateModule
     ]
 })
 export class CoreModule { }

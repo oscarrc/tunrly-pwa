@@ -6,6 +6,7 @@ import { SkinService } from './services/skin.service';
 import { LoadingService } from './services/loading.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-root',
@@ -20,8 +21,11 @@ export class AppComponent implements OnInit, OnDestroy {
                 private loadingService: LoadingService,
                 private skinService: SkinService,
                 private userService: UserService,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private translateService: TranslateService) {
         this.loadingService.startLoading();
+        this.translateService.setDefaultLang('en');
+        this.translateService.use('en');
     }
 
     initUser(){

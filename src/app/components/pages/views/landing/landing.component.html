@@ -21,7 +21,7 @@
                             <img src="assets/images/mockup.png" alt="Tunrly.com free music app"/>
                         </div>
                         <div class="col-lg-4 col-md-10 mx-lg-auto mx-4 text-center mt-4 mt-lg-0">                            
-                            <h1 class="pb-4">The only free music app</h1>
+                            <h1 class="pb-4">{{ 'landing.title' | translate }}</h1>
                             <form action="#" [formGroup]="registration" (ngSubmit)="register(registration)" [ngClass]="formSubmitted ? 'submitted' : ''">
                                 <div class="card card-frosted shadow mt-4 pt-4">
                                     <div class="card-body">
