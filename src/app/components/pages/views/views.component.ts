@@ -4,9 +4,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { Subscription } from 'rxjs';
 
-import { LocalStorageService } from '../../../services/local-storage.service';
-import { SkinService } from '../../../services/skin.service';
-
 @Component({
     selector: 'app-views',
     templateUrl: './views.component.html'
@@ -21,27 +18,9 @@ export class ViewsComponent implements OnInit, OnDestroy {
     @ViewChild('perfectScroll') perfectScroll: PerfectScrollbarComponent;
 
     constructor(@Inject(DOCUMENT) private document: Document,
-                private router: Router,
-                private localStorageService: LocalStorageService,
-                private skinService: SkinService) { }
+                private router: Router) { }
 
     ngOnInit() {
-        const themeSkin = this.localStorageService.getThemeSkin();
-        
-        if (themeSkin) {
-            this.document.body.classList.remove(this.themeClass);
-            this.themeClass = 'theme-' + themeSkin.theme;
-            this.document.body.classList.add(this.themeClass);
-        }
-
-        this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
-          if (skin) {
-              this.document.body.classList.remove(this.themeClass);
-              this.themeClass = 'theme-' + skin.theme;
-              this.document.body.classList.add(this.themeClass);
-          }
-        });
-
         this.routerSubscription = this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return false;
@@ -63,10 +42,7 @@ export class ViewsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.skinSubscription.unsubscribe();
-        if (this.routerSubscription) {
-            this.routerSubscription.unsubscribe();
-        }
+        this.routerSubscription?.unsubscribe();
     }
 
 }

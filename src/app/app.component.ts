@@ -22,13 +22,11 @@ export class AppComponent implements OnInit, OnDestroy {
                 private userService: UserService,
                 private authService: AuthService) {
         this.loadingService.startLoading();
-                
-        if(this.authService.loggedIn) this.initUser();
     }
 
     initUser(){
         const user = JSON.parse(sessionStorage.getItem('user'));
-
+        
         if(!user){
             this.userService.get().subscribe( user => this.userService.set(user))
         }else{
@@ -41,12 +39,14 @@ export class AppComponent implements OnInit, OnDestroy {
         this.document.body.classList.add(this.themeClass);
               
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
-            if (skin == 'light') {
+            if(skin == 'light') {
                 this.document.body.classList.remove(this.themeClass);
             }else{             
                 this.document.body.classList.add(this.themeClass);
             }
         });
+                
+        if(this.authService.loggedIn) this.initUser();
     }
 
     ngOnDestroy() {

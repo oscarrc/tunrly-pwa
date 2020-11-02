@@ -3,7 +3,6 @@ import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { LoadingService } from '../../../../../services/loading.service';
 import { UserService } from '../../../../../services/user.service';
 import { AuthService } from '../../../../../services/auth.service';
-import { SkinService } from '../../../../../services/skin.service';
 
 import { Subscription } from 'rxjs';
 

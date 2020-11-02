@@ -1,8 +1,6 @@
 export class Config {
 
     static CURRENT_USER = 'currentUser';
-    static STAR = 'la-star';
-    static HALF_STAR = 'la-star-half-empty';
     static THEME_CLASSES = ['primary', 'danger', 'success', 'warning', 'info', 'brand', 'dark'];
     static THEME_SKIN = 'themeSkin';
 
@@ -17,12 +15,10 @@ export class Config {
 
     constructor() {
         this.config = {
-            // Brand config
             brand: {
                 logo: './assets/images/logos/logo.svg',
                 name: 'Tunrly.com'
             },
-            // Theme skin config
             themeSkin: {
                 theme: 'dark',
                 header: 0,
