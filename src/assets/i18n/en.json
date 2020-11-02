@@ -1,0 +1,218 @@
+"albums":{
+	"name":"Albums"
+},
+"artists":{
+	"name":"Artists"
+},
+"context":{
+	"favorite": "Favorite",
+	"share": "Share",
+	"trackinfo": "Track Info",
+	"addtoplaylist": "Add to Playlist",
+	"removefromplaylist": "Remove from playlist"	
+},
+"home":{
+	"recommended":{
+		"title": "Just For You",
+		"subtitle": "We thought you may like these"
+	},
+	"history":{
+		"title": "Listen again",
+		"subtitle": "Re-listen some of your songs"
+	},
+	"toptracks":{
+		"title": "Top Tracks",
+		"subtitle": "Popular tracks this week"
+	},
+	"topartists":{
+		"title": "Trending Artists",
+		"subtitle": "What everyone listens to"
+	},
+	"toptags":{
+		"title": "Hot Tags",
+		"subtitle": "This tags are hot"
+	}
+},
+"header":{
+	"search":{
+		"title":"Search...",
+		"subtitle":"Press Enter to search..."
+	},
+	"language":{
+		"title": "Language",
+		"subtitle": "Select your language",
+		"close": "Close"
+	},
+	"login":{
+		"name": "Login",
+		"title": "Login into Tunrly.com",
+		"usernameoremail": "Username or email",
+		"password": "Password",
+		"remember": "Remember me",
+		"clickhere": "Click here"
+	},
+	"forgotten":{
+		"title": "Forgotten password?",
+		"text": "Enter your username or email and we'll send you an email to reset your password",
+		"spam": "Don't forget to check your span folder too",
+		"submit": "Submit"
+	},
+	"validation":{
+		"text":"We've sent an email to the provided address. Please check your inbox to activate your account",
+		"didntreceive":"Didn't receive the email?",
+		"tryagain":"Try again"
+	}
+},
+"landing":{
+	"title": "The only free music app",
+	"register": {
+		"username": "Username",
+		"firstname": "Firstname",
+		"lastname": "Lastname",
+		"password": "Password",
+		"repeatpassword": "Repeat Password",
+		"tac": "By creating an account I accept the terms and conditions",
+		"haveaccount": "Already have an account?",
+		"joinnow":"Join Now!"
+	},
+	"subtitle": "Tunrly.com app is",
+	"free": "Free",
+	"freetext": "Enjoy your music without interruptions",
+	"legal": "Legal",
+	"legaltext": "We do not steal music from anyone",
+	"multiplatform": "Multiplatform",
+	"multiplatformtext": "Runs in your browser, desktop or phone"
+},
+"playlists":{
+	"name":"Playlists",
+	"title": "User contributed playlists"
+},
+"sidebar":{
+	"browsemusic":"Browse music",
+	"yourmusic":"Your music"
+}
+"tags":{
+	"name" :"Tags"
+}
+"tracks":{
+	"name":"Tracks",
+	"lyrics": "Lyrics",
+	"play": "Play",
+	"viewalbum": "View Album"
+},
+"ui":{
+	"viewall": "View All",
+	"browsetop": "Browse top {type}",
+	"playall": "Play all",
+	"availableon": "Available on",
+	"gotohome":"Go To Homepage"
+},
+"user":{
+	"profile":{
+		"username": "Username",
+		"firstname": "Firstname",
+		"lastname": "Lastname",
+		"country": "Country",
+		"edit": "Edit Profile",
+		"save": "Save Changes",
+		"changepasswordtext": "Change your password",
+		"currentpassword": "Current password",
+		"newpassword": "New Password",
+		"repeatpassword": "Repeat Password",
+		"changepassword": "Change Password",
+		"imageformat": "Format: .png or .jpg",
+		"imagesize": "Max size: 1MB",
+		"changeimage": "Change Image",
+		"lastfmaccount": "Have a LastFM account?",
+		"lastfmaccounttext": "Use it to scrobble your tracks!",
+		"lastfmlogin": "Login with LastFM"
+	},
+	"settings":{
+		"privacy": "Privacy",
+		"publicprofile": "Show public profile",
+		"publicfavorites": "Show favorites on public profile",
+		"musicquality": "Music Quality",
+		"streamingquality": "Streaming Quality",
+		"veryhigh": "Very high",
+		"high": "High",
+		"medium": "Medium",
+		"low": "Low",
+		"volumelevel": "Volume level, adjust volume level for your enviroment",
+		"theme": "Theme",
+		"darktheme": "Dark theme",
+		"history": "history",
+		"clearhistory":"Clear your music history",
+		"clearbutton": "Clear Now",
+		"security": "Security",
+		"closession": "Close session in all devices",
+		"closebutton": "Close Now"
+	}
+	"playlists":{
+		"title": "Your playlists",
+		"edit": {
+			"title": "Edit Playlist",
+			"name": "Name",
+			"cover": "Cover Image"
+			"optional": "Optional",
+			"description": "Description",
+			"public": "Public",
+			"tracklist": "Tracklist",
+			"save": "Save",
+			"cancel": "Cancel"
+		}
+	},
+	"recommended":{
+		"title": "Curated tracks just for you",
+		"foryous": "Recommended for you"
+	},
+	"favorites":{
+		"title": "Favorites",
+		"alsolike": "Also Like",
+		"checkout": "Check out these songs"
+	},
+	"history":{
+		"title": "History",
+		"subtitle": "You've recently listen"
+	}
+},
+"validation":{
+	"success":"Success",
+	"error":"Error",
+	"accountvalidated":"Your account has been validated",
+	"passwordchanged":"Your password has been changed",
+	"accounterror":"There was an error while validating your account", 
+	"passworderror":"There was an error while changing your password",
+	"canlogin":"Now you can login to your account and start listening to some tunes"
+},
+"errors":{
+	"form":{
+		"required": "Please, fill in this field",
+		"email": "Please, enter a valid email address",
+		"emailtaken": "Email already taken",
+		"usertaken": "Username already taken",
+		"username": "Username must be between 5 and 15 characters long, start and end with a letter. Only (. - _) are permitted"
+		"password": "Password must be between 8 - 15 characters length and contain, at least, one upper case letter, one lower case letter, and one numeric digit"
+		"passwordmatch": "Passwords don't match",
+		"tac": "You must accept our terms and conditions"
+	},
+	"api":{
+		"SessionCreationError": "Unable to create a session",
+		"SessionNotFound": "Session does not exists or it has expired",
+		"SessionDeletionError": "Unable to delete this session. Does it exits?",
+		"UserNotFound": "Requested user does not exists",
+		"BadPassword": "Must provide a valid password",
+		"ValidationNotFound": "Validation token does not exists or it has expired",
+		"AlbumNotFound": "Album not found",
+		"ArtistNotFound": "Artist not found",
+		"TrackNotFound": "Track not found",
+		"UnableToCreatePlaylist": "Unable to create the playlist",
+		"UnableToDeletePlaylist": "Unable to delete the playlist",
+		"PlaylistNotFound": "The playlist was not found or it is not public and it doesn't belong to you",
+		"UnableToFetchTags": "We're unable to fetch tags. Try again later."
+	},
+	"auth":{
+		"BadCredentials": "Bad credentials",
+		"NotActive": "Account is not active"
+		"InsufficientPermits": "You not have enough permits to do that"
+	}
+}

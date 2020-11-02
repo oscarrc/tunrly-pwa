@@ -1,0 +1,218 @@
+"albums":{
+	"name":"Albumes"
+},
+"artists":{
+	"name":"Artistas"
+},
+"context":{
+	"favorite": "Favorito",
+	"share": "Compartir",
+	"trackinfo": "Info canción",
+	"addtoplaylist": "Añadir a Playlist",
+	"removefromplaylist": "Quitar de playlist"	
+},
+"home":{
+	"recommended":{
+		"title": "Solo para tí",
+		"subtitle": "Creemos que esto podría gustarte"
+	},
+	"history":{
+		"title": "Escuchar de nuevo",
+		"subtitle": "Vuelve a escuchar estas canciones"
+	},
+	"toptracks":{
+		"title": "Canciones populares",
+		"subtitle": "Canciones populares de esta semana"
+	},
+	"topartists":{
+		"title": "Artistas destacados",
+		"subtitle": "Todo el mundo está escuchando esto"
+	},
+	"toptags":{
+		"title": "Etiquetas",
+		"subtitle": "Estas etiquetas están que arden"
+	}
+},
+"header":{
+	"search":{
+		"title":"Buscar...",
+		"subtitle":"Pulsa Enter para buscar..."
+	},
+	"language":{
+		"title": "Idioma",
+		"subtitle": "Selecciona tu idioma",
+		"close": "Cerrar"
+	},
+	"login":{
+		"name": "Iniciar sesión",
+		"title": "Inicia sesión en Tunrly.com",
+		"usernameoremail": "Nobmre de usuario o mail",
+		"password": "Contraseña",
+		"remember": "Recuérdame",
+		"clickhere": "Click aquí"
+	},
+	"forgotten":{
+		"title": "¿Contraseña olvidada?",
+		"text": "Ingresa tu nombre de usuario o email y te enviaremos un correo para recuperar tu contraseña",
+		"spam": "No te olvides de comprobar la carpeta spam",
+		"submit": "Enviar"
+	},
+	"validation":{
+		"text":"Hemos enviado un email a la dirección proporcionada. Comprueba tu correo para activar tu cuenta",
+		"didntreceive":"¿No has recibido el email?",
+		"tryagain":"Intentar de nuevo"
+	}
+},
+"landing":{
+	"title": "La única app de música gratuita",
+	"register": {
+		"username": "Nombre de usuario",
+		"firstname": "Nombre",
+		"lastname": "appelidos",
+		"password": "Contraseña",
+		"repeatpassword": "Repite la contraseña",
+		"tac": "Al crear una cuenta aceptas nuestros términos y condiciones",
+		"haveaccount": "Ya tienes una cuenta?",
+		"joinnow":"Únete ahora!"
+	},
+	"subtitle": "Tunrly.com es",
+	"free": "Gratis",
+	"freetext": "Disfruta de tu musica sin interrupciones",
+	"legal": "Legal",
+	"legaltext": "No robamos música",
+	"multiplatform": "Multiplataforma",
+	"multiplatformtext": "Se ejecuta en el navegador, en el escritorio o en tu teléfono"
+},
+"playlists":{
+	"name":"Playlists",
+	"title": "Listas de reproducción de usuarios"
+},
+"sidebar":{
+	"browsemusic":"Explorar música",
+	"yourmusic":"Tu música"
+}
+"tags":{
+	"name" :"Etiquetas"
+}
+"tracks":{
+	"name":"Canciones",
+	"lyrics": "Letra",
+	"play": "Reproducir",
+	"viewalbum": "Ver Album"
+},
+"ui":{
+	"viewall": "Ver todo",
+	"browsetop": "Explorar {type} populares",
+	"playall": "Reproducir todo",
+	"availableon": "Disponible en",
+	"gotohome":"Ir Al Inicio"
+},
+"user":{
+	"profile":{
+		"username": "Nombre de usuario",
+		"firstname": "Nombre",
+		"lastname": "Apellidos",
+		"country": "Pais",
+		"edit": "Editar Perfil",
+		"save": "Guardar cambios",
+		"changepasswordtext": "Cambio de contraseña",
+		"currentpassword": "Contraseña actual",
+		"newpassword": "Nueva contraseña",
+		"repeatpassword": "Repetir contraseña",
+		"changepassword": "Cambiar contraseña",
+		"imageformat": "Formato: .png o .jpg",
+		"imagesize": "Tamaño máximo: 1MB",
+		"changeimage": "Cambiar Imagen",
+		"lastfmaccount": "¿Tienes cuenta de LastFM?",
+		"lastfmaccounttext": "Usála para hacer scrobble de tus canciones!",
+		"lastfmlogin": "Inicia sesión con LastFM"
+	},
+	"settings":{
+		"privacy": "Privacidad",
+		"publicprofile": "Mostrar perfil público",
+		"publicfavorites": "Mostrar favoritos en perfil público",
+		"musicquality": "Calidad de Música",
+		"streamingquality": "Calidad de setreaming",
+		"veryhigh": "Muy alta",
+		"high": "Alta",
+		"medium": "Media",
+		"low": "Baja",
+		"volumelevel": "Volumen, ajusta el nivel de volumen para tu entorno",
+		"theme": "Tema",
+		"darktheme": "Tema oscuro",
+		"history": "Historial",
+		"clearhistory":"Limpia tu historial de música",
+		"clearbutton": "Limpiar ahora",
+		"security": "Seguridad",
+		"closession": "Cerrar sesión en todos los dispositivos",
+		"closebutton": "Cerrar ahora"
+	}
+	"playlists":{
+		"title": "Tus playlists",
+		"edit": {
+			"title": "Editar Playlist",
+			"name": "Nombre",
+			"cover": "Imagen de portada"
+			"optional": "Opcional",
+			"description": "Descripción",
+			"public": "Publica",
+			"tracklist": "Canciones",
+			"save": "Guardar",
+			"cancel": "Cancelar"
+		}
+	},
+	"recommended":{
+		"title": "Canciones escogidas según tus gustos",
+		"foryous": "Recomendado para tí"
+	},
+	"favorites":{
+		"title": "Favoritos",
+		"alsolike": "Podría gustarte",
+		"checkout": "Echa un vistazo a estas canciones"
+	},
+	"history":{
+		"title": "Historial",
+		"subtitle": "Recientemente has escuchado..."
+	}
+},
+"validation":{
+	"success":"Éxito",
+	"error":"Error",
+	"accountvalidated":"Tu cuenta ha sido validada",
+	"passwordchanged":"Tu contraseña ha cambiado",
+	"accounterror":"Ha habido un error validando tu cuenta", 
+	"passworderror":"Ha habido un error al cambiar tu contraseña",
+	"canlogin":"Ahora puedes iniciar sesión y comenzar a escuchar tu música favorita"
+},
+"errors":{
+	"form":{
+		"required": "Por favor, cubra este campo",
+		"email": "Por favor, ingrese un email válido",
+		"emailtaken": "Email no disponible",
+		"usertaken": "Nombre de usuario no disponible",
+		"username": "El nobmre de usuario debe tener entre 5 y 15 caracateres y empezar con una letra. Solo se permiten los simbolos (. - _)"
+		"password": "La contraseña debe tener entre 8 - 15 caracteres y contener, por lo menos, una mayúscula, una minúscula y un número"
+		"passwordmatch": "Las contraseñas no coinciden",
+		"tac": "Debes aceptar los términos y condiciones"
+	},
+	"api":{
+		"SessionCreationError": "No se ha podido crear la sesión",
+		"SessionNotFound": "La sesión no existe o ha expirado",
+		"SessionDeletionError": "No se ha podido eliminar la sesión. ¿Existe?",
+		"UserNotFound": "El usuario solicitado no existe",
+		"BadPassword": "Debe introducir una contraseña válida",
+		"ValidationNotFound": "El token de validación no existe o ha expirado",
+		"AlbumNotFound": "Album no encontrado",
+		"ArtistNotFound": "Artista no encontrado",
+		"TrackNotFound": "Canción no encontrada",
+		"UnableToCreatePlaylist": "No se ha podido crear la playlist",
+		"UnableToDeletePlaylist": "No se ha podido eliminar la playlist",
+		"PlaylistNotFound": "La playlist no se ha encontrado o no es pública y no te pertenece.",
+		"UnableToFetchTags": "Imposible recuperar las etiquetas. Inténtelo más tarde"
+	},
+	"auth":{
+		"BadCredentials": "Credenciales incorrectos",
+		"NotActive": "La cuenta no está activa"
+		"InsufficientPermits": "No tienes permisos suficientes para hacer eso"
+	}
+}
