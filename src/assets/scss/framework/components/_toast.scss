@@ -1,0 +1,24 @@
+.toast-container{
+    .ngx-toastr, .ngx-toastr:hover{
+        box-shadow: 0 1px 1rem 1px rgba($black, .15);
+        padding: 5px 5px 5px 50px;
+        border-radius: $radius-sm;
+        font-family: $font-family-base;
+    }
+    
+    .toast-error{
+        background-color:rgba($danger, .5);
+    }
+
+    .toast-success{
+        background-color:rgba($success, .5);
+    }
+
+    .toast-warning{
+        background-color:rgba($warning, .5);
+    }
+
+    .toast-info{
+        background-color:rgba($primary, .5);
+    }
+}
