@@ -18,7 +18,6 @@ import { TrackOptionsComponent } from './track-options/track-options.component';
 import { TrackHorizontalComponent } from './track-horizontal/track-horizontal.component';
 import { ImageCardComponent } from './image-card/image-card.component';
 import { CommentComponent } from './comment/comment.component';
-import { ThemeSettingsComponent } from './theme-settings/theme-settings.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { ContentLoaderModule } from '@ngneat/content-loader';
@@ -39,7 +38,6 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
         DescriptionCardLoaderComponent,
         TrackListViewLoaderComponent,
         CommentComponent,
-        ThemeSettingsComponent,
         CountdownComponent,
         ButtonComponent
     ],
@@ -57,7 +55,6 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
         DescriptionCardLoaderComponent,
         TrackListViewLoaderComponent,
         CommentComponent,
-        ThemeSettingsComponent,
         ButtonComponent
     ],
     imports: [
