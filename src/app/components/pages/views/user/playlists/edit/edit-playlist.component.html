@@ -6,46 +6,46 @@
         <div class="col-xl-8 col-md-10 mx-auto">
             <form class="card" [formGroup]="playlistForm" *ngIf="playlist" (ngSubmit)="savePlaylist(playlistForm)" [ngClass]="formSubmitted ? 'submitted' : ''">
                 <div class="card-header">
-                    <h6 class="card-title mb-0">Edit Playlist</h6>
+                    <h6 class="card-title mb-0">{{ 'user.playlists.edit.title' | translate }}</h6>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="form-row form-group">
-                                <label for="name" class="col-md-4 text-md-right col-form-label">Name</label>
+                                <label for="name" class="col-md-4 text-md-right col-form-label">{{ 'user.playlists.edit.name' | translate }}</label>
                                 <div class="col-md-7">
                                     <input formControlName="name" type="text" id="name" class="form-control">
                                     <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
-                                        <span *ngIf="playlistForm.controls.name.errors?.required">Please fill this field</span>
+                                        <span *ngIf="playlistForm.controls.name.errors?.required">{{ 'errors.form.required' | translate }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row form-group">
-                                <label for="image" class="col-md-4 text-md-right col-form-label">Cover Image<br><small>(Optional)</small></label>
+                                <label for="image" class="col-md-4 text-md-right col-form-label">{{ 'user.playlists.edit.cover' | translate }}<br><small>({{ 'user.playlists.edit.optional' | translate }})</small></label>
                                 <div class="col-md-7">
                                     <div class="custom-file">
                                         <input formControlName="image" type="file" class="custom-file-input" id="image" (change)="onFile($event.target.files)">
-                                        <label class="custom-file-label" for="image">Choose File</label>
+                                        <label class="custom-file-label" for="image">{{ 'user.playlists.edit.chosefile' | translate }}</label>
                                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
-                                            <span *ngIf="playlistForm.controls.image.errors?.requiredFileType">Filetype must be png or jpg</span>
-                                            <span *ngIf="playlistForm.controls.image.errors?.requiredSize">File must not be greater than 1MB</span>
+                                            <span *ngIf="playlistForm.controls.image.errors?.requiredFileType">{{ 'errors.form.filetype' | translate }}</span>
+                                            <span *ngIf="playlistForm.controls.image.errors?.requiredSize">{{ 'errors.form.filesize' | translate }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row form-group">
-                                <label for="description" class="col-md-4 text-md-right col-form-label">Description</label>
+                                <label for="description" class="col-md-4 text-md-right col-form-label">{{ 'user.playlists.edit.description' | translate }}</label>
                                 <div class="col-md-7">
                                     <div class="custom-file">
                                         <textarea formControlName="description"  id="description" class="form-control"></textarea>
                                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
-                                            <span *ngIf="playlistForm.controls.description.errors?.required">Please fill this field</span>
+                                            <span *ngIf="playlistForm.controls.description.errors?.required">{{ 'errors.form.required' | translate }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row form-group">
-                                <label for="description" class="col-md-4 text-md-right col-form-label">Public</label>
+                                <label for="description" class="col-md-4 text-md-right col-form-label">{{ 'user.playlists.edit.public' | translate }}</label>
                                 <div class="col-md-7">
                                     <div class="switch switch-primary ml-auto">
                                         <input formControlName="public" type="checkbox" id="public">
@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="container-header d-flex justify-content-between">
-                                <span class="title">Tracklist</span>
+                                <span class="title">{{ 'user.playlists.edit.tracklist' | translate }}</span>
                             </div>
                             <div class="mb-4" *ngFor="let track of playlist.tracks; let i = index">
                                 <app-track-list-view [trackNumber]="(i + 1)" [track]="track" [icon]="'la la-trash'"  (buttonClicked)="removeFromPlaylist($event)" [options]="false"></app-track-list-view>
@@ -67,8 +67,8 @@
                 <div class="card-footer">
                     <div class="row">                        
                         <div class="col-md-7 btn-inline text-center">
-                            <app-button type="submit" text="Save" [loading]="loading" classes="btn btn-brand btn-air"></app-button>
-                            <button [disabled]="loading" type="button" class="ml-2 btn btn-outline-secondary" [routerLink]="'/user/playlists'">Cancel</button>
+                            <app-button type="submit" text="{{ 'user.playlists.edit.save' | translate }}" [loading]="loading" classes="btn btn-brand btn-air"></app-button>
+                            <button [disabled]="loading" type="button" class="ml-2 btn btn-outline-secondary" [routerLink]="'/user/playlists'">{{ 'user.playlists.edit.cancel' | translate }}</button>
                         </div>
                     </div>
                 </div>

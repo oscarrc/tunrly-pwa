@@ -17,7 +17,7 @@
                     </div>
                     <div class="mt-4">
                       <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
-                              (click)="playAllSongs()">Play All</button>
+                              (click)="playAllSongs()">{{ 'ui.playall' | translate }}</button>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6">
@@ -37,11 +37,11 @@
         <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="artistDetails" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="track-tab" data-toggle="tab" href="#track" role="tab" (click)="getTracks()"
-                   aria-controls="track" aria-selected="true">Top Tracks</a>
+                   aria-controls="track" aria-selected="true">{{ 'tracks.top' | translate }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="album-tab" data-toggle="tab" href="#album" role="tab" (click)="getAlbums()"
-                   aria-controls="album" aria-selected="false">Top Albums</a>
+                   aria-controls="album" aria-selected="false">{{ 'albums.top' | translate }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="similar-tab" data-toggle="tab" href="#similar" role="tab" (click)="getSimilar()"
@@ -55,7 +55,7 @@
             <div class="tab-pane fade show active" id="track" role="tabpanel" aria-labelledby="track-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header d-flex justify-content-end pb-3">
-                    <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/artist/' + artistDetails?._id + '/tracks'">View All</a>
+                    <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/artist/' + artistDetails?._id + '/tracks'">{{ 'ui.viewall' | translate }}</a>
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
@@ -67,7 +67,7 @@
             <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header d-flex justify-content-end pb-3">
-                    <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/artist/' + artistDetails?._id + '/albums'">View All</a>
+                    <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/artist/' + artistDetails?._id + '/albums'">{{ 'ui.viewall' | translate }}</a>
                 </div>
                 <!-- End | Container header -->
                 <div class="row">
@@ -80,7 +80,7 @@
             <div class="tab-pane fade" id="similar" role="tabpanel" aria-labelledby="similar-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header d-flex justify-content-end pb-3">
-                    <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/artist/' + artistDetails?._id + '/similar'">View All</a>
+                    <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/artist/' + artistDetails?._id + '/similar'">{{ 'ui.viewall' | translate }}</a>
                 </div>
                 <!-- End | Container header -->
                 <div class="row">

@@ -3,7 +3,7 @@
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <div class="container-header d-flex justify-content-between">
-        <span class="title">Browse top tags</span>
+        <span class="title">{{ 'ui.browsetop' | translate:{ type: ('tags.name' | translate) } }} </span>
         <span>
             <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
             <button [disabled]="page==tags.length/limit" type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>

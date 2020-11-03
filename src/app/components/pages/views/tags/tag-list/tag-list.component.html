@@ -9,7 +9,7 @@
 <div class="main-container">
   <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header d-flex justify-content-between">
-        <span class="title">Top {{ tagName | titlecase }} {{type | titlecase}}</span>
+        <span class="title">{{ 'tags.top' | translate:{ tag: tagName | translate | titlecase, type: (type+'.name') | translate | titlecase} }}</span>
         <div class="d-flex align-items-center">
             <a *ngIf="type == 'tracks'" class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>

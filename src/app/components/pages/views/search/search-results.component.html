@@ -5,7 +5,7 @@
     
     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header d-flex justify-content-between">        
-        <span class="title">{{this[type]?.results?.total}} Results {{ this[type]?.results?.query ? 'for ' + this[type]?.results?.query : ''}}</span>
+        <span class="title">{{this[type]?.results?.total}} {{ 'ui.results' | translate}} {{ this[type]?.results?.query ? ('ui.for' | translate) + ' ' + this[type]?.results?.query : ''}}</span>
         <div class="d-flex align-items-center">
             <a *ngIf="type == 'tracks'" class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>

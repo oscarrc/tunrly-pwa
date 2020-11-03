@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     @ViewChild('headerBackdrop') backdrop: ElementRef;
     headerClasses = 'bg-primary';
 
-    language: any = {};
+    languageIcon: any;
     currentUser: any = {};
 
     private searchSubscription: Subscription;
@@ -36,10 +36,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 private storageService: StorageService,
                 private userService: UserService,
                 private skinService: SkinService) {
-        this.language = {
-            title: 'Language',
-            image: './assets/images/svg/translate.svg'
-        };
+        this.languageIcon = './assets/images/svg/translate.svg';
     }
 
     ngOnInit() {

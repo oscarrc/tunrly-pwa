@@ -50,7 +50,7 @@ export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.artistService.getAlbums(this.id).subscribe(
             res => {
                     this.loading = false;
-                    this.albums = res ; 
+                    this.albums = res;
                 },
             err => console.log(err)
         )

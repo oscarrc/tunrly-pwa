@@ -1,6 +1,7 @@
 {
 	"albums":{
-		"name":"Albumes"
+		"name":"Albumes",
+		"top": "Albumes populares"
 	},
 	"artists":{
 		"name":"Artistas"
@@ -59,7 +60,7 @@
 			"submit": "Enviar"
 		},
 		"validation":{
-			"text":"Hemos enviado un email a la dirección proporcionada. Comprueba tu correo para activar tu cuenta",
+			"text":"Hemos enviado un email a la dirección proporcionada. Comprueba tu correo (y spam) para activar tu cuenta",
 			"didntreceive":"¿No has recibido el email?",
 			"tryagain":"Intentar de nuevo"
 		}
@@ -94,20 +95,25 @@
 		"yourmusic":"Tu música"
 	},
 	"tags":{
-		"name" :"Etiquetas"
+		"name" :"Etiquetas",
+		"top" : "{{type}} {{tag}} populares"
 	},
 	"tracks":{
 		"name":"Canciones",
 		"lyrics": "Letra",
 		"play": "Reproducir",
-		"viewalbum": "Ver Album"
+		"viewalbum": "Ver Album",
+		"top": "Canciones populares"
 	},
 	"ui":{
 		"viewall": "Ver todo",
-		"browsetop": "Explorar {type} populares",
+		"browsetop": "Explorar {{type}} populares",
 		"playall": "Reproducir todo",
 		"availableon": "Disponible en",
-		"gotohome":"Ir Al Inicio"
+		"gotohome":"Ir Al Inicio",
+		"results": "Resultados",
+		"for": "para",
+		"nofound":"No se han encontrado {{type}}"
 	},
 	"user":{
 		"profile":{
@@ -140,13 +146,17 @@
 			"medium": "Media",
 			"low": "Baja",
 			"volumelevel": "Volumen, ajusta el nivel de volumen para tu entorno",
+			"quiet":"Bajo",
+			"normal":"Normal",
+			"loud":"Alto",
+			"louder":"Muy alto",
 			"theme": "Tema",
 			"darktheme": "Tema oscuro",
 			"history": "Historial",
 			"clearhistory":"Limpia tu historial de música",
 			"clearbutton": "Limpiar ahora",
 			"security": "Seguridad",
-			"closession": "Cerrar sesión en todos los dispositivos",
+			"closesession": "Cerrar sesión en todos los dispositivos",
 			"closebutton": "Cerrar ahora"
 		},
 		"playlists":{
@@ -156,6 +166,7 @@
 				"name": "Nombre",
 				"cover": "Imagen de portada",
 				"optional": "Opcional",
+				"chosefile": "Elegir archivo",
 				"description": "Descripción",
 				"public": "Publica",
 				"tracklist": "Canciones",
@@ -180,11 +191,12 @@
 	"validation":{
 		"success":"Éxito",
 		"error":"Error",
-		"accountvalidated":"Tu cuenta ha sido validada",
-		"passwordchanged":"Tu contraseña ha cambiado",
-		"accounterror":"Ha habido un error validando tu cuenta", 
-		"passworderror":"Ha habido un error al cambiar tu contraseña",
-		"canlogin":"Ahora puedes iniciar sesión y comenzar a escuchar tu música favorita"
+		"enternewpassword":"Introduce tu nueva contraseña",
+		"accountvalidated":"Tu cuenta ha sido validada.",
+		"passwordchanged":"Tu contraseña ha cambiado.",
+		"accounterror":"Ha habido un error validando tu cuenta.", 
+		"passworderror":"Ha habido un error al cambiar tu contraseña.",
+		"canlogin":"Ahora puedes iniciar sesión y comenzar a escuchar tu música favorita."
 	},
 	"errors":{
 		"form":{
@@ -195,7 +207,13 @@
 			"username": "El nobmre de usuario debe tener entre 5 y 15 caracateres y empezar con una letra. Solo se permiten los simbolos (. - _)",
 			"password": "La contraseña debe tener entre 8 - 15 caracteres y contener, por lo menos, una mayúscula, una minúscula y un número",
 			"passwordmatch": "Las contraseñas no coinciden",
-			"tac": "Debes aceptar los términos y condiciones"
+			"tac": "Debes aceptar los términos y condiciones",
+			"filetype": "El tipo de archivo debe ser png o jpg",
+			"filesize": "El archivo de no debe ocupar más de 1MB"
+		},
+		"page":{
+			"unavailable":"Lo sentimos. La página que buscas no existe o ha sido eliminada.",
+			"changed":"Su nombre ha cambiado o está temporalmente no disponible."
 		},
 		"api":{
 			"SessionCreationError": "No se ha podido crear la sesión",

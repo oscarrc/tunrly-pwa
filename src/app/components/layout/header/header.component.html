@@ -8,7 +8,7 @@
         <form id="searchForm" [formGroup]="searchForm" (submit)="doSearch()" autocomplete="off">
             <div class="position-relative">
                 <button type="button" class="btn ion-ios-search"></button>
-                <input formControlName="query" type="text" [placeholder]="(this.pressEnter ? 'Press Enter to ' : '') + 'Search...'"
+                <input formControlName="query" type="text" [placeholder]="(this.pressEnter ? 'header.search.subtitle' : 'header.search.title') | translate"
                      id="searchInput" class="form-control" (focusin)="toggleSearchFocus()" (focusout)="toggleSearchFocus()" autocomplpete="false">
             </div>
             <app-search></app-search>
@@ -18,8 +18,8 @@
         <ul class="header-options d-flex align-items-center">
             <li>
                 <a href="javascript:;" class="language" (click)="openLanguagesModal()">
-                    <span>{{language.title}}</span>
-                    <img [src]="language.image" alt="">
+                    <span>{{ 'header.language.title' | translate }}</span>
+                    <img [src]="languageIcon" alt="">
                 </a>
             </li>
             <li>

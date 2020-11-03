@@ -1,6 +1,7 @@
 {
 	"albums":{
-		"name":"Albums"
+		"name":"Albums",
+		"top": "Top Albums"
 	},
 	"artists":{
 		"name":"Artists"
@@ -59,7 +60,7 @@
 			"submit": "Submit"
 		},
 		"validation":{
-			"text":"We've sent an email to the provided address. Please check your inbox to activate your account",
+			"text":"We've sent an email to the provided address. Please check your inbox (and span folder) to activate your account",
 			"didntreceive":"Didn't receive the email?",
 			"tryagain":"Try again"
 		}
@@ -94,20 +95,25 @@
 		"yourmusic":"Your music"
 	},
 	"tags":{
-		"name" :"Tags"
+		"name" :"Tags",
+		"top" : "Top {{tag}} {{type}}"
 	},
 	"tracks":{
 		"name":"Tracks",
 		"lyrics": "Lyrics",
 		"play": "Play",
-		"viewalbum": "View Album"
+		"viewalbum": "View Album",
+		"top": "Top tracks"
 	},
 	"ui":{
 		"viewall": "View All",
-		"browsetop": "Browse top {type}",
-		"playall": "Play all",
+		"browsetop": "Browse Top {{type}}",
+		"playall": "Play All",
 		"availableon": "Available on",
-		"gotohome":"Go To Homepage"
+		"gotohome":"Go To Homepage",
+		"results": "Results", 
+		"for": "for",
+		"nofound":"No {{type}} Found"
 	},
 	"user":{
 		"profile":{
@@ -140,13 +146,17 @@
 			"medium": "Medium",
 			"low": "Low",
 			"volumelevel": "Volume level, adjust volume level for your enviroment",
+			"quiet":"Quiet",
+			"normal":"Normal",
+			"loud":"Loud",
+			"louder":"Louder",
 			"theme": "Theme",
 			"darktheme": "Dark theme",
-			"history": "history",
+			"history": "History",
 			"clearhistory":"Clear your music history",
 			"clearbutton": "Clear Now",
 			"security": "Security",
-			"closession": "Close session in all devices",
+			"closesession": "Close session in all devices",
 			"closebutton": "Close Now"
 		},
 		"playlists":{
@@ -156,6 +166,7 @@
 				"name": "Name",
 				"cover": "Cover Image",
 				"optional": "Optional",
+				"chosefile": "Choose file",
 				"description": "Description",
 				"public": "Public",
 				"tracklist": "Tracklist",
@@ -180,6 +191,7 @@
 	"validation":{
 		"success":"Success",
 		"error":"Error",
+		"enternewpassword":"Enter your new password",
 		"accountvalidated":"Your account has been validated",
 		"passwordchanged":"Your password has been changed",
 		"accounterror":"There was an error while validating your account", 
@@ -195,7 +207,13 @@
 			"username": "Username must be between 5 and 15 characters long, start and end with a letter. Only (. - _) are permitted",
 			"password": "Password must be between 8 - 15 characters length and contain, at least, one upper case letter, one lower case letter, and one numeric digit",
 			"passwordmatch": "Passwords don't match",
-			"tac": "You must accept our terms and conditions"
+			"tac": "You must accept our terms and conditions",
+			"filetype": "Filetype must be png or jpg",
+			"filesize": "File must not be greater than 1MB"
+		},
+		"page":{
+			"unavailable":"Sorry! But the page you are looking for does not exist, have been removed.",
+			"changed":"Name changed or is temporarily unavailable"
 		},
 		"api":{
 			"SessionCreationError": "Unable to create a session",

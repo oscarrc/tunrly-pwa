@@ -4,15 +4,15 @@
         <!-- Begin | Search Result List -->
         <div class="search-item">
             <div class="search-item-header">
-                <span class="search-item-title">Tracks</span>
-                <a *ngIf="tracks?.matches.length" class="search-item-link ml-auto" (click)="goToPage('tracks')">View All</a>
+                <span class="search-item-title">{{ 'tracks.name' | translate }}</span>
+                <a *ngIf="tracks?.matches.length" class="search-item-link ml-auto" (click)="goToPage('tracks')">{{ 'ui.viewall' | translate }}</a>
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-4 col-sm-6 col-12" *ngFor="let track of tracks?.matches | slice:0:6">
                     <app-track-horizontal [track]="track" class="song-h song-h--sm"></app-track-horizontal>
                 </div>
                 <div *ngIf="!tracks?.matches.length" class="col-12 mb-2">                    
-                    <p>No tracks found</p>
+                    <p>{{ 'ui.nofound' | translate: { type: ('tracks.name' | translate ) } }}</p>
                 </div>
             </div>
         </div>
@@ -21,8 +21,8 @@
         <!-- Begin | Search Result List -->
         <div class="search-item">
             <div class="search-item-header">
-                <span class="search-item-title">Artists</span>
-                <a *ngIf="artists?.matches.length" class="search-item-link ml-auto" (click)="goToPage('artists')">View All</a>
+                <span class="search-item-title">{{ 'artists.name' | translate }}</span>
+                <a *ngIf="artists?.matches.length" class="search-item-link ml-auto" (click)="goToPage('artists')">{{ 'ui.viewall' | translate }}</a>
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-2 col-md-4 col-6" *ngFor="let artist of artists?.matches | slice:0:6">
@@ -30,7 +30,7 @@
                                     type="artist"></app-image-card>
                 </div>
                 <div *ngIf="!artists?.matches.length" class="col-12 mb-2">                    
-                    <p>No artists found</p>
+                    <p>{{ 'ui.nofound' | translate: { type: ('artists.name' | translate ) } }}</p>
                 </div>
             </div>
         </div>
@@ -39,8 +39,8 @@
         <!-- Begin | Search Result List -->
         <div class="search-item">
             <div class="search-item-header">
-                <span class="search-item-title">Albums</span>
-                <a *ngIf="albums?.matches.length" class="search-item-link ml-auto" (click)="goToPage('albums')">View All</a>
+                <span class="search-item-title">{{ 'albums.name' | translate }}</span>
+                <a *ngIf="albums?.matches.length" class="search-item-link ml-auto" (click)="goToPage('albums')">{{ 'ui.viewall' | translate }}</a>
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-2 col-md-4 col-6" *ngFor="let album of albums?.matches | slice:0:6">
@@ -48,7 +48,7 @@
                                     type="album"></app-image-card>
                 </div>
                 <div *ngIf="!albums?.matches.length" class="col-12 mb-2">                    
-                    <p>No albums found</p>
+                    <p>{{ 'ui.nofound' | translate: { type: ('albums.name' | translate ) } }}</p>
                 </div>
             </div>
         </div>
@@ -57,15 +57,15 @@
         <!-- Begin | Search Result List -->
         <div class="search-item">
             <div class="search-item-header">
-                <span class="search-item-title">Playlists</span>
-                <a *ngIf="playlists?.matches?.length" class="search-item-link ml-auto" (click)="goToPage('playlists')">View All</a>
+                <span class="search-item-title">{{ 'playlists.name' | translate }}</span>
+                <a *ngIf="playlists?.matches?.length" class="search-item-link ml-auto" (click)="goToPage('playlists')">{{ 'ui.viewall' | translate }}</a>
             </div>
             <div class="search-item-body row">
                 <div class="col-xl-4 col-sm-6 col-12" *ngFor="let playlist of playlists?.matches | slice:0:6">
                     <app-description-card [item]="playlists.matches"  type="playlist"></app-description-card>
                 </div>
                 <div *ngIf="!playlists?.matches?.length" class="col-12 mb-2">                    
-                    <p>No playlists found</p>
+                    <p>{{ 'ui.nofound' | translate: { type: ('playlists.name' | translate ) } }}</p>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
 <div class="main-container">
   <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header d-flex justify-content-between">
-        <span class="title">Browse top tracks</span>
+        <span class="title">{{ 'ui.browsetop' | translate:{ type: ('tracks.name' | translate) } }} </span>
         <div class="d-flex align-items-center">
             <a class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>

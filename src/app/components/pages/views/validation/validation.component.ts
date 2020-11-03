@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoadingService } from '../../../../services/loading.service';
 import { ValidationService } from '../../../../services/validation.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PasswordValidator } from 'src/app/core/validators/password.validator';
 
 @Component({
     selector: 'app-validation',
@@ -44,7 +45,7 @@ export class ValidationComponent implements OnInit, OnDestroy{
         
         return this.validationService.validate(this.token, this.action, password).subscribe( 
             res => { this.success = true },
-            err => { this.success = false; this.error = err.error.message;}
+            err => { this.success = false; this.error = err.error.name;}
         )
     }
 
@@ -57,7 +58,7 @@ export class ValidationComponent implements OnInit, OnDestroy{
             repeatpassword: new FormControl('', [
                 Validators.required
             ])
-        });
+        }, PasswordValidator.checkPassword());
 
         if( this.action == 1){              
             this.done = false;      
@@ -72,7 +73,7 @@ export class ValidationComponent implements OnInit, OnDestroy{
 
     doReset(reset){
         this.formSubmitted = true;
-
+        
         if (this.reset.invalid) {
             return false;
         }
