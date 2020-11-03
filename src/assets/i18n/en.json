@@ -85,14 +85,22 @@
 		"multiplatform": "Multiplatform",
 		"multiplatformtext": "Runs in your browser, desktop or phone"
 	},
+	"menu":{
+		"browsemusic":"Browse music",		
+		"yourmusic":"Your music",
+		"home":"Home",
+		"recommended":"Recommended",
+		"profile":"Profile",
+		"settings":"Settings",
+		"logout":"Logout"
+	},
 	"playlists":{
 		"name":"Playlists",
 		"title": "User contributed playlists",
 		"nowplaying": "Now playing"
 	},
-	"sidebar":{
-		"browsemusic":"Browse music",
-		"yourmusic":"Your music"
+	"sections":{
+
 	},
 	"tags":{
 		"name" :"Tags",

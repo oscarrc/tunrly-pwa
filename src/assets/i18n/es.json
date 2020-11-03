@@ -85,14 +85,22 @@
 		"multiplatform": "Multiplataforma",
 		"multiplatformtext": "Se ejecuta en el navegador, en el escritorio o en tu teléfono"
 	},
+	"menu":{
+		"browsemusic":"Explorar música",		
+		"yourmusic":"Tu música",
+		"home":"Inicio",
+		"recommended":"Recomendados",
+		"profile":"Perfil",
+		"settings":"Ajustes",
+		"logout":"Salir"
+	},
 	"playlists":{
 		"name":"Playlists",
 		"title": "Listas de reproducción de usuarios",
 		"nowplaying": "Reproduciendo ahora"
 	},
-	"sidebar":{
-		"browsemusic":"Explorar música",
-		"yourmusic":"Tu música"
+	"sections":{
+
 	},
 	"tags":{
 		"name" :"Etiquetas",
@@ -236,5 +244,4 @@
 			"InsufficientPermits": "No tienes permisos suficientes para hacer eso"
 		}
 	}
-	
 }
