@@ -141,7 +141,9 @@
 			"changeimage": "Cambiar Imagen",
 			"lastfmaccount": "¿Tienes cuenta de LastFM?",
 			"lastfmaccounttext": "Usála para hacer scrobble de tus canciones!",
-			"lastfmlogin": "Inicia sesión con LastFM"
+			"lastfmlogin": "Inicia sesión con LastFM",
+			"membersince": "Miembro desde:",
+			"publicplaylists": "Playlists públicas de {{username}}"
 		},
 		"settings":{
 			"privacy": "Privacidad",
