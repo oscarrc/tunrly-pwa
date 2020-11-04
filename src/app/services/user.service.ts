@@ -33,8 +33,12 @@ export class UserService {
         this.userSource.next(user);
     }
 
-    get(){
-        return this.httpClient.get(this.userURL)
+    get(username:string = null){
+        let params = {};
+
+        if (username) params['value'] = username;
+
+        return this.httpClient.get(this.userURL, params)
     }
 
     create(user: any){
