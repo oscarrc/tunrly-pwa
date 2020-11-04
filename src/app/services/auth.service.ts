@@ -44,8 +44,8 @@ export class AuthService {
 
     login(user: string, password: string, remember: boolean){        
         if(remember){
-            let date = new Date();
-            this.cookieTTL.setFullYear(date.getFullYear() + 1);
+            this.cookieTTL = new Date();
+            this.cookieTTL.setFullYear(this.cookieTTL.getFullYear() + 1);
         }
         
         return this.httpClient.post(this.authURL, { user: user, password: password, device: this.fingerprint }).pipe(tap(
