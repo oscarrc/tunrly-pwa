@@ -24,15 +24,17 @@ export class AppComponent implements OnInit, OnDestroy {
                 private authService: AuthService,
                 private translateService: TranslateService) {
         this.loadingService.startLoading();
-        this.translateService.setDefaultLang('en');
-        this.translateService.use('en');
+        this.translateService.setDefaultLang('en');        
+        this.translateService.use('es');
     }
 
     initUser(){
         const user = JSON.parse(sessionStorage.getItem('user'));
         
         if(!user){
-            this.userService.get().subscribe( user => this.userService.set(user))
+            this.userService.get().subscribe( user => {
+                this.userService.set(user);
+            })
         }else{
             this.userService.set(user);
         }
