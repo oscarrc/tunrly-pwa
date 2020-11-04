@@ -145,7 +145,7 @@
 		},
 		"settings":{
 			"privacy": "Privacy",
-			"publicprofile": "Show public profile",
+			"publicprofile": "Show public profile (required to have public playlists)",
 			"publicfavorites": "Show favorites on public profile",
 			"musicquality": "Music Quality",
 			"streamingquality": "Streaming Quality",

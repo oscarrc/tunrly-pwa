@@ -13,11 +13,11 @@
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
         <a class="dropdown-item" *ngFor="let item of userMenu" [routerLink]="item.page">
             <i [class]="item.icon"></i>
-            <span>{{item.title}}</span>
+            <span>{{ item.title | translate }}</span>
         </a>
         <a class="dropdown-item" (click)="logout()">
             <i class="ion-md-log-out"></i>
-            <span>Logout</span>
+            <span>{{'menu.logout' | translate}}</span>
         </a>
     </div>
 </div>
