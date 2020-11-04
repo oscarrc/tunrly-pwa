@@ -17,8 +17,8 @@
         <!-- Begin | Header Options -->
         <ul class="header-options d-flex align-items-center">
             <li>
-                <a href="javascript:;" class="language" (click)="openLanguagesModal()">
-                    <span>{{ 'header.language.title' | translate }}</span>
+                <a href="javascript:;" class="language d-flex" (click)="openLanguagesModal()">
+                    <span class="d-none d-md-flex">{{ 'header.language.title' | translate }}</span>
                     <img [src]="languageIcon" alt="">
                 </a>
             </li>
