@@ -25,7 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
                 private translateService: TranslateService) {
         this.loadingService.startLoading();
         this.translateService.setDefaultLang('en');        
-        this.translateService.use('es');
     }
 
     initUser(){
@@ -42,6 +41,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
+        const browserLang = this.translateService.getBrowserLang();
+        this.translateService.use(browserLang.match(/en|es/) ? browserLang : 'en');
+
         this.document.body.classList.add(this.themeClass);
               
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
