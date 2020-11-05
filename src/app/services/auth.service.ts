@@ -71,16 +71,14 @@ export class AuthService {
         const fingerprint = this.cookieService.get("fingerprint");
 
         return this.httpClient.delete(this.authURL, { params: device ? { device: fingerprint } : {} }).subscribe(
-            res => {                
+            res => {      
                 return res["success"];
             },
             err => {
                 return err
             }            
-        ).add(() => {
-            this.cookieService.delete('session');
-            this.cookieService.delete('token');
-            this.cookieService.delete('uid');             
+        ).add(() => {           
+            this.cookieService.deleteAll();      
             this.router.navigate(['/']);                             
             this.userService.set(null);
             this.isLoggedIn = false;   
