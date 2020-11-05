@@ -10,17 +10,17 @@
         <div class="modal-body">
             <ul class="language-list">
                 <li class="language-item">
-                    <input type="radio" name="language" id="en" [checked]="lang === 'en'" (click)="setLanguage('en')">
+                    <input type="radio" name="language" id="en" [checked]="lang === 'en'" (click)="lang = 'en'">
                     <label for="en">English</label>
                 </li>
                 <li class="language-item">
-                    <input type="radio" name="language" id="es" [checked]="lang === 'es'" (click)="setLanguage('es')">
+                    <input type="radio" name="language" id="es" [checked]="lang === 'es'" (click)="lang = 'es'">
                     <label for="es">Español</label>
                 </li>                
             </ul>
         </div>
         <div class="modal-footer text-center d-block pb-4">
-            <button type="button" class="btn btn-primary btn-pill" (click)="close()">{{ 'header.language.close' | translate }}</button>
+            <button type="button" class="btn btn-primary btn-pill" (click)="setLanguage()">{{ 'header.language.apply' | translate }}</button>
         </div>
     </div>
 </div>

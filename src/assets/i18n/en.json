@@ -43,7 +43,7 @@
 		"language":{
 			"title": "Language",
 			"subtitle": "Select your language",
-			"close": "Close"
+			"apply": "Apply"
 		},
 		"login":{
 			"name": "Login",

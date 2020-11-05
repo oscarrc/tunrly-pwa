@@ -16,13 +16,13 @@ export class LanguageComponent extends SimpleModalComponent<any, any> implements
         super();
     }
 
-    setLanguage(lang){
-        this.userService.update({language: lang}).subscribe(
+    setLanguage(){
+        this.userService.update({language: this.lang}).subscribe(
             res => { 
                 this.userService.set(res);
                 this.translateService.use(this.lang);
-            },
-            err => {}
+                this.close();
+            }
         )
     }
 

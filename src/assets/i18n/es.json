@@ -43,7 +43,7 @@
 		"language":{
 			"title": "Idioma",
 			"subtitle": "Selecciona tu idioma",
-			"close": "Cerrar"
+			"apply": "Aplicar"
 		},
 		"login":{
 			"name": "Iniciar sesión",
