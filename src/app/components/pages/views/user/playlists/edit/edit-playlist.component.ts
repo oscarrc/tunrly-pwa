@@ -31,6 +31,7 @@ export class EditPlaylistComponent implements OnDestroy{
                 private loadingService: LoadingService, 
                 private playlistService: PlaylistService, 
                 private playerService: PlayerService) { 
+        this.loadingService.startLoading();
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.id) {
                 this.playlistId = param.id;
@@ -44,6 +45,9 @@ export class EditPlaylistComponent implements OnDestroy{
     initForm(){
         this.playlistForm = new FormGroup({
             name: new FormControl(this.playlist.name, [
+                Validators.required
+            ]),
+            tags: new FormControl(this.playlist.tags.toString(), [
                 Validators.required
             ]),
             description: new FormControl(this.playlist.description, [
@@ -108,27 +112,23 @@ export class EditPlaylistComponent implements OnDestroy{
         this.loading = true;
 
         playlist = playlist.value;
+        playlist.tracks = this.playlist.tracks.map( t => t._id);
+        playlist.tags = playlist.tags.split(',').map( t => t.trim() )
 
-        if(playlist.image){
-           playlist.image = await this.imageToBase64(this.files[0]);
-        }
-
-        playlist.tracks = this.playlist.tracks;
-
+        if(playlist.image) playlist.image = await this.imageToBase64(this.files[0]);
+       
         if(this.playlistId){
-            this.playlistService.update(playlist).subscribe(
+            this.playlistService.update(playlist, this.playlistId).subscribe(
                 () => {
                     this.router.navigate(['/user/playlists'])
-                    this.loading = false;
                 }
-            )
+            ).add( () => this.loading = false )
         }else{
             this.playlistService.create(playlist).subscribe(
                 () => {
                     this.router.navigate(['/user/playlists'])
-                    this.loading = false;
                 }
-            )
+            ).add( () => this.loading = false )
         }
     }
 

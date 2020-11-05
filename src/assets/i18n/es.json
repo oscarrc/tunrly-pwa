@@ -182,7 +182,9 @@
 				"public": "Publica",
 				"tracklist": "Canciones",
 				"save": "Guardar",
-				"cancel": "Cancelar"
+				"cancel": "Cancelar",
+				"tags":"Etiquetas",
+				"comma":"Separadas por comas"
 			}
 		},
 		"recommended":{

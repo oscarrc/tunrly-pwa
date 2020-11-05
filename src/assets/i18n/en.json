@@ -182,7 +182,9 @@
 				"public": "Public",
 				"tracklist": "Tracklist",
 				"save": "Save",
-				"cancel": "Cancel"
+				"cancel": "Cancel",
+				"tags":"Tags",
+				"comma":"Comma delimited"
 			}
 		},
 		"recommended":{

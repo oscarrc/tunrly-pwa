@@ -34,6 +34,12 @@
                                 </div>
                             </div>
                             <div class="form-row form-group">
+                                <label for="tags" class="col-md-4 text-md-right col-form-label">{{ 'user.playlists.edit.tags' | translate }}<br><small>({{ 'user.playlists.edit.comma' | translate }})</small></label>
+                                <div class="col-md-7">
+                                    <input formControlName="tags" type="text" id="tags" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
                                 <label for="description" class="col-md-4 text-md-right col-form-label">{{ 'user.playlists.edit.description' | translate }}</label>
                                 <div class="col-md-7">
                                     <div class="custom-file">
