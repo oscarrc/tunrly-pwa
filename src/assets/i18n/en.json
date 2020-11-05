@@ -33,6 +33,10 @@
 		"toptags":{
 			"title": "Hot Tags",
 			"subtitle": "This tags are hot"
+		},
+		"playlists":{
+			"title":"Recent playlists",
+			"subtitle":"Public playlists from our users"
 		}
 	},
 	"header":{
@@ -98,9 +102,6 @@
 		"name":"Playlists",
 		"title": "User contributed playlists",
 		"nowplaying": "Now playing"
-	},
-	"sections":{
-
 	},
 	"tags":{
 		"name" :"Tags",

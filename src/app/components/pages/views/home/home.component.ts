@@ -64,8 +64,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // Initialize top tracks object
     initTopTracks() {
         this.topTracks = {
-            title: 'Top Tracks',
-            subTitle: 'Popular tracks this week',
+            title: 'home.toptracks.title',
+            subTitle: 'home.toptracks.subtitle',
             page: '/tracks',
             loading: true,
             items: []
@@ -83,8 +83,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // Initialize top tracks object
     initTopArtists() {
         this.topArtists = {
-            title: 'Trending Artists',
-            subTitle: 'What everyone listens to',
+            title: 'home.topartists.title',
+            subTitle: 'home.topartists.subtitle',
             page: '/artists',
             loading: true,
             items: []
@@ -102,8 +102,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // Initialize top tracks object
     initTopTags() {
         this.topTags = {
-            title: 'Hot tags',
-            subTitle: 'This tags are hot',
+            title: 'home.toptags.title',
+            subTitle: 'home.toptags.subtitle',
             page: '/tags',
             loading: true,
             items: []
@@ -121,8 +121,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // Initialize music playlist object for section
     initPlaylist() {
         this.playlist = {
-          title: 'Your Playlist',
-          subTitle: 'You best to listen',
+          title: 'home.playlists.title',
+          subTitle: 'home.playlists.subtitle',
           page: '/playlist',
           items: []
         };
@@ -131,8 +131,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //Initialize user history
     initHistory(history) {
         this.history = {
-            title: 'Listen again',
-            subTitle: 'Re-listen some of your songs',
+            title: 'home.history.title',
+            subTitle: 'home.history.subtitle',
             page: '/user/history',
             loading: false,
             items: history.sort( (a, b) => { return 0.5 - Math.random() })
@@ -154,8 +154,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         })
 
         this.recommended = {
-            title: 'Just for you',
-            subTitle: 'We thought you may like these',
+            title: 'home.recommended.title',
+            subTitle: 'home.recommended.subtitle',
             page: '/user/recommended',
             loading: false,
             items: tracks.sort( (a, b) => { return 0.5 - Math.random() }).slice(0,10)

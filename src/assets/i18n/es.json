@@ -33,6 +33,10 @@
 		"toptags":{
 			"title": "Etiquetas",
 			"subtitle": "Estas etiquetas están que arden"
+		},
+		"playlists":{
+			"title":"Playlists recientes",
+			"subtitle":"Playlists públicas de nuestros usuarios"
 		}
 	},
 	"header":{
@@ -98,9 +102,6 @@
 		"name":"Playlists",
 		"title": "Listas de reproducción de usuarios",
 		"nowplaying": "Reproduciendo ahora"
-	},
-	"sections":{
-
 	},
 	"tags":{
 		"name" :"Etiquetas",
