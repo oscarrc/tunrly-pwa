@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SkinService } from './skin.service';
+import { StorageService } from './storage.service';
 
 @Injectable({ 
     providedIn: "root"
@@ -14,7 +15,9 @@ export class UserService {
 
     user: Observable<any> = this.userSource.asObservable();
     
-    constructor(private httpClient: HttpClient, private skinService: SkinService) {
+    constructor(private httpClient: HttpClient, 
+                private skinService: SkinService,
+                private storageService: StorageService) {
     }
 
     
@@ -24,10 +27,10 @@ export class UserService {
    
     set(user){        
         if(user){
-            sessionStorage.setItem('user', JSON.stringify(user));
+            this.storageService.setUser(user)
             this.skinService.skin.emit(user['settings']['dark'] ? 'dark' : 'light');
         }else{
-            sessionStorage.removeItem('user');
+           this.storageService.clearCurrentUser();
         }
 
         this.userSource.next(user);

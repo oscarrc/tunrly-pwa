@@ -7,6 +7,7 @@ import { LoadingService } from './services/loading.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import {TranslateService} from '@ngx-translate/core';
+import { StorageService } from './services/storage.service';
 
 @Component({
     selector: 'app-root',
@@ -22,13 +23,15 @@ export class AppComponent implements OnInit, OnDestroy {
                 private skinService: SkinService,
                 private userService: UserService,
                 private authService: AuthService,
+                private storageService: StorageService,
                 private translateService: TranslateService) {
-        this.loadingService.startLoading();
-        this.translateService.setDefaultLang('en');        
+                            
+        this.initLang();
+        this.initTheme(); 
     }
 
     initUser(){
-        const user = JSON.parse(sessionStorage.getItem('user'));
+        const user = this.storageService.getCurrentUser();
         
         if(!user){
             this.userService.get().subscribe( user => {
@@ -39,13 +42,25 @@ export class AppComponent implements OnInit, OnDestroy {
         }
     }
 
-
-    ngOnInit() {
+    initLang(){
+        const lang = this.storageService.getLang();
         const browserLang = this.translateService.getBrowserLang();
-        this.translateService.use(browserLang.match(/en|es/) ? browserLang : 'en');
+        console.log(lang);
+        this.loadingService.startLoading();
+        this.translateService.setDefaultLang('en');
 
-        this.document.body.classList.add(this.themeClass);
-              
+        if(lang){
+            this.translateService.use(lang);
+        }else{
+            this.translateService.use(browserLang.match(/en|es/) ? browserLang : 'en');
+        }
+    }
+
+    initTheme(){
+        const theme = this.storageService.getThemeSkin();
+        console.log(theme)
+        if(theme) this.skinService.skin = theme;
+
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
             if(skin == 'light') {
                 this.document.body.classList.remove(this.themeClass);
@@ -53,7 +68,13 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.document.body.classList.add(this.themeClass);
             }
         });
-                
+
+        this.document.body.classList.add(this.themeClass);
+    }
+
+
+
+    ngOnInit() {       
         if(this.authService.loggedIn) this.initUser();
     }
 

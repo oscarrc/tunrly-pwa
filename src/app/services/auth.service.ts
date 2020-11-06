@@ -7,6 +7,7 @@ import { UserService } from './user.service';
 
 import Fingerprint2 from '@fingerprintjs/fingerprintjs';
 import { Router } from '@angular/router';
+import { StorageService } from './storage.service';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,11 @@ export class AuthService {
     private isLoggedIn: boolean = false;
     private cookieTTL: any = 0;
 
-    constructor(private httpClient: HttpClient, private cookieService: CookieService, private userService: UserService, private router: Router ) {
+    constructor(private httpClient: HttpClient, 
+                private cookieService: CookieService, 
+                private userService: UserService, 
+                private storageService: StorageService,
+                private router: Router ) {
         this.init();
     }
 
@@ -30,6 +35,14 @@ export class AuthService {
         if(this.session && this.session !== ''){
             this.isLoggedIn = true; 
         }
+    }
+
+    private clear(){
+        this.storageService.clearLocalStorage();     
+        this.cookieService.deleteAll();
+        this.router.navigate(['/']);                             
+        this.userService.set(null);
+        this.isLoggedIn = false;  
     }
 
     get loggedIn(): boolean{
@@ -77,11 +90,8 @@ export class AuthService {
             err => {
                 return err
             }            
-        ).add(() => {           
-            this.cookieService.deleteAll();      
-            this.router.navigate(['/']);                             
-            this.userService.set(null);
-            this.isLoggedIn = false;   
+        ).add(() => {      
+            this.clear();
         });
     }
 
@@ -90,22 +100,15 @@ export class AuthService {
 
         return this.httpClient.patch(this.authURL, { user:session.uid, token:session.session, device: session.fingerprint }).pipe(tap(
             res => {
-                let date = new Date();
-               
-                date.setFullYear(date.getFullYear() + 1);
-
                 this.userService.set(res['user']);
                 this.cookieService.set("token", res['token'], 0, '/', this.domain);
                 this.cookieService.set("session", res['session'], this.cookieTTL, '/', this.domain);
-
                 this.isLoggedIn = true;
                 
                 return res;
             },
             err => {
-                this.isLoggedIn = false;
-                this.cookieService.deleteAll();
-                this.userService.set(null);
+                this.clear();
                 return err
             }
         ));

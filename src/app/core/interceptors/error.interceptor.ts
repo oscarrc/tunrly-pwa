@@ -7,12 +7,13 @@ import { JwtInterceptor } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '../../services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({ providedIn: 'root' }) 
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(private router: Router, 
                 private authService: AuthService,
-                private jwtInterceptor: JwtInterceptor, 
+                private jwtInterceptor: JwtInterceptor,
                 private toastr: ToastrService) {}
 
     private refreshing: Boolean = false;
