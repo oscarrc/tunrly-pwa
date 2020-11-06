@@ -1,8 +1,9 @@
 export class Config {
 
-    static CURRENT_USER = 'currentUser';
+    static CURRENT_USER = 'user';
     static THEME_CLASSES = ['primary', 'danger', 'success', 'warning', 'info', 'brand', 'dark'];
-    static THEME_SKIN = 'themeSkin';
+    static THEME_SKIN = 'skin';
+    static APP_LANG = 'lang';
 
     static classes = {
         show: 'show',

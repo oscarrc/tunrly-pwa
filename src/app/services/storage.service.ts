@@ -26,11 +26,42 @@ export class StorageService {
         }
     }
 
+    clearLocalStorage(key = null){
+        if(!key) return localStorage.clear();
+
+        try {
+            localStorage.removeItem(key)
+        } catch (e) {
+            console.error('Error deleting data from local storage', e);
+            return null;
+        }
+    }
+
+    setUser(user){
+        localStorage.setItem(Config.CURRENT_USER, JSON.stringify(user));
+    }
+
+    setTheme(theme){
+        localStorage.setItem(Config.THEME_SKIN, JSON.stringify(theme));
+    }
+
+    setLang(lang){
+        localStorage.setItem(Config.APP_LANG, JSON.stringify(lang));
+    }
+
     getCurrentUser() {
         return this.getLocalStorage(Config.CURRENT_USER);
     }
 
     getThemeSkin() {
         return this.getLocalStorage(Config.THEME_SKIN);
+    }
+
+    getLang() {
+        return this.getLocalStorage(Config.APP_LANG);
+    }
+
+    clearCurrentUser(){
+        this.clearLocalStorage(Config.CURRENT_USER);
     }
 }
