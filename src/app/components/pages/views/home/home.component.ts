@@ -36,10 +36,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.userService.user.subscribe( user => {
-            if(user.settings?.personalResults){
-                this.initHistory(user.history.slice(0,9));
-                this.initRecommended(user.favorite);
-            }            
+            this.initHistory(user.history.slice(0,9));
+            this.initRecommended(user.favorite);       
         }).unsubscribe();
 
         this.initTopTracks();
@@ -50,10 +48,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.loadingService.stopLoading();
     }
-
-    // ngOnDestroy(){
-    //     this.userSubscription.unsubscribe();
-    // }
 
     getRandom(elements: Array<any>){
         const size = elements.length;
@@ -135,7 +129,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             subTitle: 'home.history.subtitle',
             page: '/user/history',
             loading: false,
-            items: history.sort( (a, b) => { return 0.5 - Math.random() })
+            items: history.sort( () => { return 0.5 - Math.random() })
         };
     }
 
@@ -158,7 +152,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             subTitle: 'home.recommended.subtitle',
             page: '/user/recommended',
             loading: false,
-            items: tracks.sort( (a, b) => { return 0.5 - Math.random() }).slice(0,10)
+            items: tracks.sort( () => { return 0.5 - Math.random() }).slice(0,10)
         };
     }
 }
