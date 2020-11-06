@@ -10,6 +10,7 @@ import { StorageService } from '../../../services/storage.service';
 import { UserService } from '../../../services/user.service';
 import { SkinService } from '../../../services/skin.service';
 import { Config } from '../../../config/config';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-header',
@@ -35,6 +36,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 private simpleModalService: SimpleModalService,
                 private storageService: StorageService,
                 private userService: UserService,
+                private translateService: TranslateService,
                 private skinService: SkinService) {
         this.languageIcon = './assets/images/svg/translate.svg';
     }
@@ -54,6 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.userSubscription = this.userService.user.subscribe( user => {
             this.currentUser = user;
+            this.translateService?.use(user.language);
         });
 
         this.searchSubscription = this.searchService.hideSearch.subscribe((value) => {

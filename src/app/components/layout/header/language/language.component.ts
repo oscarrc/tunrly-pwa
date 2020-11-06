@@ -20,8 +20,6 @@ export class LanguageComponent extends SimpleModalComponent<any, any> implements
         this.userService.update({language: this.lang}).subscribe(
             res => { 
                 this.userService.set(res);
-                this.translateService.use(this.lang);
-                this.close();
             }
         )
     }
@@ -29,8 +27,7 @@ export class LanguageComponent extends SimpleModalComponent<any, any> implements
     ngOnInit() {
         this.userService.user.subscribe(
             user => { 
-                this.lang = user.language 
-                this.translateService.use(this.lang);
+                this.lang = user.language
             }
         )
     }
