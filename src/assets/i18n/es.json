@@ -241,9 +241,7 @@
 			"UnableToCreatePlaylist": "No se ha podido crear la playlist",
 			"UnableToDeletePlaylist": "No se ha podido eliminar la playlist",
 			"PlaylistNotFound": "La playlist no se ha encontrado o no es pública y no te pertenece.",
-			"UnableToFetchTags": "Imposible recuperar las etiquetas. Inténtelo más tarde"
-		},
-		"auth":{
+			"UnableToFetchTags": "Imposible recuperar las etiquetas. Inténtelo más tarde",
 			"BadCredentials": "Credenciales incorrectos",
 			"NotActive": "La cuenta no está activa",
 			"InsufficientPermits": "No tienes permisos suficientes para hacer eso"

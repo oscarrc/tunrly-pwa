@@ -241,9 +241,7 @@
 			"UnableToCreatePlaylist": "Unable to create the playlist",
 			"UnableToDeletePlaylist": "Unable to delete the playlist",
 			"PlaylistNotFound": "The playlist was not found or it is not public and it doesn't belong to you",
-			"UnableToFetchTags": "We're unable to fetch tags. Try again later."
-		},
-		"auth":{
+			"UnableToFetchTags": "We're unable to fetch tags. Try again later.",
 			"BadCredentials": "Bad credentials",
 			"NotActive": "Account is not active",
 			"InsufficientPermits": "You not have enough permits to do that"
