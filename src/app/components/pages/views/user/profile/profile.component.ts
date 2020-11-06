@@ -101,7 +101,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
                 profile.disable();
                 this.userService.set(res);
                 this.toggleEdit();
-                this.toastr.success('Profile updated', 'OK');
+                this.toastr.success('Profile updated', 'OK', { positionClass: 'toast-offset'});
             }
         ).add( () => this.profileLoading = false )
     }
@@ -118,7 +118,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
         this.userService.updatePassword(passwords.controls.oldpassword.value, passwords.controls.password.value).subscribe(
             res => {
                 this.passwordSubmitted = false;
-                this.toastr.success('Password changed', 'OK');
+                this.toastr.success('Password changed', 'OK', { positionClass: 'toast-offset'});
                 passwords.reset();
             }
         ).add(() => this.passwordLoading = false)

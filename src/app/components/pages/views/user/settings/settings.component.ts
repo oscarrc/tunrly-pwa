@@ -29,7 +29,7 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.userService.update({ history: [] }).subscribe(
             res => { 
                 this.userService.set(res);
-                this.toastr.success('History cleared', 'OK');
+                this.toastr.success('History cleared', 'OK', { positionClass: 'toast-offset'});
             }
         )
     }
@@ -40,7 +40,7 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.userService.update({settings: this.settings}).subscribe(
             res => { 
                 this.userService.set(res)
-                this.toastr.success('Settings saved', 'OK');
+                this.toastr.success('Settings saved', 'OK', { positionClass: 'toast-offset'});
              },
             err => {
                 this.settings = this.lastSettings 

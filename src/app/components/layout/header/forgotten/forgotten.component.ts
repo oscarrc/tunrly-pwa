@@ -43,7 +43,7 @@ export class ForgottenComponent extends SimpleModalComponent<any, any> implement
 
         this.validationService.create(forgotten.value.user, 1).subscribe().add( () => {
             this.loading = false;
-            this.toastr.success("Email sent", 'OK');
+            this.toastr.success("Email sent", 'OK', { positionClass: 'toast-offset'});
             this.close();
         })
     }

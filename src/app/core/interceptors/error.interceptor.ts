@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     private refreshing: Boolean = false;
 
     private handleError(err){
-        this.toastr.error(err.error.message, 'Error');
+        this.toastr.error(err.error.message, 'Error', { positionClass: this.authService.loggedIn ? 'toast-offset' : 'toast-position'});
     }
 
     private handleRefresh(){
@@ -54,13 +54,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                     }
                 case 403:
                     this.handleError(err);
-                    return throwError(err);
                 case 404:
                     this.router.navigate(['/404']);
-                    return throwError(err);
                 default:
                     this.handleError(err);
-                    return throwError(err);
             }            
         }))
     }

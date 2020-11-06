@@ -22,3 +22,15 @@
         background-color:rgba($primary, .5);
     }
 }
+
+.toast-offset{
+    position: fixed;
+    bottom: 6rem;
+    right: 2rem;
+}
+
+.toast-position{
+    position: fixed;
+    bottom: 0.5rem;
+    right: 2rem;
+}

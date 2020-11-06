@@ -8,7 +8,6 @@ import { PlayerService } from '../../../../../../services/player.service';
 import { Subscription } from 'rxjs';
 
 import { FileValidator } from '../../../../../../core/validators/file.validator';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-edit-playlist',
@@ -29,8 +28,7 @@ export class EditPlaylistComponent implements OnDestroy{
 
     constructor(private route: ActivatedRoute, 
                 private router: Router, 
-                private loadingService: LoadingService, 
-                private toastr: ToastrService,
+                private loadingService: LoadingService,
                 private playlistService: PlaylistService, 
                 private playerService: PlayerService) { 
         this.loadingService.startLoading();
