@@ -11,17 +11,22 @@ import { TranslateService } from '@ngx-translate/core';
 export class LanguageComponent extends SimpleModalComponent<any, any> implements OnInit, OnDestroy {
     private userSubscription: Subscription;
     lang:string;
+    loading: boolean = false
 
-    constructor(private userService: UserService, private translateService: TranslateService) {
+    constructor(private userService: UserService) {
         super();
     }
 
     setLanguage(){
+        this.loading = true;
         this.userService.update({language: this.lang}).subscribe(
             res => { 
                 this.userService.set(res);
             }
-        )
+        ).add( () => {
+            this.loading = false;
+            this.close();
+        })
     }
 
     ngOnInit() {

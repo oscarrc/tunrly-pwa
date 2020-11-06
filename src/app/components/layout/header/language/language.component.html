@@ -20,7 +20,7 @@
             </ul>
         </div>
         <div class="modal-footer text-center d-block pb-4">
-            <button type="button" class="btn btn-primary btn-pill" (click)="setLanguage()">{{ 'header.language.apply' | translate }}</button>
+            <app-button type="button" (click)="setLanguage()" text="{{ 'header.language.apply' | translate }}" [loading]="loading" classes="btn btn-primary btn-pill"></app-button>
         </div>
     </div>
 </div>
