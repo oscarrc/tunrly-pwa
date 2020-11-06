@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AvailabilityValidator } from '../../../../../core/validators/availability.validator';
 import { PasswordValidator } from '../../../../../core/validators/password.validator';
 import { FileValidator } from '../../../../../core/validators/file.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-user-profile',
@@ -29,7 +30,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private userSubscription: Subscription;
     
-    constructor(private loadingService: LoadingService, private userService: UserService) { }
+    constructor(private loadingService: LoadingService, private userService: UserService, private toastr: ToastrService) { }
 
     toggleEdit(){
         this.profileSubmitted = false;
@@ -100,9 +101,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
                 profile.disable();
                 this.userService.set(res);
                 this.toggleEdit();
-            },
-            err => {
-                console.log(err)
+                this.toastr.success('Profile updated', 'OK');
             }
         ).add( () => this.profileLoading = false )
     }
@@ -119,10 +118,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
         this.userService.updatePassword(passwords.controls.oldpassword.value, passwords.controls.password.value).subscribe(
             res => {
                 this.passwordSubmitted = false;
+                this.toastr.success('Password changed', 'OK');
                 passwords.reset();
-            },
-            err => {
-                console.log(err)
             }
         ).add(() => this.passwordLoading = false)
     }
@@ -165,9 +162,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
         this.userService.update({image: image}).subscribe(
             res => {
                 this.userService.set(res);
-            },
-            err => {
-                console.log(err)
             }
         )
     }   

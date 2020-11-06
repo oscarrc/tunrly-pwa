@@ -5,6 +5,7 @@ import { UserService } from '../../../../../services/user.service';
 import { AuthService } from '../../../../../services/auth.service';
 
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-user-settings',
@@ -21,12 +22,15 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private loadingService: LoadingService, 
                 private userService: UserService, 
-                private authService: AuthService) { }
+                private authService: AuthService,
+                private toastr: ToastrService) { }
 
     clearHistory(){
         this.userService.update({ history: [] }).subscribe(
-            res => { this.userService.set(res) },
-            err => {}
+            res => { 
+                this.userService.set(res);
+                this.toastr.success('History cleared', 'OK');
+            }
         )
     }
 
@@ -36,8 +40,11 @@ export class UserSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.userService.update({settings: this.settings}).subscribe(
             res => { 
                 this.userService.set(res)
+                this.toastr.success('Settings saved', 'OK');
              },
-            err => { this.settings = this.lastSettings }
+            err => {
+                this.settings = this.lastSettings 
+            }
         ).add( () => this.loading = false )
     }
 

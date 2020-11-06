@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 
 import { ValidationService } from '../../../../services/validation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-forgotten',
@@ -15,7 +16,7 @@ export class ForgottenComponent extends SimpleModalComponent<any, any> implement
     device: string;
     formSubmitted = false;
 
-    constructor( private validationService:ValidationService) {
+    constructor( private validationService:ValidationService, private toastr: ToastrService) {
         super();
     }
 
@@ -42,6 +43,7 @@ export class ForgottenComponent extends SimpleModalComponent<any, any> implement
 
         this.validationService.create(forgotten.value.user, 1).subscribe().add( () => {
             this.loading = false;
+            this.toastr.success("Email sent", 'OK');
             this.close();
         })
     }
