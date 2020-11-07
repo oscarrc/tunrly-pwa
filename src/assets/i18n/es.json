@@ -52,7 +52,7 @@
 		"login":{
 			"name": "Iniciar sesión",
 			"title": "Inicia sesión en Tunrly.com",
-			"usernameoremail": "Nobmre de usuario o mail",
+			"usernameoremail": "Nombre de usuario o mail",
 			"password": "Contraseña",
 			"remember": "Recuérdame",
 			"clickhere": "Click aquí"
@@ -217,7 +217,7 @@
 			"email": "Por favor, ingrese un email válido",
 			"emailtaken": "Email no disponible",
 			"usertaken": "Nombre de usuario no disponible",
-			"username": "El nobmre de usuario debe tener entre 5 y 15 caracateres y empezar con una letra. Solo se permiten los simbolos (. - _)",
+			"username": "El nombre de usuario debe tener entre 5 y 15 caracateres y empezar con una letra. Solo se permiten los simbolos (. - _)",
 			"password": "La contraseña debe tener entre 8 - 15 caracteres y contener, por lo menos, una mayúscula, una minúscula y un número",
 			"passwordmatch": "Las contraseñas no coinciden",
 			"tac": "Debes aceptar los términos y condiciones",
