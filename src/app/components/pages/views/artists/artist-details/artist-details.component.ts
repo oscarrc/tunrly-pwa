@@ -57,10 +57,7 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
         this.artistService.getInfo(this.artistName).subscribe(
             res => {
                 this.artistDetails = res;
-                
-                if(!this.artistDetails.tracks){
-                    this.getTracks();
-                }
+                this.getTracks();
             }
         )
     }

@@ -77,7 +77,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         if(!this.trackDetails.similar || !this.trackDetails.similar.length){
             this.trackService.getSimilar(this.trackDetails._id).subscribe(
                 res => {
-                    this.trackDetails.similar = res;
+                    this.trackDetails.similar = this.similarTracks.items = res;
                     this.similarTracks.loading = false;
                 }
             )
