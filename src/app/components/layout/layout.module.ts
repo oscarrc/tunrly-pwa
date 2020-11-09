@@ -32,8 +32,6 @@ import { ValidationComponent } from './header/validation/validation.component';
 import { ForgottenComponent } from './header/forgotten/forgotten.component';
 import { BannerComponent } from './banner/banner.component';
 
-import { ToTimePipe } from '../../core/pipes/toTime.pipe';
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
 };
@@ -55,7 +53,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ValidationComponent,
         ForgottenComponent,
         BannerComponent,
-        ToTimePipe
     ],
     exports: [
         AsideLeftComponent,
