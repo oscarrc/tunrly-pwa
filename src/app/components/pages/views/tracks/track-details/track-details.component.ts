@@ -16,6 +16,9 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     trackName: string;
     trackArtist: string;
     trackDetails: any;
+    loading: boolean = false;
+    gridView:boolean = false;
+    similarTracks: any;
 
     routeSubscription: Subscription;
 
@@ -42,8 +45,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     addFavorite() {
         this.userService.setFavorite(this.trackDetails._id, 'track').subscribe(
-            res => { this.userService.set(res) },
-            err => {}
+            res => { this.userService.set(res) }
         )
     }
 
@@ -52,23 +54,36 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getTrackDetails() {
+        this.loading = true;
+
         this.trackService.getInfo(this.trackName, this.trackArtist).subscribe(
             res => {
-                this.trackDetails = res
-                if(!this.trackDetails.similar || !this.trackDetails.similar.length){
-                    this.getSimilar()
-                }
-            },
-            err => console.log(err)
-        )
+                this.trackDetails = res;
+                this.initSimilar()
+            }
+        ).add( () => this.loading = false )
     }
 
-    getSimilar(){
-        if(!this.trackDetails.similar || this.trackDetails.similar.length == 0){
+    initSimilar(){
+        this.similarTracks = {
+            title: 'tracks.similar',
+            subTitle: 'tracks.alsolike',
+            page: '/track/' + this.trackDetails._id + '/similar',
+            loading: true,
+            items: []
+        };
+
+        
+        if(!this.trackDetails.similar || !this.trackDetails.similar.length){
             this.trackService.getSimilar(this.trackDetails._id).subscribe(
-                res => this.trackDetails.similar = res,
-                err => console.log(err)
+                res => {
+                    this.trackDetails.similar = res;
+                    this.similarTracks.loading = false;
+                }
             )
+        }else{
+            this.similarTracks.items = this.trackDetails.similar;
+            this.similarTracks.loading = false;
         }
     }
 

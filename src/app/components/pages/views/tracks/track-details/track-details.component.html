@@ -34,25 +34,11 @@
         </div>
     </div>
 
-    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
-    <div class="section" *ngIf="trackDetails?.similar?.length">
-        <div class="heading">
-            <div class="d-flex flex-wrap align-items-end">
-                <div class="flex-grow-1">
-                    <h4>{{ 'tracks.similar' | translate | titlecase}}</h4>
-                    <p>{{ 'tracks.alsolike' | translate}}</p>
-                </div>
-                <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/track/' + trackDetails._id + '/similar'">{{ 'ui.viewall' | translate }}</a>
-            </div>
-            <hr>
-        </div>
+    <app-section  *ngIf="similarTracks?.loading || trackDetails?.similar.length > 0" [section]="similarTracks" 
+        [primaryCard]="true"
+        carouselButtonPositionClass="arrow-pos-3"
+        [showImageOptions]="true">
+    </app-section>
 
-        <div class="row custom-card-list">
-            <div class="col-xl-6 col-lg-12" *ngFor="let track of trackDetails?.similar; let i = index">                    
-                <app-track-list-view [trackNumber]="i+1" [track]="track"></app-track-list-view>
-            </div>  
-        </div>  
-    </div>
-    <!-- End | Section -->
 </div>
 <!-- End | Main Container -->
