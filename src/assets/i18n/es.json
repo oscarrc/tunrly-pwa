@@ -112,7 +112,9 @@
 		"lyrics": "Letra",
 		"play": "Reproducir",
 		"viewalbum": "Ver Album",
-		"top": "Canciones populares"
+		"top": "Canciones populares",
+		"similar": "Canciones Similares",
+		"alsolike": "Quiza te gusten estas canciones"
 	},
 	"ui":{
 		"viewall": "Ver todo",

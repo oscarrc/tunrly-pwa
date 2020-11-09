@@ -28,7 +28,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
             if (param.name) {
                 this.trackName = param.name;
                 this.trackArtist = param.artist;
-                this.getSongDetails();
+                this.getTrackDetails();
             }
         });
     }
@@ -51,9 +51,14 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.userService.isFavorite(this.trackDetails._id, 'track');
     }
 
-    getSongDetails() {
+    getTrackDetails() {
         this.trackService.getInfo(this.trackName, this.trackArtist).subscribe(
-            res => this.trackDetails = res,
+            res => {
+                this.trackDetails = res
+                if(!this.trackDetails.similar || !this.trackDetails.similar.length){
+                    this.getSimilar()
+                }
+            },
             err => console.log(err)
         )
     }

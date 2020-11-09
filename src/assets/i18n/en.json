@@ -112,7 +112,9 @@
 		"lyrics": "Lyrics",
 		"play": "Play",
 		"viewalbum": "View Album",
-		"top": "Top tracks"
+		"top": "Top tracks",
+		"similar": "Similar tracks",
+		"alsolike": "You may also like these"
 	},
 	"ui":{
 		"viewall": "View All",

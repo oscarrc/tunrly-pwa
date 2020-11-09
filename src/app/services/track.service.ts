@@ -13,10 +13,6 @@ export class TrackService {
         return this.httpClient.get(this.trackUrl + `${name}/${artist}`);
     }
 
-    getLyrics(id: string){
-        return this.httpClient.get(this.trackUrl + `${id}/lyrics`);
-    }
-
     getSimilar(id: string){
         return this.httpClient.get(this.trackUrl + `${id}/similar`);
     }
