@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 
 import { PlayerService } from '../../../services/player.service';
+import { StorageService } from '../../../services/storage.service'
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -44,7 +45,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 private userService: UserService,
-                private playerService: PlayerService) { }
+                private storageService: StorageService,
+                private playerService: PlayerService) { 
+                    const options = this.storageService.getLocalStorage('player');
+                    this.playerOptions.shuffle = options?.shuffle || false;
+                    this.playerOptions.repeat = options?.repeat || false;
+                }
 
     ngOnInit() {
         this.init();
@@ -131,6 +137,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     toggleOptions(option){
         this.playerService.setOption(option);
+        this.storageService.setLocalStorage('player', this.playerOptions);
     }
 
     openPlaylist() {
