@@ -58,10 +58,16 @@
                     <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/artist/' + artistDetails?._id + '/tracks'">{{ 'ui.viewall' | translate }}</a>
                 </div>
                 <!-- End | Container header -->
-                <div class="row custom-card-list">
+                <div class="row custom-card-list" *ngIf="!loadingTracks">
                     <div class="col-xl-6 col-lg-12" *ngFor="let track of artistDetails?.tracks; let i = index">                    
                         <app-track-list-view [trackNumber]="i+1" [track]="track"></app-track-list-view>
                     </div>  
+                </div>
+
+                <div *ngIf="loadingTracks == true" class="row custom-card-list">
+                    <div class="col-xl-6 col-lg-12" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; let i = index">
+                        <app-track-list-view-loader [trackNumber]="i+1"></app-track-list-view-loader>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album-tab">
@@ -70,10 +76,16 @@
                     <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/artist/' + artistDetails?._id + '/albums'">{{ 'ui.viewall' | translate }}</a>
                 </div>
                 <!-- End | Container header -->
-                <div class="row">
+                <div class="row custom-card-list" *ngIf="!loadingAlbums">
                     <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let album of artistDetails?.albums">
                         <app-image-card [item]="album" [imageBorderRadiusClass]="imageBorderRadiusClass"
                             type="album"></app-image-card>
+                    </div>
+                </div>
+
+                <div *ngIf="loadingAlbums == true"  class="row custom-card-list">
+                    <div class="col-6 col-md-2 col-sm-4 col-xl-2 mb-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
+                        <app-secondary-card-loader></app-secondary-card-loader>
                     </div>
                 </div>
             </div>
@@ -83,10 +95,16 @@
                     <a class="btn btn-sm btn-pill btn-air btn-primary" [routerLink]="'/artist/' + artistDetails?._id + '/similar'">{{ 'ui.viewall' | translate }}</a>
                 </div>
                 <!-- End | Container header -->
-                <div class="row">
+                <div class="row custom-card-list" *ngIf="!loadingSimilar">
                     <div class="col-6 col-md-2 col-sm-4 mb-4" *ngFor="let artist of artistDetails?.similar">
                         <app-image-card [item]="artist" [imageBorderRadiusClass]="imageBorderRadiusClass"
                             type="artist"></app-image-card>
+                    </div>
+                </div>
+
+                <div *ngIf="loadingSimilar == true"  class="row custom-card-list">
+                    <div class="col-6 col-md-2 col-sm-4 col-xl-2 mb-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
+                        <app-secondary-card-loader></app-secondary-card-loader>
                     </div>
                 </div>
             </div>
