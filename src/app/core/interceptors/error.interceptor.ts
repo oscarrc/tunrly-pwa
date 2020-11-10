@@ -7,7 +7,6 @@ import { JwtInterceptor } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '../../services/auth.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({ providedIn: 'root' }) 
 export class ErrorInterceptor implements HttpInterceptor {
@@ -52,10 +51,13 @@ export class ErrorInterceptor implements HttpInterceptor {
                     }else{
                         this.handleError(err)
                     }
+                    break;
                 case 403:
                     this.handleError(err);
+                    break;
                 case 404:
                     this.router.navigate(['/404']);
+                    break;
                 default:
                     this.handleError(err);
             }            

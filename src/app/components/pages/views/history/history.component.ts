@@ -37,7 +37,7 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.tracks = {
                     title: 'History',
                     subTitle: 'You recently listen',
-                    list: user.history
+                    list: user.history.reverse()
                 };
             }
         )
