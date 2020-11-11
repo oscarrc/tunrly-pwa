@@ -37,12 +37,8 @@ export class TagsComponent implements OnInit, AfterViewInit {
     initTags() {
         this.loading = true;
         this.tagService.getTop(this.page, this.limit).subscribe(
-            res => {
-                this.loading = false;
-                this.tags = res;
-            },
-            err => console.log(err)
-        )
+            res =>  this.tags = res            
+        ).add( () => this.loading = false )
     }
 
 }

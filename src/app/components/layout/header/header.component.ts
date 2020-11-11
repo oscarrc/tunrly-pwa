@@ -78,8 +78,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 res => {
                     this.searchService.searchResults = res
                     if(res) this.showSearchResults();
-                },
-                err => console.log(err)
+                }
             )
         }
     }

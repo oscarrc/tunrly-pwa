@@ -131,13 +131,10 @@ export class LandingComponent implements OnInit, AfterViewInit {
         delete user.repeatpassword;
 
         this.userService.create(user).subscribe(
-            res => {
+            () => {
                 registration.reset();
                 this.formSubmitted = false;
                 this.openValidationModal(user.email);
-            },
-            err => {
-                console.log(err)
             }
         ).add( () => this.loading = false )
     }

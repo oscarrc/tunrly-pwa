@@ -35,12 +35,8 @@ export class PlaylistsComponent implements OnInit, AfterViewInit {
         this.loading = true;
 
         this.playlistService.get(null, this.page, this.limit).subscribe(
-            res => {
-                this.loading = false;
-                this.playlists = res;
-            },
-            err => console.log(err)
-        )
+            res => this.playlists = res
+        ).add( () => this.loading = false )
     }
 
     ngAfterViewInit() {

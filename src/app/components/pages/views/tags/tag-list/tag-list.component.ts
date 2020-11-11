@@ -52,12 +52,8 @@ export class TagListComponent implements OnInit, AfterViewInit, OnDestroy {
     
     getTag(){
         this.tagService.getTag(this.tagName, this.type, this.page, this.limit).subscribe(
-            res => { 
-                this[this.type] = res;
-                this.loading = false;
-            },
-            err => console.log(err)
-        )
+            res => this[this.type] = res
+        ).add( () => this.loading = false )
     }
 
     ngOnDestroy(){

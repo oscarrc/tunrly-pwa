@@ -56,8 +56,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     // Initialize static data for display
     getAlbumDetails() {
         this.albumService.getInfo(this.albumName, this.artistName).subscribe(
-            res => this.albumDetails = res,
-            err => console.log(err)
+            res => this.albumDetails = res
         )
     }
    

@@ -53,8 +53,7 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
     // Initialize static data for display
     getPlaylistDetails() {
         this.playlistService.getInfo(this.playlistId).subscribe(
-            res => this.playlistDetails = res,
-            err => console.log(err)
+            res => this.playlistDetails = res
         )
     }
    

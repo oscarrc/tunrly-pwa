@@ -66,12 +66,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         };
         
         this.trackService.getTop('', 1, 10).subscribe(
-            res => {
-                this.topTracks.items = res;
-                this.topTracks.loading = false;
-            },
-            err => console.log(err)
-        )
+            res =>  this.topTracks.items = res 
+        ).add( () => { this.topTracks.loading = false })
     }
 
     // Initialize top tracks object
@@ -85,12 +81,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         };
         
         this.artistService.getTop('', 1, 10).subscribe(
-            res => {
-                this.topArtists.items = res;
-                this.topArtists.loading = false;
-            },
-            err => console.log(err)
-        );
+            res => this.topArtists.items = res
+        ).add( () => this.topArtists.loading = false );
     }
 
     // Initialize top tracks object
@@ -104,12 +96,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         };
         
         this.tagService.getTop(1, 10).subscribe(
-            res => {
-                this.topTags.items = res;
-                this.topTags.loading = false;
-            },
-            err => console.log(err)
-        )
+            res => this.topTags.items = res
+        ).add( () => { this.topTags.loading = false })
     }
  
     // Initialize music playlist object for section
@@ -138,13 +126,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
         let tracks = [];
 
         favorites.track.forEach( track => {
-            tracks = tracks.concat(track.similar.slice(0,5))
+            if(track.similar){
+                tracks = tracks.concat(track.similar.slice(0,5))
+            }
         });
 
         favorites.artist.forEach( artist => {
-            artist.similar.slice(0,5).forEach( similar => {
-                tracks = tracks.concat(similar.tracks);
-            })
+            if(artist.similar) {
+                artist.similar.slice(0,5).forEach( similar => {
+                    tracks = tracks.concat(similar.tracks);
+                })
+            }
         })
 
         this.recommended = {

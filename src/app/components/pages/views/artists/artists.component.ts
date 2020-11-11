@@ -67,8 +67,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
             res => {
                 this.loading = false;
                 this.artists = res
-            },
-            err => console.log(err)
+            }
         )
     }
 
@@ -77,8 +76,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
             res => {
                 this.loading = false;
                 this.artists = res;
-            },
-            err => console.log(err)
+            }
         )
     }
 

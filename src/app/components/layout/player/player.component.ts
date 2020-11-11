@@ -88,7 +88,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     ready(event){
-        console.log(1)
         this.player = event.target;
         this.player?.setVolume(this.volume);
         this.timer = setInterval( () => {

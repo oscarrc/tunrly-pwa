@@ -59,12 +59,8 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         };
 
         this.tagService.getTag(this.tagName, 'artists', 1, 10).subscribe(
-            res => {
-                this.artists.items= res;
-                this.artists.loading = false;  
-            },
-            err => console.log(err)
-        )
+            res => this.artists.items= res
+        ).add( () => this.artists.loading = false )
     }
 
     initAlbums(){ 
@@ -76,12 +72,8 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         };
 
         this.tagService.getTag(this.tagName, 'albums', 1, 10).subscribe(
-            res => { 
-                this.albums.items= res; 
-                this.albums.loading = false; 
-            },
-            err => console.log(err)
-        )
+            res =>   this.albums.items= res 
+        ).add( () => this.albums.loading = false )
     }
 
     initTracks(){         
@@ -93,12 +85,8 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         };
 
         this.tagService.getTag(this.tagName, 'tracks', 1, 10).subscribe(
-            res => {
-                this.tracks.items= res;                    
-                this.tracks.loading = false;
-            },
-            err => console.log(err)
-        )
+            res => this.tracks.items= res
+        ).add( () => this.tracks.loading = false )
     }
 
     initPlaylists(){
@@ -110,12 +98,8 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         };
 
         this.tagService.getTag(this.tagName, 'playlists', 1, 10).subscribe(
-            res => {  
-                this.playlists.items= res;
-                this.playlists.loading = false     
-            },
-            err => console.log(err)
-        )
+            res => this.playlists.items= res
+        ).add( () => this.playlists.loading = false )
     }
 
     ngOnDestroy() {

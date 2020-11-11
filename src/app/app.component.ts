@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
     initLang(){
         const lang = this.storageService.getLang();
         const browserLang = this.translateService.getBrowserLang();
-        console.log(lang);
+        
         this.loadingService.startLoading();
         this.translateService.setDefaultLang('en');
 
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     initTheme(){
         const theme = this.storageService.getThemeSkin();
-        console.log(theme)
+        
         if(theme) this.skinService.skin = theme;
 
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {

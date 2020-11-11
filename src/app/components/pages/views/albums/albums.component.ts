@@ -51,9 +51,8 @@ export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
             res => {
                     this.loading = false;
                     this.albums = res;
-                },
-            err => console.log(err)
-        )
+                }
+        ).add( () => this.loading = false )
     }
 
     ngOnDestroy() {
