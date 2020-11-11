@@ -56,12 +56,13 @@ export class ErrorInterceptor implements HttpInterceptor {
                     }
                 case 403:
                     this.handleError(err);
-                    break;
+                    return throwError(err);
                 case 404:
                     this.router.navigate(['/404']);
-                    break;
+                    return throwError(err);
                 default:
                     this.handleError(err);
+                    return throwError(err);
             }            
         }))
     }
