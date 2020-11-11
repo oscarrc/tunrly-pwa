@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable, throwError, ReplaySubject } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { Observable, ReplaySubject, throwError } from 'rxjs';
+import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { JwtInterceptor } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,42 +16,44 @@ export class ErrorInterceptor implements HttpInterceptor {
                 private toastr: ToastrService) {}
 
     private refreshing: Boolean = false;
+    private refreshObservable: Observable<any>;
+    private refreshSubject: ReplaySubject<any>;
 
     private handleError(err){
         this.toastr.error(err.error.message, 'Error', { positionClass: this.authService.loggedIn ? 'toast-offset' : 'toast-position'});
     }
 
     private handleRefresh(){
-        const refreshObservable = this.authService.refresh();
-        const refreshSubject = new ReplaySubject<any>(1);
+        this.refreshing = true;
+        this.refreshObservable = this.authService.refresh();
+        this.refreshSubject = new ReplaySubject<any>(null);
 
-        refreshSubject.subscribe().add( () => { this.refreshing = false } );
-
-        refreshObservable.subscribe(refreshSubject);
-        
-        return refreshSubject;
+        this.refreshObservable.subscribe(this.refreshSubject);
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {    
         return next.handle(req).pipe(catchError((err:any) => {        
             switch(err.status){
                 case 401:
-                    if(this.authService.loggedIn && !this.refreshing){                                                        
-                        this.refreshing = true;
+                    if(this.authService.loggedIn){
+                        if (!this.refreshing) this.handleRefresh();
 
-                        return this.handleRefresh().pipe(
-                            mergeMap(() => {
-                                return this.jwtInterceptor.intercept(req, next);
-                            }),
-                            catchError( err => {
-                                this.router.navigate(['/']);
-                                return throwError(err);
+                        return this.refreshSubject.pipe(
+                            filter( t => t !== null),
+                            take(1),
+                            switchMap(() => {                            
+                                return this.jwtInterceptor.intercept(req, next).pipe(
+                                    catchError( (err) => {
+                                        if(this.authService.loggedIn) this.authService.logout();
+                                        return throwError(err);
+                                    })
+                                );
                             })
                         )
                     }else{
-                        this.handleError(err)
+                        this.handleError(err);
+                        return throwError(err);
                     }
-                    break;
                 case 403:
                     this.handleError(err);
                     break;
