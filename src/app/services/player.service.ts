@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -19,10 +20,18 @@ export class PlayerService {
     playerOptions: EventEmitter<any> = new EventEmitter();
     currentPlaylist: BehaviorSubject<any> = new BehaviorSubject(this.playlist);
 
-    constructor() { }
+    constructor(private storageService: StorageService) {
+        this.options = this.getOptions();
+    }
 
     get track(){
         return this.playlist.tracks[this.options.index];
+    }
+
+    getOptions():any{
+        const options = this.storageService.getLocalStorage('player');
+        if(options) return options;
+        return this.options;
     }
 
     playTrack(track) {
@@ -36,11 +45,8 @@ export class PlayerService {
         let index = this.options.index;
 
         if(this.options.repeat && this.options.index == this.playlist.tracks.length - 1) index = -1;
-
-        if(this.playlist.tracks?.length > this.options.index){
-            index = this.options.shuffle ?  Math.floor(Math.random()* this.playlist.tracks.length) : index + 1;
-            this.options.index = index;
-        }
+        if(this.options.shuffle) index = Math.floor(Math.random()* this.playlist.tracks.length);
+        if(this.playlist.tracks?.length > this.options.index) this.options.index = index++; 
         
         this.playerOptions.emit(this.options);
     }

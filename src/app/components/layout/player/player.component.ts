@@ -47,9 +47,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 private userService: UserService,
                 private storageService: StorageService,
                 private playerService: PlayerService) { 
-                    const options = this.storageService.getLocalStorage('player');
-                    this.playerOptions.shuffle = options?.shuffle || false;
-                    this.playerOptions.repeat = options?.repeat || false;
+                    this.playerOptions = this.playerService.getOptions();
                 }
 
     ngOnInit() {
@@ -65,6 +63,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
             this.track = this.playerService.track;            
             this.playerOptions = options;
+            
             if(this.track){
                 this.userService.addToHistory(this.track._id).subscribe(
                     res => { this.userService.set(res) }
