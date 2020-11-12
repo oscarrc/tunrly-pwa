@@ -34,10 +34,11 @@ export class PlayerService {
         return this.options;
     }
 
-    playTrack(track) {
+    playTrack(track) {        
         this.playlist.tracks.unshift(track);
         this.currentPlaylist.next(this.playlist);
         this.options.index = 0;
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playerOptions.emit(this.options);
     }
 
@@ -70,14 +71,14 @@ export class PlayerService {
     }
 
     addToPlaylist(track){
-        this.options.modified = true;
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playlist.tracks.push(track);
         this.currentPlaylist.next(this.playlist);
         this.playerOptions.emit(this.options);
     }
 
     playNowPlaylist(playlist) {
-        this.options.modified = false;
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playlist = playlist;
         this.currentPlaylist.next(this.playlist);
         this.options.index = 0;
@@ -85,8 +86,10 @@ export class PlayerService {
     }
 
     removeFromPlaylist(index){
-        this.playlist.tracks = this.playlist.tracks.splice(index, 1);
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
+        this.playlist.tracks.splice(index, 1);
         this.currentPlaylist.next(this.playlist);
+        this.playerOptions.emit(this.options);
     }
 
     setOption(option){

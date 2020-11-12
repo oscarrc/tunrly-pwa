@@ -4,7 +4,7 @@
 <div class="main-container">
     <div class="row section">
         <div class="col-xl-8 col-md-10 mx-auto">
-            <form class="card" [formGroup]="playlistForm" *ngIf="playlist" (ngSubmit)="savePlaylist(playlistForm)" [ngClass]="formSubmitted ? 'submitted' : ''">
+            <form class="card" [formGroup]="playlistForm" *ngIf="playlistForm   " (ngSubmit)="savePlaylist(playlistForm)" [ngClass]="formSubmitted ? 'submitted' : ''">
                 <div class="card-header">
                     <h6 class="card-title mb-0">{{ 'user.playlists.edit.title' | translate }}</h6>
                 </div>

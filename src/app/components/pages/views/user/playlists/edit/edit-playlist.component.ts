@@ -47,7 +47,7 @@ export class EditPlaylistComponent implements OnDestroy{
             name: new FormControl(this.playlist.name, [
                 Validators.required
             ]),
-            tags: new FormControl(this.playlist.tags.toString(), [
+            tags: new FormControl(this.playlist.tags ? this.playlist.tags.toString() : '', [
                 Validators.required
             ]),
             description: new FormControl(this.playlist.description, [
@@ -64,17 +64,17 @@ export class EditPlaylistComponent implements OnDestroy{
                 tracks: playlist?.tracks,
                 name: playlist?.name,
             }
-        });
-        
-        this.loadingService.stopLoading();
-        this.initForm();
+            
+            this.loadingService.stopLoading();  
+            this.initForm();
+        });     
     }
 
     getPlaylistDetails(){
         this.playlistService.getInfo(this.playlistId).subscribe( 
             playlist => {
-                this.loadingService.stopLoading();
                 this.playlist = playlist;
+                this.loadingService.stopLoading();
                 this.initForm();
             }
         )
