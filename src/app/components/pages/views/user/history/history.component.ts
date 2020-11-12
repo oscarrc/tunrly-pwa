@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { UserService } from '../../../../services/user.service';
+import { LoadingService } from '../../../../../services/loading.service';
+import { UserService } from '../../../../../services/user.service';
 
 @Component({
-    selector: 'app-history',
+    selector: 'app-user-history',
     templateUrl: './history.component.html'
 })
-export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
     tracks: any = {};
     page: number = 1;

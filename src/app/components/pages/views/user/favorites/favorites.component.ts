@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
-import { LoadingService } from '../../../../services/loading.service';
+import { LoadingService } from '../../../../../services/loading.service';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-favorites',
+    selector: 'app-user-favorites',
     templateUrl: './favorites.component.html'
 })
-export class FavoritesComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     songs: any = {};
     favorites: any = {};

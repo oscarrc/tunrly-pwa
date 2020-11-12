@@ -22,8 +22,8 @@ import { TracksComponent } from './tracks/tracks.component';
 import { TrackDetailsComponent } from './tracks/track-details/track-details.component';
 import { PlaylistsComponent } from './playlists/playlists.compontent';
 import { PlaylistDetailsComponent } from './playlists/playlist-details/playlist-details.component';
-import { FavoritesComponent } from './favorites/favorites.component';
-import { HistoryComponent } from './history/history.component';
+import { UserFavoritesComponent } from './user/favorites/favorites.component';
+import { UserHistoryComponent } from './user/history/history.component';
 import { UserProfileComponent } from './user/profile/profile.component';
 import { UserRecommendedComponent } from './user/recommended/recommended.component';
 import { UserComponent } from './user/user.component';
@@ -141,11 +141,11 @@ const routes: Routes = [
             },
             {
                 path: 'user/favorites',
-                component: FavoritesComponent
+                component: UserFavoritesComponent
             },
             {
                 path: 'user/history',
-                component: HistoryComponent
+                component: UserHistoryComponent
             },
             {
                 path: 'user/playlists',
@@ -189,8 +189,8 @@ const routes: Routes = [
         PlaylistDetailsComponent,
         TracksComponent,
         TrackDetailsComponent,
-        FavoritesComponent,
-        HistoryComponent,
+        UserFavoritesComponent,
+        UserHistoryComponent,
         UserProfileComponent,
         UserRecommendedComponent,
         UserComponent,
