@@ -51,9 +51,11 @@ export class FavoritesComponent implements OnInit, AfterViewInit, OnDestroy {
         });
 
         this.favorites.artist.forEach( artist => {
-            artist.similar.forEach( similar => {
-                tracks = tracks.concat(similar.tracks)
-            })
+            if(artist.similar){
+                artist.similar.forEach( similar => {
+                    tracks = tracks.concat(similar.tracks)
+                })
+            }
         });
 
         return tracks.sort( (a, b) => { return 0.5 - Math.random() });
