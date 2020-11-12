@@ -29,7 +29,7 @@ export class FavoritesComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe(
             user => {
-                this.favorites = user.favorite;
+                this.favorites = user?.favorite;
                 this.initSongs();
             }
         );
