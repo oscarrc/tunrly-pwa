@@ -37,11 +37,7 @@ export class UserService {
     }
 
     get(username:string = null){
-        let params = {};
-
-        if (username) params['value'] = username;
-
-        return this.httpClient.get(this.userURL, params)
+        return this.httpClient.get(this.userURL + (username ? username : ''))
     }
 
     create(user: any){

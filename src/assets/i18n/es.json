@@ -150,7 +150,7 @@
 		},
 		"settings":{
 			"privacy": "Privacidad",
-			"publicprofile": "Mostrar perfil público (requerido para playlists públicas)",
+			"publicprofile": "Mostrar perfil público",
 			"publicfavorites": "Mostrar favoritos en perfil público",
 			"musicquality": "Calidad de Música",
 			"streamingquality": "Calidad de setreaming",
