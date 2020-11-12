@@ -64,8 +64,8 @@ export class AuthService {
         return this.httpClient.post(this.authURL, { user: user, password: password, device: this.fingerprint }).pipe(tap(
             res => {
                 this.userService.set(res['user']);
-                this.cookieService.set("uid", res['user']['_id'], 0, '/', this.domain);
                 this.cookieService.set("token", res['token'], 0, '/', this.domain);
+                this.cookieService.set("uid", res['user']['_id'], this.cookieTTL, '/', this.domain);
                 this.cookieService.set("fingerprint", this.fingerprint, this.cookieTTL, '/', this.domain);
                 this.cookieService.set("session", res['session'], this.cookieTTL, '/', this.domain);
 
@@ -82,7 +82,14 @@ export class AuthService {
 
     logout(device:boolean = true){
         const fingerprint = this.cookieService.get("fingerprint");
+        const token = this.cookieService.get("token");
+        const session = this.cookieService.get("session");
 
+        if(!session && !token){
+            this.clear();
+            return;
+        }
+        
         return this.httpClient.delete(this.authURL, { params: device ? { device: fingerprint } : {} }).subscribe(
             res => {      
                 return res["success"];

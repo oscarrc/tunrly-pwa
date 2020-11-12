@@ -44,9 +44,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                             switchMap(() => {                            
                                 return this.jwtInterceptor.intercept(req, next).pipe(
                                     catchError( (err) => {
-                                        if(this.authService.loggedIn) this.authService.logout();
+                                        this.authService.logout();
                                         return throwError(err);
-                                    })
+                                    }),
                                 );
                             })
                         )
