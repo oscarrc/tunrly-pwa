@@ -7,7 +7,9 @@ export class AvailabilityValidator {
   static checkAvailability(userService: UserService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
       return userService.check(control.value).pipe(
-        map((result: boolean) => ({notAvailable: result}) )
+        map((result) =>  {
+          return result['available'] ? null : { notAvailable: true }
+        } )
       );
     };
   }

@@ -53,7 +53,7 @@ export class ValidationComponent implements OnInit, OnDestroy{
         this.reset = new FormGroup({
             password: new FormControl('', [
                 Validators.required,
-                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
             ]),
             repeatpassword: new FormControl('', [
                 Validators.required

@@ -76,11 +76,11 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
         this.passwordForm = new FormGroup({            
                 oldpassword: new FormControl('', [
                     Validators.required,
-                    Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                    Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
                 ]),
                 password: new FormControl('', [
                     Validators.required,
-                    Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                    Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
                 ]),
                 repeatpassword: new FormControl('', [
                     Validators.required
