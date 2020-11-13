@@ -165,7 +165,7 @@ const routes: Routes = [
                 component: UserRecommendedComponent
             },        
             {
-                path: 'user/:username',
+                path: 'user/:username/profile',
                 component: UserComponent
             },
             {
