@@ -125,10 +125,13 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
         this.loading = true;
 
-        let user = registration.value;
-
-        delete user.tac;
-        delete user.repeatpassword;
+        const user = {
+            username: registration.value.username,
+            email: registration.value.email,
+            firstname: registration.value.firstname,
+            lastname: registration.value.lastname,
+            password: registration.value.passgroup.password,
+        }
 
         this.userService.create(user).subscribe(
             () => {

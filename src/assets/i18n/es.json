@@ -64,6 +64,7 @@
 			"submit": "Enviar"
 		},
 		"validation":{
+			"title":"Tu cuenta de Tunrly.com ha sido creada",
 			"text":"Hemos enviado un email a la dirección proporcionada. Comprueba tu correo (y spam) para activar tu cuenta",
 			"didntreceive":"¿No has recibido el email?",
 			"tryagain":"Intentar de nuevo"

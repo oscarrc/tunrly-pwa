@@ -22,7 +22,7 @@ export class UserService {
 
     
     check(value){
-        return this.httpClient.get(this.userURL  + '/check', { params: { value } });
+        return this.httpClient.get(this.userURL  + 'check', { params: { value } });
     }
    
     set(user){        
@@ -49,11 +49,11 @@ export class UserService {
     }
 
     updatePassword(oldPassword: string, newPassword: string){
-        return this.httpClient.patch(this.userURL + '/password', {oldPassword, newPassword});
+        return this.httpClient.patch(this.userURL + 'profile/password', {oldPassword, newPassword});
     }
 
     setFavorite(favId: string, type: string){
-        return this.httpClient.patch(this.userURL + '/favorites', {favId, type});
+        return this.httpClient.patch(this.userURL + 'profile/favorites', {favId, type});
     }
 
     isFavorite(favId: string, type: string): boolean{
@@ -62,6 +62,6 @@ export class UserService {
     }
 
     addToHistory(track: string){
-        return this.httpClient.patch(this.userURL + '/history', { track });
+        return this.httpClient.patch(this.userURL + 'profile/history', { track });
     }
 }
