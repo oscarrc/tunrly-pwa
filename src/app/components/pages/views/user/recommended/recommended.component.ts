@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { UserService } from '../../../../../services/user.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { UserService } from 'src/app/services/user.service';
 import { PlayerService } from 'src/app/services/player.service';
 
 @Component({

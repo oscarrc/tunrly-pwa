@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { PlayerService } from '../../../../../services/player.service';
-import { TrackService } from '../../../../../services/track.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { TrackService } from 'src/app/services/track.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

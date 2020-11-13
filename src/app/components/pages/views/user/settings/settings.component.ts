@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { UserService } from '../../../../../services/user.service';
-import { AuthService } from '../../../../../services/auth.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';

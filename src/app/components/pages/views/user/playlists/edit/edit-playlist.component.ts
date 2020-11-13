@@ -2,12 +2,12 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { LoadingService } from '../../../../../../services/loading.service';
-import { PlaylistService } from '../../../../../../services/playlist.service';
-import { PlayerService } from '../../../../../../services/player.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { PlaylistService } from 'src/app/services/playlist.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { Subscription } from 'rxjs';
 
-import { FileValidator } from '../../../../../../core/validators/file.validator';
+import { FileValidator } from 'src/app/core/validators/file.validator';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { PlayerService } from '../../../../../services/player.service';
-import { ArtistService } from '../../../../../services/artist.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { ArtistService } from 'src/app/services/artist.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
