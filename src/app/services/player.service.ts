@@ -43,23 +43,18 @@ export class PlayerService {
     }
 
     playNext(){
-        let index = this.options.index;
-
-        if(this.options.repeat && this.options.index == this.playlist.tracks.length - 1) index = -1;
-        if(this.options.shuffle) index = Math.floor(Math.random()* this.playlist.tracks.length);
-        if(this.playlist.tracks?.length > this.options.index) this.options.index = index++; 
+        if(this.options.repeat && this.options.index == this.playlist.tracks.length - 1) this.options.index = -1;
+        if(this.options.shuffle) this.options.index = Math.floor(Math.random()* this.playlist.tracks.length);
+        if(this.playlist.tracks?.length > this.options.index) this.options.index += 1; 
         
         this.playerOptions.emit(this.options);
     }
 
     playPrev(){
-        let index = this.options.index;
+        if(this.options.repeat && this.options.index == 0 ) this.options.index = this.playlist.tracks.length;
 
-        if(this.options.repeat && index == 0 ) index = this.playlist.tracks.length;
-
-        if(index > 0 && this.playlist.tracks.length){            
-            index = this.options.shuffle ? Math.floor(Math.random()* this.playlist.tracks.length) : index - 1;
-            this.options.index = index;
+        if(this.options.index > 0 && this.playlist.tracks.length){            
+            this.options.index = this.options.shuffle ? Math.floor(Math.random()* this.playlist.tracks.length) : this.options.index - 1;
         }
        
         this.playerOptions.emit(this.options);
