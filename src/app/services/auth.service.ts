@@ -39,7 +39,7 @@ export class AuthService {
 
     private clear(){
         this.storageService.clearLocalStorage();     
-        this.cookieService.deleteAll();
+        this.cookieService.deleteAll('/', this.domain);
         this.router.navigate(['/']);                             
         this.userService.set(null);
         this.isLoggedIn = false;  
