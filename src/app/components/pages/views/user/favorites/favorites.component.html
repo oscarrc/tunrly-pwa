@@ -36,11 +36,6 @@
                     <div class="container-header">
                         <span class="title">{{favorites?.track?.length || 0 }} {{ 'ui.results' | translate }}</span>
                         <div class="ml-auto d-flex align-items-center">
-                            <!-- <select class="select" name="sort" id="sort">
-                                <option selected="">Popular</option>
-                                <option value="0">A-Z</option>
-                                <option value="1">Z-A</option>
-                            </select> -->
                             <a class="icon" (click)="gridView = !gridView">
                                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
                                 <ng-template #gridViewButton>
