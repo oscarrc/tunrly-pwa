@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build --prod",
     "postbuild": "echo '' > dist/tunrly/200.html",
     "deploy": "surge dist/tunrly tunrly.com",
@@ -35,7 +35,6 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
-    "express": "^4.17.1",
     "ionicons": "^4.6.3",
     "jquery": "^3.5.1",
     "ng2-charts": "^2.4.0",
