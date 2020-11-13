@@ -6,8 +6,9 @@ import { Component, Input } from '@angular/core';
 })
 export class NothingComponent {
 
-    @Input() type: string;
+    @Input() message: string;
     @Input() url: string;
+    @Input() action: string;
 
     constructor() { }
 
