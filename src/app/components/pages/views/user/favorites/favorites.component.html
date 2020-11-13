@@ -50,7 +50,7 @@
                     </div>
                     <!-- End | Container header -->
 
-                    <div class="row custom-card-list">
+                    <div class="row custom-card-list" *ngIf="favorites.track?.length; else notracks">
                         <ng-container *ngIf="gridView; else listView">
                             <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let track of favorites.track">
                                 <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
@@ -62,6 +62,14 @@
                             </div>
                         </ng-template>
                     </div>
+
+                    <ng-template #notracks>
+                        <app-nothing 
+                            message="tracks.empty"
+                            url="/tracks"
+                            action="tracks.explore">
+                        </app-nothing>
+                    </ng-template>
                 </div>
 
                 <div class="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums-tab">
@@ -77,11 +85,19 @@
                     </div>
                     <!-- End | Container header -->
 
-                    <div class="row custom-card-list">
+                    <div class="row custom-card-list" *ngIf="favorites.album?.length; else noalbums">
                         <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let album of favorites.album | slice:(page.album-1)*limit:page.album*limit">
                             <app-image-card [item]="album" type="album"></app-image-card>
                         </div>
                     </div>
+
+                    <ng-template #noalbums>
+                        <app-nothing 
+                            message="albums.empty"
+                            url="/albums"
+                            action="albums.explore">
+                        </app-nothing>
+                    </ng-template>
                 </div>
                 <div class="tab-pane fade" id="artists" role="tabpanel" aria-labelledby="artists-tab">
                     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
@@ -92,31 +108,29 @@
                                 <button type="button" (click)="prevPage('artist')" [disabled]="page.artist == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
                                 <button type="button" (click)="nextPage('artist')" [disabled]="favorites.artist.length / limit <= page.artist" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
                             </span>
-                            <!-- <select class="select" name="sort" id="sort">
-                                <option selected="">Popular</option>
-                                <option value="0">A-Z</option>
-                                <option value="1">Z-A</option>
-                            </select> -->
                         </div>
                     </div>
                     <!-- End | Container header -->
 
-                    <div class="row custom-card-list">
+                    <div class="row custom-card-list" *ngIf="favorites.artist?.length; else noartists">
                         <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let artist of favorites.artist | slice:(page.artist-1)*limit:page.artist*limit">
                             <app-image-card [item]="artist" type="artist"></app-image-card>
                         </div>
                     </div>
+
+                    <ng-template #noartists>
+                        <app-nothing 
+                            message="artists.empty"
+                            url="/artists"
+                            action="artists.explore">
+                        </app-nothing>
+                    </ng-template>
                 </div>
                 <div class="tab-pane fade" id="playlists" role="tabpanel" aria-labelledby="playlists-tab">
                     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                     <div class="container-header">
                         <span class="title">{{favorites?.playlist?.length || 0}} {{ 'ui.results' | translate }}</span>
                         <div class="ml-auto d-flex align-items-center">
-                            <!-- <select class="select" name="sort" id="sort">
-                                <option selected="">Popular</option>
-                                <option value="0">A-Z</option>
-                                <option value="1">Z-A</option>
-                            </select> -->
                             <span>
                                 <button type="button" (click)="prevPage('playlist')" [disabled]="page.playlist == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
                                 <button type="button" (click)="nextPage('playlist')" [disabled]="favorites.playlist.length / limit <= page.playlist" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
@@ -125,11 +139,19 @@
                     </div>
                     <!-- End | Container header -->
 
-                    <div class="row custom-card-list">
+                    <div class="row custom-card-list" *ngIf="favorites.playlist?.length; else noplaylists">
                         <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let playlist of favorites.playlist | slice:(page.playlist-1)*limit:page.playlist*limit">
                             <app-description-card [item]="playlist"  type="playlist"></app-description-card>
                         </div>
                     </div>
+
+                    <ng-template #noplaylists>
+                        <app-nothing 
+                            message="playlists.empty"
+                            url="/playlists"
+                            action="playlists.explore">
+                        </app-nothing>
+                    </ng-template>
                 </div>
             </div>  
         </div>

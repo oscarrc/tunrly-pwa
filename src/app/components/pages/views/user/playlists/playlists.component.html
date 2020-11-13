@@ -14,7 +14,7 @@
 
      <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
      <div class="section">
-        <div *ngIf="!loading" class="row custom-card-list">
+        <div *ngIf="!loading && playlists.length; else nothing" class="row custom-card-list">
             <div class="col-xl-3 col-lg-4 col-sm-6 mb-4 mb-sm-auto" *ngFor="let playlist of playlists">
                 <app-description-card [item]="playlist" type="playlist" [edit]="true"></app-description-card>
             </div>
@@ -24,6 +24,13 @@
                 <app-description-card-loader></app-description-card-loader>
             </div>
         </div>
+        <ng-template #nothing>
+            <app-nothing 
+                message="user.playlists.empty"
+                url="/home"
+                action="user.playlists.explore">
+            </app-nothing>
+        </ng-template>
     </div>
     <!-- End | Section -->
 </div>

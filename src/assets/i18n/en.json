@@ -1,10 +1,15 @@
 {
 	"albums":{
 		"name":"Albums",
-		"top": "Top Albums"
+		"top": "Top Albums",
+		"empty": "You haven't favorited any album yet",
+		"explore": "Explore popular"
 	},
 	"artists":{
-		"name":"Artists"
+		"name":"Artists",
+		"empty": "You haven't favorited any artist yet",
+		"explore": "Explore popular",
+		"similar": "Similar artists"
 	},
 	"context":{
 		"favorite": "Favorite",
@@ -102,7 +107,9 @@
 	"playlists":{
 		"name":"Playlists",
 		"title": "User contributed playlists",
-		"nowplaying": "Now playing"
+		"nowplaying": "Now playing",
+		"empty": "You haven't favorited any playlist yet",
+		"explore": "Explore popular"
 	},
 	"tags":{
 		"name" :"Tags",
@@ -115,7 +122,9 @@
 		"viewalbum": "View Album",
 		"top": "Top tracks",
 		"similar": "Similar tracks",
-		"alsolike": "You may also like these"
+		"alsolike": "You may also like these",
+		"empty": "You haven't favorited any track yet",
+		"explore": "Explore popular"
 	},
 	"ui":{
 		"viewall": "View All",
@@ -125,7 +134,8 @@
 		"gotohome":"Go To Homepage",
 		"results": "Results", 
 		"for": "for",
-		"nofound":"No {{type}} Found"
+		"nofound":"No {{type}} Found",
+		"nothing": "Nothing here"
 	},
 	"user":{
 		"profile":{
@@ -188,7 +198,9 @@
 				"cancel": "Cancel",
 				"tags":"Tags",
 				"comma":"Comma delimited"
-			}
+			},			
+			"empty": "You have no playlists",
+			"explore": "Go and make one"
 		},
 		"recommended":{
 			"title": "Curated tracks just for you",
@@ -201,7 +213,9 @@
 		},
 		"history":{
 			"title": "History",
-			"subtitle": "You've recently listen"
+			"subtitle": "You've recently listen",
+			"empty": "You've not listened to any song yet",
+			"explore": "Browse some"
 		}
 	},
 	"validation":{
