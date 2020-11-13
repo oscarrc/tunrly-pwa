@@ -50,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         }),
         ToastrModule.forRoot({
             timeOut: 5000,
-            positionClass: 'toast-position',
+            positionClass: 'toast-offset',
             preventDuplicates: true,
         }),
         TranslateModule.forRoot({

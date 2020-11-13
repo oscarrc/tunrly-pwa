@@ -8,6 +8,7 @@ import { PlayerService } from '../../../../../../services/player.service';
 import { Subscription } from 'rxjs';
 
 import { FileValidator } from '../../../../../../core/validators/file.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-edit-playlist',
@@ -24,13 +25,12 @@ export class EditPlaylistComponent implements OnDestroy{
     
     private routeSubscription: Subscription;
 
-    //TODO playlists tags
-
     constructor(private route: ActivatedRoute, 
                 private router: Router, 
                 private loadingService: LoadingService,
                 private playlistService: PlaylistService, 
-                private playerService: PlayerService) { 
+                private playerService: PlayerService,
+                private toastr: ToastrService) { 
         this.loadingService.startLoading();
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.id) {
@@ -115,18 +115,20 @@ export class EditPlaylistComponent implements OnDestroy{
         playlist.tracks = this.playlist.tracks.map( t => t._id);
         playlist.tags = playlist.tags.split(',').map( t => t.trim() )
 
-        if(playlist.image) playlist.image = await this.imageToBase64(this.files[0]);
+        if(playlist.image && this.files) playlist.image = await this.imageToBase64(this.files[0]);
        
         if(this.playlistId){
             this.playlistService.update(playlist, this.playlistId).subscribe(
                 () => {
-                    this.router.navigate(['/user/playlists'])
+                    this.toastr.success("Playlist updated", "OK");
+                    this.router.navigate(['/user/playlists']);
                 }
             ).add( () => this.loading = false )
         }else{
             this.playlistService.create(playlist).subscribe(
                 () => {
-                    this.router.navigate(['/user/playlists'])
+                    this.toastr.success("Playlist saved", "OK");
+                    this.router.navigate(['/user/playlists']);
                 }
             ).add( () => this.loading = false )
         }
