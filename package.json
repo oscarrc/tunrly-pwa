@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build --prod",
+    "postbuild": "echo '' > dist/tunrly/200.html",
     "deploy": "surge dist/tunrly tunrly.com",
+    "deploy-beta": "surge dist/tunrly beta.tunrly.com",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
