@@ -13,6 +13,7 @@ import { StorageService } from './services/storage.service';
     selector: 'app-root',
     templateUrl: './app.component.html'
 })
+
 export class AppComponent implements OnInit, OnDestroy {
     title = 'Tunrly.com';
     themeClass = 'theme-dark';

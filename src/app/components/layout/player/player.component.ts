@@ -92,7 +92,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.timer = setInterval( () => {
             this.time = this.player.getCurrentTime();
             this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
-        })
+        });
     }
 
     stateChange(event){
@@ -114,7 +114,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 break;
             case 3: //Buffering
                 break;
-            case 5: //Queued
+            case 5: //Queued        
+                this.playPause();
                 break;
         }
     }
