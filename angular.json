@@ -26,7 +26,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/.htaccess"
+              "src/.htaccess",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "node_modules/ionicons/dist/css/ionicons.min.css",
@@ -75,7 +76,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
@@ -106,7 +109,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/.htaccess"
+              "src/.htaccess",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "node_modules/ionicons/dist/css/ionicons.min.css",

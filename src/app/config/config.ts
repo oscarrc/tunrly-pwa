@@ -17,7 +17,7 @@ export class Config {
     constructor() {
         this.config = {
             brand: {
-                logo: './assets/images/logos/logo.svg',
+                logo: './assets/images/logo.svg',
                 name: 'Tunrly.com'
             },
             themeSkin: {

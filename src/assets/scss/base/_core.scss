@@ -81,7 +81,7 @@ img {
     .bg-#{nth($banner-bg-list, $i)} {
         background-attachment: fixed;
         background-position: center center;
-        background-image: url('#{$banner-bg-image-url}#{nth($banner-bg-list, $i)}.jpg');
+        // background-image: url('#{$banner-bg-image-url}#{nth($banner-bg-list, $i)}.jpg');
     }
 }
 

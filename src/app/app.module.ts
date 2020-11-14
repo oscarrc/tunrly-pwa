@@ -17,7 +17,9 @@ import { LoadingService } from './services/loading.service';
 import { MenuConfigService } from './services/menu.service';
 import { AuthService } from './services/auth.service';
 
-import {ErrorInterceptor} from './core/interceptors/error.interceptor'
+import {ErrorInterceptor} from './core/interceptors/error.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment'
 
 export function jwtOptionsFactory(cookieService: CookieService) {
     return {
@@ -60,7 +62,8 @@ export function HttpLoaderFactory(http: HttpClient) {
                 useFactory: HttpLoaderFactory,
                 deps: [HttpClient]
             }
-        })
+        }),
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [
         LoadingService,
