@@ -5,7 +5,7 @@
     
     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header d-flex justify-content-between">        
-        <span class="title">{{this[type]?.results?.total}} {{ 'ui.results' | translate}} {{ this[type]?.results?.query ? ('ui.for' | translate) + ' ' + this[type]?.results?.query : ''}}</span>
+        <span class="title">{{this.results[type]?.results?.total}} {{ 'ui.results' | translate}} {{ this.results[type]?.results?.query ? ('ui.for' | translate) + ' ' + this.results[type]?.results?.query : ''}}</span>
         <div class="d-flex align-items-center">
             <a *ngIf="type == 'tracks'" class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
@@ -25,12 +25,12 @@
     <div class="section">
         <div *ngIf="type == 'tracks' && !loading" class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
-                <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let track of tracks?.matches">
+                <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let track of results.tracks?.matches">
                     <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
                 </div>
             </ng-container>
             <ng-template #listView>
-                <div class="col-xl-6 col-lg-12" *ngFor="let track of tracks?.matches; let i = index">
+                <div class="col-xl-6 col-lg-12" *ngFor="let track of results.tracks?.matches; let i = index">
                     <app-track-list-view [trackNumber]="(i + 1 + ((page - 1) * limit))" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
                 </div>
             </ng-template>
@@ -50,7 +50,7 @@
         </div>
 
         <div *ngIf="type == 'albums' && !loading" class="row custom-card-list">
-            <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let album of albums?.matches">
+            <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let album of results.albums?.matches">
                 <app-image-card [item]="album" type="album"
                                 [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
             </div>
@@ -63,7 +63,7 @@
         </div>
 
         <div *ngIf="type == 'artists' && !loading" class="row custom-card-list">
-            <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let artist of artists?.matches">
+            <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let artist of results.artists?.matches">
                 <app-image-card [item]="artist" type="album"
                                 [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
             </div>
@@ -76,8 +76,8 @@
         </div>
 
         <div *ngIf="type == 'playlists' && !loading" class="row custom-card-list">
-            <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let playlist of playlists?.matches">
-                <app-description-card [item]="playlists.matches"  type="playlist"></app-description-card>
+            <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let playlist of results.playlists?.matches">
+                <app-description-card [item]="playlist"  type="playlist"></app-description-card>
             </div>
         </div>
 

@@ -15,10 +15,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
     routeSubscription: Subscription;
     statusSubscription: Subscription;
 
-    tracks: any = {};
-    albums: any = {};
-    artists: any = {};
-    playlists: any = {};
+    results: any = {};
     loading: boolean = false;
     type: string = "";
     page: number = 1;
@@ -52,7 +49,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
 
         this.searchService.doSearch(this.searchService.query, this.type, this.page, this.limit).subscribe(
             res => {
-                this.searchService.results = res;
+                this.results[this.type] = res;
             }
         ).add( () => {                
             this.searchService.status = false
@@ -61,10 +58,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
     
     ngOnInit() {
         this.searchSubscription = this.searchService.searchResults.subscribe((value) => {
-            this.tracks = value.tracks;
-            this.albums = value.albums;
-            this.artists = value.artists;
-            this.playlists = value.playlists
+            this.results = value
         });
 
         this.statusSubscription = this.searchService.searchStatus.subscribe((value) => {
