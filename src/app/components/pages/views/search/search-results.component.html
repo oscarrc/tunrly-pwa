@@ -23,7 +23,7 @@
 
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="section">
-        <div *ngIf="type == 'tracks'" class="row custom-card-list">
+        <div *ngIf="type == 'tracks' && !loading" class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
                 <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let track of tracks?.matches">
                     <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
@@ -31,28 +31,59 @@
             </ng-container>
             <ng-template #listView>
                 <div class="col-xl-6 col-lg-12" *ngFor="let track of tracks?.matches; let i = index">
-                    <app-track-list-view [trackNumber]="i+1" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
+                    <app-track-list-view [trackNumber]="(i + 1 + ((page - 1) * limit))" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
                 </div>
             </ng-template>
         </div>
 
-        <div *ngIf="type == 'albums'" class="row custom-card-list">
+        <div *ngIf="type == 'tracks' && loading == true" class="row custom-card-list">
+            <ng-container *ngIf="gridView; else listView">
+                <div class="col-lg-5 col-sm-3 col-xl-2" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; let i = index">
+                    <app-primary-card-loader></app-primary-card-loader>
+                </div>
+            </ng-container>
+            <ng-template #listView>
+                <div class="col-xl-6 col-lg-12" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; let i = index">
+                    <app-track-list-view-loader [trackNumber]="(i + 1 + ((page - 1) * limit))"></app-track-list-view-loader>
+                </div>
+            </ng-template>
+        </div>
+
+        <div *ngIf="type == 'albums' && !loading" class="row custom-card-list">
             <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let album of albums?.matches">
                 <app-image-card [item]="album" type="album"
                                 [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
             </div>
         </div>
 
-        <div *ngIf="type == 'artists'" class="row custom-card-list">
+        <div *ngIf="type == 'albums' && loading == true"  class="row custom-card-list">
+            <div class="col-xl-2 col-lg-4 col-sm-6 mb-4" *ngFor="let album of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
+                <app-primary-card-loader></app-primary-card-loader>
+            </div>
+        </div>
+
+        <div *ngIf="type == 'artists' && !loading" class="row custom-card-list">
             <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let artist of artists?.matches">
                 <app-image-card [item]="artist" type="album"
                                 [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
             </div>
         </div>
 
-        <div *ngIf="type == 'playlists'" class="row custom-card-list">
+        <div *ngIf="type == 'artists' && loading == true"  class="row custom-card-list">
+            <div class="col-6 col-md-2 col-sm-4 col-xl-2 mb-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
+                <app-secondary-card-loader></app-secondary-card-loader>
+            </div>
+        </div>
+
+        <div *ngIf="type == 'playlists' && !loading" class="row custom-card-list">
             <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let playlist of playlists?.matches">
                 <app-description-card [item]="playlists.matches"  type="playlist"></app-description-card>
+            </div>
+        </div>
+
+        <div *ngIf="type == 'playlists' && loading == true" class="row custom-card-list">
+            <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7]">
+                <app-description-card-loader></app-description-card-loader>
             </div>
         </div>
     </div>

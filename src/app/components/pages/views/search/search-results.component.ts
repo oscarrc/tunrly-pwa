@@ -19,7 +19,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
     albums: any = {};
     artists: any = {};
     playlists: any = {};
-    status: any = {};
+    loading: boolean = false;
     type: string = "";
     page: number = 1;
     limit: number = 12;
@@ -39,10 +39,24 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
 
     nextPage(){
         this.page = this.page + 1;
+        this.doSearch();
     }
 
     prevPage(){
         this.page = this.page - 1;
+        this.doSearch();
+    }
+
+    doSearch(){
+        this.searchService.status = true;
+
+        this.searchService.doSearch(this.searchService.query, this.type, this.page, this.limit).subscribe(
+            res => {
+                this.searchService.results = res;
+            }
+        ).add( () => {                
+            this.searchService.status = false
+        })
     }
     
     ngOnInit() {
@@ -54,7 +68,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
         });
 
         this.statusSubscription = this.searchService.searchStatus.subscribe((value) => {
-            this.status = value;
+            this.loading = value;
         })
     }
 

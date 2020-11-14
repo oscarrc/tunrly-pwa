@@ -74,24 +74,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     doSearch(){
         if(this.searchForm.valid){
-            const query = this.searchForm.get('query').value;
-
             this.showSearchResults();
             
-            this.searchService.status = {
-                query: query,
-                loading: true
-            }
+            this.searchService.status = true;            
+            this.searchService.query = this.searchForm.get('query').value;
 
-            this.searchService.doSearch(query).subscribe(
+            this.searchService.doSearch().subscribe(
                 res => {
                     this.searchService.results = res
                 }
             ).add( () => {                
-                this.searchService.status = {
-                    query: query,
-                    loading: false
-                }
+                this.searchService.status = false
             })
         }
     }
@@ -116,7 +109,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     toggleSearchFocus(){
-        if( this.searchForm.get('query').value && Object.keys(this.searchService.results).length ){
+        if( this.searchForm.get('query').value && this.searchService.query ){
             this.showSearchResults();
         }
         this.pressEnter = !this.pressEnter
