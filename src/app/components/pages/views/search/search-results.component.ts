@@ -13,11 +13,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
 
     searchSubscription: Subscription;
     routeSubscription: Subscription;
+    statusSubscription: Subscription;
 
     tracks: any = {};
     albums: any = {};
     artists: any = {};
     playlists: any = {};
+    status: any = {};
     type: string = "";
     page: number = 1;
     limit: number = 12;
@@ -42,7 +44,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
     prevPage(){
         this.page = this.page - 1;
     }
-
+    
     ngOnInit() {
         this.searchSubscription = this.searchService.searchResults.subscribe((value) => {
             this.tracks = value.tracks;
@@ -50,6 +52,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
             this.artists = value.artists;
             this.playlists = value.playlists
         });
+
+        this.statusSubscription = this.searchService.searchStatus.subscribe((value) => {
+            this.status = value;
+        })
     }
 
     ngOnDestroy() {

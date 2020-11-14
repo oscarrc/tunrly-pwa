@@ -44,6 +44,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.searchSubscription.unsubscribe();
+        this.statusSubscription.unsubscribe();
     }
 
 }

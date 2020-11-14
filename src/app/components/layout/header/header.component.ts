@@ -116,7 +116,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     toggleSearchFocus(){
-        if( !this.pressEnter && this.searchService.results.length ){
+        if( this.searchForm.get('query').value && Object.keys(this.searchService.results).length ){
             this.showSearchResults();
         }
         this.pressEnter = !this.pressEnter
