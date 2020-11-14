@@ -84,9 +84,10 @@ export class AuthService {
         const fingerprint = this.cookieService.get("fingerprint");
         const token = this.cookieService.get("token");
         const session = this.cookieService.get("session");
+        
+        this.clear();
 
         if(!session && !token){
-            this.clear();
             return;
         }
         
@@ -97,9 +98,7 @@ export class AuthService {
             err => {
                 return err
             }            
-        ).add(() => {      
-            this.clear();
-        });
+        )
     }
 
     refresh(){
