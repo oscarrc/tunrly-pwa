@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.loadingService.startLoading();
         this.translateService.setDefaultLang('en');
 
-        if(lang){
+        if(lang && lang != "undefined"){
             this.translateService.use(lang);
         }else{
             this.translateService.use(browserLang.match(/en|es/) ? browserLang : 'en');
