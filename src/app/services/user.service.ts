@@ -27,7 +27,8 @@ export class UserService {
    
     set(user){        
         if(user){
-            this.storageService.setUser(user)
+            //TODO Fix user exceeds storage
+            // this.storageService.setUser(user)
             this.skinService.skin.emit(user['settings']['dark'] ? 'dark' : 'light');
         }else{
            this.storageService.clearCurrentUser();

@@ -67,7 +67,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
             },
             err => {
                 this.loading = false;
-
+                
                 if( err.error?.name === "NotActive"){
                     this.simpleModalService.addModal(ValidationComponent, { email: this.user, title: "Validate your Tunrly.com account" });
                     this.close();
