@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "postbuild": "echo '' > dist/tunrly/200.html",
+    "postbuild": "cp dist/tunrly/index.html dist/tunrly/200.html",
     "deploy": "surge dist/tunrly tunrly.com",
     "deploy-beta": "surge dist/tunrly beta.tunrly.com",
     "test": "ng test",

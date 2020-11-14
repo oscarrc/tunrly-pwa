@@ -23,7 +23,7 @@ export class AsideRightComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.playlistSubscription = this.playerService.currentPlaylist.subscribe((playlist) => {
-            this.playlist = playlist;
+            this.playlist = playlist;        
         });
 
         this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {

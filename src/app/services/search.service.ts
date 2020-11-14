@@ -2,8 +2,6 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -12,17 +10,28 @@ export class SearchService {
 
     private search:any = [];
     private searchURL = environment.api + '/search/';
-    searchStatus: BehaviorSubject<any> = new BehaviorSubject(this.search);
+    private currentStatus = {
+        query: '',
+        loading: false
+    }
+
+    searchResults: BehaviorSubject<any> = new BehaviorSubject(this.search);
+    searchStatus: BehaviorSubject<any> = new BehaviorSubject(this.currentStatus);
     hideSearch: EventEmitter<boolean> = new EventEmitter(false);
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) {}
 
-    get searchResults() {
+    get results() {
         return this.search;
     }
 
-    set searchResults(value) {
+    set results(value) {
         this.search = value;
+        this.searchResults.next(value);
+    }
+
+    set status(value) {
+        this.currentStatus = value;
         this.searchStatus.next(value);
     }
 

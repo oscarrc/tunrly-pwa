@@ -44,7 +44,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
     }
 
     ngOnInit() {
-        this.searchSubscription = this.searchService.searchStatus.subscribe((value) => {
+        this.searchSubscription = this.searchService.searchResults.subscribe((value) => {
             this.tracks = value.tracks;
             this.albums = value.albums;
             this.artists = value.artists;
