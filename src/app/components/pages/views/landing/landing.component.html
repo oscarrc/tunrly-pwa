@@ -17,7 +17,7 @@
             <div class="banner-content">
                 <div class="container-fluid">
                     <div class="row d-flex align-items-center">
-                        <div class="align-self-end col-lg-4 col-md-10 mx-lg-auto mx-4 mt-4 text-center d-none d-lg-block">
+                        <div class="align-self-center col-lg-4 col-md-10 mx-lg-auto mx-4 mt-4 text-center d-none d-lg-block">
                             <img src="assets/images/mockup.png" alt="Tunrly.com free music app"/>
                         </div>
                         <div class="col-lg-4 col-md-10 mx-lg-auto mx-4 text-center mt-4 mt-lg-0">                            
@@ -95,7 +95,7 @@
                                             <div class="col-12 input-group">
                                                 <div class="custom-control custom-radio custom-control-inline pt-2">
                                                     <input type="checkbox" id="tac" formControlName="tac" name="eventType" class="custom-control-checkbox custom-control-input">
-                                                    <label for="free" class="custom-control-label">{{ 'landing.register.tac' | translate }}</label>                                                    
+                                                    <label for="free" class="custom-control-label text-left">{{ 'landing.register.tac' | translate }}</label>                                                    
                                                 </div>
                                                 <div class="invalid-feedback d-block text-left pl-4" *ngIf="formSubmitted">
                                                     <span *ngIf="registration.controls.tac.errors?.required">{{ 'errors.form.tac' | translate }}</span>
