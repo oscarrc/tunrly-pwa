@@ -367,5 +367,25 @@
       "src":  "assets/icons/firefox/firefox-general-16-16.png",
       "sizes": "16x16"
     }
+  ],
+  "shortcuts": [
+	{
+      "name": "Recommendations",
+      "short_name": "Recommendations",
+      "description": "Tracks just for you",
+      "url": "/user/recommended"
+    },
+	{
+      "name": "Your favorites",
+      "short_name": "Favorites",
+      "description": "Listen to your favorite music",
+      "url": "/user/favorites"
+    },
+	{
+      "name": "Your playlist",
+      "short_name": "Playlists",
+      "description": "Listen to your playlists",
+      "url": "/user/playlists"
+    }
   ]
 }
