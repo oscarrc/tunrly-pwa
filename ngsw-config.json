@@ -29,7 +29,7 @@
   ],
   "dataGroups":[
 	{
-		"name": "EntitiesSubsystem",
+		"name": "Entities",
 		"urls": [
 			"https://api.tunrly.com/v1/artist",
 			"https://api.tunrly.com/v1/album",
@@ -44,7 +44,7 @@
 		}
 	},
 	{
-		"name": "UserSubsystem",
+		"name": "User",
 		"urls": [
 			"https://api.tunrly.com/v1/user",
 			"https://api.tunrly.com/v1/playlist"
