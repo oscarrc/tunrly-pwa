@@ -5,12 +5,11 @@ import { Subscription } from 'rxjs';
 
 import { SimpleModalService } from 'ngx-simple-modal';
 import { LanguageComponent } from './language/language.component';
-import { SearchService } from '../../../services/search.service';
-import { StorageService } from '../../../services/storage.service';
-import { UserService } from '../../../services/user.service';
-import { SkinService } from '../../../services/skin.service';
-import { Config } from '../../../config/config';
-import { TranslateService } from '@ngx-translate/core';
+import { SearchService } from 'src/app/services/search.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { UserService } from 'src/app/services/user.service';
+import { SkinService } from 'src/app/services/skin.service';
+import { Config } from 'src/app/config/config';
 
 @Component({
     selector: 'app-header',
@@ -36,7 +35,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 private simpleModalService: SimpleModalService,
                 private storageService: StorageService,
                 private userService: UserService,
-                private translateService: TranslateService,
                 private skinService: SkinService) {
         this.languageIcon = './assets/images/svg/translate.svg';
     }

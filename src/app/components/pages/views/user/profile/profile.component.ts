@@ -5,9 +5,9 @@ import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { AvailabilityValidator } from '../../../../../core/validators/availability.validator';
-import { PasswordValidator } from '../../../../../core/validators/password.validator';
-import { FileValidator } from '../../../../../core/validators/file.validator';
+import { AvailabilityValidator } from 'src/app/core/validators/availability.validator';
+import { PasswordValidator } from 'src/app/core/validators/password.validator';
+import { FileValidator } from 'src/app/core/validators/file.validator';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -30,7 +30,9 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private userSubscription: Subscription;
     
-    constructor(private loadingService: LoadingService, private userService: UserService, private toastr: ToastrService) { }
+    constructor(private loadingService: LoadingService, 
+                private userService: UserService, 
+                private toastr: ToastrService) { }
 
     toggleEdit(){
         this.profileSubmitted = false;
@@ -56,7 +58,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
                     Validators.required,
                     Validators.pattern('^([a-z0-9]+(?:[ _.-][a-z0-9]+)*){5,15}$')
                 ],
-                // AvailabilityValidator.checkAvailability(this.userService)
+                AvailabilityValidator.checkAvailability(this.userService)
             ),
             country: new FormControl(user.country),
         });

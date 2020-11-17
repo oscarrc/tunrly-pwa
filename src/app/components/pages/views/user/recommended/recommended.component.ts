@@ -22,8 +22,7 @@ export class UserRecommendedComponent implements OnInit, AfterViewInit, OnDestro
 
     constructor(private playerService: PlayerService,
                 private userService: UserService,
-                private loadingService: LoadingService) {
-                }
+                private loadingService: LoadingService) {}
 
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe( user => {

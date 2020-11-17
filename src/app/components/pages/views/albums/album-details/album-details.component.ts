@@ -53,7 +53,6 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.userService.isFavorite(this.albumDetails._id, 'album');
     }
 
-    // Initialize static data for display
     getAlbumDetails() {
         this.albumService.getInfo(this.albumName, this.artistName).subscribe(
             res => this.albumDetails = res

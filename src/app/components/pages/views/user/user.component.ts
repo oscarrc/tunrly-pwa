@@ -1,8 +1,8 @@
 import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { LoadingService } from '../../../../services/loading.service';
 import { Subscription } from 'rxjs';
+
+import { LoadingService } from 'src/app/services/loading.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -27,12 +27,12 @@ export class UserComponent implements AfterViewInit, OnDestroy{
     constructor(private route: ActivatedRoute, 
                 private loadingService: LoadingService,
                 private userService: UserService) { 
-        this.routeSubscription = this.route.params.subscribe(param => {
-            if (param.username) {
-                this.getUser(param.username);
-            }
-        });
-    }
+                    this.routeSubscription = this.route.params.subscribe(param => {
+                        if (param.username) {
+                            this.getUser(param.username);
+                        }
+                    });
+                }
 
     getUser(username){
         this.user = this.userService.get(username).subscribe(

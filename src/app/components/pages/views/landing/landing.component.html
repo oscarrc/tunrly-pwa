@@ -152,50 +152,7 @@
                 </div>
             </div>
         </div>
-        <!-- End | Landing Section -->
-
-        <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
-        <div class="landing-section pt-0" *ngIf="trendingArtists.length > 0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto text-center mb-5">
-                        <h3>We've All Trending Artists</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-10 mx-auto">
-                        <ngx-slick-carousel class="carousel" [config]="sliderConfig">
-                            <div ngxSlickItem *ngFor="let artist of trendingArtists" class="slide text-center">
-                                <div class="avatar avatar-xl avatar-circle mx-auto">
-                                    <img [src]="artist.cover_url" alt="{{artist.name}}">
-                                </div>
-                                <h6 class="mb-0 mt-2">{{artist.name}}</h6>
-                            </div>
-                        </ngx-slick-carousel>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End | Landing Section -->        
-
-        <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
-        <!-- <div class="landing-section light-section" *ngIf="events.length > 0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto mb-5 text-center">
-                        <h3>Upcoming Events</h3>
-                        <p class="font-md">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4 col-lg-6 col-12 pb-4" *ngFor="let event of events">
-                        <app-description-card [musicEvent]="event"></app-description-card>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- End | Landing Section -->       
-
+        <!-- End | Landing Section -->  
         <app-footer></app-footer>
     </perfect-scrollbar>
 </div>

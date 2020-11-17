@@ -25,11 +25,10 @@ export class AppComponent implements OnInit, OnDestroy {
                 private userService: UserService,
                 private authService: AuthService,
                 private storageService: StorageService,
-                private translateService: TranslateService) {
-                            
-        this.initLang();
-        this.initTheme(); 
-    }
+                private translateService: TranslateService) {        
+                    this.initLang();
+                    this.initTheme(); 
+                }
 
     initUser(){
         const user = this.storageService.getCurrentUser();

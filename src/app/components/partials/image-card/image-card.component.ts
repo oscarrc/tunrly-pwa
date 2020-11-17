@@ -1,7 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 
-import { SearchService } from '../../../services/search.service';
-import { UserService } from '../../../services/user.service';
+import { SearchService } from 'src/app/services/search.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-image-card',
@@ -16,7 +16,8 @@ export class ImageCardComponent implements OnInit {
     routeLink: string;
     imageSrc: string;
 
-    constructor(private searchService: SearchService, private userService: UserService) { }
+    constructor(private searchService: SearchService, 
+                private userService: UserService) { }
 
     @HostListener('click') onClick() {
         this.searchService.hideSearchResult();

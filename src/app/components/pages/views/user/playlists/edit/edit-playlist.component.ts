@@ -31,16 +31,16 @@ export class EditPlaylistComponent implements OnDestroy{
                 private playlistService: PlaylistService, 
                 private playerService: PlayerService,
                 private toastr: ToastrService) { 
-        this.loadingService.startLoading();
-        this.routeSubscription = this.route.params.subscribe(param => {
-            if (param.id) {
-                this.playlistId = param.id;
-                this.getPlaylistDetails();
-            }else{
-                this.initNewPlaylist();
-            }
-        });
-    }
+                    this.loadingService.startLoading();
+                    this.routeSubscription = this.route.params.subscribe(param => {
+                        if (param.id) {
+                            this.playlistId = param.id;
+                            this.getPlaylistDetails();
+                        }else{
+                            this.initNewPlaylist();
+                        }
+                    });
+                }
    
     initForm(){
         this.playlistForm = new FormGroup({

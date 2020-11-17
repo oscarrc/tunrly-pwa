@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { TrackService } from '../../../../services/track.service';
-import { ArtistService } from '../../../../services/artist.service';
-import { TagService } from '../../../../services/tag.service';
-import { UserService } from '../../../../services/user.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { TrackService } from 'src/app/services/track.service';
+import { ArtistService } from 'src/app/services/artist.service';
+import { TagService } from 'src/app/services/tag.service';
+import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 
 

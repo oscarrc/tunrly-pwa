@@ -26,7 +26,6 @@ export class UserService {
    
     set(user){        
         if(user){
-            //TODO Fix user exceeds storage
             try{
                 this.storageService.setUser(user)
             }catch{

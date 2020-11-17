@@ -3,9 +3,9 @@ import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 
-import { PlayerService } from '../../../services/player.service';
-import { StorageService } from '../../../services/storage.service'
-import { UserService } from '../../../services/user.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { StorageService } from 'src/app/services/storage.service'
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-player',
