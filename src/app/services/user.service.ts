@@ -17,8 +17,7 @@ export class UserService {
     
     constructor(private httpClient: HttpClient, 
                 private skinService: SkinService,
-                private storageService: StorageService) {
-    }
+                private storageService: StorageService) {}
 
     
     check(value){
@@ -28,7 +27,12 @@ export class UserService {
     set(user){        
         if(user){
             //TODO Fix user exceeds storage
-            // this.storageService.setUser(user)
+            try{
+                this.storageService.setUser(user)
+            }catch{
+                this.storageService.clearCurrentUser();
+            }
+
             this.skinService.skin.emit(user['settings']['dark'] ? 'dark' : 'light');
         }else{
            this.storageService.clearCurrentUser();
@@ -59,7 +63,7 @@ export class UserService {
 
     isFavorite(favId: string, type: string): boolean{
         const favorites = this.userSource.getValue().favorite;
-        return favorites[type].findIndex( f => {return f._id == favId} ) >= 0;
+        return favorites ? favorites[type].findIndex( f => {return f._id == favId} ) >= 0 : false;
     }
 
     addToHistory(track: string){
