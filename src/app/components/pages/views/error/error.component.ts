@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../services/loading.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
     selector: 'app-error',

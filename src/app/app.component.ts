@@ -6,13 +6,14 @@ import { SkinService } from './services/skin.service';
 import { LoadingService } from './services/loading.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from './services/storage.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html'
 })
+
 export class AppComponent implements OnInit, OnDestroy {
     title = 'Tunrly.com';
     themeClass = 'theme-dark';
@@ -24,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 private userService: UserService,
                 private authService: AuthService,
                 private storageService: StorageService,
-                private translateService: TranslateService) {                            
+                private translateService: TranslateService) {
                     this.initLang();
                     this.initTheme(); 
                 }
@@ -35,9 +36,10 @@ export class AppComponent implements OnInit, OnDestroy {
         if(!user){
             this.userService.get().subscribe( user => {
                 this.userService.set(user);
+                if(user && user['language']) this.translateService?.use(user['language']);
             })
         }else{
-            this.userService.set(user);
+            this.userService.set(user);;
         }
     }
 
@@ -48,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.loadingService.startLoading();
         this.translateService.setDefaultLang('en');
 
-        if(lang){
+        if(lang && lang != null){
             this.translateService.use(lang);
         }else{
             this.translateService.use(browserLang.match(/en|es/) ? browserLang : 'en');

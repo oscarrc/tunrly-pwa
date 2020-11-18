@@ -6,7 +6,7 @@ import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { JwtInterceptor } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
 
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({ providedIn: 'root' }) 
 export class ErrorInterceptor implements HttpInterceptor {
@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     private refreshSubject: ReplaySubject<any>;
 
     private handleError(err){
-        this.toastr.error(err.error.message, 'Error', { positionClass: this.authService.loginStatus ? 'toast-offset' : 'toast-position'});
+        this.toastr.error(err.error?.message, 'Error', { positionClass: this.authService.loginStatus ? 'toast-offset' : 'toast-position'});
     }
 
     private handleRefresh(){

@@ -1,18 +1,19 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { TrackService } from '../../../../services/track.service';
-import { ArtistService } from '../../../../services/artist.service';
-import { TagService } from '../../../../services/tag.service';
-import { UserService } from '../../../../services/user.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { TrackService } from 'src/app/services/track.service';
+import { ArtistService } from 'src/app/services/artist.service';
+import { TagService } from 'src/app/services/tag.service';
+import { UserService } from 'src/app/services/user.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit, AfterViewInit {
-    // private userSubscription: Subscription;
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+    private userSubscription: Subscription;
     
     carouselArrowPosClass1 = 'arrow-pos-1';
     carouselArrowPosClass2 = 'arrow-pos-2';
@@ -35,18 +36,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 private userService: UserService) {}
 
     ngOnInit() {
-        this.userService.user.subscribe( user => {
-            this.initHistory(user.history.slice(0,9));
-            this.initRecommended(user.favorite);       
-        }).unsubscribe();
+        this.userSubscription = this.userService.user.subscribe( user => {
+            if(user?.history){
+                this.initHistory(user.history, 9);
+                this.initRecommended(user.favorite);
+            }
+        })
 
         this.initTopTracks();
         this.initTopArtists();
         this.initTopTags();
     }
 
-    ngAfterViewInit() {
+    ngAfterViewInit() {  
         this.loadingService.stopLoading();
+    }
+
+    ngOnDestroy(){        
+        this.userSubscription.unsubscribe();
     }
 
     getRandom(elements: Array<any>){
@@ -111,13 +118,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     //Initialize user history
-    initHistory(history) {
+    initHistory(history, size) {
         this.history = {
             title: 'home.history.title',
             subTitle: 'home.history.subtitle',
             page: '/user/history',
             loading: false,
-            items: history.sort( () => { return 0.5 - Math.random() })
+            items: history.slice(0,size).sort( () => { return 0.5 - Math.random() })
         };
     }
 

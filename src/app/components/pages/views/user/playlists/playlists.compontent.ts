@@ -16,7 +16,7 @@ export class UserPlaylistsComponent implements OnInit, AfterViewInit, OnDestroy 
     loading: boolean = true;
 
     constructor(private loadingService: LoadingService,
-        private userService: UserService) {}
+                private userService: UserService) {}
 
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe(

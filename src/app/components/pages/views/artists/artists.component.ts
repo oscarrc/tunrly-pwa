@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { ArtistService } from '../../../../services/artist.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ArtistService } from 'src/app/services/artist.service';
 
 @Component({
     selector: 'app-artists',

@@ -27,11 +27,11 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
                 private tagService: TagService) {
-        this.routeSubscription = this.route.params.subscribe(param => {
-            if (param) {
-                this.tagName = param.name;
-            }
-        });
+                    this.routeSubscription = this.route.params.subscribe(param => {
+                        if (param) {
+                            this.tagName = param.name;
+                        }
+                    });
     }
 
     ngOnInit() {    

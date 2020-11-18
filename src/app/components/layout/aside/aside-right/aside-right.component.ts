@@ -1,9 +1,9 @@
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 
-import { PlayerService } from '../../../../services/player.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { Subscription } from 'rxjs';
 
-//TODO save and clear playlist
+//TODO clear playlist
 @Component({
     selector: 'app-aside-right',
     templateUrl: './aside-right.component.html'

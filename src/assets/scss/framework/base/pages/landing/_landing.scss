@@ -30,6 +30,15 @@
         height: $landing-banner-height-sm;
     }
 
+    @include vertical-breakpoint-down(sm) {
+        height: $landing-banner-height-vsm;
+    }
+
+    @include vertical-breakpoint-down(xs) {
+        height: $landing-banner-height-vxs;
+    }
+
+
     &:after{
         display: none;
     }
