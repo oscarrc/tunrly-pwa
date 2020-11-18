@@ -28,4 +28,10 @@ export class TrackService {
             limit: limit.toString()
         }});
     }
+
+    getTracks(ids){
+        return this.httpClient.get(this.trackUrl, { params: {
+            ids: ids.join(',')
+        }})
+    }
 }

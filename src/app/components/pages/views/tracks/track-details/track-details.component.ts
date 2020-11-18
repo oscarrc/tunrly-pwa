@@ -67,7 +67,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     initSimilar(){
         this.similarTracks = {
             title: 'tracks.similar',
-            subTitle: 'tracks.alsolike',
+            subtitle: 'tracks.alsolike',
             page: '/track/' + this.trackDetails._id + '/similar',
             loading: true,
             items: []

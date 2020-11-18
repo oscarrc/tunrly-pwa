@@ -67,7 +67,7 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.albums = {
             title: this.tagName + " albums",
             page: '/tag/' + this.tagName + '/albums',          
-            subTitle: '',
+            subtitle: '',
             loading: true
         };
 
@@ -80,7 +80,7 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.tracks = {
             title: this.tagName + " tracks",
             page: '/tag/' + this.tagName + '/tracks',            
-            subTitle: '',
+            subtitle: '',
             loading: true
         };
 
@@ -93,7 +93,7 @@ export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.playlists = {
             title: this.tagName + " playlists",
             page: '/tag/' + this.tagName + '/playlists',            
-            subTitle: '',
+            subtitle: '',
             loading: true
         };
 
