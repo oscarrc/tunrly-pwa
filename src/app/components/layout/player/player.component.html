@@ -3,7 +3,15 @@
 
     <!-- Begin | Audio Player Progress -->
     <div id="progress-container">
-        <input type="range" class="track-song-slider"  min="0" max="100" [value]="seekTo == 0 ? (time * 100 / duration) - 0.1 || 0 : seekTo" step=".001" (mousedown)="seekStart($event)" (mouseup)="seekEnd($event)">
+        <input type="range" class="track-song-slider"  
+            min="0" 
+            max="100" 
+            [value]="seekTo == 0 ? (time * 100 / duration) - 0.1 || 0 : seekTo"
+            step=".001"
+            (mousedown)="seekStart($event)"
+            (mouseup)="seekEnd($event)"
+            (touchstart)="seekStart($event)"
+            (touchend)="seekEnd($event)">
         <progress class="audio-progress audio-progress--played track-song-played-progress" min="0" max="100" [value]="(time * 100 / duration) || 0"></progress>
         <progress class="audio-progress audio-progress--buffered track-buffered-progress" min="0" max="100" [value]="buffered || 0"></progress>
     </div>

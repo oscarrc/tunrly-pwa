@@ -28,8 +28,8 @@ export class PlaylistService {
         return this.httpClient.post(this.playlistURL, playlist);
     }
 
-    update(playlist){
-        return this.httpClient.put(this.playlistURL, playlist);
+    update(playlist, id){
+        return this.httpClient.put(this.playlistURL + '/' + id, playlist);
     }
 
     delete(id){

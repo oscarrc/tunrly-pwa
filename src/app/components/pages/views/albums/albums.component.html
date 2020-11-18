@@ -4,17 +4,10 @@
 <div class="main-container">
     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header">
-        <span class="title">{{albums.record}} Results</span>
-        <div class="ml-auto d-flex align-items-center">
-            <select class="select" name="sort" id="sort">
-                <option selected="">Popular</option>
-                <option value="0">A-Z</option>
-                <option value="1">Z-A</option>
-            </select>
-        </div>
+        <span class="title">{{albums.length}} {{'ui.results' | translate}}</span> 
     </div>
     <!-- End | Container header -->
-
+    
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="section">
         <div *ngIf="!loading" class="row custom-card-list">

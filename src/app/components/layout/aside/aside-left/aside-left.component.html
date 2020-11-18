@@ -9,7 +9,7 @@
                 <li class="nav-item" *ngFor="let item of menuItems" [ngClass]="item.section ? 'nav-header' : ''"
                     (click)="hideSidebar()">
                     <!-- Menu section heading-->
-                    <ng-container *ngIf="item.section; else menuSection">{{item.section}}</ng-container>
+                    <ng-container *ngIf="item.section; else menuSection">{{item.section | translate}}</ng-container>
 
                     <!-- Menu section-->
                     <ng-template #menuSection>

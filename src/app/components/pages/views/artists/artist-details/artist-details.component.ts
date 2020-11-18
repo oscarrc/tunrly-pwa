@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { PlayerService } from '../../../../../services/player.service';
-import { ArtistService } from '../../../../../services/artist.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { ArtistService } from 'src/app/services/artist.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,6 +16,9 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     artistName: string
     artistDetails: any;
     imageBorderRadiusClass: string = "card-img--radius-lg";
+    loadingTracks: boolean = false;
+    loadingAlbums: boolean = false;
+    loadingSimilar: boolean = false;
     
     private routeSubscription: Subscription;
 
@@ -54,35 +57,35 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
         this.artistService.getInfo(this.artistName).subscribe(
             res => {
                 this.artistDetails = res;
-            },
-            err => console.log(err)
+                this.getTracks();
+            }
         )
     }
 
     getTracks(){
         if(!this.artistDetails.tracks || this.artistDetails.tracks.length == 0){
+            this.loadingTracks = true;
             this.artistService.getTracks(this.artistDetails._id).subscribe(
-                res => this.artistDetails.tracks = res,
-                err => console.log(err)
-            )
+                res => this.artistDetails.tracks = res
+            ).add( () => this.loadingTracks = false);
         }
     }
 
     getAlbums(){
         if(!this.artistDetails.albums || this.artistDetails.albums.length == 0){
+            this.loadingAlbums = true;
             this.artistService.getAlbums(this.artistDetails._id).subscribe(
-                res => this.artistDetails.albums = res,
-                err => console.log(err)
-            )
+                res => this.artistDetails.albums = res
+            ).add( () => this.loadingAlbums = false);
         }
     }
 
     getSimilar(){
         if(!this.artistDetails.similar || this.artistDetails.similar.length == 0){
+            this.loadingSimilar = true;
             this.artistService.getSimilar(this.artistDetails._id).subscribe(
-                res => this.artistDetails.similar = res,
-                err => console.log(err)
-            )
+                res => this.artistDetails.similar = res
+            ).add( () => this.loadingSimilar = false);
         }
     }
 

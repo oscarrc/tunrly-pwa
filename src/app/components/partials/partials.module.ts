@@ -9,15 +9,14 @@ import { SecondaryCardLoaderComponent } from './main-cards/secondary-card/loader
 import { DescriptionCardComponent } from './description-cards/description-card/description-card.component';
 import { DescriptionCardLoaderComponent } from './description-cards/description-card/loader/description-card-loader.component';
 import { EventCountdownCardComponent } from './description-cards/description-countdown-card/description-countdown-card.component';
-import { TruncatePipe } from '../../core/pipes/truncate.pipe';
 import { TrackListViewComponent } from './track-list-view/track-list-view.component';
 import { TrackListViewLoaderComponent } from './track-list-view/loader/track-list-view-loader.component';
+import { ButtonComponent } from './button/button.component';
+import { NothingComponent } from './nothing/nothing.component';
 
 import { TrackOptionsComponent } from './track-options/track-options.component';
 import { TrackHorizontalComponent } from './track-horizontal/track-horizontal.component';
 import { ImageCardComponent } from './image-card/image-card.component';
-import { CommentComponent } from './comment/comment.component';
-import { ThemeSettingsComponent } from './theme-settings/theme-settings.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { ContentLoaderModule } from '@ngneat/content-loader';
@@ -28,7 +27,6 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
         SecondaryCardComponent,
         DescriptionCardComponent,
         EventCountdownCardComponent,
-        TruncatePipe,
         TrackListViewComponent,
         TrackOptionsComponent,
         TrackHorizontalComponent,
@@ -37,9 +35,9 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
         SecondaryCardLoaderComponent,
         DescriptionCardLoaderComponent,
         TrackListViewLoaderComponent,
-        CommentComponent,
-        ThemeSettingsComponent,
-        CountdownComponent
+        CountdownComponent,
+        ButtonComponent,
+        NothingComponent
     ],
     exports: [
         PrimaryCardComponent,
@@ -54,8 +52,8 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
         SecondaryCardLoaderComponent,
         DescriptionCardLoaderComponent,
         TrackListViewLoaderComponent,
-        CommentComponent,
-        ThemeSettingsComponent
+        ButtonComponent,
+        NothingComponent
     ],
     imports: [
         CommonModule,

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { UserService } from '../../../../../services/user.service'
+import { LoadingService } from 'src/app/services/loading.service';
+import { UserService } from 'src/app/services/user.service'
 import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-user-playlists',
@@ -16,7 +16,7 @@ export class UserPlaylistsComponent implements OnInit, AfterViewInit, OnDestroy 
     loading: boolean = true;
 
     constructor(private loadingService: LoadingService,
-        private userService: UserService) {}
+                private userService: UserService) {}
 
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe(

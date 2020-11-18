@@ -13,7 +13,8 @@ export class DescriptionCardComponent implements OnInit {
     @Input() edit: boolean = false;
     @Input() eventBorderRadiusClass = 'bg-img-radius-lg';
 
-    constructor(private userService: UserService, private playlistService: PlaylistService) {}
+    constructor(private userService: UserService, 
+                private playlistService: PlaylistService) {}
 
     getRandom(elements: Array<any>){
         const size = elements.length;

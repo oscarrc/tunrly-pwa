@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { TagService } from '../../../../../services/tag.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { TagService } from 'src/app/services/tag.service';
 
 @Component({
     selector: 'app-tags',
@@ -20,6 +20,7 @@ export class TagListComponent implements OnInit, AfterViewInit, OnDestroy {
     gridView = false;
     page: number = 1;
     limit: number = 12;
+    loading: boolean = true;
 
     routeSubscription: Subscription;
 
@@ -51,11 +52,8 @@ export class TagListComponent implements OnInit, AfterViewInit, OnDestroy {
     
     getTag(){
         this.tagService.getTag(this.tagName, this.type, this.page, this.limit).subscribe(
-            res => { 
-                this[this.type] = res;
-            },
-            err => console.log(err)
-        )
+            res => this[this.type] = res
+        ).add( () => this.loading = false )
     }
 
     ngOnDestroy(){

@@ -6,45 +6,50 @@ export class MenuConfig {
         this.config = {
             aside: {
                 items: [
-                    { section: 'Browse Music' },
+                    { section: 'menu.browsemusic' },
                     {
-                        title: 'Home',
+                        title: 'menu.home',
                         icon: 'la la-home',
                         page: '/home'
                     },
                     {
-                        title: 'Artists',
+                        title: 'artists.name',
                         icon: 'la la-microphone',
                         page: '/artists'
                     },
                     {
-                        title: 'Tracks',
+                        title: 'tracks.name',
                         icon: 'la la-music',
                         page: '/tracks'
                     },
                     {
-                        title: 'Tags',
+                        title: 'tags.name',
                         icon: 'la la-diamond',
                         page: '/tags'
                     },
                     {
-                        title: 'Playlists',
+                        title: 'playlists.name',
                         icon: 'la la-play-circle',
                         page: '/playlists'
                     },
-                    { section: 'Your Music' },
+                    { section: 'menu.yourmusic' },
                     {
-                        title: 'Favorites',
+                        title: 'menu.recommended',
+                        icon: 'la la-fire',
+                        page: '/user/recommended'
+                    },
+                    {
+                        title: 'user.favorites.title',
                         icon: 'la la-heart-o',
                         page: '/user/favorites'
                     },
                     {
-                        title: 'Playlists',
+                        title: 'playlists.name',
                         icon: 'la la-list',
                         page: '/user/playlists'
                     },
                     {
-                        title: 'History',
+                        title: 'user.history.title',
                         icon: 'la la-history',
                         page: '/user/history'
                     }
@@ -53,12 +58,12 @@ export class MenuConfig {
             userMenu: {
                 items: [
                     {
-                        title: 'Profile',
+                        title: 'menu.profile',
                         icon: 'ion-md-contact',
                         page: '/user'
                     },
                     {
-                        title: 'Settings',
+                        title: 'menu.settings',
                         icon: 'ion-md-settings',
                         page: '/settings'
                     }

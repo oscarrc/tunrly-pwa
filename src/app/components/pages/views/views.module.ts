@@ -8,9 +8,6 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { ChartsModule } from 'ng2-charts';
 
-import { RandomPipe } from '../../../core/pipes/random.pipe';
-import { LastPipe } from '../../../core/pipes/last.pipe';
-
 import { ViewsComponent } from './views.component';
 import { HomeComponent } from './home/home.component';
 import { PartialsModule } from '../../partials/partials.module';
@@ -25,9 +22,10 @@ import { TracksComponent } from './tracks/tracks.component';
 import { TrackDetailsComponent } from './tracks/track-details/track-details.component';
 import { PlaylistsComponent } from './playlists/playlists.compontent';
 import { PlaylistDetailsComponent } from './playlists/playlist-details/playlist-details.component';
-import { FavoritesComponent } from './favorites/favorites.component';
-import { HistoryComponent } from './history/history.component';
+import { UserFavoritesComponent } from './user/favorites/favorites.component';
+import { UserHistoryComponent } from './user/history/history.component';
 import { UserProfileComponent } from './user/profile/profile.component';
+import { UserRecommendedComponent } from './user/recommended/recommended.component';
 import { UserComponent } from './user/user.component';
 import { UserPlaylistsComponent } from './user/playlists/playlists.compontent';
 import { EditPlaylistComponent } from './user/playlists/edit/edit-playlist.component';
@@ -143,11 +141,11 @@ const routes: Routes = [
             },
             {
                 path: 'user/favorites',
-                component: FavoritesComponent
+                component: UserFavoritesComponent
             },
             {
                 path: 'user/history',
-                component: HistoryComponent
+                component: UserHistoryComponent
             },
             {
                 path: 'user/playlists',
@@ -161,9 +159,13 @@ const routes: Routes = [
             {
                 path: 'user/playlist/:id/edit',
                 component: EditPlaylistComponent
-            },            
+            },
             {
-                path: 'user/:username',
+                path: 'user/recommended',
+                component: UserRecommendedComponent
+            },        
+            {
+                path: 'user/:username/profile',
                 component: UserComponent
             },
             {
@@ -175,9 +177,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [        
-        RandomPipe,
-        LastPipe,
+    declarations: [
         ViewsComponent,
         HomeComponent,
         TagsComponent,
@@ -189,9 +189,10 @@ const routes: Routes = [
         PlaylistDetailsComponent,
         TracksComponent,
         TrackDetailsComponent,
-        FavoritesComponent,
-        HistoryComponent,
+        UserFavoritesComponent,
+        UserHistoryComponent,
         UserProfileComponent,
+        UserRecommendedComponent,
         UserComponent,
         UserSettingsComponent,
         UserPlaylistsComponent,

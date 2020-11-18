@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { ValidationService } from '../../../../services/validation.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ValidationService } from 'src/app/services/validation.service';
+import { PasswordValidator } from 'src/app/core/validators/password.validator';
 
 @Component({
     selector: 'app-validation',
@@ -17,6 +18,7 @@ export class ValidationComponent implements OnInit, OnDestroy{
     success: boolean;
     error: string;
     done: boolean = false;
+    loading: boolean = false;
 
     reset: any;
     formSubmitted = false;
@@ -24,11 +26,11 @@ export class ValidationComponent implements OnInit, OnDestroy{
     constructor(private loadingService: LoadingService,
                 private validationService: ValidationService,
                 private route: ActivatedRoute,) {
-        this.routeSubscription = this.route.params.subscribe(param => {
-            this.action = param.action;
-            this.token = param.token;
-        });
-    }
+                    this.routeSubscription = this.route.params.subscribe(param => {
+                        this.action = param.action;
+                        this.token = param.token;
+                    });
+                }
 
     get password() {
         return this.reset.get('password').value;
@@ -39,9 +41,11 @@ export class ValidationComponent implements OnInit, OnDestroy{
     }
 
     doValidate(password:string = null){
+        this.loading = true;
+        
         return this.validationService.validate(this.token, this.action, password).subscribe( 
             res => { this.success = true },
-            err => { this.success = false; this.error = err.error.message;}
+            err => { this.success = false; this.error = err.error.name;}
         )
     }
 
@@ -49,12 +53,12 @@ export class ValidationComponent implements OnInit, OnDestroy{
         this.reset = new FormGroup({
             password: new FormControl('', [
                 Validators.required,
-                Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
             ]),
             repeatpassword: new FormControl('', [
                 Validators.required
             ])
-        });
+        }, PasswordValidator.checkPassword());
 
         if( this.action == 1){              
             this.done = false;      
@@ -69,14 +73,17 @@ export class ValidationComponent implements OnInit, OnDestroy{
 
     doReset(reset){
         this.formSubmitted = true;
-
+        
         if (this.reset.invalid) {
             return false;
         }
 
+        this.loading = true;
+        
         this.doValidate(reset.value.password).add(() => {
             this.loadingService.stopLoading();
             this.done = true;
+            this.loading = false;
         });
     }
 

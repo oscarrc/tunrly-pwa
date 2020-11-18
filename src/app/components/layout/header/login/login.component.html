@@ -3,7 +3,7 @@
         <div class="modal-header border-bottom-0 pb-0">
             <button type="button" class="close" (click)="close()">&times;</button>
         </div>
-        <h6 class="modal-title text-center mb-3">Login into Tunrly.com</h6>
+        <h6 class="modal-title text-center mb-3">{{ 'header.login.title' | translate }}</h6>
         <div class="modal-body">
             <form action="#" [formGroup]="login" class="mx-4 pb-2" (ngSubmit)="submitLogin(login)" [ngClass]="formSubmitted ? 'submitted' : ''">                
                 <div class="form-group">
@@ -11,9 +11,9 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">@</div>
                         </div>
-                        <input type="text" formControlName="user" id="user" class="form-control" placeholder="Username or email" required>
+                        <input type="text" formControlName="user" id="user" class="form-control" placeholder="{{ 'header.login.usernameoremail' | translate }}" required>
                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
-                            <span *ngIf="login.controls.user.errors?.required">Please fill this field</span>
+                            <span *ngIf="login.controls.user.errors?.required">{{ 'errors.form.required' | translate }}</span>
                         </div>
                     </div>                    
                 </div>
@@ -22,9 +22,9 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="ion-md-lock"></i></div>
                         </div>
-                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="Password" minlength="4" required>
+                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="{{ 'landing.register.password' | translate }}" minlength="4" required>
                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
-                            <span *ngIf="login.controls.password.errors?.required">Please fill this field</span>
+                            <span *ngIf="login.controls.password.errors?.required">{{ 'errors.form.required' | translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -32,12 +32,13 @@
                     <div class="input-group">
                         <div class="custom-control custom-radio custom-control-inline pt-2">
                             <input type="checkbox" id="remember" formControlName="remember" class="custom-control-input">
-                            <label for="remember" class="custom-control-label">Remember me</label>
+                            <label for="remember" class="custom-control-label">{{ 'header.login.remember' | translate }}</label>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-block btn-bold btn-air btn-primary load-page">Login</button>
-                <p class="text-center pt-4">Forgotten password? <a (click)="openForgotten()">Click here</a>.</p>
+                <app-button type="submit" text="{{ 'header.login.name' | translate }}" class="btn-block" [loading]="loading" classes="btn btn-block btn-bold btn-air btn-primary load-page"></app-button>
+                
+                <p class="text-center pt-4">{{ 'header.forgotten.title' | translate }} <a (click)="openForgotten()">{{ 'header.login.clickhere' | translate }}</a>.</p>
             </form>
         </div>
     </div>

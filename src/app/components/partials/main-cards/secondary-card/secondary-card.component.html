@@ -1,4 +1,4 @@
-<div class="custom-card">
+<div class="custom-card" *ngIf="item">
     <div class="custom-card--img">
         <a [routerLink]="'/' + type + '/' + (item._id || item.name)">
             <img *ngIf="item.image" [src]="item?.image" alt="{{item?.name}}" [class]="imageBorderRadiusClass">

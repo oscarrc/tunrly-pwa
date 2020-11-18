@@ -4,35 +4,79 @@ import { Subscription } from 'rxjs';
 
 import { SkinService } from './services/skin.service';
 import { LoadingService } from './services/loading.service';
+import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
+import { StorageService } from './services/storage.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html'
 })
+
 export class AppComponent implements OnInit, OnDestroy {
     title = 'Tunrly.com';
-
+    themeClass = 'theme-dark';
+    skinSubscription: Subscription;
+    
     constructor( @Inject(DOCUMENT) private document: Document,
                 private loadingService: LoadingService,
-                private skinService: SkinService) {
-        this.loadingService.startLoading();
+                private skinService: SkinService,
+                private userService: UserService,
+                private authService: AuthService,
+                private storageService: StorageService,
+                private translateService: TranslateService) {        
+                    this.initLang();
+                    this.initTheme(); 
+                }
+
+    initUser(){
+        const user = this.storageService.getCurrentUser();
+        
+        if(!user){
+            this.userService.get().subscribe( user => {
+                this.userService.set(user);
+                if(user && user['language']) this.translateService?.use(user['language']);
+            })
+        }else{
+            this.userService.set(user);;
+        }
     }
 
-    themeClass = 'theme-dark';
+    initLang(){
+        const lang = this.storageService.getLang();
+        const browserLang = this.translateService.getBrowserLang();
+        
+        this.loadingService.startLoading();
+        this.translateService.setDefaultLang('en');
 
-    skinSubscription: Subscription;
+        if(lang && lang != null){
+            this.translateService.use(lang);
+        }else{
+            this.translateService.use(browserLang.match(/en|es/) ? browserLang : 'en');
+        }
+    }
 
+    initTheme(){
+        const theme = this.storageService.getThemeSkin();
+        
+        if(theme) this.skinService.skin = theme;
 
-    ngOnInit() {
-        this.document.body.classList.add(this.themeClass);
-              
         this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
-            if (skin == 'light') {
+            if(skin == 'light') {
                 this.document.body.classList.remove(this.themeClass);
             }else{             
                 this.document.body.classList.add(this.themeClass);
             }
         });
+
+        this.document.body.classList.add(this.themeClass);
+    }
+
+
+
+    ngOnInit() {       
+        if(this.authService.loggedIn) this.initUser();
     }
 
     ngOnDestroy() {

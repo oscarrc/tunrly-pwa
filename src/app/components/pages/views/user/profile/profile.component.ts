@@ -1,13 +1,14 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { UserService } from '../../../../../services/user.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { AvailabilityValidator } from '../../../../../core/validators/availability.validator';
-import { PasswordValidator } from '../../../../../core/validators/password.validator';
-import { FileValidator } from '../../../../../core/validators/file.validator';
+import { AvailabilityValidator } from 'src/app/core/validators/availability.validator';
+import { PasswordValidator } from 'src/app/core/validators/password.validator';
+import { FileValidator } from 'src/app/core/validators/file.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-user-profile',
@@ -22,12 +23,16 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
     imageSubmitted: boolean = false;
     files: FileList;
     profileSubmitted: boolean = false;
+    profileLoading: boolean = false;
     passwordForm: any;
     passwordSubmitted: boolean = false;
+    passwordLoading: boolean = false;
 
     private userSubscription: Subscription;
     
-    constructor(private loadingService: LoadingService, private userService: UserService) { }
+    constructor(private loadingService: LoadingService, 
+                private userService: UserService, 
+                private toastr: ToastrService) { }
 
     toggleEdit(){
         this.profileSubmitted = false;
@@ -53,7 +58,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
                     Validators.required,
                     Validators.pattern('^([a-z0-9]+(?:[ _.-][a-z0-9]+)*){5,15}$')
                 ],
-                // AvailabilityValidator.checkAvailability(this.userService)
+                AvailabilityValidator.checkAvailability(this.userService)
             ),
             country: new FormControl(user.country),
         });
@@ -73,11 +78,11 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
         this.passwordForm = new FormGroup({            
                 oldpassword: new FormControl('', [
                     Validators.required,
-                    Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                    Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
                 ]),
                 password: new FormControl('', [
                     Validators.required,
-                    Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                    Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
                 ]),
                 repeatpassword: new FormControl('', [
                     Validators.required
@@ -91,17 +96,16 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
         if (profile.invalid) {
             return false;
         }
+        this.profileLoading = true;
 
         this.userService.update(profile.value).subscribe(
             res => {
                 profile.disable();
                 this.userService.set(res);
                 this.toggleEdit();
-            },
-            err => {
-                console.log(err)
+                this.toastr.success('Profile updated', 'OK', { positionClass: 'toast-offset'});
             }
-        )
+        ).add( () => this.profileLoading = false )
     }
 
     changePassword(passwords){
@@ -111,15 +115,15 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
             return false;
         }
 
+        this.passwordLoading = true;
+
         this.userService.updatePassword(passwords.controls.oldpassword.value, passwords.controls.password.value).subscribe(
             res => {
                 this.passwordSubmitted = false;
+                this.toastr.success('Password changed', 'OK', { positionClass: 'toast-offset'});
                 passwords.reset();
-            },
-            err => {
-                console.log(err)
             }
-        )
+        ).add(() => this.passwordLoading = false)
     }
 
     initImageForm(){
@@ -149,7 +153,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.imageForm.get('image').updateValueAndValidity();
 
-        console.log(this.imageForm);
         if (this.imageForm.invalid) {
             return false;
         }
@@ -161,9 +164,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
         this.userService.update({image: image}).subscribe(
             res => {
                 this.userService.set(res);
-            },
-            err => {
-                console.log(err)
             }
         )
     }   

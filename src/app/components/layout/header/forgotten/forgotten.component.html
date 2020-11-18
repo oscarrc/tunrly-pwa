@@ -3,23 +3,23 @@
         <div class="modal-header border-bottom-0 pb-0">
             <button type="button" class="close" (click)="close()">&times;</button>
         </div>
-        <h6 class="modal-title text-center">Forgotten password?</h6>
+        <h6 class="modal-title text-center">{{ 'header.forgotten.title' | translate }}</h6>
         <div class="modal-body">
             <form action="#" [formGroup]="forgotten" class="mx-4 pb-2" (ngSubmit)="submitForgotten(forgotten)" [ngClass]="formSubmitted ? 'submitted' : ''">                
                 <div class="form-group">
-                    <label class="mb-4">Enter your username or email and we'll send you an email to reset your password.</label>
+                    <label class="mb-4">{{ 'header.forgotten.text' | translate }}</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">@</div>
                         </div>
-                        <input type="text" formControlName="user" id="user" class="form-control" placeholder="Username or email" required>
+                        <input type="text" formControlName="user" id="user" class="form-control" placeholder="{{ 'header.login.usernameoremail' | translate }}" required>
                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
-                            <span *ngIf="forgotten.controls.user.errors.required">Please fill this field</span>
+                            <span *ngIf="forgotten.controls.user?.errors?.required">{{ 'errors.form.required' | translate }}</span>
                         </div>
                     </div>                    
                 </div>
-                
-                <button type="submit" class="btn btn-block btn-bold btn-air btn-primary load-page mt-4">Submit</button>
+                <p>{{ 'header.forgotten.spam' | translate }}</p>
+                <app-button type="submit" text="{{ 'header.forgotten.submit' | translate }}" class="btn-block" [loading]="loading" classes="btn btn-block btn-bold btn-air btn-primary load-page mt-4"></app-button>
             </form>
         </div>
     </div>

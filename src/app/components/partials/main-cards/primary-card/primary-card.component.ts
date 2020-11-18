@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { PlayerService } from '../../../../services/player.service';
-import { UserService } from '../../../../services/user.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-primary-card',
@@ -15,7 +15,8 @@ export class PrimaryCardComponent implements OnInit {
 
     classes = '';
 
-    constructor(private playerService: PlayerService, private userService: UserService) {
+    constructor(private playerService: PlayerService, 
+                private userService: UserService) {
         
     }
 
@@ -26,7 +27,6 @@ export class PrimaryCardComponent implements OnInit {
     addFavorite() {
         this.userService.setFavorite(this.track._id, 'track').subscribe(
             res => { this.userService.set(res); },
-            err => {}
         )
     }
 

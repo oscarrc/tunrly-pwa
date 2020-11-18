@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { TrackService } from '../../../../services/track.service';
-import { ArtistService } from '../../../../services/artist.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { TrackService } from 'src/app/services/track.service';
+import { ArtistService } from 'src/app/services/artist.service';
 
 @Component({
     selector: 'app-tracks',
@@ -68,32 +68,20 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
     // Initialize songs
     getTracks() {
         this.trackService.getTop(this.country, this.page, this.limit).subscribe(
-            res => {
-                this.loading = false;
-                this.tracks = res
-            },
-            err => console.log(err)
-        )
+            res =>  this.tracks = res 
+        ).add( () => this.loading = false )
     }
 
     getArtistTracks() {
         this.artistService.getTracks(this.id).subscribe(
-            res => {
-                this.loading = false;
-                this.tracks = res
-            },
-            err => console.log(err)
-        )
+            res => this.tracks = res
+        ).add( () => this.loading = false )
     }
 
     getSimilar() {
         this.trackService.getSimilar(this.id).subscribe(
-            res => {
-                this.loading = false;
-                this.tracks = res
-            },
-            err => console.log(err)
-        )
+            res => this.tracks = res
+        ).add( () => this.loading = false )
     }
 
     ngOnDestroy(){

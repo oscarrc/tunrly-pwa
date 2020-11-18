@@ -1,0 +1,147 @@
+<app-banner [backgroundImage]="user?.image" [blur]="true"></app-banner>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <div *ngIf="user" class="row section text-center text-md-left">
+        <div class="col-xl-1 col-lg-3 col-sm-3">
+            <div class="avatar avatar-xl avatar-circle mx-auto mb-4" [style.background-color]="user?._id | toColor">
+                <img *ngIf="user.image" [src]="user.image" [alt]="user.username">
+                <div *ngIf="!user.image" class="initials">
+                    {{ user.username | slice:0:2 | uppercase}}
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-8 col-sm-7">
+            <div class="row pt-3">
+                <div class="col-xl-8 col-lg-6">
+                    <h5>{{user?.username}}</h5>
+                    <p>{{ 'user.profile.membersince'| translate }} {{user?.createdAt | date:'mediumDate'}}</p>
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-pill btn-air btn-bold btn-danger mr-2"
+                                (click)="addInPlayer()">{{ 'ui.playall' | translate }}</button>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="pt-3 pt-lg-0 text-lg-right btn-inline">
+                        <button type="button" class="btn btn-pill btn-air btn-brand btn-icon-only"><i class="la la-share-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="section">
+        <!-- Begin | Line Tabs [[ Find at scss/framework/components/line-tabs.scss ]] -->
+        <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="userDetails" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="playlists-tab" data-toggle="tab" href="#playlists" role="tab"
+                   aria-controls="playlists" aria-selected="true">{{ 'playlists.name' | translate }}</a>
+            </li>
+            <li class="nav-item" *ngIf="user.favorite?.tracks">
+                <a class="nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab"
+                   aria-controls="favorites" aria-selected="false">{{ 'user.favorites.title' | translate }}</a>
+            </li>
+        </ul>
+        <!-- End | Line Tabs -->
+        <!-- Begin | Tab Content -->
+        <div class="tab-content" id="userDetailsContent">
+            <div class="tab-pane fade show active" id="playlists" role="tabpanel" aria-labelledby="playlists-tab">
+                <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+                <div class="container-header d-flex justify-content-between">
+                    <span class="title">{{ 'user.profile.publicplaylists' | translate:{ username: user.username } }}</span>
+                    <span>
+                        <button [disabled]="page[selected]==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
+                        <button [disabled]="user.playlists?.length / limit <= page[selected]"  type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+                    </span>
+                </div>
+                <!-- End | Container header -->
+
+                <div *ngIf="!loading" class="row custom-card-list">
+                    <div class="col-xl-3 col-lg-4 col-sm-6 mb-4 mb-sm-auto" *ngFor="let playlist of user.playlists">
+                        <app-description-card [item]="playlist" type="playlist"></app-description-card>
+                    </div>
+                </div>
+                <div *ngIf="loading == true" class="row custom-card-list">
+                    <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
+                        <app-description-card-loader></app-description-card-loader>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">                
+                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+                 <div class="container-header d-flex justify-content-between">
+                    <span>
+                        <select class="select title" name="type" id="type" [(ngModel)]="selected">
+                            <option value="tracks">{{ 'tracks.name' | translate }}</option>
+                            <option value="artists">{{ 'artists.name' | translate }}</option>
+                            <option value="albums">{{ 'albums.name' | translate }}</option>
+                            <option value="playlists">{{ 'playlists.name' | translate }}</option>
+                        </select>
+                    </span>
+                    <span>
+                        <button [disabled]="page[selected]==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
+                        <button [disabled]="user.playlists?.length / limit <= page[selected]"  type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+                    </span>
+                </div>
+                <!-- End | Container header -->
+
+                <div class="subSection" *ngIf="selected == 'tracks'">
+                    <div *ngIf="!loading" class="row custom-card-list">
+                        <div class="col-xl-6 col-lg-12" *ngFor="let track of user.favorite.track; let i = index">
+                            <app-track-list-view [trackNumber]="(i + 1 + ((page[selected] - 1) * limit))" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
+                        </div>
+                    </div>
+                    <div *ngIf="loading == true" class="row custom-card-list">
+                        <div class="col-xl-6 col-lg-12" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; let i = index">
+                            <app-track-list-view-loader [trackNumber]="i+1"></app-track-list-view-loader>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subSection" *ngIf="selected == 'artists'">
+                    <div *ngIf="!loading"  class="row custom-card-list">
+                        <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let artist of user.favorite.artist">
+                            <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'" type="artist"></app-image-card>
+                        </div>
+                    </div>
+                    <div *ngIf="loading == true"  class="row custom-card-list">
+                        <div class="col-6 col-md-2 col-sm-4 col-xl-2 mb-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] ">
+                            <app-secondary-card-loader></app-secondary-card-loader>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="subSection" *ngIf="selected == 'albums'">
+                    <div *ngIf="!loading" class="row custom-card-list">
+                        <div class="col-xl-2 col-lg-4 col-sm-6" *ngFor="let album of user.favorite.album">
+                            <app-image-card [item]="album" type="album"
+                                            [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
+                        </div>
+                    </div>
+                    <div *ngIf="loading == true"  class="row custom-card-list">
+                        <div class="col-xl-2 col-lg-4 col-sm-6 mb-4" *ngFor="let album of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] ">
+                            <app-primary-card-loader></app-primary-card-loader>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="subSection" *ngIf="selected == 'playlists'">
+                    <div *ngIf="!loading" class="row custom-card-list">
+                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-4 mb-sm-auto" *ngFor="let playlist of user.favorite.playlist">
+                            <app-description-card [item]="playlist"  type="playlist"></app-description-card>
+                        </div>
+                    </div>
+                    <div *ngIf="loading == true" class="row custom-card-list">
+                        <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
+                            <app-description-card-loader></app-description-card-loader>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <!-- End | Tab Content -->
+    </div>
+    <!-- End | Section -->
+</div>
+<!-- End | Main Container -->

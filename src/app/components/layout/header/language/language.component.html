@@ -2,25 +2,25 @@
     <div class="modal-content lang-content">
         <div class="modal-header">
           <div class="pr-3">
-              <h5 class="modal-title mb-1">Language</h5>
-              <p class="text-muted">Select your language</p>
+              <h5 class="modal-title mb-1">{{ 'header.language.title' | translate }}</h5>
+              <p class="text-muted">{{ 'header.language.subtitle' | translate }}</p>
           </div>
           <button type="button" class="close" (click)="close()">&times;</button>
         </div>
         <div class="modal-body">
             <ul class="language-list">
                 <li class="language-item">
-                    <input type="radio" name="language" id="en" [checked]="lang === 'EN'" (click)="setLanguage('EN')">
+                    <input type="radio" name="language" id="en" [checked]="lang === 'en'" (click)="lang = 'en'">
                     <label for="en">English</label>
                 </li>
                 <li class="language-item">
-                    <input type="radio" name="language" id="es" [checked]="lang === 'ES'" (click)="setLanguage('ES')">
+                    <input type="radio" name="language" id="es" [checked]="lang === 'es'" (click)="lang = 'es'">
                     <label for="es">Español</label>
                 </li>                
             </ul>
         </div>
         <div class="modal-footer text-center d-block pb-4">
-            <button type="button" class="btn btn-primary btn-pill" (click)="close()">Close</button>
+            <app-button type="button" (click)="setLanguage()" text="{{ 'header.language.apply' | translate }}" [loading]="loading" classes="btn btn-primary btn-pill"></app-button>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import {ValidatorFn, ValidationErrors, FormControl, Form, FormGroup} from '@angular/forms';
+import {ValidatorFn, ValidationErrors, FormGroup} from '@angular/forms';
 
 export class PasswordValidator {
   static checkPassword(): ValidatorFn {

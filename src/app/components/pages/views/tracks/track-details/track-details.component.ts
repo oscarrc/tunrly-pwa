@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { PlayerService } from '../../../../../services/player.service';
-import { TrackService } from '../../../../../services/track.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { TrackService } from 'src/app/services/track.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,6 +16,9 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     trackName: string;
     trackArtist: string;
     trackDetails: any;
+    loading: boolean = false;
+    gridView:boolean = false;
+    similarTracks: any;
 
     routeSubscription: Subscription;
 
@@ -28,7 +31,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
             if (param.name) {
                 this.trackName = param.name;
                 this.trackArtist = param.artist;
-                this.getSongDetails();
+                this.getTrackDetails();
             }
         });
     }
@@ -42,8 +45,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     addFavorite() {
         this.userService.setFavorite(this.trackDetails._id, 'track').subscribe(
-            res => { this.userService.set(res) },
-            err => {}
+            res => { this.userService.set(res) }
         )
     }
 
@@ -51,19 +53,37 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.userService.isFavorite(this.trackDetails._id, 'track');
     }
 
-    getSongDetails() {
+    getTrackDetails() {
+        this.loading = true;
+
         this.trackService.getInfo(this.trackName, this.trackArtist).subscribe(
-            res => this.trackDetails = res,
-            err => console.log(err)
-        )
+            res => {
+                this.trackDetails = res;
+                this.initSimilar()
+            }
+        ).add( () => this.loading = false )
     }
 
-    getSimilar(){
-        if(!this.trackDetails.similar || this.trackDetails.similar.length == 0){
+    initSimilar(){
+        this.similarTracks = {
+            title: 'tracks.similar',
+            subTitle: 'tracks.alsolike',
+            page: '/track/' + this.trackDetails._id + '/similar',
+            loading: true,
+            items: []
+        };
+
+        
+        if(!this.trackDetails.similar || !this.trackDetails.similar.length){
             this.trackService.getSimilar(this.trackDetails._id).subscribe(
-                res => this.trackDetails.similar = res,
-                err => console.log(err)
+                res => {
+                    this.trackDetails.similar = this.similarTracks.items = res;
+                    this.similarTracks.loading = false;
+                }
             )
+        }else{
+            this.similarTracks.items = this.trackDetails.similar;
+            this.similarTracks.loading = false;
         }
     }
 

@@ -2,32 +2,44 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SearchService {
 
-    private search:any = [];
+    private search:any = {};
     private searchURL = environment.api + '/search/';
-    searchStatus: BehaviorSubject<any> = new BehaviorSubject(this.search);
+    private loading = false;
+    private searchQuery = '';
+
+    searchResults: BehaviorSubject<any> = new BehaviorSubject(this.search);
+    searchStatus: BehaviorSubject<any> = new BehaviorSubject(this.loading);
     hideSearch: EventEmitter<boolean> = new EventEmitter(false);
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) {}
 
-    get searchResults() {
-        return this.search;
+    get query() {
+        return this.searchQuery;
     }
 
-    set searchResults(value) {
+    set query(value) {
+        this.searchQuery = value;
+    }
+
+    set results(value) {
         this.search = value;
+        this.searchResults.next(this.search);
+    }
+
+    set status(value) {
+        this.loading = value;
         this.searchStatus.next(value);
     }
 
-    doSearch(query: string, type: string = "", page: number = 1, limit: number = 10){
-        return this.httpClient.get(this.searchURL + type, { params: {
+    doSearch(query: string = this.searchQuery, type: string = "", page: number = 1, limit: number = 10){
+        return this.httpClient.get(this.searchURL, { params: {
+            type: type,
             query: query,
             page: page.toString(),
             limit: limit.toString()

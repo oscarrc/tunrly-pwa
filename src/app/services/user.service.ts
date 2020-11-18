@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SkinService } from './skin.service';
+import { StorageService } from './storage.service';
 
 @Injectable({ 
     providedIn: "root"
@@ -14,27 +15,33 @@ export class UserService {
 
     user: Observable<any> = this.userSource.asObservable();
     
-    constructor(private httpClient: HttpClient, private skinService: SkinService) {
-    }
+    constructor(private httpClient: HttpClient, 
+                private skinService: SkinService,
+                private storageService: StorageService) {}
 
     
     check(value){
-        return this.httpClient.get(this.userURL  + '/check', { params: { value } });
+        return this.httpClient.get(this.userURL  + 'check', { params: { value } });
     }
    
     set(user){        
         if(user){
-            sessionStorage.setItem('user', JSON.stringify(user));
+            try{
+                this.storageService.setUser(user)
+            }catch{
+                this.storageService.clearCurrentUser();
+            }
+
             this.skinService.skin.emit(user['settings']['dark'] ? 'dark' : 'light');
         }else{
-            sessionStorage.removeItem('user');
+           this.storageService.clearCurrentUser();
         }
 
         this.userSource.next(user);
     }
 
-    get(){
-        return this.httpClient.get(this.userURL)
+    get(username:string = null){
+        return this.httpClient.get(this.userURL + (username ? username : ''))
     }
 
     create(user: any){
@@ -46,19 +53,19 @@ export class UserService {
     }
 
     updatePassword(oldPassword: string, newPassword: string){
-        return this.httpClient.patch(this.userURL + '/password', {oldPassword, newPassword});
+        return this.httpClient.patch(this.userURL + 'profile/password', {oldPassword, newPassword});
     }
 
     setFavorite(favId: string, type: string){
-        return this.httpClient.patch(this.userURL + '/favorites', {favId, type});
+        return this.httpClient.patch(this.userURL + 'profile/favorites', {favId, type});
     }
 
     isFavorite(favId: string, type: string): boolean{
         const favorites = this.userSource.getValue().favorite;
-        return favorites[type].findIndex( f => {return f._id == favId} ) >= 0;
+        return favorites ? favorites[type].findIndex( f => {return f._id == favId} ) >= 0 : false;
     }
 
     addToHistory(track: string){
-        return this.httpClient.patch(this.userURL + '/history', { track });
+        return this.httpClient.patch(this.userURL + 'profile/history', { track });
     }
 }

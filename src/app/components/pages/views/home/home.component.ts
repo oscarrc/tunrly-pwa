@@ -1,18 +1,19 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { TrackService } from '../../../../services/track.service';
-import { ArtistService } from '../../../../services/artist.service';
-import { TagService } from '../../../../services/tag.service';
-import { UserService } from '../../../../services/user.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { TrackService } from 'src/app/services/track.service';
+import { ArtistService } from 'src/app/services/artist.service';
+import { TagService } from 'src/app/services/tag.service';
+import { UserService } from 'src/app/services/user.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit, AfterViewInit {
-    // private userSubscription: Subscription;
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+    private userSubscription: Subscription;
     
     carouselArrowPosClass1 = 'arrow-pos-1';
     carouselArrowPosClass2 = 'arrow-pos-2';
@@ -32,28 +33,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 private trackService: TrackService,
                 private artistService: ArtistService,
                 private tagService: TagService,
-                private userService: UserService) { }
+                private userService: UserService) {}
 
     ngOnInit() {
-        this.userService.user.subscribe( user => {
-            if(user.settings.personalResults){
-                this.initHistory(user.history.slice(0,9));
+        this.userSubscription = this.userService.user.subscribe( user => {
+            if(user?.history){
+                this.initHistory(user.history, 9);
                 this.initRecommended(user.favorite);
-            }            
-        }).unsubscribe();
+            }
+        })
 
         this.initTopTracks();
         this.initTopArtists();
         this.initTopTags();
     }
 
-    ngAfterViewInit() {
+    ngAfterViewInit() {  
         this.loadingService.stopLoading();
     }
 
-    // ngOnDestroy(){
-    //     this.userSubscription.unsubscribe();
-    // }
+    ngOnDestroy(){        
+        this.userSubscription.unsubscribe();
+    }
 
     getRandom(elements: Array<any>){
         const size = elements.length;
@@ -64,78 +65,66 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // Initialize top tracks object
     initTopTracks() {
         this.topTracks = {
-            title: 'Top Tracks',
-            subTitle: 'Popular tracks this week',
+            title: 'home.toptracks.title',
+            subTitle: 'home.toptracks.subtitle',
             page: '/tracks',
             loading: true,
             items: []
         };
         
         this.trackService.getTop('', 1, 10).subscribe(
-            res => {
-                this.topTracks.items = res;
-                this.topTracks.loading = false;
-            },
-            err => console.log(err)
-        )
+            res =>  this.topTracks.items = res 
+        ).add( () => { this.topTracks.loading = false })
     }
 
     // Initialize top tracks object
     initTopArtists() {
         this.topArtists = {
-            title: 'Trending Artists',
-            subTitle: 'What everyone listens to',
+            title: 'home.topartists.title',
+            subTitle: 'home.topartists.subtitle',
             page: '/artists',
             loading: true,
             items: []
         };
         
         this.artistService.getTop('', 1, 10).subscribe(
-            res => {
-                this.topArtists.items = res;
-                this.topArtists.loading = false;
-            },
-            err => console.log(err)
-        );
+            res => this.topArtists.items = res
+        ).add( () => this.topArtists.loading = false );
     }
 
     // Initialize top tracks object
     initTopTags() {
         this.topTags = {
-            title: 'Hot tags',
-            subTitle: 'This tags are hot',
+            title: 'home.toptags.title',
+            subTitle: 'home.toptags.subtitle',
             page: '/tags',
             loading: true,
             items: []
         };
         
         this.tagService.getTop(1, 10).subscribe(
-            res => {
-                this.topTags.items = res;
-                this.topTags.loading = false;
-            },
-            err => console.log(err)
-        )
+            res => this.topTags.items = res
+        ).add( () => { this.topTags.loading = false })
     }
  
     // Initialize music playlist object for section
     initPlaylist() {
         this.playlist = {
-          title: 'Your Playlist',
-          subTitle: 'You best to listen',
+          title: 'home.playlists.title',
+          subTitle: 'home.playlists.subtitle',
           page: '/playlist',
           items: []
         };
     }
 
     //Initialize user history
-    initHistory(history) {
+    initHistory(history, size) {
         this.history = {
-            title: 'Listen again',
-            subTitle: 'Re-listen some of your songs',
+            title: 'home.history.title',
+            subTitle: 'home.history.subtitle',
             page: '/user/history',
             loading: false,
-            items: history.sort( (a, b) => { return 0.5 - Math.random() })
+            items: history.slice(0,size).sort( () => { return 0.5 - Math.random() })
         };
     }
 
@@ -144,21 +133,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
         let tracks = [];
 
         favorites.track.forEach( track => {
-            tracks = tracks.concat(track.similar.slice(0,5))
+            if(track.similar){
+                tracks = tracks.concat(track.similar.slice(0,5))
+            }
         });
 
         favorites.artist.forEach( artist => {
-            artist.similar.slice(0,5).forEach( similar => {
-                tracks = tracks.concat(similar.tracks);
-            })
+            if(artist.similar) {
+                artist.similar.slice(0,5).forEach( similar => {
+                    tracks = tracks.concat(similar.tracks);
+                })
+            }
         })
 
         this.recommended = {
-            title: 'Just for you',
-            subTitle: 'We thought you may like these',
-            page: '/user/favorites',
+            title: 'home.recommended.title',
+            subTitle: 'home.recommended.subtitle',
+            page: '/user/recommended',
             loading: false,
-            items: tracks.sort( (a, b) => { return 0.5 - Math.random() }).slice(0,10)
+            items: tracks.sort( () => { return 0.5 - Math.random() }).slice(0,10)
         };
     }
 }

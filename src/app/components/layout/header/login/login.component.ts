@@ -15,6 +15,7 @@ import { ForgottenComponent } from '../../../layout/header/forgotten/forgotten.c
 export class LoginComponent extends SimpleModalComponent<any, any> implements OnInit {
 
     login: any;
+    loading: boolean = false;
     formSubmitted = false;
 
     constructor(private simpleModalService: SimpleModalService,
@@ -57,13 +58,17 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         if (this.login.invalid) {
             return false;
         }
+        
+        this.loading = true;
 
         this.authService.login(login.value.user, login.value.password, login.value.remember).subscribe(
-            res => {         
+            res => {
                 this.close();
             },
             err => {
-                if( err.error.name === "NotActive"){
+                this.loading = false;
+                
+                if( err.error?.name === "NotActive"){
                     this.simpleModalService.addModal(ValidationComponent, { email: this.user, title: "Validate your Tunrly.com account" });
                     this.close();
                 }

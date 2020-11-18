@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 
-import { LoginComponent } from '../../../layout/header/login/login.component';
-import { ValidationComponent } from '../../../layout/header/validation/validation.component';
-import { LoadingService } from '../../../../services/loading.service';
-import { UserService } from '../../../../services/user.service';
-import { AvailabilityValidator } from '../../../../core/validators/availability.validator';
-import { PasswordValidator } from '../../../../core/validators/password.validator';
+import { LoginComponent } from 'src/app/components/layout/header/login/login.component';
+import { ValidationComponent } from 'src/app/components/layout/header/validation/validation.component';
+import { LoadingService } from 'src/app/services/loading.service';
+import { UserService } from 'src/app/services/user.service';
+import { AvailabilityValidator } from 'src/app/core/validators/availability.validator';
+import { PasswordValidator } from 'src/app/core/validators/password.validator';
 
-import { Config } from '../../../../config/config';
+import { Config } from 'src/app/config/config';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -19,10 +19,9 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
     config: Config;
     brand: any = {};
-    sliderConfig: any = {};
-    trendingArtists: any = [];
     backgroundImage: string = "";
     registration: any;
+    loading: boolean = false;
     formSubmitted: boolean = false;
 
     constructor(private loadingService: LoadingService,
@@ -57,7 +56,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
             passgroup: new FormGroup({
                 password: new FormControl('', [
                     Validators.required,
-                    Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
+                    Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$')
                 ]),
                 repeatpassword: new FormControl('', [
                     Validators.required
@@ -67,39 +66,6 @@ export class LandingComponent implements OnInit, AfterViewInit {
                 Validators.required
             ])
         });
-
-        this.sliderConfig = {
-            arrows: false,
-            dots: false,
-            infinite: false,
-            slidesToShow: 5,
-            slidesToScroll: 2,
-            speed: 1000,
-            autoplay: true,
-            // Breakpoints
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 3
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 380,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        arrows: false
-                    }
-                }
-            ]
-        };
     }
 
     ngAfterViewInit() {
@@ -120,21 +86,24 @@ export class LandingComponent implements OnInit, AfterViewInit {
         if (this.registration.invalid) {
             return false;
         }
-        let user = registration.value;
 
-        delete user.tac;
-        delete user.repeatpassword;
+        this.loading = true;
+
+        const user = {
+            username: registration.value.username,
+            email: registration.value.email,
+            firstname: registration.value.firstname,
+            lastname: registration.value.lastname,
+            password: registration.value.passgroup.password,
+        }
 
         this.userService.create(user).subscribe(
-            res => {
+            () => {
                 registration.reset();
                 this.formSubmitted = false;
                 this.openValidationModal(user.email);
-            },
-            err => {
-                console.log(err)
             }
-        )
+        ).add( () => this.loading = false )
     }
 
     getRandomBackground(){

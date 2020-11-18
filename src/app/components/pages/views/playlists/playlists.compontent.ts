@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { PlaylistService } from '../../../../services/playlist.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { PlaylistService } from 'src/app/services/playlist.service';
 
 @Component({
     selector: 'app-playlists',
@@ -14,7 +14,7 @@ export class PlaylistsComponent implements OnInit, AfterViewInit {
     loading: boolean = true;
 
     constructor(private loadingService: LoadingService,
-        private playlistService: PlaylistService) {}
+                private playlistService: PlaylistService) {}
 
     ngOnInit() {
         this.initPlaylists();
@@ -35,12 +35,8 @@ export class PlaylistsComponent implements OnInit, AfterViewInit {
         this.loading = true;
 
         this.playlistService.get(null, this.page, this.limit).subscribe(
-            res => {
-                this.loading = false;
-                this.playlists = res;
-            },
-            err => console.log(err)
-        )
+            res => this.playlists = res
+        ).add( () => this.loading = false )
     }
 
     ngAfterViewInit() {

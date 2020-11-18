@@ -2,10 +2,10 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { PlayerService } from '../../../../../services/player.service';
-import { AlbumService } from '../../../../../services/album.service';
-import { UserService } from '../../../../../services/user.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { AlbumService } from 'src/app/services/album.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -53,11 +53,9 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         return this.userService.isFavorite(this.albumDetails._id, 'album');
     }
 
-    // Initialize static data for display
     getAlbumDetails() {
         this.albumService.getInfo(this.albumName, this.artistName).subscribe(
-            res => this.albumDetails = res,
-            err => console.log(err)
+            res => this.albumDetails = res
         )
     }
    

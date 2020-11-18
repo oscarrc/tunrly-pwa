@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../../services/loading.service';
-import { PlayerService } from '../../../../../services/player.service';
-import { PlaylistService } from '../../../../../services/playlist.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { PlaylistService } from 'src/app/services/playlist.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -49,12 +49,10 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
     isFavorite(){
         return this.playlistDetails?._id ? this.userService.isFavorite(this.playlistDetails._id, 'playlist') : false;
     }
-
-    // Initialize static data for display
+    
     getPlaylistDetails() {
         this.playlistService.getInfo(this.playlistId).subscribe(
-            res => this.playlistDetails = res,
-            err => console.log(err)
+            res => this.playlistDetails = res
         )
     }
    

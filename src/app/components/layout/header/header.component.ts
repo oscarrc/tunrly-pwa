@@ -5,11 +5,11 @@ import { Subscription } from 'rxjs';
 
 import { SimpleModalService } from 'ngx-simple-modal';
 import { LanguageComponent } from './language/language.component';
-import { SearchService } from '../../../services/search.service';
-import { LocalStorageService } from '../../../services/local-storage.service';
-import { UserService } from '../../../services/user.service';
-import { SkinService } from '../../../services/skin.service';
-import { Config } from '../../../config/config';
+import { SearchService } from 'src/app/services/search.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { UserService } from 'src/app/services/user.service';
+import { SkinService } from 'src/app/services/skin.service';
+import { Config } from 'src/app/config/config';
 
 @Component({
     selector: 'app-header',
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     @ViewChild('headerBackdrop') backdrop: ElementRef;
     headerClasses = 'bg-primary';
 
-    language: any = {};
+    languageIcon: any;
     currentUser: any = {};
 
     private searchSubscription: Subscription;
@@ -33,13 +33,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(@Inject(DOCUMENT) private document: Document,
                 private searchService: SearchService,
                 private simpleModalService: SimpleModalService,
-                private localStorageService: LocalStorageService,
+                private storageService: StorageService,
                 private userService: UserService,
                 private skinService: SkinService) {
-        this.language = {
-            title: 'Language',
-            image: './assets/images/svg/translate.svg'
-        };
+        this.languageIcon = './assets/images/svg/translate.svg';
     }
 
     ngOnInit() {
@@ -49,7 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             ])
         });
 
-        const themeSkin = this.localStorageService.getThemeSkin();
+        const themeSkin = this.storageService.getThemeSkin();
        
         if (themeSkin) {
             this.headerClasses = 'bg-' + Config.THEME_CLASSES[themeSkin.header];
@@ -74,13 +71,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     doSearch(){
         if(this.searchForm.valid){
-            this.searchService.doSearch(this.searchForm.get('query').value).subscribe(
+            this.showSearchResults();
+            
+            this.searchService.status = true;            
+            this.searchService.query = this.searchForm.get('query').value;
+
+            this.searchService.doSearch().subscribe(
                 res => {
-                    this.searchService.searchResults = res
-                    if(res) this.showSearchResults();
-                },
-                err => console.log(err)
-            )
+                    this.searchService.results = res
+                }
+            ).add( () => {                
+                this.searchService.status = false
+            })
         }
     }
 
@@ -104,7 +106,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     toggleSearchFocus(){
-        if( !this.pressEnter && this.searchService.searchResults.length ){
+        if( this.searchForm.get('query').value && this.searchService.query ){
             this.showSearchResults();
         }
         this.pressEnter = !this.pressEnter

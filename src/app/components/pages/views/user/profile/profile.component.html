@@ -15,20 +15,20 @@
                                 </div>
                             </div>
                             <h6 class="mb-3">{{userProfile.name}}</h6>
-                            <p  [ngClass]="imageSubmitted && imageForm.controls.image.errors?.requiredFileType ? 'text-danger' : ''" class="mb-1">Format: .png or .jpg</p>
-                            <p [ngClass]="imageSubmitted && imageForm.controls.image.errors?.requiredSize ? 'text-danger' : ''" >Max size: 1MB</p>
+                            <p  [ngClass]="imageSubmitted && imageForm.controls.image.errors?.requiredFileType ? 'text-danger' : ''" class="mb-1">{{ 'user.profile.imageformat' | translate }}</p>
+                            <p [ngClass]="imageSubmitted && imageForm.controls.image.errors?.requiredSize ? 'text-danger' : ''" >{{ 'user.profile.imagesize' | translate }}</p>
                             <form action="#" [formGroup]="imageForm">
                                 <label for="image" class="btn btn-danger btn-air">
-                                    Change Image <input type="file" formControlName="image" id="image" hidden (change)="saveImage($event.target.files)">
+                                    {{ 'user.profile.changeimage' | translate }} <input type="file" formControlName="image" id="image" hidden (change)="saveImage($event.target.files)">
                                 </label>
                             </form>
                         </div>
                     </div>
                     
                     <div class="plan-info-card text-center px-sm-5 py-sm-4 p-3">
-                        <h6>Have a LastFM account?</h6>
-                        <p>Use it to scrobble your tracks!</p>
-                        <button type="button" class="btn btn-pill btn-air btn-danger">Login with LastFM</button>
+                        <h6>{{ 'user.profile.lastfmaccount' | translate }}</h6>
+                        <p>{{ 'user.profile.lastfmaccounttext' | translate }}</p>
+                        <button type="button" class="btn btn-pill btn-air btn-danger">{{ 'user.profile.lastfmlogin' | translate }}</button>
                     </div>
                 </div>
                 <div class="col-xl-8 col-md-7">
@@ -39,42 +39,42 @@
                                     <label for="email" class="form-label">Email</label>
                                     <input type="text" id="email" name="email" class="form-control" formControlName="email">
                                     <div class="invalid-feedback d-block text-right" *ngIf="profileSubmitted">
-                                        <span *ngIf="profileForm.controls.email.errors?.required">Please fill this field</span>
-                                        <span *ngIf="profileForm.controls.email.errors?.email">Enter a valid email address</span>
+                                        <span *ngIf="profileForm.controls.email.errors?.required">{{ 'errors.form.required' | translate }}</span>
+                                        <span *ngIf="profileForm.controls.email.errors?.email">{{ 'errors.form.email' | translate }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 form-group">
-                                    <label for="firstName" class="form-label">First Name</label>
+                                    <label for="firstName" class="form-label">{{ 'user.profile.firstname' | translate }}</label>
                                     <input type="text" id="firstName" name="firstName" class="form-control" formControlName="firstname">
                                     <div class="invalid-feedback d-block text-right" *ngIf="profileSubmitted">
-                                        <span *ngIf="profileForm.controls.firstname.errors?.required">Please fill this field</span>
+                                        <span *ngIf="profileForm.controls.firstname.errors?.required">{{ 'errors.form.required' | translate }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 form-group">
-                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <label for="lastName" class="form-label">{{ 'user.profile.lastname' | translate }}</label>
                                     <input type="text" id="lastName" name="lastName" class="form-control" formControlName="lastname">
                                     <div class="invalid-feedback d-block text-right" *ngIf="profileSubmitted">
-                                        <span *ngIf="profileForm.controls.lastname.errors?.required">Please fill this field</span>
+                                        <span *ngIf="profileForm.controls.lastname.errors?.required">{{ 'errors.form.required' | translate }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 form-group">
-                                    <label for="username" class="form-label">Username</label>
+                                    <label for="username" class="form-label">{{ 'user.profile.username' | translate }}</label>
                                     <input type="text" id="username" name="username" class="form-control" formControlName="username">
                                     <div class="invalid-feedback d-block text-right" *ngIf="profileSubmitted">
-                                        <span *ngIf="profileForm.controls.username.errors?.required">Please fill this field</span>
-                                        <span *ngIf="profileForm.controls.username.errors?.pattern">Username must be between 5 and 15 characters long, start and end with a letter. Only (. - _) are permitted</span>
+                                        <span *ngIf="profileForm.controls.username.errors?.required">{{ 'errors.form.required' | translate }}</span>
+                                        <span *ngIf="profileForm.controls.username.errors?.pattern">{{ 'errors.form.username' | translate }}</span>
                                     </div>
                                     <div class="invalid-feedback d-block text-right">
-                                        <span *ngIf="profileForm.controls.username.errors?.notAvailable">Username already taken</span>
+                                        <span *ngIf="profileForm.controls.username.errors?.notAvailable">{{ 'errors.form.usertaken' | translate }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 form-group">
-                                    <label for="loc" class="form-label">Location</label>
+                                    <label for="loc" class="form-label">{{ 'user.profile.country' | translate }}</label>
                                     <input type="text" id="loc" name="loc" class="form-control" formControlName="country">
                                 </div>
                                 <div class="col-12">
-                                    <button *ngIf="edit" type="submit" class="btn btn-primary btn-air">Save Changes</button>
-                                    <button *ngIf="!edit" (click)="toggleEdit()" type="button" class="btn btn-primary btn-air">Edit profile</button>
+                                    <app-button *ngIf="edit" type="submit" text="{{ 'user.profile.save' | translate }}" [loading]="profileLoading" classes="btn btn-primary btn-air"></app-button>
+                                    <button *ngIf="!edit" (click)="toggleEdit()" type="button" class="btn btn-primary btn-air">{{ 'user.profile.edit' | translate }}</button>
                                 </div>
                             </form>
                         </div>
@@ -83,31 +83,31 @@
                         <div class="card-body">
                             <form [formGroup]="passwordForm" (ngSubmit)="changePassword(passwordForm)" [ngClass]="passwordSubmitted ? 'submitted' : ''" class="row">
                                 <div class="col-12">
-                                    <label for="loc" class="form-label">Change your password</label>
+                                    <label for="loc" class="form-label">{{ 'user.profile.changepasswordtext' | translate }}</label>
                                 </div>
                                 <div class="col-xl-4 form-group">
-                                    <input type="password" id="oldpassword" name="oldpassword" class="form-control" placeholder="Current Password" formControlName="oldpassword">
+                                    <input type="password" id="oldpassword" name="oldpassword" class="form-control" placeholder="{{ 'user.profile.currentpassword' | translate }}" formControlName="oldpassword">
                                     <div class="invalid-feedback d-block text-right" *ngIf="passwordSubmitted">
-                                        <span *ngIf="passwordForm.controls.password.errors?.required">Please fill this field</span>
-                                        <span *ngIf="passwordForm.controls.password.errors?.pattern">Password must be between 8 - 15 characters length and contain, at least, one upper case letter, one lower case letter, and one numeric digit</span>
+                                        <span *ngIf="passwordForm.controls.oldpassword.errors?.required">{{ 'errors.form.required' | translate }}</span>
+                                        <span *ngIf="passwordForm.controls.oldpassword.errors?.pattern">{{ 'errors.form.password' | translate }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-4" >
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="New Password" formControlName="password">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="{{ 'user.profile.newpassword' | translate }}" formControlName="password">
                                     <div class="invalid-feedback d-block text-right" *ngIf="passwordSubmitted">
-                                        <span *ngIf="passwordForm.controls.password.errors?.required">Please fill this field</span>
-                                        <span *ngIf="passwordForm.controls.password.errors?.pattern">Password must be between 8 - 15 characters length and contain, at least, one upper case letter, one lower case letter, and one numeric digit</span>
+                                        <span *ngIf="passwordForm.controls.password.errors?.required">{{ 'errors.form.required' | translate }}</span>
+                                        <span *ngIf="passwordForm.controls.password.errors?.pattern">{{ 'errors.form.password' | translate }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <input type="password" id="repeatPassword" name="repeatPassword" class="form-control" placeholder="Repeat Password" formControlName="repeatpassword">
+                                    <input type="password" id="repeatPassword" name="repeatPassword" class="form-control" placeholder="{{ 'user.profile.repeatpassword' | translate }}" formControlName="repeatpassword">
                                     <div class="invalid-feedback d-block text-right" *ngIf="passwordSubmitted">
-                                        <span *ngIf="passwordForm.controls.repeatpassword.errors?.required && !passwordForm.errors?.equal">Please fill this field</span>
-                                        <span *ngIf="passwordForm.errors?.equal">Passwords don't match</span>
+                                        <span *ngIf="passwordForm.controls.repeatpassword.errors?.required && !passwordForm.errors?.equal">{{ 'errors.form.required' | translate }}</span>
+                                        <span *ngIf="passwordForm.errors?.equal">{{ 'errors.form.passwordmatch' | translate }}</span>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-air">Change Password</button>
+                                    <app-button type="submit" text="{{ 'user.profile.changepassword' | translate }}" [loading]="passwordLoading" classes="btn btn-primary btn-air"></app-button>
                                 </div>
                             </form>
                         </div>

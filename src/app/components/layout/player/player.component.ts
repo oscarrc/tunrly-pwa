@@ -3,8 +3,9 @@ import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 
-import { PlayerService } from '../../../services/player.service';
-import { UserService } from '../../../services/user.service';
+import { PlayerService } from 'src/app/services/player.service';
+import { StorageService } from 'src/app/services/storage.service'
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-player',
@@ -44,21 +45,25 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 private userService: UserService,
-                private playerService: PlayerService) { }
+                private storageService: StorageService,
+                private playerService: PlayerService) { 
+                    this.playerOptions = this.playerService.getOptions();
+                }
 
     ngOnInit() {
         this.init();
 
         this.userSubscription = this.userService.user.subscribe(
             user => {
-                this.volume = (user?.settings.volume + 1)/3 * 75 || 100;
-                this.quality = user?.settings.quality;
+                this.volume = (user?.settings?.volume + 1)/3 * 75 || 100;
+                this.quality = user?.settings?.quality;
             }
         )
 
         this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
             this.track = this.playerService.track;            
             this.playerOptions = options;
+            
             if(this.track){
                 this.userService.addToHistory(this.track._id).subscribe(
                     res => { this.userService.set(res) }
@@ -82,13 +87,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     ready(event){
-        this.player = event.target;        
-        this.duration = this.player.getDuration();
+        this.player = event.target;
         this.player?.setVolume(this.volume);
         this.timer = setInterval( () => {
             this.time = this.player.getCurrentTime();
             this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
-        })
+        });
     }
 
     stateChange(event){
@@ -103,13 +107,15 @@ export class PlayerComponent implements OnInit, OnDestroy {
             case 0: //Finished
                 this.playNext();
                 break;
-            case 1: //Playing
+            case 1: //Playing                
+                this.duration = this.player.getDuration();
                 break;
             case 2: //Pausa
                 break;
             case 3: //Buffering
                 break;
-            case 5: //Queued
+            case 5: //Queued        
+                this.playPause();
                 break;
         }
     }
@@ -130,6 +136,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     toggleOptions(option){
         this.playerService.setOption(option);
+        this.storageService.setLocalStorage('player', this.playerOptions);
     }
 
     openPlaylist() {

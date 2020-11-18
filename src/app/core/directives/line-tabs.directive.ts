@@ -14,15 +14,12 @@ export class LineTabsDirective implements AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        // Add a line indicator in tabs
         this.indicatorLine = this.renderer.createElement('span');
         this.renderer.addClass(this.indicatorLine, 'tabs-link-line');
         this.renderer.appendChild(this.el.nativeElement, this.indicatorLine);
 
-        // Set styles on line indicator
         this.setLineStyles(this.el.nativeElement.querySelector('.nav-link'));
-
-        // Bind click event on multiple tab links
+        
         this.navLink$ = this.el.nativeElement.querySelectorAll('.nav-link');
         this.linkClick = this.navLink$.forEach(link => {
             link.addEventListener('click', this.navLinkClick.bind(this));

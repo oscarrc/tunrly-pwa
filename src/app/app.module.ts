@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { JwtModule, JWT_OPTIONS, JwtInterceptor } from '@auth0/angular-jwt';
+import { ToastrModule } from 'ngx-toastr';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -13,13 +17,19 @@ import { LoadingService } from './services/loading.service';
 import { MenuConfigService } from './services/menu.service';
 import { AuthService } from './services/auth.service';
 
-import {ErrorInterceptor} from './core/interceptors/error.interceptor'
+import {ErrorInterceptor} from './core/interceptors/error.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment'
 
 export function jwtOptionsFactory(cookieService: CookieService) {
     return {
         tokenGetter: () => cookieService.get('token'),
-        allowedDomains: ['localhost:3000']
+        allowedDomains: ['localhost:3000','api.tunrly.com','dev.tunrly.com']
     };
+}
+
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
 }
 
 @NgModule({
@@ -29,6 +39,7 @@ export function jwtOptionsFactory(cookieService: CookieService) {
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
         LayoutModule,
@@ -38,7 +49,21 @@ export function jwtOptionsFactory(cookieService: CookieService) {
                 useFactory: jwtOptionsFactory,
                 deps: [CookieService]
             }
-          })
+        }),
+        ToastrModule.forRoot({
+            timeOut: 5000,
+            positionClass: 'toast-offset',
+            preventDuplicates: true,
+        }),
+        TranslateModule.forRoot({
+            defaultLanguage: 'en',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [
         LoadingService,

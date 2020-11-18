@@ -5,31 +5,31 @@
     <li class="dropdown-item">
         <a class="dropdown-link" (click)="addFavorite()">
             <i class="la la-heart-o"></i>
-            <span>Favorite</span>
+            <span>{{ 'context.favorite' | translate }}</span>
         </a>
     </li>
     <li class="dropdown-item" *ngIf="trackIndex == null">
         <a class="dropdown-link" (click)="addToPlayList()">
             <i class="la la-plus"></i>
-            <span>Add to Playlist</span>
+            <span>{{ 'context.addtoplaylist' | translate }}t</span>
         </a>
     </li>
     <li class="dropdown-item" *ngIf="trackIndex >= 0">
         <a class="dropdown-link" (click)="removeFromPlaylist()">
             <i class="la la-minus"></i>
-            <span>Remove from playlist</span>
+            <span>{{ 'context.removefromplaylist' | translate }}</span>
         </a>
     </li>
     <li class="dropdown-item">
         <a class="dropdown-link" (click)="shareSong()">
             <i class="la la-share-alt"></i>
-            <span>Share</span>
+            <span>{{ 'context.share' | translate }}</span>
         </a>
     </li>
     <li class="dropdown-item">
         <a class="dropdown-link" [routerLink]="'/track/' + track?.name + '/' + track?.artist">
             <i class="la la-info-circle"></i>
-            <span>Track Info</span>
+            <span>{{ 'context.trackinfo' | translate }}</span>
         </a>
     </li>
 </ul>

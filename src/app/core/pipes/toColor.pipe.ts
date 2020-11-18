@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ToColorPipe implements PipeTransform {
     transform(value: any): string {
         let hash = 0;
-        let str = value.toString();
+        let str = value ? value.toString() : Math.random().toString();
 
         for (let i = 0; i < str.length; i++) {
             hash = str.charCodeAt(i) + ((hash << 5) - hash);
