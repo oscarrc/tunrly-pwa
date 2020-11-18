@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     private refreshSubject: ReplaySubject<any>;
 
     private handleError(err){
-        this.toastr.error(err.error.message, 'Error', { positionClass: this.authService.loggedIn ? 'toast-offset' : 'toast-position'});
+        this.toastr.error(err.error.message, 'Error', { positionClass: this.authService.loginStatus ? 'toast-offset' : 'toast-position'});
     }
 
     private handleRefresh(){
@@ -35,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(catchError((err:any) => {        
             switch(err.status){
                 case 401:
-                    if(this.authService.loggedIn){
+                    if(this.authService.loginStatus){
                         if (!this.refreshing) this.handleRefresh();
 
                         return this.refreshSubject.pipe(
@@ -50,7 +50,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                                 );
                             })
                         )
-                    }else{
+                    }else{                        
+                        this.authService.logout();
                         this.handleError(err);
                         return throwError(err);
                     }
