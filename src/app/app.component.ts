@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 private userService: UserService,
                 private authService: AuthService,
                 private storageService: StorageService,
-                private translateService: TranslateService) {        
+                private translateService: TranslateService) {
                     this.initLang();
                     this.initTheme(); 
                 }
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {       
-        if(this.authService.loggedIn) this.initUser();
+        if(this.authService.loginStatus) this.initUser();
     }
 
     ngOnDestroy() {
