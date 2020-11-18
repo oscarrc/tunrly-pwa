@@ -69,39 +69,6 @@ export class LandingComponent implements OnInit, AfterViewInit {
                 Validators.required
             ])
         });
-
-        this.sliderConfig = {
-            arrows: false,
-            dots: false,
-            infinite: false,
-            slidesToShow: 5,
-            slidesToScroll: 2,
-            speed: 1000,
-            autoplay: true,
-            // Breakpoints
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 3
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 380,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        arrows: false
-                    }
-                }
-            ]
-        };
     }
 
     ngAfterViewInit() {
@@ -142,5 +109,4 @@ export class LandingComponent implements OnInit, AfterViewInit {
         const number = Math.floor(Math.random() * 6) + 1;
         return "assets/images/background/header-" + number + ".jpg";
     }
-
 }
