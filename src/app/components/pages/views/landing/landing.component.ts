@@ -112,10 +112,6 @@ export class LandingComponent implements OnInit, AfterViewInit {
         this.simpleModalService.addModal(LoginComponent, {});
     }
 
-    openValidationModal(email) {
-        this.simpleModalService.addModal(ValidationComponent, {email: email, title: "Your Tunrly.com account has been created"});
-    }
-
     register(registration){
         this.formSubmitted = true;
         
@@ -137,7 +133,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
             () => {
                 registration.reset();
                 this.formSubmitted = false;
-                this.openValidationModal(user.email);
+                this.simpleModalService.addModal(ValidationComponent, {email: user.email});
             }
         ).add( () => this.loading = false )
     }
