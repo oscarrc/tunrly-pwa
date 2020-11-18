@@ -204,7 +204,9 @@
 		},
 		"recommended":{
 			"title": "Curated tracks just for you",
-			"foryous": "Recommended for you"
+			"foryous": "Recommended for you",			
+			"empty": "No recommendations yet. Favorite some music to get custom recommendations",
+			"explore": "Browse music"
 		},
 		"favorites":{
 			"title": "Favorites",

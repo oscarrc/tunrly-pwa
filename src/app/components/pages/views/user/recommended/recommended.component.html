@@ -25,7 +25,7 @@
 
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="section">
-        <div *ngIf="!loading" class="row custom-card-list">
+        <div *ngIf="!loading && tracks.length; else nothing" class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
                 <div class="col-lg-5 col-sm-3 col-xl-2" *ngFor="let track of tracks | slice:(page-1)*limit:page*limit">
                     <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
@@ -49,6 +49,14 @@
                 </div>
             </ng-template>
         </div>
+
+        <ng-template #nothing>
+            <app-nothing 
+                message="user.recommended.empty"
+                url="/home"
+                action="user.recommended.explore">
+            </app-nothing>
+        </ng-template>
     </div>
     <!-- End | Section -->
 </div>
