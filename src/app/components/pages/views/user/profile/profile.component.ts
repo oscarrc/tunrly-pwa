@@ -57,8 +57,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
             username: new FormControl(user.username, [
                     Validators.required,
                     Validators.pattern('^([a-z0-9]+(?:[ _.-][a-z0-9]+)*){5,15}$')
-                ],
-                AvailabilityValidator.checkAvailability(this.userService)
+                ]
             ),
             country: new FormControl(user.country),
         });
