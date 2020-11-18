@@ -62,7 +62,7 @@ export class UserService {
 
     isFavorite(favId: string, type: string): boolean{
         const favorites = this.userSource.getValue().favorite;
-        return favorites ? favorites[type].findIndex( f => {return f._id == favId} ) >= 0 : false;
+        return favorites ? favorites[type].includes(favId) : false;
     }
 
     addToHistory(track: string){

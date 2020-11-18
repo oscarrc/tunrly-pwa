@@ -50,7 +50,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     isFavorite(){
-        return this.userService.isFavorite(this.albumDetails._id, 'album');
+        return this.userService.isFavorite(this.albumDetails?._id, 'album');
     }
 
     getAlbumDetails() {
