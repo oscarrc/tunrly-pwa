@@ -37,10 +37,12 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
     getTracks(tracks){
         const offset = (this.page - 1) * this.limit;
 
+        this.tracks.loading = true;
+
         if(this.tracks.items.slice(offset, this.limit).length == 0 ){
             this.trackService.getTracks( tracks.slice(offset, this.limit)).subscribe( tracks => {   
                 this.tracks.items = this.tracks.items.concat(tracks);
-            });
+            }).add( () => this.tracks.loading = false );
         }
     }
 
@@ -51,6 +53,7 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
                     title: 'user.history.title',
                     subtitle: 'user.history.subtitle',
                     list: user.history.reverse(),
+                    loading: true,
                     items: []
                 };
                 
