@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs';
 })
 export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    songs: any = {};
     artists = {
         list: [],
         items: [],
@@ -38,6 +37,12 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
         page: 1,
         loading: false
     };
+    recommended = {
+        list: [],
+        items: [],
+        page: 1,
+        loading: false
+    }
     gridView:boolean = false;
     limit:number = 12;
 
@@ -133,15 +138,4 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
             this[type].page--
         }
     }
-   
-    // Initialize song object for section
-    initSongs() {
-        this.songs = {
-            title: 'user.favorites.alsolike',
-            subtitle: 'user.favorites.checkout',
-            page: '/user/recommended',
-            items: this.getSimilar()
-        };
-    }
-
 }

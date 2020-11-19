@@ -64,20 +64,14 @@ export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     getArtists() {
         this.artistService.getTop(this.country, this.page, this.limit).subscribe(
-            res => {
-                this.loading = false;
-                this.artists = res
-            }
-        )
+            res => this.artists = res
+        ).add(() => this.loading = false)
     }
 
     getSimilar() {
         this.artistService.getSimilar(this.id).subscribe(
-            res => {
-                this.loading = false;
-                this.artists = res;
-            }
-        )
+            res =>  this.artists = res
+        ).add(() => this.loading = false)
     }
 
     ngOnDestroy() {
