@@ -126,7 +126,7 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     nextPage(type){
-        const count = this[type].length;
+        const count = this[type].list.length;
 
         if((count / this.limit) > this[type].page){
             this[type].page++

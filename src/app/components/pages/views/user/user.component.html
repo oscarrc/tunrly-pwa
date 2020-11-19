@@ -38,8 +38,8 @@
                 <a class="nav-link active" id="playlists-tab" data-toggle="tab" href="#playlists" role="tab"
                    aria-controls="playlists" aria-selected="true">{{ 'playlists.name' | translate }}</a>
             </li>
-            <li class="nav-item" *ngIf="user.favorite?.tracks">
-                <a class="nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab"
+            <li class="nav-item" *ngIf="user.favorite?.track">
+                <a class="nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" (click)="getEntities()"
                    aria-controls="favorites" aria-selected="false">{{ 'user.favorites.title' | translate }}</a>
             </li>
         </ul>
@@ -51,8 +51,8 @@
                 <div class="container-header d-flex justify-content-between">
                     <span class="title">{{ 'user.profile.publicplaylists' | translate:{ username: user.username } }}</span>
                     <span>
-                        <button [disabled]="page[selected]==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
-                        <button [disabled]="user.playlists?.length / limit <= page[selected]"  type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+                        <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
+                        <button [disabled]="user.playlists?.length / limit <= page"  type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
                     </span>
                 </div>
                 <!-- End | Container header -->
@@ -72,7 +72,7 @@
                  <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                  <div class="container-header d-flex justify-content-between">
                     <span>
-                        <select class="select title" name="type" id="type" [(ngModel)]="selected">
+                        <select class="select title" name="type" id="type" [(ngModel)]="selected" (ngModelChange)="getEntities()">
                             <option value="tracks">{{ 'tracks.name' | translate }}</option>
                             <option value="artists">{{ 'artists.name' | translate }}</option>
                             <option value="albums">{{ 'albums.name' | translate }}</option>
@@ -80,19 +80,19 @@
                         </select>
                     </span>
                     <span>
-                        <button [disabled]="page[selected]==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
-                        <button [disabled]="user.playlists?.length / limit <= page[selected]"  type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+                        <button [disabled]="favorite[selected].page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
+                        <button [disabled]="user.playlists?.length / limit <= favorite[selected].page"  type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
                     </span>
                 </div>
                 <!-- End | Container header -->
 
                 <div class="subSection" *ngIf="selected == 'tracks'">
-                    <div *ngIf="!loading" class="row custom-card-list">
-                        <div class="col-xl-6 col-lg-12" *ngFor="let track of user.favorite.track; let i = index">
-                            <app-track-list-view [trackNumber]="(i + 1 + ((page[selected] - 1) * limit))" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
+                    <div *ngIf="!favorite.tracks.loading" class="row custom-card-list">
+                        <div class="col-xl-6 col-lg-12" *ngFor="let track of favorite.tracks.items; let i = index">
+                            <app-track-list-view [trackNumber]="(i + 1 + ((favorite.tracks.page - 1) * limit))" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
                         </div>
                     </div>
-                    <div *ngIf="loading == true" class="row custom-card-list">
+                    <div *ngIf="favorite.tracks.loading == true" class="row custom-card-list">
                         <div class="col-xl-6 col-lg-12" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; let i = index">
                             <app-track-list-view-loader [trackNumber]="i+1"></app-track-list-view-loader>
                         </div>
@@ -100,12 +100,12 @@
                 </div>
 
                 <div class="subSection" *ngIf="selected == 'artists'">
-                    <div *ngIf="!loading"  class="row custom-card-list">
-                        <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let artist of user.favorite.artist">
+                    <div *ngIf="!favorite.artists.loading"  class="row custom-card-list">
+                        <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let artist of favorite.artists.items">
                             <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'" type="artist"></app-image-card>
                         </div>
                     </div>
-                    <div *ngIf="loading == true"  class="row custom-card-list">
+                    <div *ngIf="favorite.artists.loading == true"  class="row custom-card-list">
                         <div class="col-6 col-md-2 col-sm-4 col-xl-2 mb-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] ">
                             <app-secondary-card-loader></app-secondary-card-loader>
                         </div>
@@ -113,13 +113,13 @@
                 </div> 
 
                 <div class="subSection" *ngIf="selected == 'albums'">
-                    <div *ngIf="!loading" class="row custom-card-list">
-                        <div class="col-xl-2 col-lg-4 col-sm-6" *ngFor="let album of user.favorite.album">
+                    <div *ngIf="!favorite.albums.loading" class="row custom-card-list">
+                        <div class="col-xl-2 col-lg-4 col-sm-6" *ngFor="let album of favorite.albums.items">
                             <app-image-card [item]="album" type="album"
                                             [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
                         </div>
                     </div>
-                    <div *ngIf="loading == true"  class="row custom-card-list">
+                    <div *ngIf="favorite.albums.loading == true"  class="row custom-card-list">
                         <div class="col-xl-2 col-lg-4 col-sm-6 mb-4" *ngFor="let album of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] ">
                             <app-primary-card-loader></app-primary-card-loader>
                         </div>
@@ -127,12 +127,12 @@
                 </div> 
 
                 <div class="subSection" *ngIf="selected == 'playlists'">
-                    <div *ngIf="!loading" class="row custom-card-list">
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-4 mb-sm-auto" *ngFor="let playlist of user.favorite.playlist">
+                    <div *ngIf="!favorite.playlists.loading" class="row custom-card-list">
+                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-4 mb-sm-auto" *ngFor="let playlist of favorite.playlists.items">
                             <app-description-card [item]="playlist"  type="playlist"></app-description-card>
                         </div>
                     </div>
-                    <div *ngIf="loading == true" class="row custom-card-list">
+                    <div *ngIf="favorite.playlists.loading == true" class="row custom-card-list">
                         <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
                             <app-description-card-loader></app-description-card-loader>
                         </div>
