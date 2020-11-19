@@ -34,4 +34,10 @@ export class ArtistService {
             limit: limit.toString()
         }});
     }
+
+    getArtists(ids):Observable<any>{
+        return this.httpClient.get(this.artistURL, { params: {
+            ids: ids.join(',')
+        }})
+    }
 }

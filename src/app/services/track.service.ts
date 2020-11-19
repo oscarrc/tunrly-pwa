@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TrackService {
@@ -29,7 +30,7 @@ export class TrackService {
         }});
     }
 
-    getTracks(ids){
+    getTracks(ids):Observable<any>{
         return this.httpClient.get(this.trackUrl, { params: {
             ids: ids.join(',')
         }})

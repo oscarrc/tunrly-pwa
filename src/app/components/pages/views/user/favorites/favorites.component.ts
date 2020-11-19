@@ -14,28 +14,29 @@ import { Subscription } from 'rxjs';
 export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy {
 
     songs: any = {};
-    favorites: any = [];
-    favorite: any = {
-        artists: {
-            items: [],
-            page: 1,
-            loading: false
-        },
-        albums: {
-            items: [],
-            page: 1,
-            loading: false
-        },
-        tracks: {
-            items: [],
-            page: 1,
-            loading: false
-        },
-        playlists: {
-            items: [],
-            page: 1,
-            loading: false
-        }
+    artists = {
+        list: [],
+        items: [],
+        page: 1,
+        loading: false
+    };
+    albums = {
+        list: [],
+        items: [],
+        page: 1,
+        loading: false
+    };
+    tracks = {
+        list: [],
+        items: [],
+        page: 1,
+        loading: false
+    };
+    playlists = {
+        list: [],
+        items: [],
+        page: 1,
+        loading: false
     };
     gridView:boolean = false;
     limit:number = 12;
@@ -44,34 +45,52 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
 
     constructor(private loadingService: LoadingService,
                 private userService: UserService,
-                private artistService: UserService,
+                private artistService: ArtistService,
                 private albumService: AlbumService,
-                private trackService: TrackService) { }
+                private trackService: TrackService) {}
 
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe(
             user => {
-                this.favorites = user?.favorite;
-                this.getTracks(user.favorite.track);
+                this.artists.list = user.favorite.artist.reverse();
+                this.albums.list = user.favorite.album.reverse();
+                this.playlists.list = user.favorite.playlist.reverse();
+                this.tracks.list = user.favorite.track.reverse();
+                this.getTracks(this.tracks.list);
             }
         );
     }
 
-    getArtists(){
-
+    getArtists(artists){
+        const offset = (this.artists.page - 1) * this.limit;
+        
+        if(this.artists.items.slice(offset, this.limit).length == 0 ){
+            this.artists.loading = true;
+            this.artistService.getArtists( artists.slice(offset, this.limit)).subscribe( artists => {
+                this.artists.items = artists;
+            }).add( () => this.artists.loading = false);
+        }
     }
 
-    getAlbums(){
+    getAlbums(albums){
+        const offset = (this.albums.page - 1) * this.limit;
 
+        if(this.albums.items.slice(offset, this.limit).length == 0 ){
+            this.albums.loading = true;
+            this.albumService.getAlbums( albums.slice(offset, this.limit)).subscribe( albums => {
+                this.albums.items = albums;
+            }).add( () => this.albums.loading = false);
+        }
     }
 
     getTracks(tracks){
-        const offset = (this.favorite.tracks.page - 1) * this.limit;
+        const offset = (this.tracks.page - 1) * this.limit;
 
-        if(this.favorite.tracks.items.slice(offset, this.limit).length == 0 ){
+        if(this.tracks.items.slice(offset, this.limit).length == 0 ){
+            this.tracks.loading = true;
             this.trackService.getTracks( tracks.slice(offset, this.limit)).subscribe( tracks => {
-                this.favorite.tracks = tracks;
-            });
+                this.tracks.items = tracks;
+            }).add( () => this.tracks.loading = false);;
         }
     }
 
@@ -86,32 +105,32 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
     getSimilar(){
         let tracks = [];
 
-        this.favorites.track.forEach(track => {
-            tracks = tracks.concat(track.similar);    
-        });
+        // this.favorites.track.forEach(track => {
+        //     tracks = tracks.concat(track.similar);    
+        // });
 
-        this.favorites.artist.forEach( artist => {
-            if(artist.similar){
-                artist.similar.forEach( similar => {
-                    tracks = tracks.concat(similar.tracks)
-                })
-            }
-        });
+        // this.favorites.artist.forEach( artist => {
+        //     if(artist.similar){
+        //         artist.similar.forEach( similar => {
+        //             tracks = tracks.concat(similar.tracks)
+        //         })
+        //     }
+        // });
 
         return tracks.sort( (a, b) => { return 0.5 - Math.random() });
     }
 
     nextPage(type){
-        const count = this.favorites[type].length;
+        const count = this[type].length;
 
-        if((count / this.limit) > this.favorite[type].page){
-            this.favorite[type].page++
+        if((count / this.limit) > this[type].page){
+            this[type].page++
         }
     }
 
     prevPage(type){
-        if(this.favorite[type].page > 1){
-            this.favorite[type].page--
+        if(this[type].page > 1){
+            this[type].page--
         }
     }
    
