@@ -6,6 +6,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { UserService } from 'src/app/services/user.service';
 import { TrackService } from 'src/app/services/track.service';
 import { ArtistService } from 'src/app/services/artist.service';
+import { PlaylistService } from 'src/app/services/playlist.service';
 import { AlbumService } from 'src/app/services/album.service';
 
 @Component({
@@ -50,7 +51,8 @@ export class UserComponent implements AfterViewInit, OnDestroy{
                 private userService: UserService,
                 private artistService: ArtistService,
                 private albumService: AlbumService,
-                private trackService: TrackService) { 
+                private trackService: TrackService,
+                private playlistService: PlaylistService) { 
                     this.routeSubscription = this.route.params.subscribe(param => {
                         if (param.username) {
                             this.getUser(param.username);
@@ -97,8 +99,18 @@ export class UserComponent implements AfterViewInit, OnDestroy{
         }
     }
 
+    getPlaylists(playlists){
+        const offset = (this.favorite.playlists.page - 1) * this.limit;
+
+        if(this.favorite.playlists.items.slice(offset, this.limit).length == 0 ){
+            this.favorite.playlists.loading = true;
+            this.playlistService.getPlaylists( playlists.slice(offset, this.limit)).subscribe( playlists => {
+                this.favorite.playlists.items = playlists;
+            }).add( () => this.favorite.playlists.loading = false);;
+        }
+    }
+
     getEntities(){
-        console.log(1)
         switch(this.selected){
             case 'albums':
                 this.getAlbums(this.user.favorite.album);
@@ -110,7 +122,7 @@ export class UserComponent implements AfterViewInit, OnDestroy{
                 this.getTracks(this.user.favorite.track);
                 break;
             case 'playlists':
-                // this.getPlaylists(this.user.favorite.playlist);
+                this.getPlaylists(this.user.favorite.playlist);
                 break;
         }
     }

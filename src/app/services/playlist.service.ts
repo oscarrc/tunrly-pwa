@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class PlaylistService {
@@ -34,5 +35,11 @@ export class PlaylistService {
 
     delete(id){
         return this.httpClient.delete(this.playlistURL + '/' + id);
+    }
+
+    getPlaylists(ids):Observable<any>{
+        return this.httpClient.get(this.playlistURL, { params: {
+            ids: ids.join(',')
+        }})
     }
 }
