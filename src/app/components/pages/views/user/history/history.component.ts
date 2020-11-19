@@ -38,8 +38,8 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
         const offset = (this.page - 1) * this.limit;
 
         if(this.tracks.items.slice(offset, this.limit).length == 0 ){
-            this.trackService.getTracks( this.tracks.items.slice(offset, this.limit)).subscribe( tracks => {
-                this.tracks.items.push(tracks);
+            this.trackService.getTracks( tracks.slice(offset, this.limit)).subscribe( tracks => {   
+                this.tracks.items = this.tracks.items.concat(tracks);
             });
         }
     }
@@ -48,8 +48,8 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
         this.userSubscription = this.userService.user.subscribe(
             user => { 
                 this.tracks = {
-                    title: 'History',
-                    subtitle: 'You recently listen',
+                    title: 'user.history.title',
+                    subtitle: 'user.history.subtitle',
                     list: user.history.reverse(),
                     items: []
                 };

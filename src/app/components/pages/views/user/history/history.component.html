@@ -7,8 +7,8 @@
         <div class="heading">
             <div class="d-flex flex-wrap align-items-end">
                 <div class="flex-grow-1">
-                    <h4>{{tracks?.title}}</h4>
-                    <p>{{tracks?.subtitle}}</p>
+                    <h4>{{tracks?.title | translate }}</h4>
+                    <p>{{tracks?.subtitle | translate}}</p>
                 </div>
                 <span>
                     <button type="button" (click)="prevPage()" [disabled]="page == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
