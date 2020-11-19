@@ -119,13 +119,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //Initialize user history
     initHistory(history, size) {
+        const ids = history.slice(0,size).sort( () => { return 0.5 - Math.random() })
+
         this.history = {
             title: 'home.history.title',
             subtitle: 'home.history.subtitle',
             page: '/user/history',
-            loading: false,
-            items: history.slice(0,size).sort( () => { return 0.5 - Math.random() })
+            loading: true,
+            items: []
         };
+
+        this.trackService.getTracks(ids).subscribe(
+            tracks => this.history.items = tracks 
+        ).add(() => this.history.loading = false)
     }
 
     //Initialize user recommendations
