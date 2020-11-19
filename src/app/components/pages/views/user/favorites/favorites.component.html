@@ -25,7 +25,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="similar-tab" data-toggle="tab" href="#playlists" role="tab"
-                    aria-controls="similar" aria-selected="false">{{ 'playlists.name' | translate }}</a>
+                    aria-controls="similar" aria-selected="false" (click)="getPlaylists(playlists.list)">{{ 'playlists.name' | translate }}</a>
                 </li>
             </ul>
             <!-- End | Line Tabs -->
@@ -168,7 +168,7 @@
                     <!-- End | Container header -->
 
                     <div class="row custom-card-list" *ngIf="playlists.list.length; else noplaylists">
-                        <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let playlist of playlists.list | slice:(playlists.page-1)*limit:limit">
+                        <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let playlist of playlists.items | slice:(playlists.page-1)*limit:limit">
                             <app-description-card [item]="playlist"  type="playlist"></app-description-card>
                         </div>
                     </div>

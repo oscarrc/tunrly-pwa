@@ -6,6 +6,7 @@ import { TrackService } from 'src/app/services/track.service';
 import { ArtistService } from 'src/app/services/artist.service';
 import { AlbumService } from 'src/app/services/album.service';
 import { Subscription } from 'rxjs';
+import { PlaylistService } from 'src/app/services/playlist.service';
 
 @Component({
     selector: 'app-user-favorites',
@@ -52,7 +53,8 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
                 private userService: UserService,
                 private artistService: ArtistService,
                 private albumService: AlbumService,
-                private trackService: TrackService) {}
+                private trackService: TrackService,
+                private playlistService: PlaylistService) {}
 
     ngOnInit() {
         this.userSubscription = this.userService.user.subscribe(
@@ -96,6 +98,17 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
             this.trackService.getTracks( tracks.slice(offset, this.limit)).subscribe( tracks => {
                 this.tracks.items = tracks;
             }).add( () => this.tracks.loading = false);;
+        }
+    }
+
+    getPlaylists(playlists){
+        const offset = (this.playlists.page - 1) * this.limit;
+
+        if(this.playlists.items.slice(offset, this.limit).length == 0 ){
+            this.playlists.loading = true;
+            this.playlistService.getPlaylists( playlists.slice(offset, this.limit)).subscribe( playlists => {
+                this.playlists.items = playlists;
+            }).add( () => this.playlists.loading = false);;
         }
     }
 
