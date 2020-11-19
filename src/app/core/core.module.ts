@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LineTabsDirective } from './directives/line-tabs.directive';
-import { AuthGuard } from './guards/auth.guard';
-import { LoginGuard } from './guards/login.guard';
+import { TargetBlankDirective } from './directives/target-blank.directive';
+
 import { LastPipe } from '../core/pipes/last.pipe';
 import { RandomPipe } from '../core/pipes/random.pipe';
 import { ToColorPipe } from '../core/pipes/toColor.pipe';
@@ -20,7 +20,8 @@ import { TranslateModule } from '@ngx-translate/core';
         ToColorPipe,
         ToTimePipe,
         TruncatePipe,
-        LineTabsDirective
+        LineTabsDirective,
+        TargetBlankDirective
     ],
     exports: [
         LastPipe,
@@ -29,6 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
         ToTimePipe,
         TruncatePipe,
         LineTabsDirective,
+        TargetBlankDirective,
         TranslateModule
     ]
 })
