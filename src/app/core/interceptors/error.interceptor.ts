@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     private refreshSubject: ReplaySubject<any>;
 
     private handleError(err){
-        this.toastr.error(err.error?.message, 'Error', { positionClass: this.authService.loginStatus ? 'toast-offset' : 'toast-position'});
+        this.toastr.error(err.error?.message || 'Unexpected error', 'Error', { positionClass: this.authService.loginStatus ? 'toast-offset' : 'toast-position'});
     }
 
     private handleRefresh(){
