@@ -17,7 +17,7 @@
             </a>
             <div class="ml-2">
                 <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
-                <button type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+                <button [disabled]="tracks.length / limit <= page" type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
             </div>
         </div>
     </div>
@@ -52,6 +52,7 @@
 
         <ng-template #nothing>
             <app-nothing 
+                *ngIf="!loading"
                 message="user.recommended.empty"
                 url="/home"
                 action="user.recommended.explore">

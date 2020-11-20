@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 
 import { LoadingService } from 'src/app/services/loading.service';
 import { UserService } from 'src/app/services/user.service';
@@ -18,13 +17,12 @@ export class UserRecommendedComponent implements OnInit, AfterViewInit, OnDestro
     limit: number = 10;
     loading: boolean = false;
 
-    userSubscription: Subscription;
-
     constructor(private playerService: PlayerService,
                 private userService: UserService,
                 private loadingService: LoadingService) {}
 
     ngOnInit() {
+        this.loading = true;
         this.userService.getRecommended().subscribe( 
             tracks => this.tracks = tracks
         ).add(() => this.loading = false );
