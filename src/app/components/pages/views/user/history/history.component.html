@@ -3,10 +3,7 @@
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <div class="container-header d-flex justify-content-between">
-        <div class="flex-grow-1">
-            <h4>{{history?.title | translate }}</h4>
-            <p>{{history?.subtitle | translate}}</p>
-        </div>
+        <span class="title">{{history?.subtitle | translate}}</span>
         <div class="d-flex align-items-center">
             <a class="icon align-middle" (click)="playAllSongs()">
                 <i class="la la-play"></i>
