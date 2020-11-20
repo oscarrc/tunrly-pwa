@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.userSubscription = this.userService.user.subscribe( user => {
             if(user?.history){
                 this.initHistory(user.history, 9);
-                this.initRecommended(user.favorite);
+                this.initRecommended();
             }
         })
 
@@ -135,29 +135,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     //Initialize user recommendations
-    initRecommended(favorites) {
-        let tracks = [];
-
-        favorites.track.forEach( track => {
-            if(track.similar){
-                tracks = tracks.concat(track.similar.slice(0,5))
-            }
-        });
-
-        favorites.artist.forEach( artist => {
-            if(artist.similar) {
-                artist.similar.slice(0,5).forEach( similar => {
-                    tracks = tracks.concat(similar.tracks);
-                })
-            }
-        })
-
+    initRecommended() {
         this.recommended = {
             title: 'home.recommended.title',
             subtitle: 'home.recommended.subtitle',
             page: '/user/recommended',
-            loading: false,
-            items: tracks.sort( () => { return 0.5 - Math.random() }).slice(0,10)
+            loading: true,
+            items: []
         };
+
+        this.userService.getRecommended().subscribe( 
+            tracks => this.recommended.items = tracks.slice(0,9)
+        ).add(() => this.recommended.loading = false );        
     }
 }

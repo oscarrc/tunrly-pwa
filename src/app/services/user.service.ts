@@ -68,4 +68,8 @@ export class UserService {
     addToHistory(track: string){
         return this.httpClient.patch(this.userURL + 'profile/history', { track });
     }
+
+    getRecommended():Observable<any>{
+        return this.httpClient.get(this.userURL + 'recommendations');
+    }
 }

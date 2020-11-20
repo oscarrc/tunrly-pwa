@@ -25,21 +25,9 @@ export class UserRecommendedComponent implements OnInit, AfterViewInit, OnDestro
                 private loadingService: LoadingService) {}
 
     ngOnInit() {
-        this.userSubscription = this.userService.user.subscribe( user => {
-            this.tracks = [];
-
-            user.favorite.track.forEach( track => {
-                if(track.similar) this.tracks = this.tracks.concat(track.similar.slice(0,5));
-            });
-    
-            user.favorite.artist.forEach( artist => {
-                if(artist.similar){
-                    artist.similar.slice(0,5).forEach( similar => {
-                        this.tracks = this.tracks.concat(similar.tracks);
-                    })
-                }
-            })
-        }).add( () => { this.loading = false })
+        this.userService.getRecommended().subscribe( 
+            tracks => this.tracks = tracks
+        ).add(() => this.loading = false );
     }
 
     ngAfterViewInit() {
@@ -63,6 +51,5 @@ export class UserRecommendedComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     ngOnDestroy(){
-        this.userSubscription?.unsubscribe();
     }
 }
