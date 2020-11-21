@@ -61,6 +61,9 @@
     align-items: center;
     cursor: pointer;
     .song-h--desc {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
         padding-left: $song-item-desc-padding-x;
         .song-h--name {
             display: block;
