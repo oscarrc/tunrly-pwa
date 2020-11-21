@@ -1,5 +1,5 @@
 <div class="right-sidebar-header d-flex align-items-center justify-content-between">
-    {{playlist.artist ? playlist.artist + ' - ' : ''}}{{playlist.name ? playlist.name : ('playlists.nowplaying' | translate) }} {{ playlist.user?.username ? "by " + playlist?.user?.username : ""}}
+    <span class="text-truncate">{{playlist.artist ? playlist.artist + ' - ' : ''}}{{playlist.name ? playlist.name : ('playlists.nowplaying' | translate) }} {{ playlist.user?.username ? "by " + playlist?.user?.username : ""}}</span>
     <a *ngIf="modified" class="" [routerLink]="'/user/playlist'"><i class="la la-save"></i></a>
 </div>
 <perfect-scrollbar class="right-sidebar-body">
