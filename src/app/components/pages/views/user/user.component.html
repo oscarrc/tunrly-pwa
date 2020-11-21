@@ -38,7 +38,7 @@
                 <a class="nav-link active" id="playlists-tab" data-toggle="tab" href="#playlists" role="tab"
                    aria-controls="playlists" aria-selected="true">{{ 'playlists.name' | translate }}</a>
             </li>
-            <li class="nav-item" *ngIf="user.favorite?.track">
+            <li class="nav-item">
                 <a class="nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" (click)="getEntities()"
                    aria-controls="favorites" aria-selected="false">{{ 'user.favorites.title' | translate }}</a>
             </li>
