@@ -10,6 +10,7 @@ import { PasswordValidator } from 'src/app/core/validators/password.validator';
 
 import { Config } from 'src/app/config/config';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-landing',
@@ -26,7 +27,8 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
     constructor(private loadingService: LoadingService,
                 private userService: UserService,
-                private simpleModalService: SimpleModalService) {
+                private simpleModalService: SimpleModalService,
+                private translateService: TranslateService) {
         this.config = new Config();
         this.brand = this.config.config.brand;
     }
@@ -77,6 +79,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
     }
 
     register(registration){
+        const lang = this.translateService.getBrowserLang();
         this.formSubmitted = true;
         
         if (this.registration.invalid) {
@@ -91,6 +94,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
             firstname: registration.value.firstname,
             lastname: registration.value.lastname,
             password: registration.value.passgroup.password,
+            language: lang.match(/en|es/) ? lang : 'en'
         }
 
         this.userService.create(user).subscribe(
