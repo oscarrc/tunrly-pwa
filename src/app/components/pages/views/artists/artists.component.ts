@@ -9,7 +9,7 @@ import { ArtistService } from 'src/app/services/artist.service';
     selector: 'app-artists',
     templateUrl: './artists.component.html'
 })
-//TODO paginate similar
+
 export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     artists: any = [];

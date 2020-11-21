@@ -36,6 +36,16 @@ export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.loadingService.stopLoading();
     }
 
+    nextPage(){
+        this.page = this.page + 1;
+        this.getContent();
+    }
+
+    prevPage(){
+        this.page = this.page - 1;
+        this.getContent();
+    }
+
     getContent(){
         this.loading = true;
 
