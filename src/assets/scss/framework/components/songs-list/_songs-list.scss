@@ -76,6 +76,7 @@
     }
 
     &.song-h--sm {
+        width: calc(100% - #{$song-item-number-width});
         .song-h--img {
             max-width: $song-item-image-width-sm;
         }
