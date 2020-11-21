@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ArtistService {
@@ -15,16 +14,25 @@ export class ArtistService {
         return this.httpClient.get(this.artistURL + `${name}`);
     }
 
-    getAlbums(id: string){
-        return this.httpClient.get(this.artistURL + `${id}/albums`);
+    getAlbums(id: string, page:number, limit: number){
+        return this.httpClient.get(this.artistURL + `${id}/albums`, { params: {
+            page: page.toString(),
+            limit: limit.toString()
+        }});
     }
 
-    getSimilar(id: string){
-        return this.httpClient.get(this.artistURL + `${id}/similar`);
+    getSimilar(id: string, page:number, limit: number){
+        return this.httpClient.get(this.artistURL + `${id}/similar`, { params: {
+            page: page.toString(),
+            limit: limit.toString()
+        }});
     }
 
-    getTracks(id: string){
-        return this.httpClient.get(this.artistURL + `${id}/tracks`);
+    getTracks(id: string, page:number, limit: number){
+        return this.httpClient.get(this.artistURL + `${id}/tracks`, { params: {
+            page: page.toString(),
+            limit: limit.toString()
+        }});
     }
 
     getTop(country: string, page: number, limit: number){

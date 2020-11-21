@@ -14,8 +14,11 @@ export class TrackService {
         return this.httpClient.get(this.trackUrl + `${name}/${artist}`);
     }
 
-    getSimilar(id: string){
-        return this.httpClient.get(this.trackUrl + `${id}/similar`);
+    getSimilar(id: string, page:number, limit:number){
+        return this.httpClient.get(this.trackUrl + `${id}/similar`, { params: {
+            page: page.toString(),
+            limit: limit.toString()
+        }});
     }
 
     getSource(id: string){

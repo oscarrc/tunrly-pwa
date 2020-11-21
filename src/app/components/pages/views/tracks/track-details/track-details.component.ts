@@ -19,7 +19,9 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     loading: boolean = false;
     gridView:boolean = false;
     similarTracks: any;
-
+    page: number = 1;
+    limit: number = 10;
+    
     routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
@@ -75,7 +77,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
         
         if(!this.trackDetails.similar[0]?.name){
-            this.trackService.getSimilar(this.trackDetails._id).subscribe(
+            this.trackService.getSimilar(this.trackDetails._id, this.page, this.limit).subscribe(
                 res => {
                     this.trackDetails.similar = this.similarTracks.items = res;
                     this.similarTracks.loading = false;

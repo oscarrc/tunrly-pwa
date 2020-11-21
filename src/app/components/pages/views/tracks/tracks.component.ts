@@ -21,7 +21,7 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
     page: number = 1;
     limit: number = 10;
     loading: boolean = true;
-
+    
     routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
@@ -75,13 +75,13 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
     }
 
     getArtistTracks() {
-        this.artistService.getTracks(this.id).subscribe(
+        this.artistService.getTracks(this.id, this.page, this.limit).subscribe(
             res => this.tracks = res
         ).add( () => this.loading = false )
     }
 
     getSimilar() {
-        this.trackService.getSimilar(this.id).subscribe(
+        this.trackService.getSimilar(this.id, this.page, this.limit).subscribe(
             res => this.tracks = res
         ).add( () => this.loading = false )
     }

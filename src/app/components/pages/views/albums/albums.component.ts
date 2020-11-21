@@ -15,6 +15,8 @@ export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
     id: string = '';
     type: string='';
     loading: boolean = true;
+    page: number = 1;
+    limit: number = 10;
 
     routeSubscription: Subscription;
 
@@ -47,7 +49,7 @@ export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getArtistAlbums() {
-        this.artistService.getAlbums(this.id).subscribe(
+        this.artistService.getAlbums(this.id, this.page, this.limit).subscribe(
             res => this.albums = res
         ).add( () => this.loading = false )
     }
