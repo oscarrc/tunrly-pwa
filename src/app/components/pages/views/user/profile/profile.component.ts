@@ -9,6 +9,7 @@ import { AvailabilityValidator } from 'src/app/core/validators/availability.vali
 import { PasswordValidator } from 'src/app/core/validators/password.validator';
 import { FileValidator } from 'src/app/core/validators/file.validator';
 import { ToastrService } from 'ngx-toastr';
+import { Countries } from 'src/app/config/countries';
 
 @Component({
     selector: 'app-user-profile',
@@ -16,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 
+    countries: Countries;
     userProfile: any;
     edit: boolean = false;
     profileForm: any;
@@ -32,7 +34,9 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
     
     constructor(private loadingService: LoadingService, 
                 private userService: UserService, 
-                private toastr: ToastrService) { }
+                private toastr: ToastrService) {
+                    this.countries = new Countries();
+                 }
 
     toggleEdit(){
         this.profileSubmitted = false;
