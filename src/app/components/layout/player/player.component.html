@@ -1,5 +1,5 @@
 <!-- Begin | Audio Player [[ Find at scss/framework/base/audio-player/audio-player.scss ]] -->
-<div id="audioPlayer" [class]="playerClass">
+<div id="audioPlayer" [class]="playerClass" (swipeleft)="togglePlaylist($event)" (swiperight)="togglePlaylist($event)">
 
     <!-- Begin | Audio Player Progress -->
     <div id="progress-container">
@@ -75,7 +75,7 @@
         <!-- Song options -->
         <app-track-options [icon]="'la-ellipsis-v'" [track]="track"></app-track-options>
 
-        <button class="btn btn-icon-only" (click)="openPlaylist()"><i class="ion-md-musical-note"></i></button>
+        <button class="btn btn-icon-only" (click)="togglePlaylist()"><i class="ion-md-musical-note"></i></button>
     </div>
     <!-- End | Audio Info -->
 
