@@ -140,9 +140,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     togglePlaylist(event = null) {
-        if (this.document.body.classList.contains(this.showPlaylist) && ( !event || event.type == 'swiperight')) {
+        if (this.document.body.classList.contains(this.showPlaylist) && ( !event || (event.type == 'swiperight' && event.pointer == 'touch'))) {
             this.document.body.classList.remove(this.showPlaylist);
-        } else if(!event || event.type == 'swipeleft'){
+        } else if(!event || (event.type == 'swipeleft' && event.pointer == 'touch')){
             this.document.body.classList.add(this.showPlaylist);
         }
     }
