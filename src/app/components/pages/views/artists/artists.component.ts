@@ -69,7 +69,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getSimilar() {
-        this.artistService.getSimilar(this.id).subscribe(
+        this.artistService.getSimilar(this.id, this.page, this.limit).subscribe(
             res =>  this.artists = res
         ).add(() => this.loading = false)
     }
