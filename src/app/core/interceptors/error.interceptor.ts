@@ -20,7 +20,10 @@ export class ErrorInterceptor implements HttpInterceptor {
     private refreshSubject: ReplaySubject<any>;
 
     private handleError(err){
-        this.toastr.error(err.error?.message || 'Unexpected error', 'Error', { positionClass: this.authService.loginStatus ? 'toast-offset' : 'toast-position'});
+        const message = err.error?.message || 'Unexpected error';
+        const position = this.authService.loginStatus ? 'toast-offset' : 'toast-position';
+        
+        this.toastr.error(message, 'Error', { positionClass: position });
     }
 
     private handleRefresh(){
@@ -60,6 +63,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                     return throwError(err);
                 case 404:
                     this.router.navigate(['/404']);
+                    return throwError(err);
+                case 504:
+                    err.error.message = "Gateway timeout. Try again later."
+                    this.handleError(err);
                     return throwError(err);
                 default:
                     this.handleError(err);
