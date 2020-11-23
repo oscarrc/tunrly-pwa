@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { ValidationService } from '../../../../services/validation.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ValidationService } from 'src/app/services/validation.service';
 import { PasswordValidator } from 'src/app/core/validators/password.validator';
 
 @Component({
@@ -26,11 +26,11 @@ export class ValidationComponent implements OnInit, OnDestroy{
     constructor(private loadingService: LoadingService,
                 private validationService: ValidationService,
                 private route: ActivatedRoute,) {
-        this.routeSubscription = this.route.params.subscribe(param => {
-            this.action = param.action;
-            this.token = param.token;
-        });
-    }
+                    this.routeSubscription = this.route.params.subscribe(param => {
+                        this.action = param.action;
+                        this.token = param.token;
+                    });
+                }
 
     get password() {
         return this.reset.get('password').value;

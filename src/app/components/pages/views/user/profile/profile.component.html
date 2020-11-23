@@ -70,7 +70,10 @@
                                 </div>
                                 <div class="col-xl-6 form-group">
                                     <label for="loc" class="form-label">{{ 'user.profile.country' | translate }}</label>
-                                    <input type="text" id="loc" name="loc" class="form-control" formControlName="country">
+                                    <!-- <input type="text" id="loc" name="loc" class="form-control" formControlName="country"> -->
+                                    <select class="form-control" name="country" id="country" formControlName="country">
+                                        <option *ngFor="let country of countries.list" [value]="country.name">{{ country.name }}</option>
+                                    </select>
                                 </div>
                                 <div class="col-12">
                                     <app-button *ngIf="edit" type="submit" text="{{ 'user.profile.save' | translate }}" [loading]="profileLoading" classes="btn btn-primary btn-air"></app-button>

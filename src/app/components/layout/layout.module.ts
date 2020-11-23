@@ -80,7 +80,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         YouTubePlayerModule,
         SimpleModalModule.forRoot({container: document.body})
     ],
-    entryComponents: [ //No longer required?
+    entryComponents: [
         LanguageComponent,
         LoginComponent
     ],

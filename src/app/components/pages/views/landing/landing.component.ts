@@ -1,15 +1,16 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 
-import { LoginComponent } from '../../../layout/header/login/login.component';
-import { ValidationComponent } from '../../../layout/header/validation/validation.component';
-import { LoadingService } from '../../../../services/loading.service';
-import { UserService } from '../../../../services/user.service';
-import { AvailabilityValidator } from '../../../../core/validators/availability.validator';
-import { PasswordValidator } from '../../../../core/validators/password.validator';
+import { LoginComponent } from 'src/app/components/layout/header/login/login.component';
+import { ValidationComponent } from 'src/app/components/layout/header/validation/validation.component';
+import { LoadingService } from 'src/app/services/loading.service';
+import { UserService } from 'src/app/services/user.service';
+import { AvailabilityValidator } from 'src/app/core/validators/availability.validator';
+import { PasswordValidator } from 'src/app/core/validators/password.validator';
 
-import { Config } from '../../../../config/config';
+import { Config } from 'src/app/config/config';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-landing',
@@ -19,17 +20,15 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
     config: Config;
     brand: any = {};
-    sliderConfig: any = {};
-    trendingArtists: any = [];
     backgroundImage: string = "";
     registration: any;
     loading: boolean = false;
     formSubmitted: boolean = false;
-    browserLang: string;
 
     constructor(private loadingService: LoadingService,
                 private userService: UserService,
-                private simpleModalService: SimpleModalService) {
+                private simpleModalService: SimpleModalService,
+                private translateService: TranslateService) {
         this.config = new Config();
         this.brand = this.config.config.brand;
     }
@@ -69,39 +68,6 @@ export class LandingComponent implements OnInit, AfterViewInit {
                 Validators.required
             ])
         });
-
-        this.sliderConfig = {
-            arrows: false,
-            dots: false,
-            infinite: false,
-            slidesToShow: 5,
-            slidesToScroll: 2,
-            speed: 1000,
-            autoplay: true,
-            // Breakpoints
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 3
-                    }
-                },
-                {
-                    breakpoint: 640,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 380,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        arrows: false
-                    }
-                }
-            ]
-        };
     }
 
     ngAfterViewInit() {
@@ -112,11 +78,8 @@ export class LandingComponent implements OnInit, AfterViewInit {
         this.simpleModalService.addModal(LoginComponent, {});
     }
 
-    openValidationModal(email) {
-        this.simpleModalService.addModal(ValidationComponent, {email: email, title: "Your Tunrly.com account has been created"});
-    }
-
     register(registration){
+        const lang = this.translateService.getBrowserLang();
         this.formSubmitted = true;
         
         if (this.registration.invalid) {
@@ -131,13 +94,14 @@ export class LandingComponent implements OnInit, AfterViewInit {
             firstname: registration.value.firstname,
             lastname: registration.value.lastname,
             password: registration.value.passgroup.password,
+            language: lang.match(/en|es/) ? lang : 'en'
         }
 
         this.userService.create(user).subscribe(
             () => {
                 registration.reset();
                 this.formSubmitted = false;
-                this.openValidationModal(user.email);
+                this.simpleModalService.addModal(ValidationComponent, {email: user.email});
             }
         ).add( () => this.loading = false )
     }
@@ -146,5 +110,4 @@ export class LandingComponent implements OnInit, AfterViewInit {
         const number = Math.floor(Math.random() * 6) + 1;
         return "assets/images/background/header-" + number + ".jpg";
     }
-
 }

@@ -6,7 +6,7 @@ import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { JwtInterceptor } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
 
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({ providedIn: 'root' }) 
 export class ErrorInterceptor implements HttpInterceptor {
@@ -20,7 +20,10 @@ export class ErrorInterceptor implements HttpInterceptor {
     private refreshSubject: ReplaySubject<any>;
 
     private handleError(err){
-        this.toastr.error(err.error.message, 'Error', { positionClass: this.authService.loggedIn ? 'toast-offset' : 'toast-position'});
+        const message = err.error?.message || 'Unexpected error';
+        const position = this.authService.loginStatus ? 'toast-offset' : 'toast-position';
+        
+        this.toastr.error(message, 'Error', { positionClass: position });
     }
 
     private handleRefresh(){
@@ -35,7 +38,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(catchError((err:any) => {        
             switch(err.status){
                 case 401:
-                    if(this.authService.loggedIn){
+                    if(this.authService.loginStatus){
                         if (!this.refreshing) this.handleRefresh();
 
                         return this.refreshSubject.pipe(
@@ -50,7 +53,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                                 );
                             })
                         )
-                    }else{
+                    }else{                        
+                        this.authService.logout();
                         this.handleError(err);
                         return throwError(err);
                     }
@@ -59,6 +63,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                     return throwError(err);
                 case 404:
                     this.router.navigate(['/404']);
+                    return throwError(err);
+                case 504:
+                    err.error.message = "Gateway timeout. Try again later."
+                    this.handleError(err);
                     return throwError(err);
                 default:
                     this.handleError(err);

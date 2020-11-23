@@ -140,3 +140,15 @@
         @content;
     }
 }
+
+@mixin vertical-breakpoint-up($name) {
+    @media (min-height: #{map-get($vbreakpoints, $name)}) {
+        @content;
+    }
+}
+
+@mixin vertical-breakpoint-down($name) {
+    @media (max-height: #{map-get($vbreakpoints, $name)}) {
+        @content;
+    }
+}

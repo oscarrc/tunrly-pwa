@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { Config } from '../../../../../config/config';
+import { Config } from 'src/app/config/config';
 import { DOCUMENT } from '@angular/common';
 
 

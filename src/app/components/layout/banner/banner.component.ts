@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SkinService } from '../../../services/skin.service';
+import { SkinService } from 'src/app/services/skin.service';
 
 @Component({
     selector: 'app-banner',

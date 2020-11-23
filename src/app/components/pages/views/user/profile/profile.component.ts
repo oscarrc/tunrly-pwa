@@ -5,10 +5,11 @@ import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { AvailabilityValidator } from '../../../../../core/validators/availability.validator';
-import { PasswordValidator } from '../../../../../core/validators/password.validator';
-import { FileValidator } from '../../../../../core/validators/file.validator';
+import { AvailabilityValidator } from 'src/app/core/validators/availability.validator';
+import { PasswordValidator } from 'src/app/core/validators/password.validator';
+import { FileValidator } from 'src/app/core/validators/file.validator';
 import { ToastrService } from 'ngx-toastr';
+import { Countries } from 'src/app/config/countries';
 
 @Component({
     selector: 'app-user-profile',
@@ -16,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 
+    countries: Countries;
     userProfile: any;
     edit: boolean = false;
     profileForm: any;
@@ -30,7 +32,11 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private userSubscription: Subscription;
     
-    constructor(private loadingService: LoadingService, private userService: UserService, private toastr: ToastrService) { }
+    constructor(private loadingService: LoadingService, 
+                private userService: UserService, 
+                private toastr: ToastrService) {
+                    this.countries = new Countries();
+                 }
 
     toggleEdit(){
         this.profileSubmitted = false;
@@ -55,8 +61,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit, OnDestroy {
             username: new FormControl(user.username, [
                     Validators.required,
                     Validators.pattern('^([a-z0-9]+(?:[ _.-][a-z0-9]+)*){5,15}$')
-                ],
-                // AvailabilityValidator.checkAvailability(this.userService)
+                ]
             ),
             country: new FormControl(user.country),
         });

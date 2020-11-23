@@ -11,7 +11,7 @@
                 <div class="col-xl-8 col-lg-6">
                     <h5>{{albumDetails?.name}}</h5>
                     <p *ngIf="albumDetails?.artist"><a routerLink="{{ '/artist/' +  albumDetails.artist }}">{{albumDetails?.artist}}</a></p>
-                    <p [innerHTML]="albumDetails?.wiki?.summary"></p> 
+                    <p targetblank [innerHTML]="albumDetails?.wiki?.summary"></p> 
                     <div class="text-warning tags mb-4">
                         <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of albumDetails?.tags"><span class="badge badge-pill badge-warning mr-2">{{tag | titlecase}}</span></a>
                     </div>

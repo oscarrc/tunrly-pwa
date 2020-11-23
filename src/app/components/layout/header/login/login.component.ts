@@ -35,18 +35,6 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         });
     }
 
-    get user() {
-        return this.login.get('user').value;
-    }
-
-    get password() {
-        return this.login.get('password').value;
-    }
-
-    get remember() {
-        return this.login.get('remember').value;
-    }
-
     openForgotten(){
         this.close();
         this.simpleModalService.addModal(ForgottenComponent,{});
@@ -62,14 +50,14 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         this.loading = true;
 
         this.authService.login(login.value.user, login.value.password, login.value.remember).subscribe(
-            res => {
+            () => {
                 this.close();
             },
             err => {
                 this.loading = false;
-
+                
                 if( err.error?.name === "NotActive"){
-                    this.simpleModalService.addModal(ValidationComponent, { email: this.user, title: "Validate your Tunrly.com account" });
+                    this.simpleModalService.addModal(ValidationComponent, { email: login.value.user });
                     this.close();
                 }
             }

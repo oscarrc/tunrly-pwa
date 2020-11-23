@@ -2,14 +2,14 @@ import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { ArtistService } from '../../../../services/artist.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ArtistService } from 'src/app/services/artist.service';
 
 @Component({
     selector: 'app-artists',
     templateUrl: './artists.component.html'
 })
-//TODO paginate similar
+
 export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     artists: any = [];
@@ -64,20 +64,14 @@ export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     getArtists() {
         this.artistService.getTop(this.country, this.page, this.limit).subscribe(
-            res => {
-                this.loading = false;
-                this.artists = res
-            }
-        )
+            res => this.artists = res
+        ).add(() => this.loading = false)
     }
 
     getSimilar() {
-        this.artistService.getSimilar(this.id).subscribe(
-            res => {
-                this.loading = false;
-                this.artists = res;
-            }
-        )
+        this.artistService.getSimilar(this.id, this.page, this.limit).subscribe(
+            res =>  this.artists = res
+        ).add(() => this.loading = false)
     }
 
     ngOnDestroy() {

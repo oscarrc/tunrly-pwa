@@ -1,9 +1,9 @@
-<app-banner [backgroundImage]="((favorites.artist | random)?.image.background | random) || 
-                                ((favorites.artist | random)?.image.thumbnail | random) ||
-                                ((favorites.track | random)?.image | last) ||
-                                ((favorites.album | random)?.image | last) ||
-                                (((favorites.playlist | random)?.tracks | random)?.image | last) || null"
-                                [blur]="favorites.artist.length == 0"></app-banner>
+<app-banner [backgroundImage]="((artists.items | random)?.image.background | random) || 
+                                ((artists.items | random)?.image.thumbnail | random) ||
+                                ((tracks.items | random)?.image | last) ||
+                                ((albums.items | random)?.image | last) ||
+                                (((playlists.items | random)?.tracks | random)?.image | last) || null"
+                                [blur]="artists.items.length == 0"></app-banner>
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
@@ -13,19 +13,19 @@
             <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase my-4" id="favorites" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="track-tab" data-toggle="tab" href="#tracks" role="tab"
-                    aria-controls="track" aria-selected="true">{{ 'tracks.name' | translate }}</a>
+                    aria-controls="track" aria-selected="true" (click)="getTracks(tracks.list)">{{ 'tracks.name' | translate }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="album-tab" data-toggle="tab" href="#albums" role="tab"
-                    aria-controls="album" aria-selected="false">{{ 'albums.name' | translate }}</a>
+                    aria-controls="album" aria-selected="false" (click)="getAlbums(albums.list)">{{ 'albums.name' | translate }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="similar-tab" data-toggle="tab" href="#artists" role="tab"
-                    aria-controls="similar" aria-selected="false">{{ 'artists.name' | translate }}</a>
+                    aria-controls="similar" aria-selected="false" (click)="getArtists(artists.list)">{{ 'artists.name' | translate }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="similar-tab" data-toggle="tab" href="#playlists" role="tab"
-                    aria-controls="similar" aria-selected="false">{{ 'playlists.name' | translate }}</a>
+                    aria-controls="similar" aria-selected="false" (click)="getPlaylists(playlists.list)">{{ 'playlists.name' | translate }}</a>
                 </li>
             </ul>
             <!-- End | Line Tabs -->
@@ -34,7 +34,7 @@
                 <div class="tab-pane fade show active" id="tracks" role="tabpanel" aria-labelledby="tracks-tab">                
                     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                     <div class="container-header">
-                        <span class="title">{{favorites?.track?.length || 0 }} {{ 'ui.results' | translate }}</span>
+                        <span class="title">{{tracks.list.length || 0 }} {{ 'ui.results' | translate }}</span>
                         <div class="ml-auto d-flex align-items-center">
                             <a class="icon" (click)="gridView = !gridView">
                                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
@@ -43,28 +43,42 @@
                                 </ng-template>
                             </a>
                             <span>
-                                <button type="button" (click)="prevPage('track')" [disabled]="page.track == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
-                                <button type="button" (click)="nextPage('track')" [disabled]="favorites.track.length / limit <= page.track" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
+                                <button type="button" (click)="prevPage('tracks')" [disabled]="tracks.page == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
+                                <button type="button" (click)="nextPage('tracks')" [disabled]="tracks.list.length / limit <= tracks.page" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
                             </span>
                         </div>
                     </div>
                     <!-- End | Container header -->
 
-                    <div class="row custom-card-list" *ngIf="favorites.track?.length; else notracks">
+                    <div class="row custom-card-list" *ngIf="!tracks.loading && tracks.items.length; else notracks">
                         <ng-container *ngIf="gridView; else listView">
-                            <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let track of favorites.track">
+                            <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let track of tracks.items">
                                 <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
                             </div>
                         </ng-container>
                         <ng-template #listView>
-                            <div class="col-xl-6 col-lg-12" *ngFor="let track of favorites.track | slice:(page.track-1)*limit:page.track*limit; let i = index">
-                                <app-track-list-view [trackNumber]="(i + 1 + ((page.track - 1) * limit))"  [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
+                            <div class="col-xl-6 col-lg-12" *ngFor="let track of tracks.items | slice:(tracks.page-1)*limit:limit; let i = index">
+                                <app-track-list-view [trackNumber]="(i + 1 + ((tracks.page - 1) * limit))"  [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
+                            </div>
+                        </ng-template>
+                    </div>
+
+                    <div *ngIf="tracks.loading == true" class="row custom-card-list">
+                        <ng-container *ngIf="gridView; else listView">
+                            <div class="col-lg-5 col-sm-3 col-xl-2" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; let i = index">
+                                <app-primary-card-loader></app-primary-card-loader>
+                            </div>
+                        </ng-container>
+                        <ng-template #listView>
+                            <div class="col-xl-6 col-lg-12" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; let i = index">
+                                <app-track-list-view-loader [trackNumber]="(i + 1 + ((tracks.page - 1) * limit))"></app-track-list-view-loader>
                             </div>
                         </ng-template>
                     </div>
 
                     <ng-template #notracks>
                         <app-nothing 
+                            *ngIf="!tracks.loading"
                             message="tracks.empty"
                             url="/tracks"
                             action="tracks.explore">
@@ -75,24 +89,31 @@
                 <div class="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums-tab">
                     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                     <div class="container-header">
-                        <span class="title">{{favorites?.album?.length || 0}} {{ 'ui.results' | translate }}</span>
+                        <span class="title">{{albums.list.length || 0}} {{ 'ui.results' | translate }}</span>
                         <div class="ml-auto d-flex align-items-center">
                             <span>
-                                <button type="button" (click)="prevPage('album')" [disabled]="page.album == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
-                                <button type="button" (click)="nextPage('album')" [disabled]="favorites.album.length / limit <= page.album" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
+                                <button type="button" (click)="prevPage('albums')" [disabled]="albums.page == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
+                                <button type="button" (click)="nextPage('albums')" [disabled]="albums.list.length / limit <= albums.page" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
                             </span>
                         </div>
                     </div>
                     <!-- End | Container header -->
 
-                    <div class="row custom-card-list" *ngIf="favorites.album?.length; else noalbums">
-                        <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let album of favorites.album | slice:(page.album-1)*limit:page.album*limit">
+                    <div class="row custom-card-list" *ngIf="!albums.loading && albums.items.length; else noalbums">
+                        <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let album of albums.items | slice:(albums.page-1)*limit:limit">
                             <app-image-card [item]="album" type="album"></app-image-card>
+                        </div>
+                    </div>
+
+                    <div *ngIf="albums.loading == true"  class="row custom-card-list">
+                        <div class="col-xl-2 col-lg-4 col-sm-6 mb-4" *ngFor="let album of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
+                            <app-primary-card-loader></app-primary-card-loader>
                         </div>
                     </div>
 
                     <ng-template #noalbums>
                         <app-nothing 
+                            *ngIf="!albums.loading" 
                             message="albums.empty"
                             url="/albums"
                             action="albums.explore">
@@ -102,24 +123,31 @@
                 <div class="tab-pane fade" id="artists" role="tabpanel" aria-labelledby="artists-tab">
                     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                     <div class="container-header">
-                        <span class="title">{{favorites?.artist?.length || 0}} {{ 'ui.results' | translate }}</span>
+                        <span class="title">{{artists.list.length || 0}} {{ 'ui.results' | translate }}</span>
                         <div class="ml-auto d-flex align-items-center">
                             <span>
-                                <button type="button" (click)="prevPage('artist')" [disabled]="page.artist == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
-                                <button type="button" (click)="nextPage('artist')" [disabled]="favorites.artist.length / limit <= page.artist" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
+                                <button type="button" (click)="prevPage('artists')" [disabled]="artists.page == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
+                                <button type="button" (click)="nextPage('artists')" [disabled]="artists.list.length / limit <= artists.page" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
                             </span>
                         </div>
                     </div>
                     <!-- End | Container header -->
-
-                    <div class="row custom-card-list" *ngIf="favorites.artist?.length; else noartists">
-                        <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let artist of favorites.artist | slice:(page.artist-1)*limit:page.artist*limit">
+                    
+                    <div class="row custom-card-list" *ngIf="!artists.loading && artists.items.length; else noartists">
+                        <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let artist of artists.items | slice:(artists.page-1)*limit:limit">
                             <app-image-card [item]="artist" type="artist"></app-image-card>
+                        </div>
+                    </div>
+
+                    <div *ngIf="artists.loading == true"  class="row custom-card-list">
+                        <div class="col-6 col-md-2 col-sm-4 col-xl-2 mb-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
+                            <app-secondary-card-loader></app-secondary-card-loader>
                         </div>
                     </div>
 
                     <ng-template #noartists>
                         <app-nothing 
+                            *ngIf="!artists.loading"
                             message="artists.empty"
                             url="/artists"
                             action="artists.explore">
@@ -129,18 +157,18 @@
                 <div class="tab-pane fade" id="playlists" role="tabpanel" aria-labelledby="playlists-tab">
                     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                     <div class="container-header">
-                        <span class="title">{{favorites?.playlist?.length || 0}} {{ 'ui.results' | translate }}</span>
+                        <span class="title">{{playlists.list.length || 0}} {{ 'ui.results' | translate }}</span>
                         <div class="ml-auto d-flex align-items-center">
                             <span>
-                                <button type="button" (click)="prevPage('playlist')" [disabled]="page.playlist == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
-                                <button type="button" (click)="nextPage('playlist')" [disabled]="favorites.playlist.length / limit <= page.playlist" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
+                                <button type="button" (click)="prevPage('playlists')" [disabled]="playlists.page == 1" class="btn pr-2 btn-icon-only btn-transparent"><i class="ion-md-arrow-back"></i></button>
+                                <button type="button" (click)="nextPage('playlists')" [disabled]="playlists.list.length / limit <= playlists.page" class="btn btn-icon-only btn-transparent"><i class="ion-md-arrow-forward"></i></button>
                             </span>
                         </div>                        
                     </div>
                     <!-- End | Container header -->
 
-                    <div class="row custom-card-list" *ngIf="favorites.playlist?.length; else noplaylists">
-                        <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let playlist of favorites.playlist | slice:(page.playlist-1)*limit:page.playlist*limit">
+                    <div class="row custom-card-list" *ngIf="playlists.list.length; else noplaylists">
+                        <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let playlist of playlists.items | slice:(playlists.page-1)*limit:limit">
                             <app-description-card [item]="playlist"  type="playlist"></app-description-card>
                         </div>
                     </div>
@@ -159,7 +187,7 @@
     <!-- End | Section -->
 
     <!-- Songs -->
-    <app-section *ngIf="songs?.items?.length > 0" [section]="songs" [carouselButtonPositionClass]="'arrow-pos-3'"
+    <app-section *ngIf="recommended?.items?.length > 0" [section]="recommended" [carouselButtonPositionClass]="'arrow-pos-3'"
                  [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 </div>

@@ -77,7 +77,7 @@ $icon-size-base: 1.25rem !default;
 $dropdown-menu-shadow: 0 1px 12px 2px rgba($black, .15) !default;
 
 //== Z-index
-$zIndex-player: 2000;
+$zIndex-player: 1004;
 $zIndex-header: 1014;
 $zIndex-sidebar: 1024;
 $zIndex-loader: 3000;
@@ -104,4 +104,12 @@ $breakpoints: (
     lg: 992px,
     xl: 1200px
 );
+
+$vbreakpoints:(
+    xs: 400px,
+    sm: 600px,
+    md: 768px,
+    lg: 1200px,
+    xl: 1920px
+)
 

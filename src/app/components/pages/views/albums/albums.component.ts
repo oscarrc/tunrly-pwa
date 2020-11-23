@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { ArtistService } from '../../../../services/artist.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ArtistService } from 'src/app/services/artist.service';
 
 @Component({
     selector: 'app-albums',
@@ -15,6 +15,8 @@ export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
     id: string = '';
     type: string='';
     loading: boolean = true;
+    page: number = 1;
+    limit: number = 10;
 
     routeSubscription: Subscription;
 
@@ -34,6 +36,16 @@ export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.loadingService.stopLoading();
     }
 
+    nextPage(){
+        this.page = this.page + 1;
+        this.getContent();
+    }
+
+    prevPage(){
+        this.page = this.page - 1;
+        this.getContent();
+    }
+
     getContent(){
         this.loading = true;
 
@@ -47,11 +59,8 @@ export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getArtistAlbums() {
-        this.artistService.getAlbums(this.id).subscribe(
-            res => {
-                    this.loading = false;
-                    this.albums = res;
-                }
+        this.artistService.getAlbums(this.id, this.page, this.limit).subscribe(
+            res => this.albums = res
         ).add( () => this.loading = false )
     }
 

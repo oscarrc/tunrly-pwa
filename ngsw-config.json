@@ -1,0 +1,60 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/icons/favicon.ico",
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+        ]
+      }
+    }
+  ],
+  "dataGroups":[
+	{
+		"name": "Entities",
+		"urls": [
+			"https://api.tunrly.com/v1/artist",
+			"https://api.tunrly.com/v1/album",
+			"https://api.tunrly.com/v1/track",
+			"https://api.tunrly.com/v1/tag"
+		],
+		"cacheConfig": {
+			"strategy": "performance",
+      "maxSize": 100,
+      "maxAge": "7d",
+      "timeout": "10s"
+		}
+	},
+	{
+		"name": "User",
+		"urls": [
+			"https://api.tunrly.com/v1/user",
+			"https://api.tunrly.com/v1/playlist"
+		],
+		"cacheConfig": {
+			"strategy": "freshness",
+        "maxSize": 20,
+        "maxAge": "1h",
+        "timeout": "5s"
+		}
+	}
+  ]
+}

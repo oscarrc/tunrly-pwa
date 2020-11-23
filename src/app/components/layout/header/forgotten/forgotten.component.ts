@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 
-import { ValidationService } from '../../../../services/validation.service';
+import { ValidationService } from 'src/app/services/validation.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -41,10 +41,13 @@ export class ForgottenComponent extends SimpleModalComponent<any, any> implement
 
         this.loading = true;
 
-        this.validationService.create(forgotten.value.user, 1).subscribe().add( () => {
+        this.validationService.create(forgotten.value.user, 1).subscribe(
+            () => { 
+                this.toastr.success("Email sent", 'OK', { positionClass: 'toast-offset'});
+                this.close();
+            }
+        ).add( () => {
             this.loading = false;
-            this.toastr.success("Email sent", 'OK', { positionClass: 'toast-offset'});
-            this.close();
         })
     }
 

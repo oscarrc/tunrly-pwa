@@ -1,0 +1,12 @@
+{
+  "appId": "com.tunrly.app",
+  "appName": "Tunrly",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/tunrly",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1
+    }
+  }
+}
