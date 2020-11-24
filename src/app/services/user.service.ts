@@ -70,6 +70,7 @@ export class UserService {
     }
 
     getRecommended():Observable<any>{
-        return this.httpClient.get(this.userURL + 'recommendations');
+        const user = this.userSource.value;
+        return this.httpClient.get(this.userURL + `recommendations/${user._id}`);
     }
 }

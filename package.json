@@ -4,10 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
-    "postbuild": "cp dist/tunrly/index.html dist/tunrly/200.html",
-    "deploy": "surge dist/tunrly tunrly.com",
-    "deploy-beta": "surge dist/tunrly beta.tunrly.com",
+    "build": "ng build --prod && cp dist/tunrly/index.html dist/tunrly/200.html && surge dist/tunrly tunrly.com",
+    "buildbeta": "ng build --configuration beta && cp dist/tunrly/index.html dist/tunrly/200.html && surge dist/tunrly beta.tunrly.com",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
