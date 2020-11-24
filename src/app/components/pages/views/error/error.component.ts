@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 
 import { LoadingService } from 'src/app/services/loading.service';
 
@@ -6,12 +6,9 @@ import { LoadingService } from 'src/app/services/loading.service';
     selector: 'app-error',
     templateUrl: './error.component.html'
 })
-export class ErrorComponent implements OnInit, AfterViewInit {
+export class ErrorComponent implements AfterViewInit {
 
     constructor(private loadingService: LoadingService) { }
-
-    ngOnInit() {
-    }
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();

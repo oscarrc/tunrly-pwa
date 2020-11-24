@@ -20,7 +20,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
     type: string = "";
     page: number = 1;
     limit: number = 12;
-    gridView = false;
+    gridView: boolean = false;
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,

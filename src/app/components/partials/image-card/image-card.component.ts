@@ -23,7 +23,7 @@ export class ImageCardComponent implements OnInit {
         this.searchService.hideSearchResult();
     }
 
-    getRandomImage(images: Array<string>){
+    getRandomImage(images: Array<string>):string{
         const size = images.length;
         const rand = Math.floor(Math.random() * size) + 1;
         return images[rand];
@@ -31,12 +31,11 @@ export class ImageCardComponent implements OnInit {
 
     addFavorite() {
         this.userService.setFavorite(this.item._id, this.type).subscribe(
-            res => { this.userService.set(res) },
-            err => {}
+            res => { this.userService.set(res) }
         )
     }
 
-    isFavorite(){
+    isFavorite():boolean{
         return this.userService.isFavorite(this.item._id, this.type);
     }
 

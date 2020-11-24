@@ -30,11 +30,11 @@ export class PrimaryCardComponent implements OnInit {
         )
     }
 
-    isFavorite(){
+    isFavorite():boolean{
         return this.userService.isFavorite(this.track._id, 'track')
     }
 
-    addToPlayList() {
+    addToPlayList(){
         this.playerService.addToPlaylist(this.track);
     }
     

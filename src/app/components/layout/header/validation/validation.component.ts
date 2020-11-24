@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 
-import { ValidationService } from '../../../../services/validation.service';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ValidationService } from 'src/app/services/validation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-validation-modal',

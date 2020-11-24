@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { TagService } from 'src/app/services/tag.service';
     selector: 'app-tags',
     templateUrl: './tag-list.component.html'
 })
-export class TagListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TagListComponent implements AfterViewInit, OnDestroy {
 
     tagName: string;
     type: string;
@@ -33,8 +33,6 @@ export class TagListComponent implements OnInit, AfterViewInit, OnDestroy {
                         this.getTag();
                     });
                 }
-
-    ngOnInit() {}
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();

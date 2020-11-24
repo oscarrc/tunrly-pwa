@@ -20,7 +20,7 @@ export class UserService {
                 private storageService: StorageService) {}
 
     
-    check(value){
+    check(value):Observable<Object>{
         return this.httpClient.get(this.userURL  + 'check', { params: { value } });
     }
    
@@ -40,23 +40,23 @@ export class UserService {
         this.userSource.next(user);
     }
 
-    get(username:string = null){
+    get(username:string = null):Observable<Object>{
         return this.httpClient.get(this.userURL + (username ? username : ''))
     }
 
-    create(user: any){
+    create(user: any):Observable<Object>{
         return this.httpClient.post(this.userURL, user);
     }
 
-    update(user:any){
+    update(user:any):Observable<Object>{
         return this.httpClient.put(this.userURL, user);
     }
 
-    updatePassword(oldPassword: string, newPassword: string){
+    updatePassword(oldPassword: string, newPassword: string):Observable<Object>{
         return this.httpClient.patch(this.userURL + 'profile/password', {oldPassword, newPassword});
     }
 
-    setFavorite(favId: string, type: string){
+    setFavorite(favId: string, type: string):Observable<Object>{
         return this.httpClient.patch(this.userURL + 'profile/favorites', {favId, type});
     }
 
@@ -65,7 +65,7 @@ export class UserService {
         return favorites ? favorites[type].includes(favId) : false;
     }
 
-    addToHistory(track: string){
+    addToHistory(track: string):Observable<Object>{
         return this.httpClient.patch(this.userURL + 'profile/history', { track });
     }
 

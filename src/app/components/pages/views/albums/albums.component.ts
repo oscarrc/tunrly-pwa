@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { ArtistService } from 'src/app/services/artist.service';
     selector: 'app-albums',
     templateUrl: './albums.component.html'
 })
-export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AlbumsComponent implements AfterViewInit, OnDestroy {
 
     albums: any = [];
     id: string = '';
@@ -29,8 +29,6 @@ export class AlbumsComponent implements OnInit, AfterViewInit, OnDestroy {
                         this.getContent();
                     });
                 }
-
-    ngOnInit() {}
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();

@@ -15,9 +15,9 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private userSubscription: Subscription;
     
-    carouselArrowPosClass1 = 'arrow-pos-1';
-    carouselArrowPosClass2 = 'arrow-pos-2';
-    carouselArrowPosClass3 = 'arrow-pos-3';
+    carouselArrowPosClass1:string = 'arrow-pos-1';
+    carouselArrowPosClass2:string = 'arrow-pos-2';
+    carouselArrowPosClass3:string = 'arrow-pos-3';
 
     topTracks: any = {};
     topArtists: any = {};
@@ -25,9 +25,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     playlist: any = {};
     history: any = {};
     recommended: any = {};
-
-    mainEvent: any = {};
-    secondaryEvents: any = [];
 
     constructor(private loadingService: LoadingService,
                 private trackService: TrackService,
@@ -62,7 +59,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         return elements[rand];
     }
 
-    // Initialize top tracks object
     initTopTracks() {
         this.topTracks = {
             title: 'home.toptracks.title',
@@ -77,7 +73,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         ).add( () => { this.topTracks.loading = false })
     }
 
-    // Initialize top tracks object
     initTopArtists() {
         this.topArtists = {
             title: 'home.topartists.title',
@@ -92,7 +87,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         ).add( () => this.topArtists.loading = false );
     }
 
-    // Initialize top tracks object
     initTopTags() {
         this.topTags = {
             title: 'home.toptags.title',
@@ -107,7 +101,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         ).add( () => { this.topTags.loading = false })
     }
  
-    // Initialize music playlist object for section
     initPlaylist() {
         this.playlist = {
           title: 'home.playlists.title',
@@ -117,7 +110,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         };
     }
 
-    //Initialize user history
     initHistory(history, size) {
         const ids = history.slice(0,size).sort( () => { return 0.5 - Math.random() })
 
@@ -134,7 +126,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         ).add(() => this.history.loading = false)
     }
 
-    //Initialize user recommendations
     initRecommended() {
         this.recommended = {
             title: 'home.recommended.title',

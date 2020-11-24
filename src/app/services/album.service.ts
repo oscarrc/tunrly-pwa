@@ -10,7 +10,7 @@ export class AlbumService {
     constructor(private httpClient: HttpClient) {
     }
 
-    getInfo(name: string, artist: string){
+    getInfo(name: string, artist: string):Observable<Object>{
         return this.httpClient.get(this.albumURL + `${name}/${artist}`);
     }
 

@@ -14,7 +14,7 @@ export class ForgottenComponent extends SimpleModalComponent<any, any> implement
     forgotten: any;
     loading: boolean = false;
     device: string;
-    formSubmitted = false;
+    formSubmitted:boolean = false;
 
     constructor( private validationService:ValidationService, private toastr: ToastrService) {
         super();

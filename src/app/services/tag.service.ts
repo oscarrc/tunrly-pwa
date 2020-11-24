@@ -11,7 +11,7 @@ export class TagService {
     constructor(private httpClient: HttpClient) {
     }
 
-    getTag(tag: string, type: string, page: number, limit: number){
+    getTag(tag: string, type: string, page: number, limit: number):Observable<Object>{
         return this.httpClient.get(this.tagURL + tag, { params: {
             type: type,
             page: page.toString(),
@@ -19,7 +19,7 @@ export class TagService {
         }});
     }
 
-    getTop(page: number, limit: number){
+    getTop(page: number, limit: number):Observable<any>{
         return this.httpClient.get(this.tagURL, { params: {
             page: page.toString(),
             limit: limit.toString()

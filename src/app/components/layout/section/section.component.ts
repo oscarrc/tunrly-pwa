@@ -9,14 +9,14 @@ export class SectionComponent implements OnInit {
     classes = 'carousel';
 
     @Input() section: any = {};
-    @Input() imageCard = false;
-    @Input() primaryCard = false;
-    @Input() secondaryCard = false;
-    @Input() descriptionCard = false;
-    @Input() showImageOptions = false;
-    @Input() imageBorderRadiusClass = 'card-img--radius-lg';
-    @Input() carouselButtonPositionClass;
-    @Input() fourSlideCarousel = false;
+    @Input() imageCard:boolean = false;
+    @Input() primaryCard:boolean = false;
+    @Input() secondaryCard:boolean = false;
+    @Input() descriptionCard:boolean = false;
+    @Input() showImageOptions:boolean = false;
+    @Input() imageBorderRadiusClass:string = 'card-img--radius-lg';
+    @Input() carouselButtonPositionClass:string;
+    @Input() fourSlideCarousel:boolean = false;
     @Input() type:string;
 
     sliderConfig: any = {};

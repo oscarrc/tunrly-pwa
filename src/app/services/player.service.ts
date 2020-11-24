@@ -34,7 +34,7 @@ export class PlayerService {
         return this.options;
     }
 
-    playTrack(track) {        
+    playTrack(track){        
         this.playlist.tracks.unshift(track);
         this.currentPlaylist.next(this.playlist);
         this.options.index = 0;
@@ -72,7 +72,7 @@ export class PlayerService {
         this.playerOptions.emit(this.options);
     }
 
-    playNowPlaylist(playlist) {
+    playNowPlaylist(playlist){
         this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playlist = playlist;
         this.currentPlaylist.next(this.playlist);

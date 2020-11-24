@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { SimpleModalService } from 'ngx-simple-modal';
 
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
-import { ValidationComponent } from '../../../layout/header/validation/validation.component';
-import { ForgottenComponent } from '../../../layout/header/forgotten/forgotten.component';
+import { ValidationComponent } from 'src/app/components/layout/header/validation/validation.component';
+import { ForgottenComponent } from 'src/app/components/layout/header/forgotten/forgotten.component';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
 
     login: any;
     loading: boolean = false;
-    formSubmitted = false;
+    formSubmitted:boolean = false;
 
     constructor(private simpleModalService: SimpleModalService,
                 private authService:AuthService) {

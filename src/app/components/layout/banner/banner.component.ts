@@ -14,7 +14,7 @@ export class BannerComponent implements OnInit, OnDestroy {
 
     constructor(private skinService: SkinService) {}
 
-    getRandomBackground(){
+    getRandomBackground():string{
         const number = Math.floor(Math.random() * 6) + 1;
         return "assets/images/background/header-" + number + ".jpg";
     }

@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-language',

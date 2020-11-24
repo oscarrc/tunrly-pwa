@@ -1,16 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-menu-section',
     templateUrl: './menu-section.component.html'
 })
-export class MenuSectionComponent implements OnInit {
+export class MenuSectionComponent{
 
     @Input() menuItem: any = {};
 
     constructor() { }
-
-    ngOnInit() {
-    }
-
 }

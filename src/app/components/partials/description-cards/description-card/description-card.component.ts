@@ -22,14 +22,13 @@ export class DescriptionCardComponent implements OnInit {
         return elements[rand];
     }
 
-    isFavorite(){
+    isFavorite(): boolean{
         return this.userService.isFavorite(this.item._id, this.type);
     }
 
     addFavorite(){
         this.userService.setFavorite(this.item._id, this.type).subscribe(
-            res => { this.userService.set(res) },
-            err => {}
+            res => { this.userService.set(res) }
         )
     }
 

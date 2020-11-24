@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
     selector: 'app-playlist-details',
     templateUrl: './playlist-details.component.html'
 })
-export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PlaylistDetailsComponent implements AfterViewInit, OnDestroy {
     playlistImage: string;
     playlistId: string;
     imageSrc: string;
@@ -31,10 +31,7 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
             }
         });
     }
-
-    ngOnInit() {
-    }
-
+ 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
     }
@@ -46,7 +43,7 @@ export class PlaylistDetailsComponent implements OnInit, AfterViewInit, OnDestro
         )
     }
 
-    isFavorite(){
+    isFavorite():boolean{
         return this.playlistDetails?._id ? this.userService.isFavorite(this.playlistDetails._id, 'playlist') : false;
     }
     

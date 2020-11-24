@@ -51,7 +51,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         )
     }
 
-    isFavorite(){
+    isFavorite():boolean{
         return this.userService.isFavorite(this.trackDetails._id, 'track');
     }
 

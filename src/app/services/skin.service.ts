@@ -11,16 +11,16 @@ export class SkinService {
 
     constructor(private storageService: StorageService) { }
 
-    get skin() {
+    get skin(){
         return this.themeSkin;
     }
 
-    set skin(value) {
+    set skin(value){
         this.themeSkin.emit(value);
         this.storageService.setTheme(value);
     }
 
-    get background() {
+    get background(){
         return this.bannerBg;
     }
 

@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { MenuConfigService } from '../../../../services/menu.service';
-import { SearchService } from '../../../../services/search.service';
-import { AuthService } from '../../../../services/auth.service';
+import { MenuConfigService } from 'src/app/services/menu.service';
+import { SearchService } from 'src/app/services/search.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html'
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
 
     @Input() user: any = {};
 
@@ -18,9 +18,6 @@ export class ProfileComponent implements OnInit {
                 private menuConfigService: MenuConfigService,
                 private authService: AuthService) {
         this.userMenu = this.menuConfigService.userMenuItems;
-    }
-
-    ngOnInit() {
     }
 
     logout(){
