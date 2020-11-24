@@ -1,40 +1,42 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service';
 import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from './user.service';
-
-import Fingerprint2 from '@fingerprintjs/fingerprintjs';
-import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
+import { environment } from 'src/environments/environment';
+import Fingerprint2 from '@fingerprintjs/fingerprintjs';
 
 @Injectable()
 export class AuthService {
     private authURL = environment.api + '/auth/';
     private domain = environment.domain == 'localhost' ? environment.domain : '.' + environment.domain;
-    private fingerprint: string;
-    private isLoggedIn: boolean = false;
-    private cookieTTL: any = 0;
+    private loggedIn = new BehaviorSubject<boolean>(this.hasSession());
+    private fingerprint:string;
+    private cookieTTL:any = 0;
+
+    isLoggedIn:Observable<boolean> = this.loggedIn.asObservable();
 
     constructor(private httpClient: HttpClient, 
                 private cookieService: CookieService, 
                 private userService: UserService, 
                 private storageService: StorageService,
                 private router: Router ) {
-        this.init();
-    }
+                    this.getFingerprint();
+                }
 
-    private init(){
+    private getFingerprint(){
         Fingerprint2.getPromise().then( (components) => {
             let values = components.map( c => { return c.value })
             let fingerprint = Fingerprint2.x64hash128(values.join(''), 31);         
-            this.fingerprint =  fingerprint;
+            this.fingerprint = fingerprint;
         })
+    }
 
-        if(this.session && this.session !== ''){
-            this.isLoggedIn = true; 
-        }
+    private hasSession():boolean{
+        return !!this.cookieService.get("session");
     }
 
     private clear(){
@@ -42,20 +44,14 @@ export class AuthService {
         this.cookieService.deleteAll('/', this.domain);
         this.router.navigate(['/']);                             
         this.userService.set(null);
-        this.isLoggedIn = false;  
+        this.loggedIn.next(false);  
     }
 
-    get loggedIn(): boolean{
-        return this.isLoggedIn;
+    get loginStatus(): boolean{
+        return this.loggedIn.value && this.hasSession();
     }
 
-    get session(): string{
-        return this.cookieService.get("session");
-    }
-
-
-
-    login(user: string, password: string, remember: boolean){        
+    login(user: string, password: string, remember: boolean):Observable<Object>{        
         if(remember){
             this.cookieTTL = new Date();
             this.cookieTTL.setFullYear(this.cookieTTL.getFullYear() + 1);
@@ -68,40 +64,13 @@ export class AuthService {
                 this.cookieService.set("uid", res['user']['_id'], this.cookieTTL, '/', this.domain);
                 this.cookieService.set("fingerprint", this.fingerprint, this.cookieTTL, '/', this.domain);
                 this.cookieService.set("session", res['session'], this.cookieTTL, '/', this.domain);
-
-                this.isLoggedIn = true;
+                this.loggedIn.next(true);
                 this.router.navigate(['/home']);
-
-                return this.isLoggedIn;
-            },
-            err => {
-                return err
             }
         ));
     }
 
-    logout(device:boolean = true){
-        const fingerprint = this.cookieService.get("fingerprint");
-        const token = this.cookieService.get("token");
-        const session = this.cookieService.get("session");
-        
-        this.clear();
-
-        if(!session && !token){
-            return;
-        }
-        
-        return this.httpClient.delete(this.authURL, { params: device ? { device: fingerprint } : {} }).subscribe(
-            res => {      
-                return res["success"];
-            },
-            err => {
-                return err
-            }            
-        )
-    }
-
-    refresh(){
+    refresh():Observable<Object>{
         const session = this.cookieService.getAll();
 
         return this.httpClient.patch(this.authURL, { user:session.uid, token:session.session, device: session.fingerprint }).pipe(tap(
@@ -109,14 +78,20 @@ export class AuthService {
                 this.userService.set(res['user']);
                 this.cookieService.set("token", res['token'], 0, '/', this.domain);
                 this.cookieService.set("session", res['session'], this.cookieTTL, '/', this.domain);
-                this.isLoggedIn = true;
-                
-                return res;
-            },
-            err => {
-                this.clear();
-                return err
+                this.loggedIn.next(true);
             }
         ));
+    }    
+
+    logout(device:boolean = true):void{
+        const fingerprint = this.cookieService.get("fingerprint");
+        const token = this.cookieService.get("token");
+        const session = this.cookieService.get("session");
+
+        if(session && token){
+            this.httpClient.delete(this.authURL, { params: device ? { device: fingerprint } : {} }).subscribe()
+        }
+
+        this.clear();
     }
 }

@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class ViewsComponent implements OnInit, OnDestroy {
 
     themeClass = 'theme-light';
-
+    showPlaylist = 'open-right-sidebar';
     skinSubscription: Subscription;
     routerSubscription: Subscription;
 
@@ -40,7 +40,7 @@ export class ViewsComponent implements OnInit, OnDestroy {
             header.classList.remove('scrolled');
         }
     }
-
+    
     ngOnDestroy() {
         this.routerSubscription?.unsubscribe();
     }

@@ -1,4 +1,5 @@
-import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 import { PlayerService } from 'src/app/services/player.service';
 import { Subscription } from 'rxjs';
@@ -14,12 +15,14 @@ export class AsideRightComponent implements OnInit, OnDestroy {
 
     playlist: any = {};
     nowPlaying: number = 0;
-    modified: boolean = false;
+    modified: boolean = false;    
+    showPlaylist = 'open-right-sidebar';
 
     private playlistSubscription: Subscription;
     private nowPlayingSubscription: Subscription;
 
-    constructor(private playerService: PlayerService) { }
+    constructor(@Inject(DOCUMENT) private document: Document,
+                private playerService: PlayerService) { }
 
     ngOnInit() {
         this.playlistSubscription = this.playerService.currentPlaylist.subscribe((playlist) => {
@@ -35,6 +38,12 @@ export class AsideRightComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.playlistSubscription.unsubscribe();
         this.nowPlayingSubscription.unsubscribe();
+    }
+
+    closePlaylist() {
+        if (this.document.body.classList.contains(this.showPlaylist)) {
+            this.document.body.classList.remove(this.showPlaylist);
+        }
     }
 
     playTrack(index: number){

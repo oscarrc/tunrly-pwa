@@ -12,13 +12,7 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate() {
-        const loggedIn = this.authService.loggedIn;
-        const session = this.authService.session;
-
-        if (loggedIn || session) {
-            return true;
-        }
-
+        if (this.authService.loginStatus) return true;
         this.router.navigate(['/']);   
         return false;
     }

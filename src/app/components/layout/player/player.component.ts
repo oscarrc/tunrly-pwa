@@ -139,10 +139,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.storageService.setLocalStorage('player', this.playerOptions);
     }
 
-    openPlaylist() {
-        if (this.document.body.classList.contains(this.showPlaylist)) {
+    togglePlaylist(event = null) {
+        if (this.document.body.classList.contains(this.showPlaylist) && ( !event || (event.type == 'swiperight' && event.pointerType == 'touch'))) {
             this.document.body.classList.remove(this.showPlaylist);
-        } else {
+        } else if(!event || (event.type == 'swipeleft' && event.pointerType == 'touch')){
             this.document.body.classList.add(this.showPlaylist);
         }
     }
@@ -163,6 +163,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
         const time = (this.duration * event.target.value)/100;
         this.player?.seekTo(time, true);
         this.seekTo = 0;
+    }
+
+    
+    jumpTo(event){
+        this.seekStart(event);
+        this.seekEnd(event);
     }
 
     playPause(){

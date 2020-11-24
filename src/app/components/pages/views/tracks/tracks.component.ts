@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoadingService } from 'src/app/services/loading.service';
 import { TrackService } from 'src/app/services/track.service';
 import { ArtistService } from 'src/app/services/artist.service';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
     selector: 'app-tracks',
@@ -20,13 +21,14 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
     page: number = 1;
     limit: number = 10;
     loading: boolean = true;
-
+    
     routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
                 private loadingService: LoadingService,
                 private trackService: TrackService,
-                private artistService: ArtistService) { 
+                private artistService: ArtistService,
+                private playerService: PlayerService) { 
                     this.routeSubscription = this.route.params.subscribe(param => {
                         this.type = this.route.snapshot.url[2]?.path;
                         this.id = param.id;
@@ -73,15 +75,21 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
     }
 
     getArtistTracks() {
-        this.artistService.getTracks(this.id).subscribe(
+        this.artistService.getTracks(this.id, this.page, this.limit).subscribe(
             res => this.tracks = res
         ).add( () => this.loading = false )
     }
 
     getSimilar() {
-        this.trackService.getSimilar(this.id).subscribe(
+        this.trackService.getSimilar(this.id, this.page, this.limit).subscribe(
             res => this.tracks = res
         ).add( () => this.loading = false )
+    }
+
+    playAllSongs() {
+        this.playerService.playNowPlaylist({
+            tracks: this.tracks
+        });
     }
 
     ngOnDestroy(){

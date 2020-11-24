@@ -8,7 +8,7 @@
                 <div class="col-xl-4 col-md-5">
                     <div class="card h-auto">
                         <div class="card-body text-center">
-                            <div class="avatar avatar-xl avatar-circle mx-auto mb-4" [style.background-color]="userProfile._id | toColor">
+                            <div class="avatar avatar-xl avatar-circle mx-auto mb-4" [ngStyle]="{'background-color' : (!userProfile.image ? (userProfile._id | toColor) : 'none')}">
                                 <img *ngIf="userProfile.image" [src]="userProfile.image" [alt]="userProfile.username">
                                 <div *ngIf="!userProfile.image" class="initials">
                                     {{ userProfile.username | slice:0:2 | uppercase}}
@@ -70,7 +70,10 @@
                                 </div>
                                 <div class="col-xl-6 form-group">
                                     <label for="loc" class="form-label">{{ 'user.profile.country' | translate }}</label>
-                                    <input type="text" id="loc" name="loc" class="form-control" formControlName="country">
+                                    <!-- <input type="text" id="loc" name="loc" class="form-control" formControlName="country"> -->
+                                    <select class="form-control" name="country" id="country" formControlName="country">
+                                        <option *ngFor="let country of countries.list" [value]="country.name">{{ country.name }}</option>
+                                    </select>
                                 </div>
                                 <div class="col-12">
                                     <app-button *ngIf="edit" type="submit" text="{{ 'user.profile.save' | translate }}" [loading]="profileLoading" classes="btn btn-primary btn-air"></app-button>

@@ -6,6 +6,9 @@
     <div class="container-header d-flex justify-content-between">
         <span class="title">{{ 'ui.browsetop' | translate:{ type: ('tracks.name' | translate) } }} </span>
         <div class="d-flex align-items-center">
+            <a class="icon align-middle" (click)="playAllSongs()">
+                <i class="la la-play"></i>
+            </a>
             <a class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
                 <ng-template #gridViewButton>

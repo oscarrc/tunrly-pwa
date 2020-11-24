@@ -12,12 +12,7 @@ export class LoginGuard implements CanActivate {
     ) { }
 
     canActivate() {
-        const loggedIn = this.authService.loggedIn;
-
-        if(!loggedIn){
-            return true;
-        }
-
+        if(!this.authService.loginStatus) return true;
         this.router.navigate(['/home']);   
         return false;
     }

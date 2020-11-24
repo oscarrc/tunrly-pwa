@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.userSubscription = this.userService.user.subscribe( user => {
             if(user?.history){
                 this.initHistory(user.history, 9);
-                this.initRecommended(user.favorite);
+                this.initRecommended();
             }
         })
 
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     initTopTracks() {
         this.topTracks = {
             title: 'home.toptracks.title',
-            subTitle: 'home.toptracks.subtitle',
+            subtitle: 'home.toptracks.subtitle',
             page: '/tracks',
             loading: true,
             items: []
@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     initTopArtists() {
         this.topArtists = {
             title: 'home.topartists.title',
-            subTitle: 'home.topartists.subtitle',
+            subtitle: 'home.topartists.subtitle',
             page: '/artists',
             loading: true,
             items: []
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     initTopTags() {
         this.topTags = {
             title: 'home.toptags.title',
-            subTitle: 'home.toptags.subtitle',
+            subtitle: 'home.toptags.subtitle',
             page: '/tags',
             loading: true,
             items: []
@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     initPlaylist() {
         this.playlist = {
           title: 'home.playlists.title',
-          subTitle: 'home.playlists.subtitle',
+          subtitle: 'home.playlists.subtitle',
           page: '/playlist',
           items: []
         };
@@ -119,39 +119,33 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //Initialize user history
     initHistory(history, size) {
+        const ids = history.slice(0,size).sort( () => { return 0.5 - Math.random() })
+
         this.history = {
             title: 'home.history.title',
-            subTitle: 'home.history.subtitle',
+            subtitle: 'home.history.subtitle',
             page: '/user/history',
-            loading: false,
-            items: history.slice(0,size).sort( () => { return 0.5 - Math.random() })
+            loading: true,
+            items: []
         };
+
+        this.trackService.getTracks(ids).subscribe(
+            tracks => this.history.items = tracks 
+        ).add(() => this.history.loading = false)
     }
 
     //Initialize user recommendations
-    initRecommended(favorites) {
-        let tracks = [];
-
-        favorites.track.forEach( track => {
-            if(track.similar){
-                tracks = tracks.concat(track.similar.slice(0,5))
-            }
-        });
-
-        favorites.artist.forEach( artist => {
-            if(artist.similar) {
-                artist.similar.slice(0,5).forEach( similar => {
-                    tracks = tracks.concat(similar.tracks);
-                })
-            }
-        })
-
+    initRecommended() {
         this.recommended = {
             title: 'home.recommended.title',
-            subTitle: 'home.recommended.subtitle',
+            subtitle: 'home.recommended.subtitle',
             page: '/user/recommended',
-            loading: false,
-            items: tracks.sort( () => { return 0.5 - Math.random() }).slice(0,10)
+            loading: true,
+            items: []
         };
+
+        this.userService.getRecommended().subscribe( 
+            tracks => this.recommended.items = tracks.slice(0,9)
+        ).add(() => this.recommended.loading = false );        
     }
 }

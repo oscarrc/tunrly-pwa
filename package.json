@@ -4,10 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
-    "postbuild": "cp dist/tunrly/index.html dist/tunrly/200.html",
-    "deploy": "surge dist/tunrly tunrly.com",
-    "deploy-beta": "surge dist/tunrly beta.tunrly.com",
+    "build": "ng build --prod && cp dist/tunrly/index.html dist/tunrly/200.html && surge dist/tunrly tunrly.com",
+    "buildbeta": "ng build --configuration beta && cp dist/tunrly/index.html dist/tunrly/200.html && surge dist/tunrly beta.tunrly.com",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -32,6 +30,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
+    "hammerjs": "^2.0.8",
     "ionicons": "^4.6.3",
     "jquery": "^3.5.1",
     "ng2-charts": "^2.4.0",

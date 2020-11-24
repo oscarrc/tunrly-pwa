@@ -204,7 +204,9 @@
 		},
 		"recommended":{
 			"title": "Canciones escogidas según tus gustos",
-			"foryous": "Recomendado para tí"
+			"foryous": "Recomendado para tí",
+			"empty": "No tenemos recomendaciones todavía. Marca cómo favorita la música que te guste para obtener recomendaciones.",
+			"explore": "Explorar música"
 		},
 		"favorites":{
 			"title": "Favoritos",
