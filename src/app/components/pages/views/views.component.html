@@ -6,7 +6,7 @@
     <!-- App header -->
     <app-header></app-header>
 
-    <perfect-scrollbar class="main-ps vh-100" (psScrollY)="psBodyScroll($event)" #perfectScroll>
+    <perfect-scrollbar class="main-ps vh-100" (psScrollY)="psBodyScroll($event)" (psScrollDown)="psScrollDown($event)" #perfectScroll>
 
         <!-- Begin | Page Wrapper [[ Find at scss/framework/base/wrapper/wrapper.scss ]] -->
         <main id="pageWrapper">

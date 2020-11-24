@@ -5,15 +5,15 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root'
 })
 export class ScrollService {
-    endReached: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    limitReached: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     constructor() { }
 
-    scrollEnd(){
-        this.endReached.next(true);
+    reached(){
+        this.limitReached.next(true);
     }
 
-    scrollStart(){
-        this.endReached.next(false);
+    unreached(){
+        this.limitReached.next(false);
     }
 }
