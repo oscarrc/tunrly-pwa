@@ -46,6 +46,10 @@ export class AsideRightComponent implements OnInit, OnDestroy {
         }
     }
 
+    clearPlaylist(){
+        this.playerService.clearPlaylist();
+    }
+
     playTrack(index: number){
         this.playerService.playIndex(index);
     }

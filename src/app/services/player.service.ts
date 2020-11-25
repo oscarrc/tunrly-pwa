@@ -87,6 +87,14 @@ export class PlayerService {
         this.playerOptions.emit(this.options);
     }
 
+    clearPlaylist(){
+        this.playlist = { tracks:[] };
+        this.options.index = 0;
+        this.options.modified = false;
+        this.currentPlaylist.next(this.playlist);
+        this.playerOptions.emit(this.options);
+    }
+
     setOption(option){
         this.options[option] = !this.options[option];
         this.playerOptions.emit(this.options);
