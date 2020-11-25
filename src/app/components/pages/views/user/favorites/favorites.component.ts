@@ -42,8 +42,8 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
         title: 'user.favorites.alsolike',
         subtitle: 'user.favorites.checkout',
         items: [],
-        page: 1,
-        loading: false
+        page: '/user/recommended',
+        loading: false,
     }
     gridView:boolean = false;
     limit:number = 12;
