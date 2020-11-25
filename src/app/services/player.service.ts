@@ -66,24 +66,26 @@ export class PlayerService {
     }
 
     addToPlaylist(track){
-        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
-        this.playlist.tracks.push(track);
+        this.playlist.tracks.push(track);  
         this.currentPlaylist.next(this.playlist);
+        
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playerOptions.emit(this.options);
     }
 
     playNowPlaylist(playlist){
-        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playlist = playlist;
-        this.currentPlaylist.next(this.playlist);
+        this.currentPlaylist.next(this.playlist);        
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.options.index = 0;
         this.playerOptions.emit(this.options);
     }
 
     removeFromPlaylist(index){
-        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playlist.tracks.splice(index, 1);
         this.currentPlaylist.next(this.playlist);
+        
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playerOptions.emit(this.options);
     }
 
