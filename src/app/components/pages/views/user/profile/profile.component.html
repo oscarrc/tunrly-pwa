@@ -8,13 +8,13 @@
                 <div class="col-xl-4 col-md-5">
                     <div class="card h-auto">
                         <div class="card-body text-center">
-                            <div class="avatar avatar-xl avatar-circle mx-auto mb-4" [ngStyle]="{'background-color' : (!userProfile.image ? (userProfile._id | toColor) : 'none')}">
+                            <div class="avatar avatar-xl avatar-circle mx-auto mb-2" [ngStyle]="{'background-color' : (!userProfile.image ? (userProfile._id | toColor) : 'none')}">
                                 <img *ngIf="userProfile.image" [src]="userProfile.image" [alt]="userProfile.username">
                                 <div *ngIf="!userProfile.image" class="initials">
                                     {{ userProfile.username | slice:0:2 | uppercase}}
                                 </div>
                             </div>
-                            <h6 class="mb-3">{{userProfile.name}}</h6>
+                            <h6 class="mb-3">{{userProfile.username}}</h6>
                             <p  [ngClass]="imageSubmitted && imageForm.controls.image.errors?.requiredFileType ? 'text-danger' : ''" class="mb-1">{{ 'user.profile.imageformat' | translate }}</p>
                             <p [ngClass]="imageSubmitted && imageForm.controls.image.errors?.requiredSize ? 'text-danger' : ''" >{{ 'user.profile.imagesize' | translate }}</p>
                             <form action="#" [formGroup]="imageForm">
@@ -25,11 +25,11 @@
                         </div>
                     </div>
                     
-                    <div class="plan-info-card text-center px-sm-5 py-sm-4 p-3">
+                    <!-- <div class="plan-info-card text-center px-sm-5 py-sm-4 p-3">
                         <h6>{{ 'user.profile.lastfmaccount' | translate }}</h6>
                         <p>{{ 'user.profile.lastfmaccounttext' | translate }}</p>
                         <button type="button" class="btn btn-pill btn-air btn-danger">{{ 'user.profile.lastfmlogin' | translate }}</button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-xl-8 col-md-7">
                     <div class="card h-auto">
