@@ -255,7 +255,7 @@
       ] 
     },
 	  {
-      "name": "Your playlist",
+      "name": "Your playlists",
       "short_name": "Playlists",
       "description": "Listen to your playlists",
       "url": "/user/playlists",
