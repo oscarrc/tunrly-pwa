@@ -1,5 +1,5 @@
 <div class="song-list--loader">
-    <div class="song-list--item-number">{{trackNumber < 10 ? '0' + trackNumber : trackNumber}}</div>
+    <div *ngIf="trackNumber" class="song-list--item-number">{{trackNumber < 10 ? '0' + trackNumber : trackNumber}}</div>
     <div class="song-h song-h--sm">        
         <div class="song-h--img card-img--radius-sm">
             <content-loader 
