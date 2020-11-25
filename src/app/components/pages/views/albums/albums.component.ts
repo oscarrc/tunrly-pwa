@@ -16,7 +16,7 @@ export class AlbumsComponent implements AfterViewInit, OnDestroy {
     type: string='';
     loading: boolean = true;
     page: number = 1;
-    limit: number = 10;
+    limit: number = 12;
 
     routeSubscription: Subscription;
 

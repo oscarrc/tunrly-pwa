@@ -19,7 +19,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy{
     loading: boolean = false;
     type: string = "";
     page: number = 1;
-    limit: number = 12;
+    limit: number = this.type != "playlist" ? 12 : 8;
     gridView: boolean = false;
 
     constructor(private route: ActivatedRoute,

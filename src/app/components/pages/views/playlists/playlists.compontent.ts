@@ -10,7 +10,7 @@ import { PlaylistService } from 'src/app/services/playlist.service';
 export class PlaylistsComponent implements OnInit, AfterViewInit {
     playlists: any = [];
     page: number = 1;
-    limit: number = 10;
+    limit: number = 8;
     loading: boolean = true;
 
     constructor(private loadingService: LoadingService,
