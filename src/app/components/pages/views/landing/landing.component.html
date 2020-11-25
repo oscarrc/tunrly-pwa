@@ -77,14 +77,14 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text"><i class="ion-md-lock"></i></div>
                                                 </div>
-                                                <input type="password" class="form-control" id="password" formControlName="password" placeholder="{{'landing.register.password' | translate}}">
+                                                <input type="password" class="form-control" id="password" formControlName="password" placeholder="{{'landing.register.password' | translate}}" autocomplete="off">
                                                 <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
                                                     <span *ngIf="registration.controls.passgroup.controls.password.errors?.required">{{ 'errors.form.required' | translate }}</span>
                                                     <span *ngIf="registration.controls.passgroup.controls.password.errors?.pattern">{{ 'errors.form.password' | translate }}</span>
                                                 </div>
                                             </div>
                                             <div class="col-6 input-group">
-                                                <input type="password" class="form-control" id="repeatpassword" formControlName="repeatpassword" placeholder="{{'landing.register.repeatpassword' | translate}}">
+                                                <input type="password" class="form-control" id="repeatpassword" formControlName="repeatpassword" placeholder="{{'landing.register.repeatpassword' | translate}}" autocomplete="off">
                                                 <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
                                                     <span *ngIf="registration.controls.passgroup.controls.repeatpassword.errors?.required && !registration.controls.passgroup.errors?.equal">{{ 'errors.form.required' | translate }}</span>
                                                     <span *ngIf="registration.controls.passgroup.errors?.equal">{{ 'errors.form.passwordmatch' | translate }}</span>

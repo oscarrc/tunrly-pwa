@@ -17,7 +17,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="ion-md-lock"></i></div>
                         </div>
-                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="{{ 'user.profile.newpassword' | translate }}">
+                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="{{ 'user.profile.newpassword' | translate }}" autocomplete="password">
                         <div class="invalid-feedback text-right" *ngIf="formSubmitted" ngClass="d-block">
                             <span *ngIf="reset.controls.password.errors?.required">{{ 'errors.form.required' | translate }}</span>
                             <span *ngIf="reset.controls.password.errors?.pattern">{{ 'errors.form.password' | translate }}</span>
@@ -29,7 +29,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="ion-md-lock"></i></div>
                         </div>
-                        <input type="password" formControlName="repeatpassword" id="repeatpassword" class="form-control" placeholder="{{ 'user.profile.repeatpassword' | translate }}">
+                        <input type="password" formControlName="repeatpassword" id="repeatpassword" class="form-control" placeholder="{{ 'user.profile.repeatpassword' | translate }}" autocomplete="repeat-password">
                         <div class="invalid-feedback text-right" *ngIf="formSubmitted" ngClass="d-block">
                             <span *ngIf="reset.controls.repeatpassword.errors?.required">{{ 'errors.form.required' | translate }}</span>
                             <span *ngIf="reset.errors?.equal">{{ 'errors.form.passwordmatch' | translate }}</span>

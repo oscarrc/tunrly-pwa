@@ -11,7 +11,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">@</div>
                         </div>
-                        <input type="text" formControlName="user" id="user" class="form-control" placeholder="{{ 'header.login.usernameoremail' | translate }}" required>
+                        <input type="text" formControlName="user" id="user" class="form-control" placeholder="{{ 'header.login.usernameoremail' | translate }}" required autocomplete="on">
                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
                             <span *ngIf="login.controls.user.errors?.required">{{ 'errors.form.required' | translate }}</span>
                         </div>
@@ -22,7 +22,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="ion-md-lock"></i></div>
                         </div>
-                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="{{ 'landing.register.password' | translate }}" minlength="4" required>
+                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="{{ 'landing.register.password' | translate }}" minlength="4" required autocomplete="on">
                         <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
                             <span *ngIf="login.controls.password.errors?.required">{{ 'errors.form.required' | translate }}</span>
                         </div>
