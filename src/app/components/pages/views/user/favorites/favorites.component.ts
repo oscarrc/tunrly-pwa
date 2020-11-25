@@ -44,7 +44,7 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
         items: [],
         page: '/user/recommended',
         loading: false,
-    }
+    };
     gridView:boolean = false;
     limit:number = 12;
 
