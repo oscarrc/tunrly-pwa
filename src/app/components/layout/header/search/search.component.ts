@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         });
 
         this.statusSubscription = this.searchService.searchStatus.subscribe((value) => {
-            this.loading = true;
+            this.loading = value;
         })
     }
 
