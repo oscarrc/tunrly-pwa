@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../services/loading.service';
-import { StorageService } from '../../../../services/storage.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
     selector: 'app-admin',

@@ -34,7 +34,7 @@ export class TrackListViewComponent implements OnInit {
         this.buttonClicked.emit(index);
     }
 
-    isFavorite(){
+    isFavorite(): boolean{
         return this.userService.isFavorite(this.track._id, 'track')
     }
 }

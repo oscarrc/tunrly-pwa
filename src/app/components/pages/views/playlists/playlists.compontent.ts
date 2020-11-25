@@ -30,7 +30,6 @@ export class PlaylistsComponent implements OnInit, AfterViewInit {
         this.initPlaylists();
     }
 
-    // Initialize songs
     initPlaylists() {
         this.loading = true;
 

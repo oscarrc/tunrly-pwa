@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
 
@@ -37,7 +37,7 @@ export class SearchService {
         this.searchStatus.next(value);
     }
 
-    doSearch(query: string = this.searchQuery, type: string = "", page: number = 1, limit: number = 10){
+    doSearch(query: string = this.searchQuery, type: string = "", page: number = 1, limit: number = 10):Observable<Object>{
         return this.httpClient.get(this.searchURL, { params: {
             type: type,
             query: query,
@@ -46,7 +46,7 @@ export class SearchService {
         }});
     }
 
-    hideSearchResult() {
+    hideSearchResult(){
         this.hideSearch.emit(true);
     }
 }

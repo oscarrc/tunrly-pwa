@@ -80,7 +80,7 @@
 		"register": {
 			"username": "Nombre de usuario",
 			"firstname": "Nombre",
-			"lastname": "appelidos",
+			"lastname": "Apellidos",
 			"password": "Contraseña",
 			"repeatpassword": "Repite la contraseña",
 			"tac": "Al crear una cuenta aceptas nuestros términos y condiciones",

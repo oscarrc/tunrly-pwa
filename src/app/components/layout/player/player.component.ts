@@ -36,7 +36,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         shuffle: false,
         repeat: false
     };
-    qualityOptions = ["hd1080","hd720","large","medium"]
+    qualityOptions:Array<string> = ["hd1080","hd720","large","medium"]
     
     skinSubscription: Subscription;
     playlistSubscription: Subscription;

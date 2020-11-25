@@ -4,9 +4,10 @@
   "theme_color": "#753fdc",
   "background_color": "#343a40",
   "display": "standalone",
+  "orientation": "portrait",
   "scope": "./",
   "start_url": "./",
-   "icons": [
+  "icons": [
     {
       "src":  "assets/icons/windows10/Square71x71Logo.scale-400.png",
       "sizes": "284x284"

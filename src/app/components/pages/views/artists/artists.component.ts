@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { ArtistService } from 'src/app/services/artist.service';
     templateUrl: './artists.component.html'
 })
 
-export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ArtistsComponent implements AfterViewInit, OnDestroy {
 
     artists: any = [];
     country: string = '';
@@ -32,9 +32,6 @@ export class ArtistsComponent implements OnInit, AfterViewInit, OnDestroy {
                     });
                 }
 
-    ngOnInit() {
-    }
-    
     ngAfterViewInit() {
         this.loadingService.stopLoading();
     }

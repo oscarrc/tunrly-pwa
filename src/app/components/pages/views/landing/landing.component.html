@@ -17,10 +17,10 @@
             <div class="banner-content">
                 <div class="container-fluid">
                     <div class="row d-flex align-items-center">
-                        <div class="align-self-center col-lg-4 col-md-10 mx-lg-auto mx-4 mt-4 text-center d-none d-lg-block">
+                        <div class="align-self-center col-lg-4 col-md-10 mx-auto mt-4 text-center d-none d-lg-block">
                             <img src="assets/images/mockup.png" alt="Tunrly.com free music app"/>
                         </div>
-                        <div class="col-lg-4 col-md-10 mx-lg-auto mx-4 text-center mt-4 mt-lg-0">                            
+                        <div class="col-lg-4 col-md-10 mx-auto text-center mt-4 mt-lg-0">                            
                             <h1 class="pb-4">{{ 'landing.title' | translate }}</h1>
                             <form action="#" [formGroup]="registration" (ngSubmit)="register(registration)" [ngClass]="formSubmitted ? 'submitted' : ''">
                                 <div class="card card-frosted shadow mt-4 pt-4">
@@ -77,14 +77,14 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text"><i class="ion-md-lock"></i></div>
                                                 </div>
-                                                <input type="password" class="form-control" id="password" formControlName="password" placeholder="{{'landing.register.password' | translate}}">
+                                                <input type="password" class="form-control" id="password" formControlName="password" placeholder="{{'landing.register.password' | translate}}" autocomplete="off">
                                                 <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
                                                     <span *ngIf="registration.controls.passgroup.controls.password.errors?.required">{{ 'errors.form.required' | translate }}</span>
                                                     <span *ngIf="registration.controls.passgroup.controls.password.errors?.pattern">{{ 'errors.form.password' | translate }}</span>
                                                 </div>
                                             </div>
                                             <div class="col-6 input-group">
-                                                <input type="password" class="form-control" id="repeatpassword" formControlName="repeatpassword" placeholder="{{'landing.register.repeatpassword' | translate}}">
+                                                <input type="password" class="form-control" id="repeatpassword" formControlName="repeatpassword" placeholder="{{'landing.register.repeatpassword' | translate}}" autocomplete="off">
                                                 <div class="invalid-feedback d-block text-right" *ngIf="formSubmitted">
                                                     <span *ngIf="registration.controls.passgroup.controls.repeatpassword.errors?.required && !registration.controls.passgroup.errors?.equal">{{ 'errors.form.required' | translate }}</span>
                                                     <span *ngIf="registration.controls.passgroup.errors?.equal">{{ 'errors.form.passwordmatch' | translate }}</span>
@@ -132,17 +132,17 @@
                 <div class="row">
                     <div class="col-md-10 mx-auto">
                         <div class="row">
-                            <div class="col-lg-4 col-sm-6 text-center feature">
+                            <div class="col-md-4 text-center feature">
                                 <img src="../../../../../assets/images/svg/music.svg" alt="">
                                 <h5 class="mt-3">{{ 'landing.free' | translate }}</h5>
                                 <p>{{ 'landing.freetext' | translate }}</p>
                             </div>
-                            <div class="col-lg-4 col-sm-6 text-center feature">
+                            <div class="col-md-4 text-center feature">
                                 <img src="../../../../../assets/images/svg/event.svg" alt="">
                                 <h5 class="mt-3">{{ 'landing.legal' | translate }}</h5>
                                 <p>{{ 'landing.legaltext' | translate }}</p>
                             </div>
-                            <div class="col-lg-4 col-sm-6 text-center feature">
+                            <div class="col-md-4 text-center feature">
                                 <img src="../../../../../assets/images/svg/comment.svg" alt="">
                                 <h5 class="mt-3">{{ 'landing.multiplatform' | translate }}</h5>
                                 <p>{{ 'landing.multiplatformtext' | translate }}</p>

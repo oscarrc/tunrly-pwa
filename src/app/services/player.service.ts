@@ -34,7 +34,7 @@ export class PlayerService {
         return this.options;
     }
 
-    playTrack(track) {        
+    playTrack(track){        
         this.playlist.tracks.unshift(track);
         this.currentPlaylist.next(this.playlist);
         this.options.index = 0;
@@ -66,23 +66,33 @@ export class PlayerService {
     }
 
     addToPlaylist(track){
-        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
-        this.playlist.tracks.push(track);
+        this.playlist.tracks.push(track);  
         this.currentPlaylist.next(this.playlist);
+        
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playerOptions.emit(this.options);
     }
 
-    playNowPlaylist(playlist) {
-        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
+    playNowPlaylist(playlist){
         this.playlist = playlist;
-        this.currentPlaylist.next(this.playlist);
+        this.currentPlaylist.next(this.playlist);        
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.options.index = 0;
         this.playerOptions.emit(this.options);
     }
 
     removeFromPlaylist(index){
-        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.playlist.tracks.splice(index, 1);
+        this.currentPlaylist.next(this.playlist);
+        
+        this.options.modified = this.playlist.tracks.length > 1 ? true : false;
+        this.playerOptions.emit(this.options);
+    }
+
+    clearPlaylist(){
+        this.playlist = { tracks:[] };
+        this.options.index = 0;
+        this.options.modified = false;
         this.currentPlaylist.next(this.playlist);
         this.playerOptions.emit(this.options);
     }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
     selector: 'app-album-details',
     templateUrl: './album-details.component.html'
 })
-export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AlbumDetailsComponent implements AfterViewInit, OnDestroy {
 
     albumName: string;
     artistName: string;
@@ -35,9 +35,6 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-    ngOnInit() {
-    }
-
     ngAfterViewInit() {
         this.loadingService.stopLoading();
     }
@@ -49,7 +46,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         )
     }
 
-    isFavorite(){
+    isFavorite():boolean{
         return this.userService.isFavorite(this.albumDetails?._id, 'album');
     }
 

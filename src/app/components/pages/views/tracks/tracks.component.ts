@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { PlayerService } from 'src/app/services/player.service';
     selector: 'app-tracks',
     templateUrl: './tracks.component.html'
 })
-export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
+export class TracksComponent implements AfterViewInit, OnDestroy{
 
     tracks: any = [];
     gridView = false;
@@ -35,8 +35,6 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
                         this.getContent();
                     });
                 }
-
-    ngOnInit() {}
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
@@ -67,7 +65,6 @@ export class TracksComponent implements OnInit, AfterViewInit, OnDestroy{
         }
     }
 
-    // Initialize songs
     getTracks() {
         this.trackService.getTop(this.country, this.page, this.limit).subscribe(
             res =>  this.tracks = res 

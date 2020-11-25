@@ -21,7 +21,7 @@ export class ValidationComponent implements OnInit, OnDestroy{
     loading: boolean = false;
 
     reset: any;
-    formSubmitted = false;
+    formSubmitted:boolean = false;
    
     constructor(private loadingService: LoadingService,
                 private validationService: ValidationService,

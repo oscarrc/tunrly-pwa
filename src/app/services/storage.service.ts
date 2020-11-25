@@ -8,16 +8,15 @@ export class StorageService {
 
     constructor() { }
 
-    setLocalStorage(key, data) {
+    setLocalStorage(key, data):void {
         try {
             localStorage.setItem(key, JSON.stringify(data));
         } catch (e) {
             console.error('Error saving to local storage', e);
-            return null;
         }
     }
 
-    getLocalStorage(key) {
+    getLocalStorage(key):any{
         try {
             return JSON.parse(localStorage.getItem(key));
         } catch (e) {
@@ -27,13 +26,12 @@ export class StorageService {
     }
 
     clearLocalStorage(key = null){
-        if(!key) return localStorage.clear();
+        if(!key) localStorage.clear();
 
         try {
             localStorage.removeItem(key)
         } catch (e) {
             console.error('Error deleting data from local storage', e);
-            return null;
         }
     }
 
@@ -49,15 +47,15 @@ export class StorageService {
         localStorage.setItem(Config.APP_LANG, JSON.stringify(lang));
     }
 
-    getCurrentUser() {
+    getCurrentUser():Object{
         return this.getLocalStorage(Config.CURRENT_USER);
     }
 
-    getThemeSkin() {
+    getThemeSkin():any{
         return this.getLocalStorage(Config.THEME_SKIN);
     }
 
-    getLang() {
+    getLang():any{
         return this.getLocalStorage(Config.APP_LANG);
     }
 

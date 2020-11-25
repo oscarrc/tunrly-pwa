@@ -16,7 +16,7 @@ export class AsideRightComponent implements OnInit, OnDestroy {
     playlist: any = {};
     nowPlaying: number = 0;
     modified: boolean = false;    
-    showPlaylist = 'open-right-sidebar';
+    showPlaylist:string = 'open-right-sidebar';
 
     private playlistSubscription: Subscription;
     private nowPlayingSubscription: Subscription;
@@ -44,6 +44,10 @@ export class AsideRightComponent implements OnInit, OnDestroy {
         if (this.document.body.classList.contains(this.showPlaylist)) {
             this.document.body.classList.remove(this.showPlaylist);
         }
+    }
+
+    clearPlaylist(){
+        this.playerService.clearPlaylist();
     }
 
     playTrack(index: number){

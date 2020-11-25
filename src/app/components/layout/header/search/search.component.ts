@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SearchService } from '../../../../services/search.service';
+import { SearchService } from 'src/app/services/search.service';
 import { Subscription } from 'rxjs';
 
 @Component({

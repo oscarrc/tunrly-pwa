@@ -83,7 +83,7 @@ export class AuthService {
         ));
     }    
 
-    logout(device:boolean = true):void{
+    logout(device:boolean = true){
         const fingerprint = this.cookieService.get("fingerprint");
         const token = this.cookieService.get("token");
         const session = this.cookieService.get("session");

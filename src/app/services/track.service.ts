@@ -10,22 +10,22 @@ export class TrackService {
     constructor(private httpClient: HttpClient) {
     }
 
-    getInfo(name: string, artist: string){
+    getInfo(name: string, artist: string):Observable<Object>{
         return this.httpClient.get(this.trackUrl + `${name}/${artist}`);
     }
 
-    getSimilar(id: string, page:number = 1, limit:number = 10){
+    getSimilar(id: string, page:number = 1, limit:number = 10):Observable<any>{
         return this.httpClient.get(this.trackUrl + `${id}/similar`, { params: {
             page: page.toString(),
             limit: limit.toString()
         }});
     }
 
-    getSource(id: string){
+    getSource(id: string):Observable<Object>{
         return this.httpClient.get(this.trackUrl + `${id}/source`);
     }
 
-    getTop(country: string, page: number, limit: number){
+    getTop(country: string, page: number, limit: number):Observable<any>{
         return this.httpClient.get(this.trackUrl + 'top', { params: {
             country: country,
             page: page.toString(),

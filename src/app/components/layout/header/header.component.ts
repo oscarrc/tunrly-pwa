@@ -18,7 +18,7 @@ import { Config } from 'src/app/config/config';
 export class HeaderComponent implements OnInit, OnDestroy {
 
     @ViewChild('headerBackdrop') backdrop: ElementRef;
-    headerClasses = 'bg-primary';
+    headerClasses:string = 'bg-primary';
 
     languageIcon: any;
     currentUser: any = {};

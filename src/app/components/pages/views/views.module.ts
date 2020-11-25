@@ -40,12 +40,13 @@ import { StatisticsComponent } from './admin/statistics/statistics.component';
 import { ReferralsComponent } from './admin/referrals/referrals.component';
 import { SearchResultsComponent } from './search/search-results.component';
 
-import { TrackService } from '../../../services/track.service';
-import { ArtistService } from '../../../services/artist.service';
-import { AlbumService } from '../../../services/album.service';
-import { TagService } from '../../../services/tag.service';
-import { PlaylistService } from '../../../services/playlist.service';
-import { ValidationService } from '../../../services/validation.service';
+import { TrackService } from 'src/app/services/track.service';
+import { ArtistService } from 'src/app/services/artist.service';
+import { AlbumService } from 'src/app/services/album.service';
+import { TagService } from 'src/app/services/tag.service';
+import { PlaylistService } from 'src/app/services/playlist.service';
+import { ValidationService } from 'src/app/services/validation.service';
+import { ScrollService } from 'src/app/services/scroll.service';
 
 import { AuthGuard } from '../../../core/guards/auth.guard';    
 
@@ -228,6 +229,7 @@ const routes: Routes = [
         PlaylistService,
         TagService,
         ValidationService,
+        ScrollService,
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
             useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

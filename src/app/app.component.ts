@@ -15,8 +15,8 @@ import { StorageService } from './services/storage.service';
 })
 
 export class AppComponent implements OnInit, OnDestroy {
-    title = 'Tunrly.com';
-    themeClass = 'theme-dark';
+    title:string = 'Tunrly.com';
+    themeClass:string = 'theme-dark';
     skinSubscription: Subscription;
     
     constructor( @Inject(DOCUMENT) private document: Document,

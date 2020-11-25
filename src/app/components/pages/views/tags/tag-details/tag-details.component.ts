@@ -10,9 +10,9 @@ import { TagService } from 'src/app/services/tag.service';
     templateUrl: './tag-details.component.html'
 })
 export class TagDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
-    carouselArrowPosClass1 = 'arrow-pos-1';
-    carouselArrowPosClass2 = 'arrow-pos-2';
-    carouselArrowPosClass3 = 'arrow-pos-3';
+    carouselArrowPosClass1:string = 'arrow-pos-1';
+    carouselArrowPosClass2:string = 'arrow-pos-2';
+    carouselArrowPosClass3:string = 'arrow-pos-3';
 
     tagName: any;
     artists: any = {};

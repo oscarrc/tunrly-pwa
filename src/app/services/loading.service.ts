@@ -20,11 +20,11 @@ export class LoadingService {
         this.loadingStatus.next(value);
     }
 
-    startLoading() {
+    startLoading(){
         this.loading = true;
     }
 
-    stopLoading() {
+    stopLoading(){
         this.loading = false;
     }
 }

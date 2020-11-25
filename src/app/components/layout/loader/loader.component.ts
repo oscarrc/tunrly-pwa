@@ -9,7 +9,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 })
 export class LoaderComponent implements OnInit, OnDestroy {
 
-    loading = false;
+    loading:boolean = false;
     loadingSubscription: Subscription;
 
     constructor(private loadingService: LoadingService) {

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 import { Config } from 'src/app/config/config';
 import { DOCUMENT } from '@angular/common';
@@ -8,7 +8,7 @@ import { DOCUMENT } from '@angular/common';
     selector: 'app-aside-left-header',
     templateUrl: './aside-left-header.component.html'
 })
-export class AsideLeftHeaderComponent implements OnInit {
+export class AsideLeftHeaderComponent {
 
     config: Config;
     brand: any = {};
@@ -16,9 +16,6 @@ export class AsideLeftHeaderComponent implements OnInit {
     constructor(@Inject(DOCUMENT) private document: Document) {
         this.config = new Config();
         this.brand = this.config.config.brand;
-    }
-
-    ngOnInit() {
     }
 
     toggleIconicSidebar() {
