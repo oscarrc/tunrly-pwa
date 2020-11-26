@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './views/landing/landing.component';
 import { ErrorComponent } from './views/error/error.component';
 import { ValidationComponent } from './views/validation/validation.component';
-
+import { PoliciesComponent } from './views/policies/policies.component';
 import { LoginGuard } from '../../core/guards/login.guard';
 
 const routes: Routes = [
@@ -16,6 +16,10 @@ const routes: Routes = [
     {
         path: '404',
         component: ErrorComponent
+    },
+    {
+        path: 'policies',
+        component: PoliciesComponent
     },
     {
         path: 'validation/:action/:token',
