@@ -29,7 +29,7 @@
                         <app-share [title]="trackDetails.name + ' by ' + trackDetails?.artist"
                                    [description]="'Listen to ' + trackDetails?.name + ' by ' + trackDetails?.artist"
                                    [image]="trackDetails?.image | last"
-                                   [tags]="trackDetails.tags.join(',')"></app-share>
+                                   [tags]="trackDetails?.tags.join(',')"></app-share>
                     </div>
                 </div>
             </div>
