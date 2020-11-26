@@ -13,6 +13,7 @@ import { TrackListViewComponent } from './track-list-view/track-list-view.compon
 import { TrackListViewLoaderComponent } from './track-list-view/loader/track-list-view-loader.component';
 import { ButtonComponent } from './button/button.component';
 import { NothingComponent } from './nothing/nothing.component';
+import { ShareComponent } from './share/share.component';
 
 import { TrackOptionsComponent } from './track-options/track-options.component';
 import { TrackHorizontalComponent } from './track-horizontal/track-horizontal.component';
@@ -20,6 +21,7 @@ import { ImageCardComponent } from './image-card/image-card.component';
 import { CountdownComponent } from './countdown/countdown.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { ContentLoaderModule } from '@ngneat/content-loader';
+import { ShareModule } from 'ngx-sharebuttons';
 
 @NgModule({
     declarations: [
@@ -37,7 +39,8 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
         TrackListViewLoaderComponent,
         CountdownComponent,
         ButtonComponent,
-        NothingComponent
+        NothingComponent,
+        ShareComponent
     ],
     exports: [
         PrimaryCardComponent,
@@ -53,13 +56,15 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
         DescriptionCardLoaderComponent,
         TrackListViewLoaderComponent,
         ButtonComponent,
-        NothingComponent
+        NothingComponent,
+        ShareComponent
     ],
     imports: [
         CommonModule,
         CoreModule,
         RouterModule,
-        ContentLoaderModule
+        ContentLoaderModule,
+        ShareModule
     ]
 })
 export class PartialsModule { }

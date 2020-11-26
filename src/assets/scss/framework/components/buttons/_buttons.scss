@@ -14,6 +14,39 @@ button,
     }
 }
 
+.btn-fab{
+    display: inline-flex;
+    flex-direction: column;
+    margin-left: .25rem;
+    .btn{
+        z-index: $zIndex-fab
+    };
+    .fabs{
+        justify-items: center;
+        position: absolute;
+        z-index: $zIndex-fab;
+        top: 4rem;
+        margin-left: 3px;
+        
+        .btn{
+            visibility: hidden;
+            display: block;
+            margin: 0 auto;        
+            margin-top: .5rem;
+            opacity: 0;            
+            color: $white;
+            transition: $transition-long;
+        }
+
+        &.show{
+            .btn {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    };
+}
+
 // Default button styles
 .btn-default {
     background-color: $white;
@@ -53,9 +86,18 @@ button,
     @include icons-style {
         @include icon-size($icon-size-base);
     }
+
+    &.btn-sm {
+        width: 2rem;
+        height: 2rem;
+        @include icons-style {
+            @include icon-size($icon-size-base);
+        }
+    }
 }
 
 .btn-inline {
+    display: inline-flex;
     .btn + .btn {
         margin-left: .25rem;
     }
@@ -82,13 +124,43 @@ button,
 
 .btn-facebook {
     @include plain-hover-focus {
-        color: #3b5998;
+        background: #1877F2;
     }
 }
 
-.btn-google {
+.btn-twitter {
     @include plain-hover-focus {
-        color: #dd4b39;
+        background: #00A2F3;
+    }
+}
+
+.btn-tumblr {
+    @include plain-hover-focus {
+        background: #314358;
+    }
+}
+
+.btn-whatsapp {
+    @include plain-hover-focus {
+        background: #24CC63;
+    }
+}
+
+.btn-telegram {
+    @include plain-hover-focus {
+        background: #29A9EB;
+    }
+}
+
+.btn-reddit {
+    @include plain-hover-focus {
+        background: #FF4500;
+    }
+}
+
+.btn-pinterest {
+    @include plain-hover-focus {
+        background: #B7081B;
     }
 }
 
