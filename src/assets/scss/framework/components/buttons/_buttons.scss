@@ -126,9 +126,9 @@ button,
     }
 }
 
-.btn-instagram {
+.btn-tumblr {
     @include plain-hover-focus {
-        background: #DA0F4E;
+        background: #314358;
     }
 }
 
@@ -147,6 +147,12 @@ button,
 .btn-reddit {
     @include plain-hover-focus {
         background: #FF4500;
+    }
+}
+
+.btn-pinterest {
+    @include plain-hover-focus {
+        background: #B7081B;
     }
 }
 
