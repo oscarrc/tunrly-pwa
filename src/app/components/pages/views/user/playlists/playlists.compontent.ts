@@ -12,7 +12,7 @@ export class UserPlaylistsComponent implements OnInit, AfterViewInit, OnDestroy 
 
     playlists: any = [];
     page: number = 1;
-    limit: number = 10;
+    limit: number = 8;
     loading: boolean = true;
 
     constructor(private loadingService: LoadingService,

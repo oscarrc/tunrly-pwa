@@ -13,7 +13,7 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
     history: any = {};
     page: number = 1;
-    limit: number = 10;
+    limit: number = 12;
     gridView: boolean = false;
 
     private userSubscription: any;

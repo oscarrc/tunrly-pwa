@@ -93,6 +93,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
             this.time = this.player.getCurrentTime();
             this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
         });
+        this.playPause();
     }
 
     stateChange(event){

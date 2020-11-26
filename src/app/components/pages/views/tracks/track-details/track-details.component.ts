@@ -21,6 +21,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     similarTracks: any;
     page: number = 1;
     limit: number = 10;
+    show: boolean = false;
     
     routeSubscription: Subscription;
 
@@ -89,8 +90,8 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
-    addInPlayer() {
-        this.playerService.playTrack(this.trackDetails);
+    addToPlaylist() {
+        this.playerService.addToPlaylist(this.trackDetails);
     }
 
     ngOnDestroy() {

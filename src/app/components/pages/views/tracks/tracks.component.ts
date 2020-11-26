@@ -19,7 +19,7 @@ export class TracksComponent implements AfterViewInit, OnDestroy{
     id: string = '';
     type: string='';
     page: number = 1;
-    limit: number = 10;
+    limit: number = 12;
     loading: boolean = true;
     
     routeSubscription: Subscription;

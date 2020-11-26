@@ -39,11 +39,12 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
         loading: false
     };
     recommended = {
-        list: [],
+        title: 'user.favorites.alsolike',
+        subtitle: 'user.favorites.checkout',
         items: [],
-        page: 1,
-        loading: false
-    }
+        page: '/user/recommended',
+        loading: false,
+    };
     gridView:boolean = false;
     limit:number = 12;
 
@@ -64,6 +65,7 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
                 this.playlists.list = user.favorite.playlist.reverse();
                 this.tracks.list = user.favorite.track.reverse();
                 this.getTracks(this.tracks.list);
+                this.getRecommended();
             }
         );
     }
@@ -120,22 +122,11 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
         this.userSubscription.unsubscribe();
     }
 
-    getSimilar(){
-        let tracks = [];
-
-        // this.favorites.track.forEach(track => {
-        //     tracks = tracks.concat(track.similar);    
-        // });
-
-        // this.favorites.artist.forEach( artist => {
-        //     if(artist.similar){
-        //         artist.similar.forEach( similar => {
-        //             tracks = tracks.concat(similar.tracks)
-        //         })
-        //     }
-        // });
-
-        return tracks.sort( (a, b) => { return 0.5 - Math.random() });
+    getRecommended(){
+        this.userService.getRecommended().subscribe( tracks => {
+            tracks = tracks.sort( () => { return 0.5 - Math.random() });
+            this.recommended.items = tracks.slice(0,10)
+        });
     }
 
     nextPage(type){

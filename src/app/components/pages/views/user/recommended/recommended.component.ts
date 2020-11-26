@@ -14,7 +14,7 @@ export class UserRecommendedComponent implements OnInit, AfterViewInit, OnDestro
     gridView = false;
     country: string = ''; 
     page: number = 1;
-    limit: number = 10;
+    limit: number = 12;
     loading: boolean = false;
 
     constructor(private playerService: PlayerService,
