@@ -21,12 +21,6 @@
         </a>
     </li>
     <li class="dropdown-item">
-        <a class="dropdown-link" (click)="shareSong()">
-            <i class="la la-share-alt"></i>
-            <span>{{ 'context.share' | translate }}</span>
-        </a>
-    </li>
-    <li class="dropdown-item">
         <a class="dropdown-link" [routerLink]="'/track/' + track?.name + '/' + track?.artist">
             <i class="la la-info-circle"></i>
             <span>{{ 'context.trackinfo' | translate }}</span>
