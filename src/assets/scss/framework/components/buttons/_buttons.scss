@@ -18,21 +18,29 @@ button,
     display: inline-flex;
     flex-direction: column;
     margin-left: .25rem;
+    .btn{
+        z-index: 2000
+    };
     .fabs{
         justify-items: center;
-
+        position: absolute;
+        z-index: 2000;
+        top: 4rem;
+        margin-left: 3px;
+        
         .btn{
-            display: none;
+            visibility: hidden;
+            display: block;
             margin: 0 auto;        
             margin-top: .5rem;
             opacity: 0;            
             color: $white;
-            transition: all ease-in-out 500ms;
+            transition: $transition-long;
         }
 
         &.show{
             .btn {
-                display: block;
+                visibility: visible;
                 opacity: 1;
             }
         }

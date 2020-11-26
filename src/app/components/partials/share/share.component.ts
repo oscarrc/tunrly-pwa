@@ -9,7 +9,7 @@ export class ShareComponent {
     @Input() description:string;
     @Input() image:string;
     @Input() tags:string;
-
+    
     show: boolean = false;
 
     constructor() { }
