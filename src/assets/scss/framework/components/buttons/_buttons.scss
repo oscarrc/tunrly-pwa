@@ -19,12 +19,12 @@ button,
     flex-direction: column;
     margin-left: .25rem;
     .btn{
-        z-index: 2000
+        z-index: $zIndex-fab
     };
     .fabs{
         justify-items: center;
         position: absolute;
-        z-index: 2000;
+        z-index: $zIndex-fab;
         top: 4rem;
         margin-left: 3px;
         
