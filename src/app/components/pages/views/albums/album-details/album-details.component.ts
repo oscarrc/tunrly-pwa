@@ -41,8 +41,7 @@ export class AlbumDetailsComponent implements AfterViewInit, OnDestroy {
 
     addFavorite() {
         this.userService.setFavorite(this.albumDetails._id, 'album').subscribe(
-            res => { this.userService.set(res) },
-            err => {}
+            res => this.userService.set(res) 
         )
     }
 
