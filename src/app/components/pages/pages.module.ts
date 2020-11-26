@@ -9,6 +9,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ErrorComponent } from './views/error/error.component';
+import { PoliciesComponent } from './views/policies/policies.component'
 import { LayoutModule } from '../layout/layout.module';
 import { PartialsModule } from '../partials/partials.module';
 import { ComponentsModule } from './views/views.module';
@@ -25,6 +26,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     declarations: [
         PagesComponent,
         ErrorComponent,
+        PoliciesComponent,
         LandingComponent,
         ValidationComponent
     ],

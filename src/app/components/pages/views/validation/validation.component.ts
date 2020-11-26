@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ValidationService } from 'src/app/services/validation.service';
 import { PasswordValidator } from 'src/app/core/validators/password.validator';
+import { Config } from 'src/app/config/config';
 
 @Component({
     selector: 'app-validation',
@@ -22,10 +23,15 @@ export class ValidationComponent implements OnInit, OnDestroy{
 
     reset: any;
     formSubmitted:boolean = false;
-   
+    
+    config: Config;
+    brand: any = {};
+
     constructor(private loadingService: LoadingService,
                 private validationService: ValidationService,
                 private route: ActivatedRoute,) {
+                    this.config = new Config();
+                    this.brand = this.config.config.brand;
                     this.routeSubscription = this.route.params.subscribe(param => {
                         this.action = param.action;
                         this.token = param.token;
