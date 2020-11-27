@@ -58,4 +58,4 @@
                 [tags]="tags" type="button" class="ml-auto btn btn-pill btn-air btn-light btn-icon-only btn-sm"><i class="la la-copy"></i></button>
     </span>
 </span>
-<div class="backdrop" [ngClass]="{'show': show}"></div>
+<div class="backdrop" [ngClass]="{'show': show}" (click)="show = !show"></div>
