@@ -26,7 +26,7 @@
                         <app-share [title]="albumDetails.name + ' by ' + albumDetails?.artist"
                                    [description]="'Listen to ' + albumDetails?.name + ' by ' + albumDetails?.artist"
                                    [image]="albumDetails?.image | last"
-                                   [tags]="albumDetails.tags.join(',')"></app-share>
+                                   [tags]="albumDetails?.tags.join(',')"></app-share>
                     </div>
                 </div>
             </div>

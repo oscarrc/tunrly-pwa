@@ -41,7 +41,7 @@ export class UserService {
     }
 
     get(username:string = null):Observable<Object>{
-        return this.httpClient.get(this.userURL + (username ? username : ''))
+        return this.httpClient.get(this.userURL + (username ? `${username}/profile` : ''))
     }
 
     create(user: any):Observable<Object>{
@@ -52,12 +52,14 @@ export class UserService {
         return this.httpClient.put(this.userURL, user);
     }
 
-    updatePassword(oldPassword: string, newPassword: string):Observable<Object>{
-        return this.httpClient.patch(this.userURL + 'profile/password', {oldPassword, newPassword});
+    updatePassword(oldPassword: string, newPassword: string):Observable<Object>{        
+        const user = this.userSource.value;
+        return this.httpClient.patch(this.userURL + `${user._id}/password`, {oldPassword, newPassword});
     }
 
-    setFavorite(favId: string, type: string):Observable<Object>{
-        return this.httpClient.patch(this.userURL + 'profile/favorites', {favId, type});
+    setFavorite(favId: string, type: string):Observable<Object>{        
+        const user = this.userSource.value;
+        return this.httpClient.patch(this.userURL + `${user._id}/favorites`, {favId, type});
     }
 
     isFavorite(favId: string, type: string): boolean{
@@ -66,11 +68,12 @@ export class UserService {
     }
 
     addToHistory(track: string):Observable<Object>{
-        return this.httpClient.patch(this.userURL + 'profile/history', { track });
+        const user = this.userSource.value;
+        return this.httpClient.patch(this.userURL + `${user._id}/history`, { track });
     }
 
     getRecommended():Observable<any>{
         const user = this.userSource.value;
-        return this.httpClient.get(this.userURL + `recommendations/${user._id}`);
+        return this.httpClient.get(this.userURL + `${user._id}/recommendations`);
     }
 }

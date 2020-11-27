@@ -17,7 +17,7 @@
                     </div>
                     <div class="mt-4">
                         <button type="button" class="btn btn-pill btn-air btn-bold btn-danger mr-2"
-                                (click)="addToPlaylist()">{{ 'tracks.play' | translate }}</button>
+                                (click)="playTrack()">{{ 'tracks.play' | translate }}</button>
                         <button *ngIf="trackDetails?.album" type="button" class="btn btn-pill btn-air btn-bold btn-success"
                                 routerLink="{{ '/album/' +  trackDetails.album.name + '/' + trackDetails.album.artist }}">{{ 'tracks.viewalbum' | translate }}</button>
                     </div>
@@ -29,7 +29,7 @@
                         <app-share [title]="trackDetails.name + ' by ' + trackDetails?.artist"
                                    [description]="'Listen to ' + trackDetails?.name + ' by ' + trackDetails?.artist"
                                    [image]="trackDetails?.image | last"
-                                   [tags]="trackDetails.tags.join(',')"></app-share>
+                                   [tags]="trackDetails?.tags.join(',')"></app-share>
                     </div>
                 </div>
             </div>
