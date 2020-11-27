@@ -90,6 +90,10 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
+    playTrack(){
+        this.playerService.playTrack(this.trackDetails);
+    }
+    
     addToPlaylist() {
         this.playerService.addToPlaylist(this.trackDetails);
     }
