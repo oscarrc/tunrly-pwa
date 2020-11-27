@@ -26,7 +26,7 @@
                         <app-share [title]="artistDetails?.name + ' music'"
                                    [description]="'Listen to ' + artistDetails?.name + ' music'"
                                    [image]="(artistDetails?.image?.thumbnail | random) || (artistDetails?.image?.background | random)"
-                                   [tags]="artistDetails?.tags.join(',')"></app-share>
+                                   [tags]="artistDetails?.tags?.join(',')"></app-share>
                     </div>
                 </div>
             </div>

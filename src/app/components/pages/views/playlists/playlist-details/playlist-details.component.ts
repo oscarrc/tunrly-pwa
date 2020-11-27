@@ -15,7 +15,7 @@ export class PlaylistDetailsComponent implements AfterViewInit, OnDestroy {
     playlistImage: string;
     playlistId: string;
     imageSrc: string;
-    playlistDetails: any;
+    playlistDetails: any = {};
 
     routeSubscription: Subscription;
 
