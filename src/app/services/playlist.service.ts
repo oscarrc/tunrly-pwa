@@ -30,11 +30,11 @@ export class PlaylistService {
     }
 
     update(playlist, id):Observable<Object>{
-        return this.httpClient.put(this.playlistURL + '/' + id, playlist);
+        return this.httpClient.put(this.playlistURL + id, playlist);
     }
 
     delete(id):Observable<Object>{
-        return this.httpClient.delete(this.playlistURL + '/' + id);
+        return this.httpClient.delete(this.playlistURL + id);
     }
 
     getPlaylists(ids):Observable<any>{
