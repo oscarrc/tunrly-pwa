@@ -4,7 +4,6 @@ import { DOCUMENT } from '@angular/common';
 import { PlayerService } from 'src/app/services/player.service';
 import { Subscription } from 'rxjs';
 
-//TODO clear playlist
 @Component({
     selector: 'app-aside-right',
     templateUrl: './aside-right.component.html'
