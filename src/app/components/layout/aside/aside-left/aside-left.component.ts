@@ -22,8 +22,8 @@ export class AsideLeftComponent implements OnDestroy {
         this.menuItems = this.menuConfigService.menuItems;
 
         this.asideFooterButton = {
-            icon: 'ion-md-play-circle',
-            title: 'Weekly playlist'
+            icon: 'ion-md-cafe',
+            title: 'menu.coffee'
         };
     }
 
