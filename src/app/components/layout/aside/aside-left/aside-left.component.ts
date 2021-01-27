@@ -14,7 +14,7 @@ export class AsideLeftComponent implements OnDestroy {
     menuItems: any = [];
     asideFooterButton: any = {};
     sidebarClass:string = 'sidebar-primary';
-
+    year: number = (new Date()).getFullYear();
     skinSubscription: Subscription;
 
     constructor(@Inject(DOCUMENT) private document: Document,
