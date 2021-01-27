@@ -14,6 +14,7 @@ import { TrackListViewLoaderComponent } from './track-list-view/loader/track-lis
 import { ButtonComponent } from './button/button.component';
 import { NothingComponent } from './nothing/nothing.component';
 import { ShareComponent } from './share/share.component';
+import { KofiComponent } from './kofi/kofi.component';
 
 import { TrackOptionsComponent } from './track-options/track-options.component';
 import { TrackHorizontalComponent } from './track-horizontal/track-horizontal.component';
@@ -40,7 +41,8 @@ import { ShareModule } from 'ngx-sharebuttons';
         CountdownComponent,
         ButtonComponent,
         NothingComponent,
-        ShareComponent
+        ShareComponent,
+        KofiComponent
     ],
     exports: [
         PrimaryCardComponent,
@@ -57,7 +59,8 @@ import { ShareModule } from 'ngx-sharebuttons';
         TrackListViewLoaderComponent,
         ButtonComponent,
         NothingComponent,
-        ShareComponent
+        ShareComponent,
+        KofiComponent
     ],
     imports: [
         CommonModule,

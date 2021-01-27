@@ -20,11 +20,6 @@ export class AsideLeftComponent implements OnDestroy {
     constructor(@Inject(DOCUMENT) private document: Document,
                 public menuConfigService: MenuConfigService) {
         this.menuItems = this.menuConfigService.menuItems;
-
-        this.asideFooterButton = {
-            icon: 'ion-md-cafe',
-            title: 'menu.coffee'
-        };
     }
 
     hideSidebar() {
