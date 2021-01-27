@@ -1,20 +1,17 @@
-import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from 'src/app/services/loading.service';
 import { TrackService } from 'src/app/services/track.service';
 import { ArtistService } from 'src/app/services/artist.service';
 import { TagService } from 'src/app/services/tag.service';
 import { UserService } from 'src/app/services/user.service';
-import { Subscription } from 'rxjs';
 
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-    private userSubscription: Subscription;
-    
+export class HomeComponent implements OnInit, AfterViewInit {
     carouselArrowPosClass1:string = 'arrow-pos-1';
     carouselArrowPosClass2:string = 'arrow-pos-2';
     carouselArrowPosClass3:string = 'arrow-pos-3';
@@ -33,12 +30,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
                 private userService: UserService) {}
 
     ngOnInit() {
-        this.userSubscription = this.userService.user.subscribe( user => {
+        this.userService.user.subscribe( user => {
             if(user?.history){
-                this.initHistory(user.history, 9);
-                this.initRecommended();
+                if(!this.history.items) this.initHistory(user.history, 9);
+                if(!this.recommended.items) this.initRecommended();
             }
-        })
+        }).unsubscribe()
 
         this.initTopTracks();
         this.initTopArtists();
@@ -47,10 +44,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngAfterViewInit() {  
         this.loadingService.stopLoading();
-    }
-
-    ngOnDestroy(){        
-        this.userSubscription.unsubscribe();
     }
 
     getRandom(elements: Array<any>){

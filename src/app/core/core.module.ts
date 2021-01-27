@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LineTabsDirective } from './directives/line-tabs.directive';
-// import { TargetBlankDirective } from './directives/target-blank.directive';
+import { ImageFallbackDirective } from './directives/image-fallback.directive';
 
 import { LastPipe } from '../core/pipes/last.pipe';
 import { RandomPipe } from '../core/pipes/random.pipe';
@@ -21,7 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
         ToTimePipe,
         TruncatePipe,
         LineTabsDirective,
-        // TargetBlankDirective
+        ImageFallbackDirective
     ],
     exports: [
         LastPipe,
@@ -30,7 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
         ToTimePipe,
         TruncatePipe,
         LineTabsDirective,
-        // TargetBlankDirective,
+        ImageFallbackDirective,
         TranslateModule
     ]
 })

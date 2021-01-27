@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy,} from '@angular/core';
+import {Component, Inject, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { MenuConfigService } from 'src/app/services/menu.service';
@@ -14,17 +14,12 @@ export class AsideLeftComponent implements OnDestroy {
     menuItems: any = [];
     asideFooterButton: any = {};
     sidebarClass:string = 'sidebar-primary';
-
+    year: number = (new Date()).getFullYear();
     skinSubscription: Subscription;
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 public menuConfigService: MenuConfigService) {
         this.menuItems = this.menuConfigService.menuItems;
-
-        this.asideFooterButton = {
-            icon: 'ion-md-play-circle',
-            title: 'Weekly playlist'
-        };
     }
 
     hideSidebar() {
