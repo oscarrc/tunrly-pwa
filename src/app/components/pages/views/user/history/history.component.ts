@@ -35,12 +35,16 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
         if((count / this.limit) > this.page){
             this.page++;
         }
+
+        this.getTracks(this.history.list)
     }
 
     prevPage(){
         if(this.page > 1){
             this.page--
         }
+
+        this.getTracks(this.history.list)
     }
 
     getTracks(tracks){
@@ -48,8 +52,7 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
         
         if(this.history.items.slice(offset, this.limit).length == 0 ){
             this.history.loading = true;
-
-            this.trackService.getTracks( tracks.slice(offset, this.limit)).subscribe( tracks => {   
+            this.trackService.getTracks( tracks.slice(offset, this.limit * this.page)).subscribe( tracks => {                
                 this.history.items = this.history.items.concat(tracks);
             }).add( () => this.history.loading = false );
         }
