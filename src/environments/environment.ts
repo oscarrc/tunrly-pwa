@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   domain: 'localhost',
-  api: 'http://localhost:3000/v1'
+  api: 'https://dev.tunrly.com/v1'
 };
 
 /*

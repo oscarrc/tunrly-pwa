@@ -53,7 +53,7 @@ export class EditPlaylistComponent implements OnDestroy{
             description: new FormControl(this.playlist.description, [
                 Validators.required
             ]),
-            image: new FormControl(this.playlist.image),
+            image: new FormControl(),
             public: new FormControl(this.playlist.public),
         })
     }
@@ -112,6 +112,7 @@ export class EditPlaylistComponent implements OnDestroy{
         this.loading = true;
 
         playlist = playlist.value;
+        playlist.image = this.playlist.image;
         playlist.tracks = this.playlist.tracks.map( t => t._id);
         playlist.tags = playlist.tags.split(',').map( t => t.trim() )
 

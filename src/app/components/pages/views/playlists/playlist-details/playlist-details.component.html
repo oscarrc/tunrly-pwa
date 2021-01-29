@@ -10,7 +10,7 @@
             <div class="row pt-4">
                 <div class="col-xl-8 col-lg-6">
                     <h5>{{playlistDetails?.name}}</h5>
-                    <p *ngIf="playlistDetails?.user.username">by <a routerLink="{{ '/user/' +  playlistDetails.user.username + '/profile' }}">{{playlistDetails?.user.username}}</a></p>
+                    <p *ngIf="playlistDetails?.user?.username">by <a routerLink="{{ '/user/' +  playlistDetails.user.username + '/profile' }}">{{playlistDetails?.user?.username}}</a></p>
                     <p [innerHTML]="playlistDetails?.description"></p> 
                     <div class="text-warning tags mb-4">
                         <a routerLink="{{ '/tag/' +  tag }}" *ngFor="let tag of playlistDetails?.tags"><span class="badge badge-pill badge-warning mr-2">{{tag | titlecase}}</span></a>
@@ -26,7 +26,7 @@
                         <app-share [title]="playlistDetails?.name + ' music'"
                                    [description]="playlistDetails?.description"
                                    [image]="playlistDetails?.image || ((playlistDetails?.tracks | random)?.image | last )"
-                                   [tags]="playlistDetails.tags.join(',')"></app-share>
+                                   [tags]="playlistDetails?.tags?.join(',')"></app-share>
                     </div>
                 </div>
             </div>

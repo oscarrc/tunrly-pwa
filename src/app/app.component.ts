@@ -18,7 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
     title:string = 'Tunrly.com';
     themeClass:string = 'theme-dark';
     skinSubscription: Subscription;
-    
+    userSubscription: Subscription;
+
     constructor( @Inject(DOCUMENT) private document: Document,
                 private loadingService: LoadingService,
                 private skinService: SkinService,
@@ -36,10 +37,9 @@ export class AppComponent implements OnInit, OnDestroy {
         if(!user){
             this.userService.get().subscribe( user => {
                 this.userService.set(user);
-                if(user && user['language']) this.translateService?.use(user['language']);
             })
         }else{
-            this.userService.set(user);;
+            this.userService.set(user);
         }
     }
 
@@ -55,6 +55,10 @@ export class AppComponent implements OnInit, OnDestroy {
         }else{
             this.translateService.use(browserLang.match(/en|es/) ? browserLang : 'en');
         }
+        
+        this.userSubscription = this.userService.user.subscribe( user => {
+            if(user['language']) this.translateService?.use(user['language']);
+        })
     }
 
     initTheme(){
@@ -81,5 +85,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.skinSubscription.unsubscribe();
+        this.userSubscription.unsubscribe();
     }
 }
