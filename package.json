@@ -1,7 +1,7 @@
 {
   "name": "tunrly",
   "version": "1.0.0",
-  "scripts": {
+   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod && cp dist/tunrly/index.html dist/tunrly/200.html && surge dist/tunrly tunrly.com",
