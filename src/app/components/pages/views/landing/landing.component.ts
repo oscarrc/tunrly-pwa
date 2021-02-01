@@ -20,6 +20,8 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
     config: Config;
     brand: any = {};
+    open: boolean = true;
+    kofi: string = "";
     backgroundImage: string = "";
     registration: any;
     loading: boolean = false;
@@ -31,6 +33,8 @@ export class LandingComponent implements OnInit, AfterViewInit {
                 private translateService: TranslateService) {
         this.config = new Config();
         this.brand = this.config.config.brand;
+        this.open = this.config.config.isOpen;
+        this.kofi = this.config.config.kofi;
     }
 
     ngOnInit() {

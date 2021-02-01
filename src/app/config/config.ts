@@ -25,7 +25,9 @@ export class Config {
                 header: 0,
                 sidebar: 0,
                 player: 0
-            }
+            },
+            isOpen: false,
+            kofi: 'https://ko-fi.com/oscarrc'
         };
     }
 }

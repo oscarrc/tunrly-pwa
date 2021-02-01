@@ -86,15 +86,16 @@
 			"tac": "Al crear una cuenta aceptas nuestros términos y condiciones",
 			"haveaccount": "Ya tienes una cuenta?",
 			"joinnow":"Únete ahora!",
-			"closed":"El registro está cerrado. Click aquí para acceder."
+			"closed":"El registro está cerrado.",
+			"invite":"Consigue una invitación"
 		},
 		"subtitle": "Tunrly.com es",
 		"free": "Gratis",
 		"freetext": "Disfruta de tu musica sin interrupciones",
 		"legal": "Legal",
-		"legaltext": "No robamos música",
+		"legaltext": "No robamos música.",
 		"multiplatform": "Multiplataforma",
-		"multiplatformtext": "Se ejecuta en el navegador, en el escritorio o en tu teléfono"
+		"multiplatformtext": "En el navegador, escritorio o teléfono"
 	},
 	"menu":{
 		"browsemusic":"Explorar música",		
