@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  domain: 'localhost',
-  api: 'https://dev.tunrly.com/v1'
+  domain: 'localhost:4200',
+  api: 'localhost:3000'
 };
 
 /*

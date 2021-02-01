@@ -98,10 +98,10 @@ export class LandingComponent implements OnInit, AfterViewInit {
         }
 
         this.userService.create(user).subscribe(
-            () => {
+            (res) => {
                 registration.reset();
                 this.formSubmitted = false;
-                this.simpleModalService.addModal(ValidationComponent, {email: user.email});
+                if(res["success"]) this.simpleModalService.addModal(ValidationComponent, {email: user.email});
             }
         ).add( () => this.loading = false )
     }

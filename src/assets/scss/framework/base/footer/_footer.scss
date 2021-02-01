@@ -35,6 +35,10 @@
         z-index: 1;
     }
 
+    .footer-copy a{
+        width: auto;
+    }
+
     .email {
         font-weight: map-get($font-weight, light);
         font-size: 3rem;

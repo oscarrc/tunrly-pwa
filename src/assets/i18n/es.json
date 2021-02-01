@@ -91,9 +91,9 @@
 		"free": "Gratis",
 		"freetext": "Disfruta de tu musica sin interrupciones",
 		"legal": "Legal",
-		"legaltext": "No robamos música",
+		"legaltext": "No robamos música.",
 		"multiplatform": "Multiplataforma",
-		"multiplatformtext": "Se ejecuta en el navegador, en el escritorio o en tu teléfono"
+		"multiplatformtext": "En el navegador, escritorio o teléfono"
 	},
 	"menu":{
 		"browsemusic":"Explorar música",		
