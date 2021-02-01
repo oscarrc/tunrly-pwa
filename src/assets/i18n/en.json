@@ -85,7 +85,8 @@
 			"repeatpassword": "Repeat Password",
 			"tac": "By creating an account I accept the terms and conditions",
 			"haveaccount": "Already have an account?",
-			"joinnow":"Join Now!"
+			"joinnow":"Join Now!",
+			"closed":"Registartion is closed. Click to get access."
 		},
 		"subtitle": "Tunrly.com app is",
 		"free": "Free",

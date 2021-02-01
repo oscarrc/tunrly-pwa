@@ -85,7 +85,8 @@
 			"repeatpassword": "Repite la contraseña",
 			"tac": "Al crear una cuenta aceptas nuestros términos y condiciones",
 			"haveaccount": "Ya tienes una cuenta?",
-			"joinnow":"Únete ahora!"
+			"joinnow":"Únete ahora!",
+			"closed":"El registro está cerrado. Click aquí para acceder."
 		},
 		"subtitle": "Tunrly.com es",
 		"free": "Gratis",
