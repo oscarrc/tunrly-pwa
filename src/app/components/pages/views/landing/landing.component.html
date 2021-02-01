@@ -25,7 +25,6 @@
                             <form action="#" [formGroup]="registration" (ngSubmit)="register(registration)" [ngClass]="formSubmitted ? 'submitted' : ''">
                                 <div class="card card-frosted shadow mt-4 pt-4">
                                     <div class="card-body">
-                                        <h6 *ngIf="!open" class="mb-4 d-flex align-items-center justify-content-between">{{ 'landing.register.closed' | translate }} <a class="btn btn-xs btn-air btn-primary" href="">{{ 'landing.register.invite' | translate }}</a></h6>
                                         <div class="form-row form-group">
                                             <div class="col-12 input-group">
                                                 <div class="input-group-prepend">
