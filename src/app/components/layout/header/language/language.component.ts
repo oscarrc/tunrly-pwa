@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { UserService } from 'src/app/services/user.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,7 +13,8 @@ export class LanguageComponent extends SimpleModalComponent<any, any> implements
     lang:string;
     loading: boolean = false
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService,
+                private storageService: StorageService) {
         super();
     }
 
@@ -21,6 +23,7 @@ export class LanguageComponent extends SimpleModalComponent<any, any> implements
         this.userService.update({language: this.lang}).subscribe(
             res => { 
                 this.userService.set(res);
+                this.storageService.setLang(this.lang);
             }
         ).add( () => {
             this.loading = false;
