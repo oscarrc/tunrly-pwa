@@ -19,6 +19,7 @@ export class ArtistDetailsComponent implements AfterViewInit, OnDestroy {
     artistName: string
     artistDetails: any;
     imageBorderRadiusClass: string = "card-img--radius-lg";
+    loading: boolean = false;
     loadingTracks: boolean = false;
     loadingAlbums: boolean = false;
     loadingSimilar: boolean = false;
@@ -45,8 +46,7 @@ export class ArtistDetailsComponent implements AfterViewInit, OnDestroy {
 
     addFavorite() {
         this.userService.setFavorite(this.artistDetails._id, 'artist').subscribe(
-            res => { this.userService.set(res) },
-            err => {}
+            res => { this.userService.set(res) }
         )
     }
 
@@ -55,12 +55,14 @@ export class ArtistDetailsComponent implements AfterViewInit, OnDestroy {
     }
 
     getArtistDetails() {
+        this.loading = true;
+
         this.artistService.getInfo(this.artistName).subscribe(
             res => {
                 this.artistDetails = res;
                 this.getTracks();
             }
-        )
+        ).add( () => this.loading = false )
     }
 
     getTracks(){

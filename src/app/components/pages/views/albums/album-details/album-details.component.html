@@ -1,7 +1,7 @@
 <app-banner [backgroundImage]="albumDetails?.image | last" [blur]="true"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
-<div class="main-container">
+<div class="main-container" [ngClass]="loading ? 'content-blur' : ''">
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
             <img [src]="(albumDetails?.image | last) || 'assets/images/cover/extralarge.png'" alt="{{albumDetails?.name}}" class="card-img--radius-lg">

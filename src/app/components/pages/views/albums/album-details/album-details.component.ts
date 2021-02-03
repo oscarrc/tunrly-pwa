@@ -20,6 +20,7 @@ export class AlbumDetailsComponent implements AfterViewInit, OnDestroy {
     artistName: string;
     artistDetails: any;
     albumDetails: any;
+    loading: boolean = false;
 
     routeSubscription: Subscription;
 
@@ -53,9 +54,11 @@ export class AlbumDetailsComponent implements AfterViewInit, OnDestroy {
     }
 
     getAlbumDetails() {
+        this.loading = true;
+
         this.albumService.getInfo(this.albumName, this.artistName).subscribe(
             res => this.albumDetails = res
-        )
+        ).add( () => this.loading = false )
     }
    
     playAllSongs() {

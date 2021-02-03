@@ -19,6 +19,7 @@ export class PlaylistDetailsComponent implements AfterViewInit, OnDestroy {
     playlistId: string;
     imageSrc: string;
     playlistDetails: any = {};
+    loading: boolean = false;
 
     routeSubscription: Subscription;
 
@@ -52,9 +53,11 @@ export class PlaylistDetailsComponent implements AfterViewInit, OnDestroy {
     }
     
     getPlaylistDetails() {
+        this.loading = true;
+        
         this.playlistService.getInfo(this.playlistId).subscribe(
             res => this.playlistDetails = res
-        )
+        ).add( () => this.loading = false )
     }
    
     playAllSongs() {

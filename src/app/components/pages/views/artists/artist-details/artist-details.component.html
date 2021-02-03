@@ -1,7 +1,7 @@
 <app-banner [backgroundImage]="(artistDetails?.image?.background | random) || (artistDetails?.images?.thumbnail | random)"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
-<div class="main-container">
+<div class="main-container" [ngClass]="loading ? 'content-blur' : ''">
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
