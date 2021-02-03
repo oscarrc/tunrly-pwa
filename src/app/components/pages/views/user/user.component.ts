@@ -1,6 +1,7 @@
 import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SimpleModalService } from 'ngx-simple-modal';
 
 import { LoadingService } from 'src/app/services/loading.service';
 import { UserService } from 'src/app/services/user.service';
@@ -8,6 +9,8 @@ import { TrackService } from 'src/app/services/track.service';
 import { ArtistService } from 'src/app/services/artist.service';
 import { PlaylistService } from 'src/app/services/playlist.service';
 import { AlbumService } from 'src/app/services/album.service';
+
+import { ShareComponent } from 'src/app/components/layout/share/share.component';
 
 @Component({
     selector: 'app-user',
@@ -47,6 +50,7 @@ export class UserComponent implements AfterViewInit, OnDestroy{
     selected:string = "tracks"
 
     constructor(private route: ActivatedRoute, 
+                private simpleModalService: SimpleModalService,
                 private loadingService: LoadingService,
                 private userService: UserService,
                 private artistService: ArtistService,
@@ -138,6 +142,15 @@ export class UserComponent implements AfterViewInit, OnDestroy{
     }
 
     addInPlayer(){}
+
+    doShare(){
+        this.simpleModalService.addModal(ShareComponent, { 
+            title: this.user?.username + ' profile.',
+            description: 'Check ' + this.user?.username + '\'s profile on Tunrly.com',
+            image: this.user?.image,
+            tags: ''
+        });
+    }
    
     ngOnDestroy(){
         this.routeSubscription.unsubscribe();
