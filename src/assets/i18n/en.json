@@ -158,7 +158,14 @@
 			"lastfmaccounttext": "Use it to scrobble your tracks!",
 			"lastfmlogin": "Login with LastFM",
 			"membersince": "Member since:",
-			"publicplaylists": "{{username}}'s public playlists"
+			"publicplaylists": "{{username}}'s public playlists",
+			"nopublicfavorites": {
+				"tracks": "This user has no favorite tracks or they're private",
+				"albums": "This user has no favorite albums or they're private",
+				"artists": "This user has no favorite artists or they're private",
+				"playlists": "This user has no favorite playlists or they're private"
+			},
+			"nopublicplaylists": "This user hasn't any public playlist"
 		},
 		"settings":{
 			"privacy": "Privacy",

@@ -75,7 +75,7 @@ export class UserComponent implements AfterViewInit, OnDestroy{
     getArtists(artists){
         const offset = (this.favorite.artists.page - 1) * this.limit;
         
-        if(this.favorite.artists.items.slice(offset, this.limit).length == 0 ){
+        if(artists && this.favorite.artists.items.slice(offset, this.limit).length == 0 ){
             this.favorite.artists.loading = true;
             this.artistService.getArtists( artists.slice(offset, this.limit)).subscribe( artists => {
                 this.favorite.artists.items = artists;
@@ -86,7 +86,7 @@ export class UserComponent implements AfterViewInit, OnDestroy{
     getAlbums(albums){
         const offset = (this.favorite.albums.page - 1) * this.limit;
 
-        if(this.favorite.albums.items.slice(offset, this.limit).length == 0 ){
+        if(albums && this.favorite.albums.items.slice(offset, this.limit).length == 0 ){
             this.favorite.albums.loading = true;
             this.albumService.getAlbums( albums.slice(offset, this.limit)).subscribe( albums => {
                 this.favorite.albums.items = albums;
@@ -96,19 +96,19 @@ export class UserComponent implements AfterViewInit, OnDestroy{
 
     getTracks(tracks){
         const offset = (this.favorite.tracks.page - 1) * this.limit;
-
-        if(this.favorite.tracks.items.slice(offset, this.limit).length == 0 ){
+        
+        if(tracks && this.favorite.tracks.items.slice(offset, this.limit).length == 0 ){
             this.favorite.tracks.loading = true;
             this.trackService.getTracks( tracks.slice(offset, this.limit)).subscribe( tracks => {
                 this.favorite.tracks.items = tracks;
-            }).add( () => this.favorite.tracks.loading = false);;
+            }).add( () => this.favorite.tracks.loading = false);
         }
     }
 
     getPlaylists(playlists){
         const offset = (this.favorite.playlists.page - 1) * this.limit;
 
-        if(this.favorite.playlists.items.slice(offset, this.limit).length == 0 ){
+        if(playlists && this.favorite.playlists.items.slice(offset, this.limit).length == 0 ){
             this.favorite.playlists.loading = true;
             this.playlistService.getPlaylists( playlists.slice(offset, this.limit)).subscribe( playlists => {
                 this.favorite.playlists.items = playlists;
