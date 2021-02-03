@@ -124,58 +124,55 @@ button,
     text-align: center;
     @include  icons-style {
         @include icon-size(1.5rem);
-    }
-}
-
-.btn-content {
-    display: table;
-    margin-right: auto;
-    margin-left: auto;
-
-    * {
-        @include table-cell-middle;
-    }
+    };
 }
 
 .btn-facebook {
     @include plain-hover-focus {
         background: #1877F2;
+        color: white;
     }
 }
 
 .btn-twitter {
     @include plain-hover-focus {
         background: #00A2F3;
+        color: white;
     }
 }
 
 .btn-tumblr {
     @include plain-hover-focus {
         background: #314358;
+        color: white;
     }
 }
 
 .btn-whatsapp {
     @include plain-hover-focus {
         background: #24CC63;
+        color: white;
     }
 }
 
 .btn-telegram {
     @include plain-hover-focus {
         background: #29A9EB;
+        color: white;
     }
 }
 
 .btn-reddit {
     @include plain-hover-focus {
         background: #FF4500;
+        color: white;
     }
 }
 
 .btn-pinterest {
     @include plain-hover-focus {
         background: #B7081B;
+        color: white;
     }
 }
 

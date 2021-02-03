@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SimpleModalService } from 'ngx-simple-modal';
 
 import { LoadingService } from 'src/app/services/loading.service';
 import { PlayerService } from 'src/app/services/player.service';
 import { ArtistService } from 'src/app/services/artist.service';
 import { UserService } from 'src/app/services/user.service';
+
+import { ShareComponent } from 'src/app/components/layout/share/share.component';
 
 @Component({
     selector: 'app-artist-details',
@@ -23,6 +26,7 @@ export class ArtistDetailsComponent implements AfterViewInit, OnDestroy {
     private routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
+                private simpleModalService: SimpleModalService,
                 private loadingService: LoadingService,
                 private playerService: PlayerService,
                 private artistService: ArtistService,
@@ -88,6 +92,15 @@ export class ArtistDetailsComponent implements AfterViewInit, OnDestroy {
 
     playAllSongs() {
         this.playerService.playNowPlaylist(this.artistDetails);
+    }
+
+    doShare(){
+        this.simpleModalService.addModal(ShareComponent, { 
+            title: this.artistDetails?.name + ' music.',
+            description: 'Listen to ' + this.artistDetails?.name + ' music.',
+            image: this.artistDetails?.image.thumbnail[this.artistDetails?.image.thumbnail.length - 1],
+            tags: this.artistDetails?.tags.map( t => t.replace(/( |-)/gi, '')).join(',')
+         });
     }
 
     ngOnDestroy() {

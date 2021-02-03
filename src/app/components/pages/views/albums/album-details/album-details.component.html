@@ -23,10 +23,7 @@
                 <div class="col-xl-4 col-lg-6">
                     <div class="pt-3 pt-lg-0 text-lg-right btn-inline">
                         <button type="button" (click)="addFavorite()" class="btn btn-pill btn-air btn-danger btn-icon-only"><i [ngClass]="isFavorite() ? 'la-heart' : 'la-heart-o'" class="la la-heart-o"></i></button>
-                        <app-share [title]="albumDetails?.name + ' by ' + albumDetails?.artist"
-                                   [description]="'Listen to ' + albumDetails?.name + ' by ' + albumDetails?.artist"
-                                   [image]="albumDetails?.image | last"
-                                   [tags]="albumDetails?.tags?.join(',')"></app-share>
+                        <button type="button" (click)="doShare()" class="btn btn-pill btn-air btn-brand btn-icon-only"><i class="la la-share-alt"></i></button>
                     </div>
                 </div>
             </div>

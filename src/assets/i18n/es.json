@@ -266,5 +266,6 @@
 			"NotActive": "La cuenta no está activa",
 			"InsufficientPermits": "No tienes permisos suficientes para hacer eso"
 		}
-	}
+	},
+	"share": "Compártelo con tus amigos"
 }
