@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { TrackService } from 'src/app/services/track.service';
 import { ArtistService } from 'src/app/services/artist.service';
 import { PlaylistService } from 'src/app/services/playlist.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { AlbumService } from 'src/app/services/album.service';
 
 import { ShareComponent } from 'src/app/components/layout/share/share.component';
@@ -56,7 +57,8 @@ export class UserComponent implements AfterViewInit, OnDestroy{
                 private artistService: ArtistService,
                 private albumService: AlbumService,
                 private trackService: TrackService,
-                private playlistService: PlaylistService) { 
+                private playlistService: PlaylistService,
+                private playerService: PlayerService) { 
                     this.routeSubscription = this.route.params.subscribe(param => {
                         if (param.username) {
                             this.getUser(param.username);
@@ -141,7 +143,14 @@ export class UserComponent implements AfterViewInit, OnDestroy{
         this.getEntities();
     }
 
-    addInPlayer(){}
+    addInPlayer(){
+        this.trackService.getTracks( this.user.favorite.track).subscribe( tracks => {
+            this.playerService.playNowPlaylist({
+                name: this.user.username + '\'s favorite tracks',
+                tracks: tracks
+            });
+        })
+    }
 
     doShare(){
         this.simpleModalService.addModal(ShareComponent, { 
