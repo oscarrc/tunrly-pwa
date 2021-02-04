@@ -1,4 +1,4 @@
-<app-banner [backgroundImage]="(albums | random)?.image | last" [blur]="true"></app-banner>
+col-md-2 col-sm-4 col-6<app-banner [backgroundImage]="(albums | random)?.image | last" [blur]="true"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
@@ -15,13 +15,13 @@
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="section">
         <div *ngIf="!loading" class="row custom-card-list">
-            <div class="col-xl-2 col-lg-4 col-sm-6" *ngFor="let album of albums">
+            <div class="col-md-2 col-sm-4 col-6" *ngFor="let album of albums">
                 <app-image-card [item]="album" type="album"
                                 [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
             </div>
         </div>
         <div *ngIf="loading == true"  class="row custom-card-list">
-            <div class="col-xl-2 col-lg-4 col-sm-6 mb-4" *ngFor="let album of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
+            <div class="col-md-2 col-sm-4 col-6 mb-4" *ngFor="let album of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
                 <app-primary-card-loader></app-primary-card-loader>
             </div>
         </div>

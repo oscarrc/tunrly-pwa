@@ -27,7 +27,7 @@
     <div class="section">
         <div *ngIf="!loading && tracks.length; else nothing" class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
-                <div class="col-lg-5 col-sm-3 col-xl-2" *ngFor="let track of tracks | slice:(page-1)*limit:page*limit">
+                <div class="col-md-2 col-sm-4 col-6" *ngFor="let track of tracks | slice:(page-1)*limit:page*limit">
                     <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
                 </div>
             </ng-container>
@@ -39,7 +39,7 @@
         </div>
         <div *ngIf="loading == true" class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
-                <div class="col-lg-5 col-sm-3 col-xl-2" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; let i = index">
+                <div class="col-md-2 col-sm-4 col-6" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; let i = index">
                     <app-primary-card-loader></app-primary-card-loader>
                 </div>
             </ng-container>
