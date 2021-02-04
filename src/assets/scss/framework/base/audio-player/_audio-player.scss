@@ -8,7 +8,7 @@
     align-items: center;
     background-color: $white;
     border-radius: $radius-md;
-    height: $player-height;
+    // height: $player-height;
     z-index: $zIndex-player;
     box-shadow: $player-shadow;
     transition: $transition-medium;
@@ -79,6 +79,13 @@
 }
 
 // Styling for audio
+.audio-wrapper{
+    width: 100%;
+    display: flex;
+    height: $player-height;
+    align-self: self-start;
+}
+
 .audio {
     @include flexBox();
     @include flex(37%);
