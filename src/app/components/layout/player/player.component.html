@@ -24,8 +24,8 @@
                     id="videoPlayer"
                     [videoId]="track.source" 
                     [suggestedQuality]="qualityOptions[quality]"
-                    [height]="videoSize" 
-                    [width]="videoSize" 
+                    [height]="72" 
+                    [width]="72" 
                     [playerVars]= "videoOptions"
                     (ready)="ready($event)"
                     (stateChange)="stateChange($event)">
@@ -78,6 +78,7 @@
         </div>
         <!-- End | Audio Info -->
     </div>
+    <app-playlist></app-playlist>
     <!-- End | Audio Wrapper -->
 </div>
 <!-- End | Audio Player -->

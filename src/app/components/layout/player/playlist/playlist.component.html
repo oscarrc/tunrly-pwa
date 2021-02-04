@@ -1,0 +1,25 @@
+<!-- Begin | Playlist Container [[ Find at scss/base/core.scss ]] -->
+<div class="playlist-container">
+     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+     <div class="playlist-header d-flex justify-content-between">
+        <span class="title text-truncate">{{playlist.artist ? playlist.artist + ' - ' : ''}}{{playlist.name ? playlist.name : ('playlists.nowplaying' | translate) }} {{ playlist.user?.username ? "by " + playlist?.user?.username : ""}}</span>
+        <div class="d-flex align-items-center icons">            
+            <a *ngIf="modified" class="btn btn-sm btn-icon-only" [routerLink]="'/user/playlist'"><i class="la la-save"></i></a>
+            <a *ngIf="playlist.tracks.length" class="btn btn-sm btn-icon-only pl-4" (click)="clearPlaylist()"><i class="la la-trash"></i></a>
+        </div>
+    </div>
+    <!-- End | Container header -->
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <perfect-scrollbar class="playlist-body">
+        <div *ngIf="playlist; else noDataFound" class="row custom-card-list">
+            <div class="col-md-6 col-12" *ngFor="let track of playlist.tracks; let i = index" (click) = playTrack(i)>
+                <app-track-list-view [trackNumber]="i+1" [track]="track" [icon]="'la-ellipsis-h'" [playlist]="playlist" [trackIndex]="i" [highlight]="nowPlaying" [imageSrc]="track.image[0]">
+                </app-track-list-view>
+            </div>
+        </div>
+        
+        <ng-template #noDataFound></ng-template>
+    </perfect-scrollbar>
+    <!-- End | Section -->
+</div>
+<!-- End | Playlist header -->

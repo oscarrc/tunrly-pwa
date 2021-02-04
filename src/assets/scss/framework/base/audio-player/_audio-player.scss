@@ -249,3 +249,54 @@
         padding-left: 0;
     }
 }
+
+#playerPlaylist{
+    width: 100%;
+    height: 0;
+    position: relative;
+
+    .playlist-header {
+        @include flexBox;
+        align-items: center;
+        padding-bottom: .75rem;
+        padding-top: .75rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid $gray-700;        
+        .title {
+            font-weight: map-get($font-weight, medium);
+            padding-left: $audio-control-padding-x;
+        }
+        .icons{
+            padding-right: $audio-control-padding-x;
+        }        
+    }
+
+    .playlist-body{
+        padding-right: $audio-control-padding-x;
+        padding-left: $audio-control-padding-x;
+        overflow: hidden;
+        height: 0;
+        transition: all ease-out 250ms;
+        > .ps {
+            height: 100%;
+        }
+    }
+}
+
+.show-playlist {
+    #playerPlaylist{
+        height: auto;
+        .playlist-body{
+            height: 60vh;
+        }
+        .playlist-header{
+            border-top: 1px solid $gray-700;
+        }
+    }
+
+    .audio .song-image{
+        img, iframe{            
+            border-bottom-left-radius: 0;
+        }
+    }
+}

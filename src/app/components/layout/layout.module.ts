@@ -23,6 +23,7 @@ import { AsideRightComponent } from './aside/aside-right/aside-right.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PlayerComponent } from './player/player.component';
+import { PlaylistComponent } from './player/playlist/playlist.component';
 import { SectionComponent } from './section/section.component';
 import { PartialsModule } from '../partials/partials.module';
 import { ProfileComponent } from './header/profile/profile.component';
@@ -47,6 +48,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HeaderComponent,
         FooterComponent,
         PlayerComponent,
+        PlaylistComponent,
         SectionComponent,
         ProfileComponent,
         LanguageComponent,

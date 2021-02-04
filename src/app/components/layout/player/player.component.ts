@@ -23,7 +23,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     timer: any;
     seekTo: number = 0;
     volumeIcon = 'ion-md-volume-low';
-    showPlaylist = 'open-right-sidebar';
+    showPlaylist = 'show-playlist';
     playerClass = 'player-primary';
     videoSize: number;
     videoOptions = {
@@ -140,10 +140,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     togglePlaylist(event = null) {
-        if (this.document.body.classList.contains(this.showPlaylist) && ( !event || (event.type == 'swiperight' && event.pointerType == 'touch'))) {
-            this.document.body.classList.remove(this.showPlaylist);
-        } else if(!event || (event.type == 'swipeleft' && event.pointerType == 'touch')){
-            this.document.body.classList.add(this.showPlaylist);
+        // if (this.document.body.classList.contains(this.showPlaylist) && ( !event || (event.type == 'swiperight' && event.pointerType == 'touch'))) {
+        //     this.document.body.classList.remove(this.showPlaylist);
+        // } else if(!event || (event.type == 'swipeleft' && event.pointerType == 'touch')){
+        //     this.document.body.classList.add(this.showPlaylist);
+        // }
+
+        if(this.document.getElementById("audioPlayer").classList.contains(this.showPlaylist)){
+            this.document.getElementById("audioPlayer").classList.remove(this.showPlaylist);
+        }else{
+            this.document.getElementById("audioPlayer").classList.add(this.showPlaylist);
         }
     }
 
