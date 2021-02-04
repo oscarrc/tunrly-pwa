@@ -6,6 +6,7 @@
     @include flexBox();
     @include fixed(right $wrapper-padding-x bottom .5rem left $player-from-left);
     align-items: center;
+    overflow: hidden;
     background-color: $white;
     border-radius: $radius-md;
     // height: $player-height;
