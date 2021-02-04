@@ -40,8 +40,8 @@
     <!-- Begin | Audio Controls -->
     <div class="audio-controls">
         <div class="audio-controls--left d-flex mr-auto">
-            <button class="btn btn-icon-only track-repeat" [class]="{'text-primary': playerOptions?.repeat}"><i class="ion-md-sync" (click)="toggleOptions('repeat')"></i></button>
-            <button class="btn btn-icon-only track-shuffle track-shuffle-off" [class]="{'text-primary': playerOptions?.shuffle}" (click)="toggleOptions('shuffle')"><i class="ion-md-shuffle"></i></button>
+            <button class="btn btn-sm btn-icon-only track-repeat" [class]="{'text-primary': playerOptions?.repeat}"><i class="ion-md-sync" (click)="toggleOptions('repeat')"></i></button>
+            <button class="btn btn-sm btn-icon-only track-shuffle track-shuffle-off" [class]="{'text-primary': playerOptions?.shuffle}" (click)="toggleOptions('shuffle')"><i class="ion-md-shuffle"></i></button>
         </div>
         <div class="audio-controls--main d-flex">
             <button class="btn btn-icon-only" (click)="playPrev()"><i class="ion-md-skip-backward"></i></button>
@@ -52,7 +52,7 @@
             <button class="btn btn-icon-only" (click)="playNext()"><i class="ion-md-skip-forward"></i></button>
         </div>
         <div class="audio-controls--right d-flex ml-auto"> 
-            <button class="btn btn-icon-only" (click)="togglePlaylist()"><i class="ion-md-list"></i></button>
+            <button class="btn btn-sm btn-icon-only" (click)="togglePlaylist()"><i class="ion-md-list"></i></button>
         </div>
     </div>
     <!-- End | Audio Controls -->
