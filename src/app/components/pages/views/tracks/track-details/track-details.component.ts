@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SimpleModalService } from 'ngx-simple-modal';
 
 import { LoadingService } from 'src/app/services/loading.service';
 import { PlayerService } from 'src/app/services/player.service';
 import { TrackService } from 'src/app/services/track.service';
 import { UserService } from 'src/app/services/user.service';
+
+import { ShareComponent } from 'src/app/components/layout/share/share.component';
 
 @Component({
     selector: 'app-track-details',
@@ -26,6 +29,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
+                private simpleModalService: SimpleModalService,
                 private loadingService: LoadingService,
                 private playerService: PlayerService,
                 private trackService: TrackService,
@@ -96,6 +100,15 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     
     addToPlaylist() {
         this.playerService.addToPlaylist(this.trackDetails);
+    }
+
+    doShare(){
+        this.simpleModalService.addModal(ShareComponent, { 
+            title: this.trackDetails?.name + ' by ' + this.trackDetails?.artist,
+            description: 'Listen to ' + this.trackDetails?.name + ' by ' + this.trackDetails?.artist,
+            image: this.trackDetails?.image[this.trackDetails?.image.length - 1],
+            tags: this.trackDetails?.tags.map( t => t.replace(/( |-)/gi, '')).join(',')
+        });
     }
 
     ngOnDestroy() {

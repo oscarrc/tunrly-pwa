@@ -2,7 +2,6 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
-
 import { PlayerService } from 'src/app/services/player.service';
 import { StorageService } from 'src/app/services/storage.service'
 import { UserService } from 'src/app/services/user.service';

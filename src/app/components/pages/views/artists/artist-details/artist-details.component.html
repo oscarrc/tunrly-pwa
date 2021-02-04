@@ -1,7 +1,7 @@
 <app-banner [backgroundImage]="(artistDetails?.image?.background | random) || (artistDetails?.images?.thumbnail | random)"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
-<div class="main-container">
+<div class="main-container" [ngClass]="loading ? 'content-blur' : ''">
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
@@ -23,10 +23,7 @@
                 <div class="col-xl-4 col-lg-6">
                     <div class="pt-3 pt-lg-0 text-lg-right btn-inline">
                         <button (click)="addFavorite()" class="btn btn-pill btn-air btn-danger btn-icon-only"><i [ngClass]="isFavorite() ? 'la-heart' : 'la-heart-o'" class="la"></i></button>
-                        <app-share [title]="artistDetails?.name + ' music'"
-                                   [description]="'Listen to ' + artistDetails?.name + ' music'"
-                                   [image]="(artistDetails?.image?.thumbnail | random) || (artistDetails?.image?.background | random)"
-                                   [tags]="artistDetails?.tags?.join(',')"></app-share>
+                        <button type="button" (click)="doShare()" class="btn btn-pill btn-air btn-brand btn-icon-only"><i class="la la-share-alt"></i></button>
                     </div>
                 </div>
             </div>

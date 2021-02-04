@@ -1,7 +1,7 @@
 <app-banner [backgroundImage]="(playlistDetails?.tracks | random)?.image | last" [blur]="true"></app-banner>
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
-<div class="main-container">
+<div class="main-container" [ngClass]="loading ? 'content-blur' : ''">
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
             <img [src]="playlistDetails?.image || ((playlistDetails?.tracks | random)?.image | last ) || 'assets/images/cover/extralarge.png'" alt="{{playlistDetails?.name}}" class="card-img--radius-lg">
@@ -23,10 +23,7 @@
                 <div class="col-xl-4 col-lg-6">
                     <div class="pt-3 pt-lg-0 text-lg-right btn-inline">
                         <button (click)="addFavorite()" type="button" class="btn btn-pill btn-air btn-danger btn-icon-only"><i [ngClass]="isFavorite() ? 'la-heart' : 'la-heart-o'" class="la "></i></button>
-                        <app-share [title]="playlistDetails?.name + ' music'"
-                                   [description]="playlistDetails?.description"
-                                   [image]="playlistDetails?.image || ((playlistDetails?.tracks | random)?.image | last )"
-                                   [tags]="playlistDetails?.tags?.join(',')"></app-share>
+                        <button type="button" (click)="doShare()" class="btn btn-pill btn-air btn-brand btn-icon-only"><i class="la la-share-alt"></i></button>
                     </div>
                 </div>
             </div>

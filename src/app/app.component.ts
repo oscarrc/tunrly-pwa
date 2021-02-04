@@ -49,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
         
         this.loadingService.startLoading();
         this.translateService.setDefaultLang('en');
-
+       
         if(lang && lang != null){
             this.translateService.use(lang);
         }else{

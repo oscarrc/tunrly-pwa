@@ -52,7 +52,7 @@
 
                     <div class="row custom-card-list" *ngIf="!tracks.loading && tracks.items.length; else notracks">
                         <ng-container *ngIf="gridView; else listView">
-                            <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let track of tracks.items">
+                            <div class="col-md-2 col-sm-4 col-6" *ngFor="let track of tracks.items">
                                 <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
                             </div>
                         </ng-container>
@@ -65,7 +65,7 @@
 
                     <div *ngIf="tracks.loading == true" class="row custom-card-list">
                         <ng-container *ngIf="gridView; else listView">
-                            <div class="col-lg-5 col-sm-3 col-xl-2" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; let i = index">
+                            <div class="col-md-2 col-sm-4 col-6 mb-4" *ngFor="let track of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; let i = index">
                                 <app-primary-card-loader></app-primary-card-loader>
                             </div>
                         </ng-container>
@@ -100,13 +100,13 @@
                     <!-- End | Container header -->
 
                     <div class="row custom-card-list" *ngIf="!albums.loading && albums.items.length; else noalbums">
-                        <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let album of albums.items | slice:(albums.page-1)*limit:limit">
+                        <div class="col-md-2 col-sm-4 col-6" *ngFor="let album of albums.items | slice:(albums.page-1)*limit:limit">
                             <app-image-card [item]="album" type="album"></app-image-card>
                         </div>
                     </div>
 
                     <div *ngIf="albums.loading == true"  class="row custom-card-list">
-                        <div class="col-xl-2 col-lg-4 col-sm-6 mb-4" *ngFor="let album of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
+                        <div class="col-md-2 col-sm-4 col-6 mb-4" *ngFor="let album of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
                             <app-primary-card-loader></app-primary-card-loader>
                         </div>
                     </div>
@@ -134,13 +134,13 @@
                     <!-- End | Container header -->
                     
                     <div class="row custom-card-list" *ngIf="!artists.loading && artists.items.length; else noartists">
-                        <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let artist of artists.items | slice:(artists.page-1)*limit:limit">
+                        <div class="col-md-2 col-sm-4 col-6" *ngFor="let artist of artists.items | slice:(artists.page-1)*limit:limit">
                             <app-image-card [item]="artist" type="artist"></app-image-card>
                         </div>
                     </div>
 
                     <div *ngIf="artists.loading == true"  class="row custom-card-list">
-                        <div class="col-6 col-md-2 col-sm-4 col-xl-2 mb-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
+                        <div class="col-md-2 col-sm-4 col-6 mb-4" *ngFor="let artist of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] ">
                             <app-secondary-card-loader></app-secondary-card-loader>
                         </div>
                     </div>

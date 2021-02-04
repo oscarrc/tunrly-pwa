@@ -1,13 +1,17 @@
 import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SimpleModalService } from 'ngx-simple-modal';
 
 import { LoadingService } from 'src/app/services/loading.service';
 import { UserService } from 'src/app/services/user.service';
 import { TrackService } from 'src/app/services/track.service';
 import { ArtistService } from 'src/app/services/artist.service';
 import { PlaylistService } from 'src/app/services/playlist.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { AlbumService } from 'src/app/services/album.service';
+
+import { ShareComponent } from 'src/app/components/layout/share/share.component';
 
 @Component({
     selector: 'app-user',
@@ -47,12 +51,14 @@ export class UserComponent implements AfterViewInit, OnDestroy{
     selected:string = "tracks"
 
     constructor(private route: ActivatedRoute, 
+                private simpleModalService: SimpleModalService,
                 private loadingService: LoadingService,
                 private userService: UserService,
                 private artistService: ArtistService,
                 private albumService: AlbumService,
                 private trackService: TrackService,
-                private playlistService: PlaylistService) { 
+                private playlistService: PlaylistService,
+                private playerService: PlayerService) { 
                     this.routeSubscription = this.route.params.subscribe(param => {
                         if (param.username) {
                             this.getUser(param.username);
@@ -69,7 +75,7 @@ export class UserComponent implements AfterViewInit, OnDestroy{
     getArtists(artists){
         const offset = (this.favorite.artists.page - 1) * this.limit;
         
-        if(this.favorite.artists.items.slice(offset, this.limit).length == 0 ){
+        if(artists && this.favorite.artists.items.slice(offset, this.limit).length == 0 ){
             this.favorite.artists.loading = true;
             this.artistService.getArtists( artists.slice(offset, this.limit)).subscribe( artists => {
                 this.favorite.artists.items = artists;
@@ -80,7 +86,7 @@ export class UserComponent implements AfterViewInit, OnDestroy{
     getAlbums(albums){
         const offset = (this.favorite.albums.page - 1) * this.limit;
 
-        if(this.favorite.albums.items.slice(offset, this.limit).length == 0 ){
+        if(albums && this.favorite.albums.items.slice(offset, this.limit).length == 0 ){
             this.favorite.albums.loading = true;
             this.albumService.getAlbums( albums.slice(offset, this.limit)).subscribe( albums => {
                 this.favorite.albums.items = albums;
@@ -90,19 +96,19 @@ export class UserComponent implements AfterViewInit, OnDestroy{
 
     getTracks(tracks){
         const offset = (this.favorite.tracks.page - 1) * this.limit;
-
-        if(this.favorite.tracks.items.slice(offset, this.limit).length == 0 ){
+        
+        if(tracks && this.favorite.tracks.items.slice(offset, this.limit).length == 0 ){
             this.favorite.tracks.loading = true;
             this.trackService.getTracks( tracks.slice(offset, this.limit)).subscribe( tracks => {
                 this.favorite.tracks.items = tracks;
-            }).add( () => this.favorite.tracks.loading = false);;
+            }).add( () => this.favorite.tracks.loading = false);
         }
     }
 
     getPlaylists(playlists){
         const offset = (this.favorite.playlists.page - 1) * this.limit;
 
-        if(this.favorite.playlists.items.slice(offset, this.limit).length == 0 ){
+        if(playlists && this.favorite.playlists.items.slice(offset, this.limit).length == 0 ){
             this.favorite.playlists.loading = true;
             this.playlistService.getPlaylists( playlists.slice(offset, this.limit)).subscribe( playlists => {
                 this.favorite.playlists.items = playlists;
@@ -137,7 +143,23 @@ export class UserComponent implements AfterViewInit, OnDestroy{
         this.getEntities();
     }
 
-    addInPlayer(){}
+    addInPlayer(){
+        this.trackService.getTracks( this.user.favorite.track).subscribe( tracks => {
+            this.playerService.playNowPlaylist({
+                name: this.user.username + '\'s favorite tracks',
+                tracks: tracks
+            });
+        })
+    }
+
+    doShare(){
+        this.simpleModalService.addModal(ShareComponent, { 
+            title: this.user?.username + ' profile.',
+            description: 'Check ' + this.user?.username + '\'s profile on Tunrly.com',
+            image: this.user?.image,
+            tags: ''
+        });
+    }
    
     ngOnDestroy(){
         this.routeSubscription.unsubscribe();

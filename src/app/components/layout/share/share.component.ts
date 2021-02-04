@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
 
 @Component({
     selector: 'app-share',
     templateUrl: './share.component.html'
 })
-export class ShareComponent {
+export class ShareComponent  extends SimpleModalComponent<any, any> {
     @Input() title:string;
     @Input() description:string;
     @Input() image:string;
@@ -12,6 +13,6 @@ export class ShareComponent {
     
     show: boolean = false;
 
-    constructor() { }
+    constructor() {  super() }
 
 }

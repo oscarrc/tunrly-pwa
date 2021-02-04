@@ -11,6 +11,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { SimpleModalModule } from 'ngx-simple-modal';
 import { DefaultSimpleModalOptionConfig } from 'ngx-simple-modal';
 import { defaultSimpleModalOptions } from 'ngx-simple-modal';
+import { ShareModule } from 'ngx-sharebuttons';
 import { ContentLoaderModule } from '@ngneat/content-loader';
 
 import { CoreModule } from 'src/app/core/core.module';
@@ -31,6 +32,7 @@ import { LoginComponent } from './header/login/login.component';
 import { ValidationComponent } from './header/validation/validation.component';
 import { ForgottenComponent } from './header/forgotten/forgotten.component';
 import { BannerComponent } from './banner/banner.component';
+import { ShareComponent } from './share/share.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -52,7 +54,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         LoginComponent,
         ValidationComponent,
         ForgottenComponent,
-        BannerComponent,
+        BannerComponent,        
+        ShareComponent
     ],
     exports: [
         AsideLeftComponent,
@@ -66,7 +69,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ProfileComponent,
         SearchComponent,
         LoginComponent,
-        BannerComponent
+        BannerComponent,
+        ShareComponent
     ],
     imports: [
         CommonModule,
@@ -78,6 +82,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         RouterModule,
         ReactiveFormsModule,
         YouTubePlayerModule,
+        ShareModule,
         SimpleModalModule.forRoot({container: document.body})
     ],
     entryComponents: [

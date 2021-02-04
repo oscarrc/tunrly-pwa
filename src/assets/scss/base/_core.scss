@@ -227,3 +227,7 @@ img {
 .col-xl-custom {
     @include flex(20%);
 }
+
+.content-blur{
+    filter: blur(5px);
+}
