@@ -261,7 +261,7 @@
         padding-bottom: .75rem;
         padding-top: .75rem;
         margin-bottom: 2rem;
-        border-bottom: 1px solid $gray-700;        
+        border-bottom: 1px solid $gray-400;        
         .title {
             font-weight: map-get($font-weight, medium);
             padding-left: $audio-control-padding-x;
@@ -290,7 +290,7 @@
             height: 60vh;
         }
         .playlist-header{
-            border-top: 1px solid $gray-700;
+            border-top: 1px solid $gray-400;
         }
     }
 

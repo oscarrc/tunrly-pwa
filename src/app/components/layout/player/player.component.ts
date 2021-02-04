@@ -146,9 +146,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
         //     this.document.body.classList.add(this.showPlaylist);
         // }
 
-        if(this.document.getElementById("audioPlayer").classList.contains(this.showPlaylist)){
+        if(this.document.getElementById("audioPlayer").classList.contains(this.showPlaylist) && ( !event || (event.type == 'swipeup' && event.pointerType == 'touch'))){
             this.document.getElementById("audioPlayer").classList.remove(this.showPlaylist);
-        }else{
+        }else if(!event || (event.type == 'swipedown' && event.pointerType == 'touch')){
             this.document.getElementById("audioPlayer").classList.add(this.showPlaylist);
         }
     }
