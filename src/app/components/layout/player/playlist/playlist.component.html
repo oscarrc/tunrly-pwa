@@ -4,7 +4,7 @@
      <div class="playlist-header d-flex justify-content-between">
         <span class="title text-truncate">{{playlist.artist ? playlist.artist + ' - ' : ''}}{{playlist.name ? playlist.name : ('playlists.nowplaying' | translate) }} {{ playlist.user?.username ? "by " + playlist?.user?.username : ""}}</span>
         <div class="d-flex align-items-center icons">            
-            <a *ngIf="modified" class="btn btn-sm btn-icon-only" [routerLink]="'/user/playlist'"><i class="la la-save"></i></a>
+            <a *ngIf="modified" class="btn btn-sm btn-icon-only" (click)="closePlaylist()" [routerLink]="'/user/playlist'"><i class="la la-save"></i></a>
             <a *ngIf="playlist.tracks.length" class="btn btn-sm btn-icon-only pl-4" (click)="clearPlaylist()"><i class="la la-trash"></i></a>
         </div>
     </div>

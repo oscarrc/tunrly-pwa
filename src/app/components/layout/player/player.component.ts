@@ -41,6 +41,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     playlistSubscription: Subscription;
     userSubscription: Subscription;
     nowPlayingSubscription: Subscription;
+    
+    // @ts-ignore 
+    mediaSession = navigator.mediaSession;
+    dummy = new Audio("assets/misc/silence.ogg");
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 private userService: UserService,
@@ -82,7 +86,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         document.body.appendChild(tag);
-        this.videoSize = document.getElementById("audioPlayer").clientHeight;
+        this.videoSize = document.getElementById("audioPlayer").clientHeight;        
+        this.dummy.loop = true;
+        this.dummy.volume = 0;
     }
 
     ready(event){
@@ -108,7 +114,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.playNext();
                 break;
             case 1: //Playing                
-                this.duration = this.player.getDuration();
+                this.duration = this.player.getDuration();                 
                 break;
             case 2: //Pausa
                 break;
@@ -139,18 +145,36 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.storageService.setLocalStorage('player', this.playerOptions);
     }
 
-    togglePlaylist(event = null) {
-        // if (this.document.body.classList.contains(this.showPlaylist) && ( !event || (event.type == 'swiperight' && event.pointerType == 'touch'))) {
-        //     this.document.body.classList.remove(this.showPlaylist);
-        // } else if(!event || (event.type == 'swipeleft' && event.pointerType == 'touch')){
-        //     this.document.body.classList.add(this.showPlaylist);
-        // }
-        
+    togglePlaylist(event = null) {        
         if(this.document.getElementById("audioPlayer").classList.contains(this.showPlaylist) && ( !event || (event.type == 'swipedown' && event.pointerType == 'touch'))){
             this.document.getElementById("audioPlayer").classList.remove(this.showPlaylist);
         }else if(!event || (event.type == 'swipeup' && event.pointerType == 'touch')){
             this.document.getElementById("audioPlayer").classList.add(this.showPlaylist);
         }
+    }
+
+    initMediaSession(){
+        this.mediaSession.setActionHandler('play', this.playPause);
+        this.mediaSession.setActionHandler('pause', this.playPause);
+        this.mediaSession.setActionHandler('previoustrack', this.playPrev);
+        this.mediaSession.setActionHandler('nexttrack', this.playNext);
+    }
+
+    setMediaSession(){        
+        // @ts-ignore 
+        this.mediaSession.metadata = new MediaMetadata({
+            title: this.track.name,
+            artist: this.track.artist,
+            album: this.track.album.name,
+            artwork: this.track.image.map( i => {
+                let size = i.match(/\/i\/u\/(\d*)/g)[0].replace("/i/u/","");
+                return {
+                    src: i,   
+                    sizes: size + 'x' + size,   
+                    type: 'image/png'
+                }
+            })
+        });
     }
 
     playNext(){
@@ -180,10 +204,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
     playPause(){
         const state = this.player.getPlayerState();
 
-        if(state == 1){            
+        if(state == 1){    
+            this.dummy.pause();        
             this.player.pauseVideo();
-        }else{            
-            this.player.playVideo();
+        }else{
+            this.setMediaSession();          
+            this.dummy.play();         
+            this.player.playVideo();            
         }
     }
 }

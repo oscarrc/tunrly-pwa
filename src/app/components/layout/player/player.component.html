@@ -22,6 +22,7 @@
             <div class="song-image">
                 <youtube-player *ngIf="track?.source"
                     id="videoPlayer"
+                    controls=0
                     [videoId]="track.source" 
                     [suggestedQuality]="qualityOptions[quality]"
                     [height]="72" 
