@@ -55,6 +55,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.init();
+        this.initMediaSession();
 
         this.userSubscription = this.userService.user.subscribe(
             user => {
@@ -203,7 +204,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     playPause(){
         const state = this.player.getPlayerState();
-
+        
         if(state == 1){    
             this.dummy.pause();        
             this.player.pauseVideo();
@@ -212,5 +213,5 @@ export class PlayerComponent implements OnInit, OnDestroy {
             this.dummy.play();         
             this.player.playVideo();            
         }
-    }
+    } 
 }
