@@ -105,7 +105,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.state = state;
 
         switch(state){
-            case -1: //Not started
+            case -1: //Not started                
+                this.time = this.buffered = this.duration = 0;
                 this.playPause();
                 break;
             case 0: //Finished
@@ -114,6 +115,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 break;
             case 1: //Playing                
                 this.duration = this.player.getDuration();
+                //TODO fix mediaSession postion state
                 this.timer = setInterval( () => {
                     this.time = this.player.getCurrentTime();
                     this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
@@ -212,13 +214,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     playPause(){
         const state = this.player.getPlayerState();
-        
+
         if(state == 1){        
             this.player.pauseVideo();
-            this.dummy.play().then( () => this.dummy.pause());            
+            this.dummy.play().then( () => {                
+                this.dummy.pause();
+            });            
             this.mediaSession.playbackState = "paused";
         }else{            
-            this.dummy.play().then( () => this.player.playVideo());    
+            this.dummy.pause();
+            this.dummy.play();    
+            this.player.playVideo();
             this.mediaSession.playbackState = "playing";
         }
     }
