@@ -67,12 +67,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
             this.track = this.playerService.track;            
             this.playerOptions = options;
-            
+
             if(this.track){                
                 this.setMediaSession();
                 this.userService.addToHistory(this.track._id).subscribe(
                     res => this.userService.set(res)
                 );
+            }else{
+                this.unsetMediaSession();
             }
         });        
     }
@@ -109,20 +111,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.time = this.buffered = this.duration = 0;
                 this.playPause();
                 break;
-            case 0: //Finished
+            case 0: //Finished;
                 clearInterval(this.timer);
                 this.playNext();
                 break;
             case 1: //Playing                
                 this.duration = this.player.getDuration();
                 //TODO fix mediaSession postion state
+                this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
                 this.timer = setInterval( () => {
                     this.time = this.player.getCurrentTime();
                     this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
-                    this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
                 }, 1000);             
                 break;
-            case 2: //Pausa                
+            case 2: //Pausa            
                 clearInterval(this.timer);
                 break;
             case 3: //Buffering
@@ -183,6 +185,15 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 }
             })
         });
+    }
+
+    unsetMediaSession(){
+        clearInterval(this.timer);
+        this.time = this.buffered = this.duration = this.state = 0;
+        // @ts-ignore 
+        this.mediaSession.metadata = new MediaMetadata({});        
+        this.mediaSession.playbackState = "paused";
+        this.dummy.pause(); 
     }
 
     playNext(){
