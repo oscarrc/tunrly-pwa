@@ -90,7 +90,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         document.body.appendChild(tag);
         this.videoSize = document.getElementById("audioPlayer").clientHeight;        
         this.dummy.loop = true;
-        this.dummy.volume = 0;
+        this.dummy.volume = 0;   
     }
 
     ready(event){
@@ -109,16 +109,23 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.playPause();
                 break;
             case 0: //Finished
+                clearInterval(this.timer);
                 this.playNext();
                 break;
             case 1: //Playing                
-                this.duration = this.player.getDuration();                 
+                this.duration = this.player.getDuration();
+                this.timer = setInterval( () => {
+                    this.time = this.player.getCurrentTime();
+                    this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
+                    this.mediaSession.setPositionState({ duration: this.duration, position: this.time });
+                }, 1000);             
                 break;
-            case 2: //Pausa
+            case 2: //Pausa                
+                clearInterval(this.timer);
                 break;
             case 3: //Buffering
                 break;
-            case 5: //Queued        
+            case 5: //Queued
                 this.playPause();
                 break;
         }
@@ -176,14 +183,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
         });
     }
 
-    setPositionState(duration, position){
-        this.mediaSession.setPositionState({
-            duration: duration,
-            playbackRate: 1,
-            position: position
-        })
-    }
-
     playNext(){
         this.playerService.playNext();
     }
@@ -214,21 +213,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
     playPause(){
         const state = this.player.getPlayerState();
         
-        if(state == 1){    
-            this.dummy.pause();        
-            this.player.pauseVideo();
+        if(state == 1){        
+            this.player.pauseVideo();            
+            this.dummy.pause();
             this.mediaSession.playbackState = "paused";
-            clearInterval(this.timer);
-        }else{          
-            this.dummy.play();         
+        }else{
+            this.dummy.play();    
             this.player.playVideo();
-            this.mediaSession.playbackState = "playing";    
-            
-            this.timer = setInterval( () => {
-                this.time = this.player.getCurrentTime();
-                this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
-                this.setPositionState(this.duration | Infinity, this.time);
-            });
+            this.mediaSession.playbackState = "playing";
         }
     }
 }
