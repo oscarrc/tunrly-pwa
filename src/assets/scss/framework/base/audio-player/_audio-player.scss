@@ -138,6 +138,10 @@
     }
 }
 
+.audio-controls--right{
+    display: none !important;
+}
+
 .audio-controls--main {
     .btn-default {
         margin-right: .5rem;
@@ -198,6 +202,10 @@
 
     .audio-info {
         display: none !important;
+    }
+
+    .audio-controls--right{
+        display: block !important;
     }
 }
 
