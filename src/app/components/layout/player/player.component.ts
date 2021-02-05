@@ -74,7 +74,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                     res => this.userService.set(res)
                 );
             }else{
-                this.unsetMediaSession();
+                this.stop();
             }
         });        
     }
@@ -108,24 +108,25 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
         switch(state){
             case -1: //Not started                
-                this.time = this.buffered = this.duration = 0;
+                this.clearInterval()
                 this.playPause();
                 break;
             case 0: //Finished;
-                clearInterval(this.timer);
+                this.clearInterval();
                 this.playNext();
                 break;
             case 1: //Playing                
                 this.duration = this.player.getDuration();
                 //TODO fix mediaSession postion state
-                this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
                 this.timer = setInterval( () => {
+                    if(!this.duration) this.clearInterval();
+                    this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
                     this.time = this.player.getCurrentTime();
                     this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
                 }, 1000);             
                 break;
             case 2: //Pausa            
-                clearInterval(this.timer);
+                this.clearInterval();
                 break;
             case 3: //Buffering
                 break;
@@ -133,6 +134,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.playPause();
                 break;
         }
+    }
+
+    clearInterval(){
+        this.time = this.buffered = this.duration = this.state = 0;
+        clearInterval(this.timer);
     }
 
     setVolume(event) {
@@ -187,13 +193,29 @@ export class PlayerComponent implements OnInit, OnDestroy {
         });
     }
 
-    unsetMediaSession(){
-        clearInterval(this.timer);
-        this.time = this.buffered = this.duration = this.state = 0;
+    stop(){
+        this.clearInterval();
         // @ts-ignore 
         this.mediaSession.metadata = new MediaMetadata({});        
         this.mediaSession.playbackState = "paused";
         this.dummy.pause(); 
+    }
+
+    playPause(){
+        const state = this.player.getPlayerState();
+
+        if(state == 1){        
+            this.player.pauseVideo();
+            this.dummy.play().then( () => {                
+                this.dummy.pause();
+            });            
+            this.mediaSession.playbackState = "paused";
+        }else{            
+            this.dummy.pause();
+            this.dummy.play();    
+            this.player.playVideo();
+            this.mediaSession.playbackState = "playing";
+        }
     }
 
     playNext(){
@@ -221,22 +243,5 @@ export class PlayerComponent implements OnInit, OnDestroy {
     jumpTo(event){
         this.seekStart(event);
         this.seekEnd(event);
-    }
-
-    playPause(){
-        const state = this.player.getPlayerState();
-
-        if(state == 1){        
-            this.player.pauseVideo();
-            this.dummy.play().then( () => {                
-                this.dummy.pause();
-            });            
-            this.mediaSession.playbackState = "paused";
-        }else{            
-            this.dummy.pause();
-            this.dummy.play();    
-            this.player.playVideo();
-            this.mediaSession.playbackState = "playing";
-        }
     }
 }
