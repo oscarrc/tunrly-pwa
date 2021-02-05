@@ -1,4 +1,4 @@
-import { BrowserModule, HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
@@ -21,8 +21,6 @@ import {ErrorInterceptor} from './core/interceptors/error.interceptor';
 
 import { environment } from '../environments/environment';
 
-import * as Hammer from 'hammerjs';
-
 export function jwtOptionsFactory(cookieService: CookieService) {
     return {
         tokenGetter: () => cookieService.get('token'),
@@ -34,12 +32,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
 }
 
-export class HammerConfig extends HammerGestureConfig {
-    overrides = <any>{
-        'swipe': { direction: Hammer.DIRECTION_ALL }
-    };
-}
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -47,7 +39,6 @@ export class HammerConfig extends HammerGestureConfig {
     ],
     imports: [
         BrowserModule,
-        HammerModule,
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
@@ -83,10 +74,6 @@ export class HammerConfig extends HammerGestureConfig {
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorInterceptor,
             multi: true
-        },
-        {
-            provide: HAMMER_GESTURE_CONFIG,
-            useClass: HammerConfig
         }
     ],
     bootstrap: [AppComponent]

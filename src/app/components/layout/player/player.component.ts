@@ -160,10 +160,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.storageService.setLocalStorage('player', this.playerOptions);
     }
 
-    togglePlaylist(event = null) {        
-        if(this.document.getElementById("audioPlayer").classList.contains(this.showPlaylist) && ( !event || (event.type == 'swipedown' && event.pointerType == 'touch'))){
+    togglePlaylist() {        
+        if(this.document.getElementById("audioPlayer").classList.contains(this.showPlaylist)){
             this.document.getElementById("audioPlayer").classList.remove(this.showPlaylist);
-        }else if(!event || (event.type == 'swipeup' && event.pointerType == 'touch')){
+        }else{
             this.document.getElementById("audioPlayer").classList.add(this.showPlaylist);
         }
     }
