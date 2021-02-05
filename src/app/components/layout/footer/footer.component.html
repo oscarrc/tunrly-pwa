@@ -10,7 +10,7 @@
                     <span class="platform-name">{{button.subtitle}}</span>
                 </span>
             </button>     -->
-            <button  class="btn btn-success install-btn" (click)="showPrompt()">
+            <button *ngIf="installPrompt" class="btn btn-success install-btn" (click)="showPrompt()">
                 <img src="assets/images/install.png" alt="isntall the app" />
                 {{ 'ui.install' | translate}}
             </button>            
