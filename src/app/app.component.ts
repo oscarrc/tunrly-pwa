@@ -57,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }
         
         this.userSubscription = this.userService.user.subscribe( user => {
-            if(user['language']) this.translateService?.use(user['language']);
+            if(user?.language) this.translateService?.use(user['language']);
         })
     }
 
