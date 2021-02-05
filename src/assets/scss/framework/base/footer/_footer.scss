@@ -51,6 +51,56 @@
 .platform-btn-inline {
     margin-right: -.25rem;
     margin-left: -.25rem;
+
+    div{
+        width: auto;
+    }
+}
+
+.install-btn{    
+    border-radius: 7px;
+    font-weight: 700;
+    margin-right: .5rem;
+    margin-left: .5rem;
+    img{
+        height: 15px !important;
+        width: 20px !important;
+        width: auto;
+        display: initial !important;
+        vertical-align: middle;
+        margin-right: 5px;
+        animation: install-wiggle 3s infinite;
+    }
+}
+
+@keyframes install-wiggle {
+	0% {
+		transform: translateY(0) scale(1)
+	}
+	60% {
+		transform: translateY(0) scale(1)
+	}
+	75% {
+		transform: translateY(0) scale(1.12)
+	}
+	80% {
+		transform: translateY(0) scale(1.1)
+	}
+	84% {
+		transform: translateY(-10%) scale(1.1)
+	}
+	88% {
+		transform: translateY(10%) scale(1.1)
+	}
+	92% {
+		transform: translateY(-10%) scale(1.1)
+	}
+	96% {
+		transform: translateY(10%) scale(1.1)
+	}
+	100% {
+		transform: translateY(0) scale(1)
+    }
 }
 
 .platform-btn {
