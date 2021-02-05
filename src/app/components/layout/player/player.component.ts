@@ -117,7 +117,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.timer = setInterval( () => {
                     this.time = this.player.getCurrentTime();
                     this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
-                    this.mediaSession.setPositionState({ duration: this.duration, position: this.time });
+                    this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
                 }, 1000);             
                 break;
             case 2: //Pausa                
@@ -166,12 +166,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.mediaSession.setActionHandler('seekto', this.doSeek.bind(this));
     }
 
-    setMediaSession(){        
+    setMediaSession(){       
         // @ts-ignore 
         this.mediaSession.metadata = new MediaMetadata({
             title: this.track.name,
             artist: this.track.artist,
-            album: this.track.album.name,
+            album: this.track.album?.name,
             artwork: this.track.image.map( i => {
                 let size = i.match(/\/i\/u\/(\d*)/g)[0].replace("/i/u/","");
                 return {
@@ -215,13 +215,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
         
         if(state == 1){        
             this.player.pauseVideo();
-            this.dummy.play();            
-            this.dummy.pause();
+            this.dummy.play().then( () => this.dummy.pause());            
             this.mediaSession.playbackState = "paused";
         }else{            
-            this.dummy.pause();
-            this.dummy.play();    
-            this.player.playVideo();
+            this.dummy.play().then( () => this.player.playVideo());    
             this.mediaSession.playbackState = "playing";
         }
     }
