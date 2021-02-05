@@ -68,9 +68,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
             this.track = this.playerService.track;            
             this.playerOptions = options;
             
-            if(this.track){
+            if(this.track){                
+                this.setMediaSession();
                 this.userService.addToHistory(this.track._id).subscribe(
-                    res => { this.userService.set(res) }
+                    res => this.userService.set(res)
                 );
             }
         });        
@@ -155,10 +156,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     initMediaSession(){
-        this.mediaSession.setActionHandler('play', this.playPause);
-        this.mediaSession.setActionHandler('pause', this.playPause);
-        this.mediaSession.setActionHandler('previoustrack', this.playPrev);
-        this.mediaSession.setActionHandler('nexttrack', this.playNext);
+        this.mediaSession.setActionHandler('play', this.playPause.bind(this));
+        this.mediaSession.setActionHandler('pause', this.playPause.bind(this));
+        this.mediaSession.setActionHandler('previoustrack', this.playPrev.bind(this));
+        this.mediaSession.setActionHandler('nexttrack', this.playNext.bind(this));
     }
 
     setMediaSession(){        
@@ -208,10 +209,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
         if(state == 1){    
             this.dummy.pause();        
             this.player.pauseVideo();
-        }else{
-            this.setMediaSession();          
+            this.mediaSession.playbackState = "paused";
+        }else{          
             this.dummy.play();         
-            this.player.playVideo();            
+            this.player.playVideo();
+            this.mediaSession.playbackState = "playing";        
         }
     } 
 }
