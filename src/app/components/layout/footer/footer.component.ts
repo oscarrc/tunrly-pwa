@@ -26,6 +26,10 @@ export class FooterComponent implements OnInit {
 
     showPrompt(){
         if(this.installPrompt) this.installPrompt.prompt();
+
+        this.installPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') this.installPrompt = null;
+        })
     }
 
     ngOnInit() {
