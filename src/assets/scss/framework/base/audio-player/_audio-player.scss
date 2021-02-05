@@ -223,11 +223,12 @@
 
 @include media-breakpoint-down(md) {
     .audio {
-        @include flex(53%);
+        @include flex(calc(50% - 1rem));
     }
 
     .audio-controls {
-        @include flex(47%);
+        @include flex(50%);
+        padding-right: 1rem;
     }
 }
 
@@ -247,7 +248,7 @@
 
     .audio-controls {
         @include flex(calc(100% - #{$player-cover-image-width}));
-        padding-left: $audio-control-padding-x;
+        // padding-left: $audio-control-padding-x;
     }
 }
 
