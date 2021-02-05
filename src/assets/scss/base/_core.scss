@@ -212,7 +212,7 @@ img {
         outline: none;
         padding: .25rem 1.5rem .25rem 1rem;
         cursor: pointer;
-        background: url('/src/assets/images/arrow.png') right 0 center no-repeat;
+        background: url('../../../assets/images/arrow.png') right 0 center no-repeat;
     }
     .icon {
         @include icons-style {
