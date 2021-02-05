@@ -138,12 +138,12 @@
         margin-bottom: 1rem;
     }
 
-    .platform-btn {
+    .platform-btn, .install-btn {
         display: table;
         margin-right: auto;
         margin-left: auto;
 
-        + .platform-btn {
+        + .platform-btn, + .install-btn  {
             margin-top: 1rem;
         }
     }
