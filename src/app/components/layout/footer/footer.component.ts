@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
     
     year: number = (new Date()).getFullYear();
-    
+    installPrompt:any;
+
     public footerButtons: any = [
         {
             classes: 'btn btn-success btn-air platform-btn',
@@ -23,7 +24,15 @@ export class FooterComponent implements OnInit {
 
     constructor() { }
 
+    showPrompt(){
+        if(this.installPrompt) this.installPrompt.prompt();
+    }
+
     ngOnInit() {
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.installPrompt = e;
+        });
     }
 
 }

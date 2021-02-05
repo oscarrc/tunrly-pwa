@@ -3,7 +3,7 @@
     <div class="footer-content">
         <!-- <a class="email">info@listenapp.com</a> -->
         <div class="platform-btn-inline">
-            <button *ngFor="let button of footerButtons" [class]="button.classes">
+            <button *ngFor="let button of footerButtons" [class]="button.classes" (click)="showPrompt()">
                 <i [class]="button.icon"></i>
                 <span class="platform-btn-info">
                     <span class="platform-desc">{{ 'ui.availableon' | translate}}</span>
