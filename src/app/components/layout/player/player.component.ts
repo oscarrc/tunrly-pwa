@@ -214,10 +214,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
         const state = this.player.getPlayerState();
         
         if(state == 1){        
-            this.player.pauseVideo();            
+            this.player.pauseVideo();
+            this.dummy.play();            
             this.dummy.pause();
             this.mediaSession.playbackState = "paused";
-        }else{
+        }else{            
+            this.dummy.pause();
             this.dummy.play();    
             this.player.playVideo();
             this.mediaSession.playbackState = "playing";
