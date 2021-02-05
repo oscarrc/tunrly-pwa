@@ -142,9 +142,6 @@
         display: table;
         margin-right: auto;
         margin-left: auto;
-
-        + .platform-btn, + .install-btn  {
-            margin-top: 1rem;
-        }
+        margin-bottom: 1rem;
     }
 }
