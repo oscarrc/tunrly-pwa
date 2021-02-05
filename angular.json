@@ -44,7 +44,6 @@
             ],
             "allowedCommonJsDependencies": [
               "chart.js",
-              "hammerjs",
               "@fingerprintjs/fingerprintjs",
               "ua-parser-js"
             ]
