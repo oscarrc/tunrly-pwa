@@ -11,7 +11,9 @@ import { UserService } from 'src/app/services/user.service';
     templateUrl: './player.component.html'
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-
+    //TODO handle resume playing when on background, but only if the reproduction stopped
+    //TODO do not resume when user paused before sending the app to the background
+    //TODO intensly test background playing
     player: any;
     track: any = {};
     state: number = -1;
