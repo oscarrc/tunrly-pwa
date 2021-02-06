@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
@@ -39,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ],
     imports: [
         BrowserModule,
+        HammerModule,
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,

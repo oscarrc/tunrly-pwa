@@ -232,8 +232,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     seekStart(event){
         this.seekTo = event.target.value;
     }
-
-    seekEnd(event){
+    seekEnd(event){        
         const time = (this.duration * event.target.value)/100;
         this.player?.seekTo(time, true);
         this.seekTo = 0;
