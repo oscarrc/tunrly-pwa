@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { InstallService } from 'src/app/services/install.service';
 
 @Component({
     selector: 'app-footer',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
     
     year: number = (new Date()).getFullYear();
-    installPrompt:any = null;
+    installButton: boolean = false;
+    promptSubscription: Subscription;
 
     public footerButtons: any = [
         {
@@ -22,21 +25,20 @@ export class FooterComponent implements OnInit {
         }
     ];
 
-    constructor() { }
+    constructor(private installService: InstallService) { }
 
     showPrompt(){
-        if(this.installPrompt) this.installPrompt.prompt();
+        this.installService.showPrompt();
+    }
 
-        this.installPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') this.installPrompt = null;
+    ngOnInit(){
+        this.promptSubscription = this.installService.installPrompt.subscribe( (prompt) => {
+            if(prompt) this.installButton = true;
+            else this.installButton = false;
         })
     }
 
-    ngOnInit() {
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            this.installPrompt = e;
-        });
+    ngOnDestroy(){
+        this.promptSubscription?.unsubscribe();
     }
-
 }
