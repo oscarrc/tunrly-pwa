@@ -46,6 +46,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
     mediaSession = navigator.mediaSession;
     dummy = new Audio("assets/misc/silence.ogg");
 
+    hidden:boolean = false;
+    resume:number = 0;
+
     constructor(@Inject(DOCUMENT) private document: Document,
                 private userService: UserService,
                 private storageService: StorageService,
@@ -56,6 +59,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.init();
         this.initMediaSession();
+
+        document.addEventListener("visibilitychange", () => {
+            this.hidden = document.hidden;
+
+            if(this.hidden){     
+                this.player.stopVideo();
+                this.dummy.pause();
+                this.mediaSession.playbackState = "paused";
+            }
+        })
 
         this.userSubscription = this.userService.user.subscribe(
             user => {
@@ -103,12 +116,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     stateChange(event){
         const state = event.data;
-
         this.state = state;
-
+        
         switch(state){
-            case -1: //Not started                
-                this.clearInterval()
+            case -1: //Not started
                 this.playPause();
                 break;
             case 0: //Finished;
@@ -117,6 +128,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 break;
             case 1: //Playing                
                 this.duration = this.player.getDuration();
+                if(this.hidden && this.resume){
+                    this.player.seekTo(this.resume);
+                    this.resume = 0;
+                }                
                 this.timer = setInterval( () => {
                     if(!this.duration) this.clearInterval();
                     this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
@@ -125,6 +140,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 }, 1000);             
                 break;
             case 2: //Pausa            
+                this.resume = this.time;
                 this.clearInterval(false);
                 break;
             case 3: //Buffering
