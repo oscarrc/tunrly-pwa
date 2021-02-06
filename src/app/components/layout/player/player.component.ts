@@ -160,10 +160,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     togglePlaylist() {        
-        if(this.document.getElementById("audioPlayer").classList.contains(this.showPlaylist)){
-            this.document.getElementById("audioPlayer").classList.remove(this.showPlaylist);
+        if(this.document.body.classList.contains(this.showPlaylist)){
+            this.document.body.classList.remove(this.showPlaylist);
         }else{
-            this.document.getElementById("audioPlayer").classList.add(this.showPlaylist);
+            this.document.body.classList.add(this.showPlaylist);
         }
     }
 

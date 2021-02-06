@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { Subscription } from 'rxjs';
 import { ScrollService } from 'src/app/services/scroll.service';
@@ -12,7 +12,7 @@ import { ScrollService } from 'src/app/services/scroll.service';
 export class ViewsComponent implements OnInit, OnDestroy {
 
     themeClass:string = 'theme-light';
-    showPlaylist:string = 'open-right-sidebar';
+    showPlaylist:string = 'show-playlist';
     limitReached:boolean = false;
     skinSubscription: Subscription;
     routerSubscription: Subscription;
@@ -28,6 +28,7 @@ export class ViewsComponent implements OnInit, OnDestroy {
         this.routerSubscription = this.router.events.subscribe(() => {
             this.perfectScroll.directiveRef.update();
             this.perfectScroll.directiveRef.scrollToTop(0, 100);
+            this.document.body.classList.remove(this.showPlaylist);
         });
 
         this.scrollSubscription = this.scrollService.limitReached.subscribe(
