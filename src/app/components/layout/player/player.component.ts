@@ -242,4 +242,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.seekStart(event);
         this.seekEnd(event);
     }
+
+    onDestroy(){
+        this.clearInterval();
+    }
 }
