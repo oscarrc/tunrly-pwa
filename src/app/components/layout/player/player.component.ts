@@ -117,7 +117,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 break;
             case 1: //Playing                
                 this.duration = this.player.getDuration();
-                //TODO fix mediaSession postion state
                 this.timer = setInterval( () => {
                     if(!this.duration) this.clearInterval();
                     this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
