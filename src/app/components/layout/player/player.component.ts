@@ -120,6 +120,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         
         switch(state){
             case -1: //Not started
+                if(this.hidden && this.resume) this.player.mute()
                 this.playPause();
                 break;
             case 0: //Finished;
@@ -128,10 +129,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 break;
             case 1: //Playing                
                 this.duration = this.player.getDuration();
+
                 if(this.hidden && this.resume){
                     this.player.seekTo(this.resume);
-                    this.resume = 0;
-                }                
+                    this.resume = 0; 
+                    this.player.unMute(); 
+                }          
+                                           
                 this.timer = setInterval( () => {
                     if(!this.duration) this.clearInterval();
                     this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
@@ -260,7 +264,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.seekEnd(event);
     }
 
-    onDestroy(){
-        this.playPause();
+    doResume(time){
+
     }
 }
