@@ -126,7 +126,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 }, 1000);             
                 break;
             case 2: //Pausa            
-                this.clearInterval();
+                this.clearInterval(false);
                 break;
             case 3: //Buffering
                 break;
@@ -136,8 +136,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
         }
     }
 
-    clearInterval(){
-        this.time = this.buffered = this.duration = this.state = 0;
+    clearInterval(time = true){
+        if(time) this.time = this.buffered = this.duration = this.state = 0;
         clearInterval(this.timer);
     }
 
