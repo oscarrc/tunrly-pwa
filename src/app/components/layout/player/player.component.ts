@@ -210,9 +210,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
             });            
             this.mediaSession.playbackState = "paused";
         }else{            
-            this.dummy.pause();
-            this.dummy.play();    
-            this.player.playVideo();
+            this.dummy.play().then( () => {
+                this.player.playVideo();
+            });    
+            
             this.mediaSession.playbackState = "playing";
         }
     }
@@ -244,6 +245,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     onDestroy(){
-        this.clearInterval();
+        this.playPause();
     }
 }
