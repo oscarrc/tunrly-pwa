@@ -11,9 +11,8 @@ import { UserService } from 'src/app/services/user.service';
     templateUrl: './player.component.html'
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-    //TODO handle resume playing when on background, but only if the reproduction stopped
-    //TODO do not resume when user paused before sending the app to the background
     //TODO intensly test background playing
+    //TODO code background playing cleanly
     player: any;
     track: any = {};
     state: number = -1;
@@ -65,7 +64,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         document.addEventListener("visibilitychange", () => {
             this.hidden = document.hidden;
 
-            if(this.hidden){     
+            if(this.hidden && this.state != 1 && this.mediaSession.playbackState == "playing"){     
                 this.player.stopVideo();
                 this.dummy.pause();
                 this.mediaSession.playbackState = "paused";
