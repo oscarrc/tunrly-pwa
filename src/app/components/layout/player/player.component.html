@@ -6,7 +6,7 @@
         <input type="range" class="track-song-slider"  
             min="0" 
             max="100" 
-            [value]="seekTo == 0 ? (time * 100 / duration) - 0.1 || 0 : seekTo"
+            [value]="seekTime == 0 ? (time * 100 / duration) - 0.1 || 0 : seekTime"
             step=".001"
             (panstart)="seekStart($event)"
             (panend)="seekEnd($event)">

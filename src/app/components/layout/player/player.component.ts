@@ -22,7 +22,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     volume: number;
     quality: number;  
     timer: any;
-    seekTo: number = 0;
+    seekTime: number = 0;
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'show-playlist';
     playerClass = 'player-primary';
@@ -47,66 +47,64 @@ export class PlayerComponent implements OnInit, OnDestroy {
     mediaSession = navigator.mediaSession;
     dummy = new Audio("assets/misc/silence.ogg");
 
-    hidden:boolean = false;
-    resume:number = 0;
-
     constructor(@Inject(DOCUMENT) private document: Document,
                 private userService: UserService,
                 private storageService: StorageService,
                 private playerService: PlayerService) { 
                     this.playerOptions = this.playerService.getOptions();
+
+                    this.userSubscription = this.userService.user.subscribe(
+                        user => {
+                            this.volume = (user?.settings?.volume + 1)/3 * 75 || 100;
+                            this.quality = user?.settings?.quality;
+                        }
+                    )
+            
+                    this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
+                        this.track = this.playerService.track;            
+                        this.playerOptions = options;
+            
+                        if(this.track){                
+                            this.setMediaSession();
+                            this.userService.addToHistory(this.track._id).subscribe(
+                                res => this.userService.set(res)
+                            );
+                        }else{
+                            this.stop();
+                        }
+                    }); 
                 }
 
     ngOnInit() {
-        this.init();
+        this.initPlayer();
         this.initMediaSession();
 
         document.addEventListener("visibilitychange", () => {
-            this.hidden = document.hidden;
-
-            if(this.hidden && this.state != 1 && this.mediaSession.playbackState == "playing"){     
-                this.player.stopVideo();
-                this.dummy.pause();
-                this.mediaSession.playbackState = "paused";
-            }
-        })
-
-        this.userSubscription = this.userService.user.subscribe(
-            user => {
-                this.volume = (user?.settings?.volume + 1)/3 * 75 || 100;
-                this.quality = user?.settings?.quality;
-            }
-        )
-
-        this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
-            this.track = this.playerService.track;            
-            this.playerOptions = options;
-
-            if(this.track){                
-                this.setMediaSession();
-                this.userService.addToHistory(this.track._id).subscribe(
-                    res => this.userService.set(res)
-                );
-            }else{
-                this.stop();
-            }
-        });        
+        })       
     }
 
     ngOnDestroy() {
         this.skinSubscription?.unsubscribe();
         this.userSubscription?.unsubscribe();
         this.nowPlayingSubscription.unsubscribe();
-        clearInterval(this.timer);
+        this.stop();
     }
 
-    init(){
+    initPlayer(){
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         document.body.appendChild(tag);
         this.videoSize = document.getElementById("audioPlayer").clientHeight;        
         this.dummy.loop = true;
         this.dummy.volume = 0;   
+    }
+
+    initMediaSession(){
+        this.mediaSession.setActionHandler('play', this.playPause.bind(this));
+        this.mediaSession.setActionHandler('pause', this.playPause.bind(this));
+        this.mediaSession.setActionHandler('previoustrack', this.playPrev.bind(this));
+        this.mediaSession.setActionHandler('nexttrack', this.playNext.bind(this));
+        this.mediaSession.setActionHandler('seekto', this.seekTo.bind(this));
     }
 
     ready(event){
@@ -121,32 +119,26 @@ export class PlayerComponent implements OnInit, OnDestroy {
         
         switch(state){
             case -1: //Not started
-                if(this.hidden && this.resume) this.player.mute()
                 this.playPause();
                 break;
             case 0: //Finished;
-                this.clearInterval();
+                clearInterval(this.timer);
                 this.playNext();
                 break;
             case 1: //Playing                
                 this.duration = this.player.getDuration();
-
-                if(this.hidden && this.resume){
-                    this.player.seekTo(this.resume);
-                    this.resume = 0; 
-                    this.player.unMute(); 
-                }          
-                                           
                 this.timer = setInterval( () => {
-                    if(!this.duration) this.clearInterval();
-                    this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
                     this.time = this.player.getCurrentTime();
                     this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
-                }, 1000);             
+                    this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
+                }, 500);             
                 break;
-            case 2: //Pausa            
-                this.resume = this.time;
-                this.clearInterval(false);
+            case 2: //Pausa 
+                clearInterval(this.timer);
+                this.dummy.play().then( () => {
+                    this.dummy.pause();
+                    this.mediaSession.playbackState = "paused";
+                });
                 break;
             case 3: //Buffering
                 break;
@@ -154,46 +146,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.playPause();
                 break;
         }
-    }
-
-    clearInterval(time = true){
-        if(time) this.time = this.buffered = this.duration = this.state = 0;
-        clearInterval(this.timer);
-    }
-
-    setVolume(event) {
-        this.volume = event.target.value;
-        
-        if (this.volume < 1) {
-            this.volumeIcon = 'ion-md-volume-mute';
-        } else if (this.volume > 0 && this.volume < 70) {
-            this.volumeIcon = 'ion-md-volume-low';
-        } else if (this.volume > 70) {
-            this.volumeIcon = 'ion-md-volume-high';
-        }
-
-        this.player?.setVolume(this.volume);
-    }
-
-    toggleOptions(option){
-        this.playerService.setOption(option);
-        this.storageService.setLocalStorage('player', this.playerOptions);
-    }
-
-    togglePlaylist() {        
-        if(this.document.body.classList.contains(this.showPlaylist)){
-            this.document.body.classList.remove(this.showPlaylist);
-        }else{
-            this.document.body.classList.add(this.showPlaylist);
-        }
-    }
-
-    initMediaSession(){
-        this.mediaSession.setActionHandler('play', this.playPause.bind(this));
-        this.mediaSession.setActionHandler('pause', this.playPause.bind(this));
-        this.mediaSession.setActionHandler('previoustrack', this.playPrev.bind(this));
-        this.mediaSession.setActionHandler('nexttrack', this.playNext.bind(this));
-        this.mediaSession.setActionHandler('seekto', this.doSeek.bind(this));
     }
 
     setMediaSession(){       
@@ -213,30 +165,32 @@ export class PlayerComponent implements OnInit, OnDestroy {
         });
     }
 
-    stop(){
-        this.clearInterval();
-        // @ts-ignore 
-        this.mediaSession.metadata = new MediaMetadata({});        
-        this.mediaSession.playbackState = "paused";
-        this.dummy.pause(); 
+    setVolume(event) {
+        this.volume = event.target.value;
+        
+        if (this.volume < 1)  this.volumeIcon = 'ion-md-volume-mute';
+        else if (this.volume > 0 && this.volume < 70) this.volumeIcon = 'ion-md-volume-low';
+        else if (this.volume > 70) this.volumeIcon = 'ion-md-volume-high';
+
+        this.player?.setVolume(this.volume);
+    }
+
+    toggleOptions(option){
+        this.playerService.setOption(option);
+        this.storageService.setLocalStorage('player', this.playerOptions);
+    }
+
+    togglePlaylist() {        
+        if(this.document.body.classList.contains(this.showPlaylist)) this.document.body.classList.remove(this.showPlaylist);
+        else this.document.body.classList.add(this.showPlaylist);
     }
 
     playPause(){
-        const state = this.player.getPlayerState();
-
-        if(state == 1){        
-            this.player.pauseVideo();
-            this.dummy.play().then( () => {                
-                this.dummy.pause();
-            });            
-            this.mediaSession.playbackState = "paused";
-        }else{            
-            this.dummy.play().then( () => {
-                this.player.playVideo();
-            });    
-            
+        if(this.state == 1) this.player.pauseVideo();
+        else this.dummy.play().then( () => {            
             this.mediaSession.playbackState = "playing";
-        }
+            this.player.playVideo();
+        })
     }
 
     playNext(){
@@ -247,17 +201,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.playerService.playPrev();
     }
 
-    doSeek(event){
+    seekTo(event){
         this.player?.seekTo(event.seekTime, true);
     }
 
     seekStart(event){
-        this.seekTo = event.target.value;
+        this.seekTime = event.target.value;
     }
     seekEnd(event){        
         const time = (this.duration * event.target.value)/100;
         this.player?.seekTo(time, true);
-        this.seekTo = 0;
+        this.seekTime = 0;
     }
     
     jumpTo(event){
@@ -265,7 +219,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.seekEnd(event);
     }
 
-    doResume(time){
-
+    stop(){
+        clearInterval(this.timer);
+        // @ts-ignore 
+        this.mediaSession.metadata = new MediaMetadata({});        
+        this.mediaSession.playbackState = "paused";
+        this.dummy.pause(); 
     }
 }
