@@ -221,6 +221,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     stop(){
         clearInterval(this.timer);
+        this.time,
+        this.duration,
+        this.buffered = 0;
         // @ts-ignore 
         this.mediaSession.metadata = new MediaMetadata({});        
         this.mediaSession.playbackState = "paused";
