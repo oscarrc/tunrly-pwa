@@ -8,7 +8,7 @@
     align-items: center;
     background-color: $white;
     border-radius: $radius-md;
-    height: $player-height;
+    // height: $player-height;
     z-index: $zIndex-player;
     box-shadow: $player-shadow;
     transition: $transition-medium;
@@ -79,6 +79,13 @@
 }
 
 // Styling for audio
+.audio-wrapper{
+    width: 100%;
+    display: flex;
+    height: $player-height;
+    align-self: self-start;
+}
+
 .audio {
     @include flexBox();
     @include flex(37%);
@@ -129,6 +136,10 @@
     .btn {
         color: $gray-600;
     }
+}
+
+.audio-controls--right{
+    display: none !important;
 }
 
 .audio-controls--main {
@@ -192,6 +203,10 @@
     .audio-info {
         display: none !important;
     }
+
+    .audio-controls--right{
+        display: block !important;
+    }
 }
 
 @include media-breakpoint-up(md) {
@@ -208,11 +223,12 @@
 
 @include media-breakpoint-down(md) {
     .audio {
-        @include flex(53%);
+        @include flex(calc(50% - 1rem));
     }
 
     .audio-controls {
-        @include flex(47%);
+        @include flex(50%);
+        padding-right: 0.5rem;
     }
 }
 
@@ -232,7 +248,7 @@
 
     .audio-controls {
         @include flex(calc(100% - #{$player-cover-image-width}));
-        padding-left: $audio-control-padding-x;
+        // padding-left: $audio-control-padding-x;
     }
 }
 
@@ -240,5 +256,56 @@
     .audio-controls {
         padding-right: 0;
         padding-left: 0;
+    }
+}
+
+#playerPlaylist{
+    width: 100%;
+    height: 0;
+    position: relative;
+
+    .playlist-header {
+        @include flexBox;
+        align-items: center;
+        padding-bottom: .75rem;
+        padding-top: .75rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid $gray-400;        
+        .title {
+            font-weight: map-get($font-weight, medium);
+            padding-left: $audio-control-padding-x;
+        }
+        .icons{
+            padding-right: $audio-control-padding-x;
+        }        
+    }
+
+    .playlist-body{
+        padding-right: $audio-control-padding-x;
+        padding-left: $audio-control-padding-x;
+        overflow: hidden;
+        height: 0;
+        transition: all ease-out 250ms;
+        > .ps {
+            height: 100%;
+        }
+    }
+}
+
+.show-playlist {
+    #playerPlaylist{
+        height: auto;
+        .playlist-body{
+            height: 60vh;
+        }
+        .playlist-header{
+            border-top: 1px solid $gray-400;
+        }
+    }
+
+    .audio .song-image{
+        img, iframe{            
+            border-bottom-left-radius: 0;
+        }
     }
 }

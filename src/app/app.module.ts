@@ -1,4 +1,4 @@
-import { BrowserModule, HammerModule} from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
@@ -19,7 +19,7 @@ import { AuthService } from './services/auth.service';
 
 import {ErrorInterceptor} from './core/interceptors/error.interceptor';
 
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
 
 export function jwtOptionsFactory(cookieService: CookieService) {
     return {

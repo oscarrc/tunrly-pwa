@@ -1,12 +1,12 @@
 <!-- Begin | Audio Player [[ Find at scss/framework/base/audio-player/audio-player.scss ]] -->
-<div id="audioPlayer" [class]="playerClass" (swipeleft)="togglePlaylist($event)" (swiperight)="togglePlaylist($event)">
+<div id="audioPlayer" [class]="playerClass">
 
     <!-- Begin | Audio Player Progress -->
     <div id="progress-container" (tap)="jumpTo($event)">
         <input type="range" class="track-song-slider"  
             min="0" 
             max="100" 
-            [value]="seekTo == 0 ? (time * 100 / duration) - 0.1 || 0 : seekTo"
+            [value]="seekTime == 0 ? (time * 100 / duration) - 0.1 || 0 : seekTime"
             step=".001"
             (panstart)="seekStart($event)"
             (panend)="seekEnd($event)">
@@ -14,67 +14,72 @@
         <progress class="audio-progress audio-progress--buffered track-buffered-progress" min="0" max="100" [value]="buffered || 0"></progress>
     </div>
     <!-- End | Audio Player Progress -->
-
-    <!-- Begin | Audio -->
-    <div class="audio">
-        <div class="song-image">
-            <youtube-player *ngIf="track?.source"
-                id="videoPlayer"
-                [videoId]="track.source" 
-                [suggestedQuality]="qualityOptions[quality]"
-                [height]="videoSize" 
-                [width]="videoSize" 
-                [playerVars]= "videoOptions"
-                (ready)="ready($event)"
-                (stateChange)="stateChange($event)">
-            </youtube-player>
-            <img *ngIf="!track?.source" src="assets/images/cover/vinyl.png" alt="Tunrly.com free music app">
-        </div>
-        <div class="song-info pl-3">
-            <span class="song-name d-inline-block text-truncate">{{ track?.name }}</span>
-            <span class="song-artists d-block text-muted">{{ track?.artist }}</span>
-        </div>
-    </div>
-    <!-- End | Audio -->
-
-    <!-- Begin | Audio Controls -->
-    <div class="audio-controls">
-        <div class="audio-controls--left d-flex mr-auto">
-            <button class="btn btn-sm btn-icon-only track-repeat" [class]="{'text-primary': playerOptions?.repeat}"><i class="ion-md-sync" (click)="toggleOptions('repeat')"></i></button>
-            <button class="btn btn-sm btn-icon-only track-shuffle track-shuffle-off" [class]="{'text-primary': playerOptions?.shuffle}" (click)="toggleOptions('shuffle')"><i class="ion-md-shuffle"></i></button>
-        </div>
-        <div class="audio-controls--main d-flex">
-            <button class="btn btn-icon-only" (click)="playPrev()"><i class="ion-md-skip-backward"></i></button>
-            <button class="btn btn-air btn-pill btn-default btn-icon-only track-play-pause" [class]="{ 'track-playing' : state == 1 }" (click)="playPause()" [disabled]="!track?.source">
-                <i class="ion-md-play"></i>
-                <i class="ion-md-pause"></i>
-            </button>
-            <button class="btn btn-icon-only" (click)="playNext()"><i class="ion-md-skip-forward"></i></button>
-        </div>
-        <div class="audio-controls--right d-flex ml-auto"> 
-            <button class="btn btn-sm btn-icon-only" (click)="togglePlaylist()"><i class="ion-md-list"></i></button>
-        </div>
-    </div>
-    <!-- End | Audio Controls -->
-
-    <!-- Begin | Audio Info -->
-    <div class="audio-info d-flex align-items-center pr-4">
-        <span class="mr-4">
-           {{ time | toTime }} / {{ duration | toTime }}
-        </span>
-        <div class="audio-volume dropdown">
-            <button class="btn btn-icon-only" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i [class]="volumeIcon"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right volume-dropdown-menu">
-                <input type="range" id="volume" class="track-volume-slider" [value]="this.volume" (change)="setVolume($event)">
+    
+    <!-- Begin | Audio Wrapper -->
+    <div class="audio-wrapper">
+         <!-- Begin | Audio -->
+        <div class="audio">
+            <div class="song-image">
+                <youtube-player *ngIf="track?.source"
+                    id="videoPlayer"
+                    controls=0
+                    [videoId]="track.source" 
+                    [suggestedQuality]="qualityOptions[quality]"
+                    [height]="72" 
+                    [width]="72" 
+                    [playerVars]= "videoOptions"
+                    (ready)="ready($event)"
+                    (stateChange)="stateChange($event)">
+                </youtube-player>
+                <img *ngIf="!track?.source" src="assets/images/cover/vinyl.png" alt="Tunrly.com free music app">
+            </div>
+            <div class="song-info pl-3">
+                <span class="song-name d-inline-block text-truncate">{{ track?.name }}</span>
+                <span class="song-artists d-block text-muted">{{ track?.artist }}</span>
             </div>
         </div>
+        <!-- End | Audio -->
 
-        <!-- Song options -->
-        <app-track-options [icon]="'la-ellipsis-v'" [track]="track"></app-track-options>
+        <!-- Begin | Audio Controls -->
+        <div class="audio-controls">
+            <div class="audio-controls--left d-flex mr-auto"> 
+            </div>    
+            <div class="audio-controls--main d-flex">
+                <button class="btn btn-icon-only track-repeat" [class]="{'text-primary': playerOptions?.repeat}"><i class="ion-md-sync" (click)="toggleOptions('repeat')"></i></button>
+                <button class="btn btn-icon-only" (click)="playPrev()"><i class="ion-md-skip-backward"></i></button>
+                <button class="btn btn-air btn-pill btn-default btn-icon-only track-play-pause" [class]="{ 'track-playing' : state == 1 }" (click)="playPause()" [disabled]="!track?.source">
+                    <i class="ion-md-play"></i>
+                    <i class="ion-md-pause"></i>
+                </button>
+                <button class="btn btn-icon-only" (click)="playNext()"><i class="ion-md-skip-forward"></i></button>
+                <button class="btn btn-icon-only track-shuffle track-shuffle-off" [class]="{'text-primary': playerOptions?.shuffle}" (click)="toggleOptions('shuffle')"><i class="ion-md-shuffle"></i></button>
+            </div>
+            <div class="audio-controls--right d-flex ml-auto"> 
+                <button class="btn btn-sm btn-icon-only" (click)="togglePlaylist()"><i class="ion-md-list"></i></button>
+            </div>
+        </div>
+        <!-- End | Audio Controls -->
+
+        <!-- Begin | Audio Info -->
+        <div class="audio-info d-flex align-items-center pr-4">
+            <span class="mr-4">
+            {{ time | toTime }} / {{ duration | toTime }}
+            </span>
+            <div class="audio-volume dropdown">
+                <button class="btn btn-icon-only" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i [class]="volumeIcon"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right volume-dropdown-menu">
+                    <input type="range" id="volume" class="track-volume-slider" [value]="this.volume" (change)="setVolume($event)">
+                </div>
+            </div>
+            <button class="btn btn-sm btn-icon-only" (click)="togglePlaylist()"><i class="ion-md-list"></i></button>
+            <!-- Song options -->
+            <app-track-options [icon]="'la-ellipsis-v'" [track]="track"></app-track-options>
+        </div>
+        <!-- End | Audio Info -->
     </div>
-    <!-- End | Audio Info -->
-
+    <app-playlist></app-playlist>
+    <!-- End | Audio Wrapper -->
 </div>
 <!-- End | Audio Player -->
