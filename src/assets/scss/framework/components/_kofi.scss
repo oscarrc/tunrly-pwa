@@ -127,19 +127,3 @@ img.kofiimg {
 		transform: rotate(0) scale(1)
 	}
 }
-
-.iconic-sidebar .kofi-container{
-	min-width: 0;
-
-	.kofi-button{
-		min-width: 0;
-	}
-
-	.kofiimg{
-		margin-right: 0 !important;
-	}
-
-	.kofitext{
-		display: none;
-	}
-}

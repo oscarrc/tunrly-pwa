@@ -126,6 +126,22 @@
                 display: block;
             }
 
+            .kofi-container{
+                min-width: 0;
+            
+                .kofi-button{
+                    min-width: 0;
+                }
+            
+                .kofiimg{
+                    margin-right: 0 !important;
+                }
+            
+                .kofitext{
+                    display: none;
+                }
+            }
+
             // span {
             //     display: none;
             // }
