@@ -23,7 +23,7 @@ export class TrackDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     gridView:boolean = false;
     similarTracks: any;
     page: number = 1;
-    limit: number = 10;
+    limit: number = 12;
     show: boolean = false;
     
     routeSubscription: Subscription;

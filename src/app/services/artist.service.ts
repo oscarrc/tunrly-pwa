@@ -14,28 +14,28 @@ export class ArtistService {
         return this.httpClient.get(this.artistURL + `${name}`);
     }
 
-    getAlbums(id: string, page:number = 1, limit:number = 10):Observable<any>{
+    getAlbums(id: string, page:number = 1, limit:number = 12):Observable<any>{
         return this.httpClient.get(this.artistURL + `${id}/albums`, { params: {
             page: page.toString(),
             limit: limit.toString()
         }});
     }
 
-    getSimilar(id: string, page:number = 1, limit:number = 10):Observable<any>{
+    getSimilar(id: string, page:number = 1, limit:number = 12):Observable<any>{
         return this.httpClient.get(this.artistURL + `${id}/similar`, { params: {
             page: page.toString(),
             limit: limit.toString()
         }});
     }
 
-    getTracks(id: string, page:number = 1, limit:number = 10):Observable<any>{
+    getTracks(id: string, page:number = 1, limit:number = 12):Observable<any>{
         return this.httpClient.get(this.artistURL + `${id}/tracks`, { params: {
             page: page.toString(),
             limit: limit.toString()
         }});
     }
 
-    getTop(country: string, page:number = 1, limit:number = 10):Observable<any>{
+    getTop(country: string, page:number = 1, limit:number = 12):Observable<any>{
         return this.httpClient.get(this.artistURL + 'top', { params: {
             country: country,
             page: page.toString(),
