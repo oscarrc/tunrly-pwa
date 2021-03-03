@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { StorageService } from './storage.service';
-import { TrackService } from './track.service';
 
 @Injectable({
     providedIn: 'root'
@@ -21,22 +20,12 @@ export class PlayerService {
     playerOptions: EventEmitter<any> = new EventEmitter();
     currentPlaylist: BehaviorSubject<any> = new BehaviorSubject(this.playlist);
 
-    constructor(private storageService: StorageService,
-                private trackService: TrackService) {
+    constructor(private storageService: StorageService) {
         this.options = this.getOptions();
     }
 
     get track(){
-        let track = this.playlist.tracks[this.options.index]
-        
-        if(!track.source){
-            this.trackService.getSource(this.track._id).subscribe( source => {
-                track.source = source;
-                return track;
-            })
-        }else{
-            return track;
-        }
+        return this.playlist.tracks[this.options.index];
     }
 
     getOptions():any{

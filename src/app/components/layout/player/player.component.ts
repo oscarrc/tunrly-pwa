@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PlayerService } from 'src/app/services/player.service';
 import { StorageService } from 'src/app/services/storage.service'
 import { UserService } from 'src/app/services/user.service';
+import { TrackService } from 'src/app/services/track.service';
 
 @Component({
     selector: 'app-player',
@@ -50,6 +51,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     constructor(@Inject(DOCUMENT) private document: Document,
                 private userService: UserService,
                 private storageService: StorageService,
+                private trackService: TrackService,
                 private playerService: PlayerService) { 
                     this.playerOptions = this.playerService.getOptions();
 
@@ -63,15 +65,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                     this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
                         this.track = this.playerService.track;            
                         this.playerOptions = options;
-            
-                        if(this.track){                
-                            this.setMediaSession();
-                            this.userService.addToHistory(this.track._id).subscribe(
-                                res => this.userService.set(res)
-                            );
-                        }else{
-                            this.stop();
-                        }
+                        this.initTrack(this.track);
                     }); 
                 }
 
@@ -88,6 +82,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.userSubscription?.unsubscribe();
         this.nowPlayingSubscription.unsubscribe();
         this.stop();
+    }
+
+    initTrack(track){
+        if(track && !track.source)
+            this.trackService.getSource(this.track._id).subscribe( s => this.track.source = s["source"]);
+
+        if(this.track){                
+            this.setMediaSession();
+            this.userService.addToHistory(this.track._id).subscribe(
+                res => this.userService.set(res)
+            );
+        }else{
+            this.stop();
+        }
     }
 
     initPlayer(){
@@ -138,7 +146,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.dummy.play().then( () => {
                     this.dummy.pause();
                     this.mediaSession.playbackState = "paused";
-                });
+                }).catch();
                 break;
             case 3: //Buffering
                 break;
@@ -190,7 +198,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         else this.dummy.play().then( () => {            
             this.mediaSession.playbackState = "playing";
             this.player.playVideo();
-        })
+        }).catch()
     }
 
     playNext(){

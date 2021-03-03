@@ -3,9 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class TrackService {
     private trackUrl = environment.api + '/track/';
 
