@@ -9,6 +9,7 @@ import { AvailabilityValidator } from 'src/app/core/validators/availability.vali
 import { PasswordValidator } from 'src/app/core/validators/password.validator';
 
 import { Config } from 'src/app/config/config';
+import { Countries } from 'src/app/config/countries';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -24,6 +25,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
     registration: any;
     loading: boolean = false;
     formSubmitted: boolean = false;
+    countries: Countries;
 
     constructor(private loadingService: LoadingService,
                 private userService: UserService,
@@ -31,6 +33,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
                 private translateService: TranslateService) {
         this.config = new Config();
         this.brand = this.config.config.brand;
+        this.countries = new Countries();
     }
 
     ngOnInit() {
@@ -80,11 +83,11 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
     register(registration){
         const lang = this.translateService.getBrowserLang();
+        const country = this.countries.list.find( c => c.code.toLowerCase() === lang.toLowerCase());
+
         this.formSubmitted = true;
         
-        if (this.registration.invalid) {
-            return false;
-        }
+        if (this.registration.invalid) return false;
 
         this.loading = true;
 
@@ -94,7 +97,8 @@ export class LandingComponent implements OnInit, AfterViewInit {
             firstname: registration.value.firstname,
             lastname: registration.value.lastname,
             password: registration.value.passgroup.password,
-            language: lang.match(/en|es/) ? lang : 'en'
+            language: lang.match(/en|es/) ? lang : 'en',
+            country: country?.name || null
         }
 
         this.userService.create(user).subscribe(
