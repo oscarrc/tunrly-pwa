@@ -14,7 +14,7 @@ export class TrackService {
         return this.httpClient.get(this.trackUrl + `${name}/${artist}`);
     }
 
-    getSimilar(id: string, page:number = 1, limit:number = 10):Observable<any>{
+    getSimilar(id: string, page:number = 1, limit:number = 12):Observable<any>{
         return this.httpClient.get(this.trackUrl + `${id}/similar`, { params: {
             page: page.toString(),
             limit: limit.toString()
@@ -25,7 +25,7 @@ export class TrackService {
         return this.httpClient.get(this.trackUrl + `${id}/source`);
     }
 
-    getTop(country: string, page: number, limit: number):Observable<any>{
+    getTop(country: string, page: number = 1, limit: number = 12):Observable<any>{
         return this.httpClient.get(this.trackUrl + 'top', { params: {
             country: country,
             page: page.toString(),

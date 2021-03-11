@@ -121,14 +121,30 @@
         .sidebar-footer {
             padding-right: .5rem;
             padding-left: .5rem;
-
+            font-size: 0.6rem;
             .ion-md-musical-note {
                 display: block;
             }
 
-            span {
-                display: none;
+            .kofi-container{
+                min-width: 0;
+            
+                .kofi-button{
+                    min-width: 0;
+                }
+            
+                .kofiimg{
+                    margin-right: 0 !important;
+                }
+            
+                .kofitext{
+                    display: none;
+                }
             }
+
+            // span {
+            //     display: none;
+            // }
         }
     }
 }
