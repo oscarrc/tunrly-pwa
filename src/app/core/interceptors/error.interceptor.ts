@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable, ReplaySubject, throwError } from 'rxjs';
-import { catchError, switchMap, filter, take, map, tap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { JwtInterceptor } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
 
@@ -34,7 +34,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                 break;
         }
         
-        this.toastr.error(message, 'Error', { positionClass: position });
+        if(window.navigator.onLine) this.toastr.error(message, 'Error', { positionClass: position });
+        else this.toastr.info('Some functions may not work', 'You\'re offline', { positionClass: position });
     }
 
     private handleRefresh(){
