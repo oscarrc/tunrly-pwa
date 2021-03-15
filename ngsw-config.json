@@ -7,9 +7,10 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/icons/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
+          "/assets/icons/favicon.ico",
+          "/assets/i18n/**",
           "/*.css",
           "/*.js"
         ]
@@ -28,33 +29,54 @@
     }
   ],
   "dataGroups":[
-	{
-		"name": "Entities",
-		"urls": [
-			"https://api.tunrly.com/v1/artist",
-			"https://api.tunrly.com/v1/album",
-			"https://api.tunrly.com/v1/track",
-			"https://api.tunrly.com/v1/tag"
-		],
-		"cacheConfig": {
-			"strategy": "performance",
-      "maxSize": 100,
-      "maxAge": "7d",
-      "timeout": "10s"
-		}
-	},
-	{
-		"name": "User",
-		"urls": [
-			"https://api.tunrly.com/v1/user",
-			"https://api.tunrly.com/v1/playlist"
-		],
-		"cacheConfig": {
-			"strategy": "freshness",
-        "maxSize": 20,
-        "maxAge": "1h",
+    {
+      "name": "Entities",
+      "urls": [
+        "/artist/**",
+        "/album/**",
+        "/track/**",
+        "/tag/**",
+        "/playlist/**",
+        "/artists/**",
+        "/albums/**",
+        "/tracks/**",
+        "/tags/**",
+        "/playlists/**"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 100,
+        "maxAge": "7d",
+        "timeout": "10s"
+      },
+      "cacheQueryOptions": {
+        "ignoreSearch": false
+      }
+    },
+    {
+      "name": "User",
+      "urls": [
+        "/user/**"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+          "maxSize": 20,
+          "maxAge": "1h",
+          "timeout": "5s"
+      }
+    },
+    {
+      "name": "Images",
+      "urls": [
+        "https://lastfm.freetls.fastly.net/**",
+        "https://assets.fanart.tv/fanart/music/**"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "30d",
         "timeout": "5s"
-		}
-	}
+      }
+    }
   ]
 }
