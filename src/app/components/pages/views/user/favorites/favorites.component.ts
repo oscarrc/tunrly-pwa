@@ -70,56 +70,65 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
         );
     }
 
+    getEntities(type){
+        switch(type){
+            case 'albums':
+                this.getAlbums(this.albums.list);
+                break;
+            case 'artists':
+                this.getArtists(this.artists.list);
+                break;
+            case 'tracks':
+                this.getTracks(this.tracks.list);
+                break;
+            case 'playlists':
+                this.getPlaylists(this.playlists.list);
+                break;
+        }
+    }
+
     getArtists(artists){
-        const offset = (this.artists.page - 1) * this.limit;
-        
-        if(this.artists.items.slice(offset, this.limit).length == 0 ){
+        const offset = (this.artists.page - 1) * this.limit;  
+        const limit = this.limit * this.artists.page;      
+        if(this.artists.items.slice(offset, limit).length == 0 ){
             this.artists.loading = true;
-            this.artistService.getArtists( artists.slice(offset, this.limit)).subscribe( artists => {
-                this.artists.items = artists;
+            this.artistService.getArtists( artists.slice(offset, limit)).subscribe( artists => {
+                this.artists.items = this.artists.items.concat(artists);
             }).add( () => this.artists.loading = false);
         }
     }
 
     getAlbums(albums){
         const offset = (this.albums.page - 1) * this.limit;
-
-        if(this.albums.items.slice(offset, this.limit).length == 0 ){
+        const limit = this.limit * this.albums.page;
+        if(this.albums.items.slice(offset, limit).length == 0 ){
             this.albums.loading = true;
-            this.albumService.getAlbums( albums.slice(offset, this.limit)).subscribe( albums => {
-                this.albums.items = albums;
+            this.albumService.getAlbums( albums.slice(offset, limit)).subscribe( albums => {
+                this.albums.items = this.albums.items.concat(albums);
             }).add( () => this.albums.loading = false);
         }
     }
 
     getTracks(tracks){
         const offset = (this.tracks.page - 1) * this.limit;
-
-        if(this.tracks.items.slice(offset, this.limit).length == 0 ){
-            this.tracks.loading = true;
-            this.trackService.getTracks( tracks.slice(offset, this.limit)).subscribe( tracks => {
-                this.tracks.items = tracks;
+        const limit = this.limit * this.tracks.page;
+        if(this.tracks.items.slice(offset, limit).length == 0 ){
+            this.tracks.loading = true;            
+            this.trackService.getTracks(tracks.slice(offset, limit)).subscribe( tracks => {
+                this.tracks.items = this.tracks.items.concat(tracks);
             }).add( () => this.tracks.loading = false);;
         }
     }
 
     getPlaylists(playlists){
         const offset = (this.playlists.page - 1) * this.limit;
-
-        if(this.playlists.items.slice(offset, this.limit).length == 0 ){
+        const limit = this.limit * this.playlists.page;
+        if(this.playlists.items.slice(offset, limit).length == 0 ){
             this.playlists.loading = true;
-            this.playlistService.getPlaylists( playlists.slice(offset, this.limit)).subscribe( playlists => {
-                this.playlists.items = playlists;
+            this.playlistService.getPlaylists( playlists.slice(offset, limit)).subscribe( playlists => {
+                this.playlists.items = this.playlists.items.concat(playlists);
             }).add( () => this.playlists.loading = false);;
         }
-    }
-
-    ngAfterViewInit() {
-        this.loadingService.stopLoading();
-    }
-
-    ngOnDestroy(){
-        this.userSubscription.unsubscribe();
     }
 
     getRecommended(){
@@ -134,12 +143,22 @@ export class UserFavoritesComponent implements OnInit, AfterViewInit, OnDestroy 
 
         if((count / this.limit) > this[type].page){
             this[type].page++
+            this.getEntities(type)
         }
     }
 
     prevPage(type){
         if(this[type].page > 1){
             this[type].page--
+            this.getEntities(type)
         }
+    }
+
+    ngAfterViewInit() {
+        this.loadingService.stopLoading();
+    }
+
+    ngOnDestroy(){
+        this.userSubscription.unsubscribe();
     }
 }
