@@ -49,13 +49,12 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
     getTracks(tracks){
         const offset = (this.page - 1) * this.limit;
-        
-        if(this.history.items.slice(offset, this.limit).length == 0 ){
-            this.history.loading = true;
-            this.trackService.getTracks( tracks.slice(offset, this.limit * this.page)).subscribe( tracks => {                
-                this.history.items = this.history.items.concat(tracks);
-            }).add( () => this.history.loading = false );
-        }
+        const limit = this.limit * this.page
+
+        this.history.loading = true;
+        this.trackService.getTracks( tracks.slice(offset, limit)).subscribe( tracks => {    
+            this.history.items = tracks;
+        }).add( () => this.history.loading = false );
     }
 
     ngOnInit() {
@@ -68,7 +67,6 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
                     loading: true,
                     items: []
                 };
-                
                 this.getTracks(this.history.list)
             }
         )
