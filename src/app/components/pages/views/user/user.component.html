@@ -59,7 +59,7 @@
 
                 <div *ngIf="user.playlists?.length; else noPlaylists">
                     <div *ngIf="!loading" class="row custom-card-list">
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-4 mb-sm-auto" *ngFor="let playlist of user.playlists">
+                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-4 mb-sm-auto" *ngFor="let playlist of user.playlists | slice:(page-1)*limit:page*limit;">
                             <app-description-card [item]="playlist" type="playlist"></app-description-card>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                     </span>
                     <span>
                         <button [disabled]="favorite[selected].page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
-                        <button [disabled]="user.playlists?.length / limit <= favorite[selected].page"  type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+                        <button [disabled]="user.favorite[selected.slice(0, selected.length - 1)]?.length / limit <= favorite[selected].page"  type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
                     </span>
                 </div>
                 <!-- End | Container header -->
@@ -91,7 +91,7 @@
                 <div class="subSection" *ngIf="selected == 'tracks'">
                     <div *ngIf="user.favorite?.track?.length; else noFavorites">
                         <div *ngIf="!favorite.tracks.loading" class="row custom-card-list">
-                            <div class="col-xl-6 col-lg-12" *ngFor="let track of favorite.tracks.items; let i = index">
+                            <div class="col-xl-6 col-lg-12" *ngFor="let track of favorite.tracks.items | slice:(favorite.tracks.page-1)*limit:favorite.tracks.page*limit; let i = index">
                                 <app-track-list-view [trackNumber]="(i + 1 + ((favorite.tracks.page - 1) * limit))" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                 <div class="subSection" *ngIf="selected == 'artists'">
                     <div *ngIf="user.favorite?.artist?.length; else noFavorites">
                         <div *ngIf="!favorite.artists.loading"  class="row custom-card-list">
-                            <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let artist of favorite.artists.items">
+                            <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let artist of favorite.artists.items | slice:(favorite.artists.page-1)*limit:favorite.artists.page*limit">
                                 <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'" type="artist"></app-image-card>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                 <div class="subSection" *ngIf="selected == 'albums'">
                     <div *ngIf="user.favorite?.album?.length; else noFavorites">
                         <div *ngIf="!favorite.albums.loading" class="row custom-card-list">
-                            <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let album of favorite.albums.items">
+                            <div class="col-6 col-md-2 col-sm-4 col-xl-2" *ngFor="let album of favorite.albums.items | slice:(favorite.albums.page-1)*limit:favorite.albums.page*limit">
                                 <app-image-card [item]="album" type="album"
                                                 [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
                             </div>
@@ -137,7 +137,7 @@
                 <div class="subSection" *ngIf="selected == 'playlists'">
                     <div *ngIf="user.favorite?.playlist?.length; else noFavorites">
                         <div *ngIf="!favorite.playlists.loading" class="row custom-card-list">
-                            <div class="col-xl-3 col-lg-4 col-sm-6 mb-4 mb-sm-auto" *ngFor="let playlist of favorite.playlists.items">
+                            <div class="col-xl-3 col-lg-4 col-sm-6 mb-4 mb-sm-auto" *ngFor="let playlist of favorite.playlists.items | slice:(favorite.playlists.page-1)*limit:favorite.playlists.page*limit">
                                 <app-description-card [item]="playlist"  type="playlist"></app-description-card>
                             </div>
                         </div>
