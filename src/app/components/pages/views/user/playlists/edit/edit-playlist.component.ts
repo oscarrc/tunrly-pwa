@@ -102,6 +102,12 @@ export class EditPlaylistComponent implements OnDestroy{
         this.playlistForm.get('image').updateValueAndValidity();
     }
 
+    getRandom(elements: Array<any>){
+        const size = elements?.length;
+        const rand = Math.floor(Math.random() * size);
+        return elements[rand];
+    }
+
     async savePlaylist(playlist){
         this.formSubmitted = true;
 
@@ -117,6 +123,10 @@ export class EditPlaylistComponent implements OnDestroy{
         playlist.tags = playlist.tags.split(',').map( t => t.trim() )
 
         if(playlist.image && this.files) playlist.image = await this.imageToBase64(this.files[0]);
+        else if(!playlist.image){
+            const track = this.getRandom(this.playlist.tracks);
+            playlist.image = track?.image[track?.image.length - 1];
+        }
        
         if(this.playlistId){
             this.playlistService.update(playlist, this.playlistId).subscribe(
