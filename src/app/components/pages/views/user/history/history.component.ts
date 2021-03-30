@@ -30,20 +30,12 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     nextPage(){
-        const count = this.history.list.length;
-
-        if((count / this.limit) > this.page){
-            this.page++;
-        }
-
+        this.page++;
         this.getTracks(this.history.list)
     }
 
     prevPage(){
-        if(this.page > 1){
-            this.page--
-        }
-
+        this.page--
         this.getTracks(this.history.list)
     }
 
