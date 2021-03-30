@@ -1,5 +1,5 @@
 <div class="song-h--img">
-    <img [src]="imageSrc || (track.image?.length ? track?.image[0] : 'assets/images/cover/small.png')" alt="{{track?.name}}" [class]="imageBorderRadiusClass">
+    <img default="assets/images/cover/small.png" [src]="imageSrc || (track.image?.length ? track?.image[0] : 'assets/images/cover/small.png')" alt="{{track?.name}}" [class]="imageBorderRadiusClass">
 </div>
 <div class="song-h--desc">
     <span class="text-truncate song-h--name" title="{{track?.name}}">{{track?.name}}</span>
