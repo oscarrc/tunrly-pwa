@@ -7,7 +7,7 @@
         <span class="title">{{ 'playlists.title' | translate }}</span>
         <span>
             <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
-            <button type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+            <button [disabled]="playlists.length < 12" type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
         </span>
     </div>
     <!-- End | Container header -->
