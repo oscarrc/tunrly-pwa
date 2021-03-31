@@ -14,13 +14,7 @@ export class DescriptionCardComponent implements OnInit {
     @Input() eventBorderRadiusClass = 'bg-img-radius-lg';
 
     constructor(private userService: UserService, 
-                private playlistService: PlaylistService) {}
-
-    getRandom(elements: Array<any>){
-        const size = elements.length;
-        const rand = Math.floor(Math.random() * size);
-        return elements[rand];
-    }
+                private playlistService: PlaylistService) {}    
 
     isFavorite(): boolean{
         return this.userService.isFavorite(this.item._id, this.type);
@@ -32,25 +26,14 @@ export class DescriptionCardComponent implements OnInit {
         )
     }
 
-    sharePlaylist(){
-
-    }
-
     deletePlaylist(){
         this.playlistService.delete(this.item._id).subscribe(
-            () => {
-                this.userService.get().subscribe( user => this.userService.set(user) )
-            }
+            () =>  this.userService.get().subscribe( user => this.userService.set(user) )
         )
     }
 
     ngOnInit() {
         this.eventBorderRadiusClass = this.eventBorderRadiusClass + ' h-100 event event-h bg-img';
-
-        if(this.type == "playlist" && !this.item.image){
-            const track = this.getRandom(this.item.tracks);
-            this.item.image = track?.image[track?.image.length - 1];
-        }
     }
 
 }

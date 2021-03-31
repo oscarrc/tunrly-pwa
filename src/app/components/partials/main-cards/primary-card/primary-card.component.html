@@ -30,7 +30,7 @@
         </div>
         <!-- End | Custom Card Info -->
         <a (click)="addInPlayer()">
-            <img default [src]="track.image?.length ? track.image[track.image.length - 1] : 'assets/images/cover/large.png'" alt="{{track?.name}}">
+            <img default="assets/images/cover/large.png" [src]="track.image?.length ? track.image[track.image.length - 1] : 'assets/images/cover/large.png'" alt="{{track?.name}}">
         </a>
     </div>
     

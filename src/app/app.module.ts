@@ -17,7 +17,8 @@ import { LoadingService } from './services/loading.service';
 import { MenuConfigService } from './services/menu.service';
 import { AuthService } from './services/auth.service';
 
-import {ErrorInterceptor} from './core/interceptors/error.interceptor';
+import { OfflineInterceptor } from './core/interceptors/offline.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 import { environment } from '../environments/environment';
 

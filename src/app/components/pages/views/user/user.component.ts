@@ -48,7 +48,7 @@ export class UserComponent implements AfterViewInit, OnDestroy{
     limit:number = 12;
     loading:boolean = true;
     gridView:boolean = false;
-    selected:string = "tracks"
+    selected:string = "tracks";
 
     constructor(private route: ActivatedRoute, 
                 private simpleModalService: SimpleModalService,
@@ -74,44 +74,44 @@ export class UserComponent implements AfterViewInit, OnDestroy{
 
     getArtists(artists){
         const offset = (this.favorite.artists.page - 1) * this.limit;
-        
-        if(artists && this.favorite.artists.items.slice(offset, this.limit).length == 0 ){
+        const limit = this.limit * this.favorite.artists.page;        
+        if(artists && this.favorite.artists.items.slice(offset, limit).length == 0 ){
             this.favorite.artists.loading = true;
-            this.artistService.getArtists( artists.slice(offset, this.limit)).subscribe( artists => {
-                this.favorite.artists.items = artists;
+            this.artistService.getArtists( artists.slice(offset, limit)).subscribe( artists => {
+                this.favorite.artists.items = this.favorite.artists.items.concat(artists);
             }).add( () => this.favorite.artists.loading = false);
         }
     }
 
     getAlbums(albums){
         const offset = (this.favorite.albums.page - 1) * this.limit;
-
-        if(albums && this.favorite.albums.items.slice(offset, this.limit).length == 0 ){
+        const limit = this.limit * this.favorite.albums.page;
+        if(albums && this.favorite.albums.items.slice(offset, limit).length == 0 ){
             this.favorite.albums.loading = true;
-            this.albumService.getAlbums( albums.slice(offset, this.limit)).subscribe( albums => {
-                this.favorite.albums.items = albums;
+            this.albumService.getAlbums( albums.slice(offset, limit)).subscribe( albums => {
+                this.favorite.albums.items = this.favorite.albums.items.concat(albums);
             }).add( () => this.favorite.albums.loading = false);
         }
     }
 
     getTracks(tracks){
         const offset = (this.favorite.tracks.page - 1) * this.limit;
-        
-        if(tracks && this.favorite.tracks.items.slice(offset, this.limit).length == 0 ){
+        const limit = this.limit * this.favorite.tracks.page;        
+        if(tracks && this.favorite.tracks.items.slice(offset, limit).length == 0 ){
             this.favorite.tracks.loading = true;
-            this.trackService.getTracks( tracks.slice(offset, this.limit)).subscribe( tracks => {
-                this.favorite.tracks.items = tracks;
+            this.trackService.getTracks( tracks.slice(offset, limit)).subscribe( tracks => {
+                this.favorite.tracks.items = this.favorite.tracks.items.concat(tracks);
             }).add( () => this.favorite.tracks.loading = false);
         }
     }
 
     getPlaylists(playlists){
         const offset = (this.favorite.playlists.page - 1) * this.limit;
-
-        if(playlists && this.favorite.playlists.items.slice(offset, this.limit).length == 0 ){
+        const limit = this.limit * this.favorite.playlists.page;
+        if(playlists && this.favorite.playlists.items.slice(offset, limit).length == 0 ){
             this.favorite.playlists.loading = true;
-            this.playlistService.getPlaylists( playlists.slice(offset, this.limit)).subscribe( playlists => {
-                this.favorite.playlists.items = playlists;
+            this.playlistService.getPlaylists( playlists.slice(offset, limit)).subscribe( playlists => {
+                this.favorite.playlists.items = this.favorite.playlists.items.concat(playlists);
             }).add( () => this.favorite.playlists.loading = false);;
         }
     }

@@ -99,14 +99,25 @@
             border-bottom-left-radius: $radius-md;
         }
 
-        #videoPlayer{   
-            &:after {
-                content: '';
-                @include absolute(top 0 bottom 0 left 0);      
-                width: $player-cover-image-width;         
-                border-top-left-radius: $radius-md;
-                border-bottom-left-radius: $radius-md; 
+        .video-player-overlay{
+            content: '';
+            @include absolute(top 0 bottom 0 left 0);      
+            width: $player-cover-image-width;         
+            border-top-left-radius: $radius-md;
+            border-bottom-left-radius: $radius-md; 
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            i{
+                display: none
             }
+        }
+
+        .video-player-overlay:hover{
+            i{ display: block }
         }
     }
 
