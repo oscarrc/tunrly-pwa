@@ -73,9 +73,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.initPlayer();
         this.initMediaSession();
+        Object.defineProperty(document, 'visibilityState', {value: 'visible', writable: true});
+        Object.defineProperty(document, 'hidden', {value: false, writable: true});
+        document.dispatchEvent(new Event("visibilitychange"));
 
-        document.addEventListener("visibilitychange", () => {
-        })       
+        document.addEventListener("visibilitychange", () => {})       
     }
 
     ngOnDestroy() {
