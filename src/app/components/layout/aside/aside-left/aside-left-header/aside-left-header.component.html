@@ -1,7 +1,7 @@
 <!-- Begin | Sidebar Header -->
 <div class="sidebar-header d-flex align-items-center">
     <a routerLink="/home" class="brand" (click)="hideSidebar()">
-        <img [src]="brand.logo" alt="{{brand.name}}">
+        <img [src]="beta ? brand.logoBeta : brand.logo" alt="{{brand.name}}">
     </a>
 
     <!-- Back sidebar arrow -->

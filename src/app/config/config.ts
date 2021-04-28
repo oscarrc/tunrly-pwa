@@ -18,6 +18,7 @@ export class Config {
         this.config = {
             brand: {
                 logo: './assets/images/logo.svg',
+                logoBeta: './assets/images/logo-beta.svg',
                 name: 'Tunrly.com'
             },
             themeSkin: {
@@ -26,6 +27,7 @@ export class Config {
                 sidebar: 0,
                 player: 0
             },
+            isBeta: true,
             isOpen: false,
             kofi: 'https://ko-fi.com/oscarrc'
         };

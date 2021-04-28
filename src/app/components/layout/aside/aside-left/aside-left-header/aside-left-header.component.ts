@@ -12,10 +12,12 @@ export class AsideLeftHeaderComponent {
 
     config: Config;
     brand: any = {};
+    beta: boolean = false;
 
     constructor(@Inject(DOCUMENT) private document: Document) {
         this.config = new Config();
         this.brand = this.config.config.brand;
+        this.beta = this.config.config.isBeta;
     }
 
     toggleIconicSidebar() {
