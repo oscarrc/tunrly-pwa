@@ -21,6 +21,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
     config: Config;
     brand: any = {};
+    beta: boolean = false;
     backgroundImage: string = "";
     registration: any;
     loading: boolean = false;
@@ -33,6 +34,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
                 private translateService: TranslateService) {
         this.config = new Config();
         this.brand = this.config.config.brand;
+        this.beta = this.config.config.isBeta;
         this.countries = new Countries();
     }
 

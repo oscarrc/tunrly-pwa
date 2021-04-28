@@ -5,7 +5,7 @@
             <header id="landing-header">
                 <div class="container d-flex align-items-center py-3">
                 <a routerLink="/home" class="brand">
-                    <img [src]="brand.logo" alt="{{brand.name}}">
+                    <img [src]="beta ? brand.logoBeta : brand.logo" alt="{{brand.name}}">
                 </a>
 
                 <ul class="header-auto-options ml-auto d-flex align-items-center">
