@@ -56,7 +56,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 private trackService: TrackService,
                 private playerService: PlayerService) { 
                     this.playerOptions = this.playerService.playerOptions;                    
-                    this.track = this.playerService.track; 
+                    this.track = this.playerService.track;
                     this.interacted = false;
 
                     this.userSubscription = this.userService.user.subscribe(
