@@ -17,60 +17,61 @@ export class PlayerService {
         modified: false
     };
 
-    playerOptions: EventEmitter<any> = new EventEmitter();
+    currentOptions: EventEmitter<any> = new EventEmitter();
     currentPlaylist: BehaviorSubject<any> = new BehaviorSubject(this.playlist);
 
     constructor(private storageService: StorageService) {
-        this.options = this.getOptions();
+        this.options = this.storageService.getLocalStorage('player') || this.options;
+        this.playlist = this.storageService.getLocalStorage("playlist") || this.playlist;        
+        this.currentPlaylist.next(this.playlist);
     }
 
     get track(){
         return this.playlist.tracks[this.options.index];
     }
 
-    getOptions():any{
-        const options = this.storageService.getLocalStorage('player');
-        if(options) return options;
+    get playerOptions():any{
         return this.options;
+    }
+
+    get playlistTracks():any{
+        return this.playlist;
     }
 
     playTrack(track){        
         this.playlist.tracks.unshift(track);
         this.currentPlaylist.next(this.playlist);
+        this.storageService.setLocalStorage('playlist', this.playlist);
         this.options.index = 0;
         this.options.modified = this.playlist.tracks.length > 1 ? true : false;
-        this.playerOptions.emit(this.options);
+        this.currentOptions.emit(this.options);
     }
 
     playNext(){
         if(this.options.repeat && this.options.index == this.playlist.tracks.length - 1) this.options.index = -1;
         if(this.options.shuffle) this.options.index = Math.floor(Math.random()* this.playlist.tracks.length);
-        if(this.playlist.tracks?.length > this.options.index) this.options.index += 1; 
-        
-        this.playerOptions.emit(this.options);
+        if(this.playlist.tracks?.length > this.options.index) this.options.index += 1;         
+        this.currentOptions.emit(this.options);
     }
 
     playPrev(){
         if(this.options.repeat && this.options.index == 0 ) this.options.index = this.playlist.tracks.length;
-
-        if(this.options.index > 0 && this.playlist.tracks.length){            
+        if(this.options.index > 0 && this.playlist.tracks.length)          
             this.options.index = this.options.shuffle ? Math.floor(Math.random()* this.playlist.tracks.length) : this.options.index - 1;
-        }
-       
-        this.playerOptions.emit(this.options);
+        this.currentOptions.emit(this.options);
     }
 
     playIndex(index: number){
         this.options.index = index;
-        this.playerOptions.emit(this.options);
+        this.currentOptions.emit(this.options);
     }
 
     addToPlaylist(track){
         this.playlist.tracks.push(track);  
         this.currentPlaylist.next(this.playlist);
-        
+        this.storageService.setLocalStorage('playlist', this.playlist);
         this.options.modified = this.playlist.tracks.length > 1 ? true : false;
-        this.playerOptions.emit(this.options);
+        this.currentOptions.emit(this.options);
     }
 
     playNowPlaylist(playlist){
@@ -78,15 +79,15 @@ export class PlayerService {
         this.currentPlaylist.next(this.playlist);        
         this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.options.index = 0;
-        this.playerOptions.emit(this.options);
+        this.currentOptions.emit(this.options);
     }
 
     removeFromPlaylist(index){
         this.playlist.tracks.splice(index, 1);
-        this.currentPlaylist.next(this.playlist);
-        
+        this.currentPlaylist.next(this.playlist);        
+        this.storageService.setLocalStorage('playlist', this.playlist);
         this.options.modified = this.playlist.tracks.length > 1 ? true : false;
-        this.playerOptions.emit(this.options);
+        this.currentOptions.emit(this.options);
     }
 
     clearPlaylist(){
@@ -94,11 +95,12 @@ export class PlayerService {
         this.options.index = 0;
         this.options.modified = false;
         this.currentPlaylist.next(this.playlist);
-        this.playerOptions.emit(this.options);
+        this.currentOptions.emit(this.options);
+        this.storageService.clearLocalStorage("playlist");
     }
 
     setOption(option){
         this.options[option] = !this.options[option];
-        this.playerOptions.emit(this.options);
+        this.currentOptions.emit(this.options);
     }
 }

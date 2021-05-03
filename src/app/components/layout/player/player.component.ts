@@ -48,13 +48,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
     // @ts-ignore 
     mediaSession = navigator.mediaSession;
     dummy = new Audio("assets/misc/silence.ogg");
-
+    interacted: Boolean = false;
+    
     constructor(@Inject(DOCUMENT) private document: Document,
                 private userService: UserService,
                 private storageService: StorageService,
                 private trackService: TrackService,
                 private playerService: PlayerService) { 
-                    this.playerOptions = this.playerService.getOptions();
+                    this.playerOptions = this.playerService.playerOptions;                    
+                    this.track = this.playerService.track; 
+                    this.interacted = false;
 
                     this.userSubscription = this.userService.user.subscribe(
                         user => {
@@ -63,17 +66,29 @@ export class PlayerComponent implements OnInit, OnDestroy {
                         }
                     )
             
-                    this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
-                        this.track = this.playerService.track;            
+                    this.nowPlayingSubscription = this.playerService.currentOptions.subscribe((options) => {
+                        this.track = this.playerService.track;   
+                        this.interacted = true;         
                         this.playerOptions = options;
-                        this.initTrack(this.track);
+                        this.initTrack(this.track);                  
                     }); 
                 }
 
-    ngOnInit() {
+    ngOnInit() {        
+        this.initVisibilityHandler();
         this.initPlayer();
-        this.initMediaSession();
+        this.initMediaSession(); 
+        this.initTrack(this.track);
+    }
 
+    ngOnDestroy() {
+        this.skinSubscription?.unsubscribe();
+        this.userSubscription?.unsubscribe();
+        this.nowPlayingSubscription.unsubscribe();
+        this.stop();
+    }
+
+    initVisibilityHandler(){        
         Object.defineProperty(document, 'visibilityState', {value: 'visible', writable: true});
         Object.defineProperty(document, 'hidden', {value: false, writable: true});
         document.dispatchEvent(new Event("visibilitychange"));
@@ -84,14 +99,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
             }, true);
         }
         
-        document.addEventListener("visibilitychange", () => { console.log(1) })       
-    }
-
-    ngOnDestroy() {
-        this.skinSubscription?.unsubscribe();
-        this.userSubscription?.unsubscribe();
-        this.nowPlayingSubscription.unsubscribe();
-        this.stop();
+        document.addEventListener("visibilitychange", () => { console.log(1) })    
     }
 
     initTrack(track){
@@ -204,6 +212,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playPause(){
+        if(!this.interacted) return;
         if(this.state == 1) this.player.pauseVideo();
         else this.dummy.play().then( () => {            
             this.mediaSession.playbackState = "playing";
