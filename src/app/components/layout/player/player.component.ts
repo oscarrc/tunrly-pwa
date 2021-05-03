@@ -30,7 +30,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     playerClass = 'player-primary';
     videoSize: number;
     videoOptions = {
-        autoplay: 1,
+        autoplay: 0,
         controls: 0
     };
     playerOptions = {
@@ -67,8 +67,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
                     )
             
                     this.nowPlayingSubscription = this.playerService.currentOptions.subscribe((options) => {
-                        this.track = this.playerService.track;   
-                        this.interacted = true;         
+                        this.interacted = true;
+                        this.track = this.playerService.track;        
                         this.playerOptions = options;
                         this.initTrack(this.track);                  
                     }); 
@@ -166,7 +166,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 break;
             case 3: //Buffering
                 break;
-            case 5: //Queued
+            case 5: //Queued      
                 this.playPause();
                 break;
         }
@@ -210,9 +210,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playPause(){
-        if(!this.interacted) return;
         if(this.state == 1) this.player.pauseVideo();
-        else this.dummy.play().then( () => {            
+        else if(this.interacted) this.dummy.play().then( () => {            
             this.mediaSession.playbackState = "playing";
             this.player.playVideo();
         }).catch()
@@ -233,6 +232,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     seekStart(event){
         this.seekTime = event.target.value;
     }
+
     seekEnd(event){        
         const time = (this.duration * event.target.value)/100;
         this.player?.seekTo(time, true);

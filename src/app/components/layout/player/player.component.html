@@ -48,7 +48,7 @@
             <div class="audio-controls--main d-flex">
                 <button class="btn btn-icon-only track-repeat" [class]="{'text-primary': playerOptions?.repeat}"><i class="ion-md-sync" (click)="toggleOptions('repeat')"></i></button>
                 <button class="btn btn-icon-only" (click)="playPrev()"><i class="ion-md-skip-backward"></i></button>
-                <button class="btn btn-air btn-pill btn-default btn-icon-only track-play-pause" [class]="{ 'track-playing' : state == 1 }" (click)="playPause()" [disabled]="!track?.source">
+                <button class="btn btn-air btn-pill btn-default btn-icon-only track-play-pause" [class]="{ 'track-playing' : state == 1 }" (click)=" interacted=true; playPause()" [disabled]="!track?.source">
                     <i class="ion-md-play"></i>
                     <i class="ion-md-pause"></i>
                 </button>
