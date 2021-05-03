@@ -97,9 +97,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
             window.addEventListener(event_name, function(event) {
                   event.stopImmediatePropagation();
             }, true);
-        }
-        
-        document.addEventListener("visibilitychange", () => { console.log(1) })    
+        }  
     }
 
     initTrack(track){
