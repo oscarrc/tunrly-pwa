@@ -101,7 +101,7 @@
 
         .video-player-overlay{
             content: '';
-            @include absolute(top 0 bottom 0 left 0);      
+            @include absolute(bottom 0 left 0);      
             width: $player-cover-image-width;         
             height: $player-cover-image-width;   
             border-top-left-radius: $radius-md;
@@ -330,8 +330,9 @@
 .show-video {
     #videoPlayer iframe {
         position: absolute;
-        bottom: 72px;
-        height: 80vh;
+        bottom: $player-cover-image-width;
+        height: calc(100vw * 0.5625);
+        max-height: 75vh;
         width: 100%;
         border-top-right-radius: $radius-md;
         border-bottom-left-radius: 0;
@@ -348,10 +349,12 @@
             border-top-left-radius: 0;
         }
         .video-player-overlay{
-            top: -80vh;
-            height: 80vh;
+            bottom: $player-cover-image-width;
+            height: calc(100vw * 0.5625);
+            max-height: 75vh;
             width: 100%;
             border-bottom-left-radius: 0;
+            border-top-right-radius: $radius-md;
             z-index: 1
         }
     }
