@@ -111,6 +111,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: all ease-out 250ms;
             
             i{
                 display: none
@@ -341,6 +342,10 @@
     #audioPlayer{
         border-top-right-radius: 0;
         border-top-left-radius: 0;
+    }
+
+    #progress-container {
+        @include absolute(top 0 right 0 left 0);
     }
 
     .song-image{

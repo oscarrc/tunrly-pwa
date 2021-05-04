@@ -20,7 +20,7 @@
          <!-- Begin | Audio -->
         <div class="audio">
             <div class="song-image">
-                <span class="video-player-overlay" (click)="toggleVideo()"><i [class]="videoShown ? 'ion-md-contract' : 'ion-md-expand' "></i></span>
+                <span *ngIf="track?.source" class="video-player-overlay" (click)="toggleVideo()"><i [class]="videoShown ? 'ion-md-contract' : 'ion-md-expand' "></i></span>
                 <youtube-player *ngIf="track?.source"
                     id="videoPlayer"
                     [videoId]="track.source" 
