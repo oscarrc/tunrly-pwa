@@ -309,7 +309,7 @@
     #playerPlaylist{
         height: auto;
         .playlist-body{
-            height: 60vh;
+            height: 50vh;
         }
         .playlist-header{
             border-top: 1px solid $gray-400;
@@ -349,7 +349,8 @@
             border-top-left-radius: 0;
         }
         .video-player-overlay{
-            @include absolute(bottom $player-cover-image-width top auto);
+            @include absolute(bottom $player-cover-image-width top auto);    
+            bottom: $player-cover-image-width;
             height: calc(100vw * 0.5625);
             max-height: 75vh;
             width: 100%;
