@@ -101,7 +101,7 @@
 
         .video-player-overlay{
             content: '';
-            @include absolute(bottom 0 left 0);      
+            @include absolute(bottom 0 top 0 left 0);      
             width: $player-cover-image-width;         
             height: $player-cover-image-width;   
             border-top-left-radius: $radius-md;
@@ -349,7 +349,7 @@
             border-top-left-radius: 0;
         }
         .video-player-overlay{
-            bottom: $player-cover-image-width;
+            @include absolute(bottom $player-cover-image-width top auto);
             height: calc(100vw * 0.5625);
             max-height: 75vh;
             width: 100%;
