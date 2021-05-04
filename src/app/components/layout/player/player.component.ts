@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { PlayerService } from 'src/app/services/player.service';
-import { StorageService } from 'src/app/services/storage.service'
 import { UserService } from 'src/app/services/user.service';
 import { TrackService } from 'src/app/services/track.service';
 
@@ -52,7 +51,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
     
     constructor(@Inject(DOCUMENT) private document: Document,
                 private userService: UserService,
-                private storageService: StorageService,
                 private trackService: TrackService,
                 private playerService: PlayerService) { 
                     this.playerOptions = this.playerService.playerOptions;                    
@@ -201,7 +199,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     toggleOptions(option){
         this.playerService.setOption(option);
-        this.storageService.setLocalStorage('player', this.playerOptions);
     }
 
     togglePlaylist() {        

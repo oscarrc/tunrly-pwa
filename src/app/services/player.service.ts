@@ -76,7 +76,8 @@ export class PlayerService {
 
     playNowPlaylist(playlist){
         this.playlist = playlist;
-        this.currentPlaylist.next(this.playlist);        
+        this.currentPlaylist.next(this.playlist);   
+        this.storageService.setLocalStorage('playlist', this.playlist);     
         this.options.modified = this.playlist.tracks.length > 1 ? true : false;
         this.options.index = 0;
         this.currentOptions.emit(this.options);
@@ -101,6 +102,7 @@ export class PlayerService {
 
     setOption(option){
         this.options[option] = !this.options[option];
-        this.currentOptions.emit(this.options);
+        this.currentOptions.emit(this.options);        
+        this.storageService.setLocalStorage('player', this.options);
     }
 }
