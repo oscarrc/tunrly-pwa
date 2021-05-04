@@ -13,7 +13,6 @@ import { TrackService } from 'src/app/services/track.service';
 export class PlayerComponent implements OnInit, OnDestroy {
     //TODO intensly test background playing
     //TODO code background playing cleanly
-    //TODO "Maximize" video
     player: any;
     track: any = {};
     state: number = -1;
