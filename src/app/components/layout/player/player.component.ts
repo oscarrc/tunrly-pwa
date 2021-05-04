@@ -212,7 +212,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
         else this.document.body.classList.add(this.showPlaylist);
     }
 
-    toggleVideo() {        
+    toggleVideo() {     
+        if(this.document.body.classList.contains(this.showPlaylist)) this.togglePlaylist();  
         if(this.document.body.classList.contains(this.showVideo)) this.document.body.classList.remove(this.showVideo);
         else this.document.body.classList.add(this.showVideo);
         this.videoShown = !this.videoShown;
