@@ -20,10 +20,9 @@
          <!-- Begin | Audio -->
         <div class="audio">
             <div class="song-image">
-                <span class="video-player-overlay"><i class="ion-md-expand"></i></span>
+                <span class="video-player-overlay" (click)="toggleVideo()"><i [class]="videoShown ? 'ion-md-contract' : 'ion-md-expand' "></i></span>
                 <youtube-player *ngIf="track?.source"
                     id="videoPlayer"
-                    controls=0
                     [videoId]="track.source" 
                     [suggestedQuality]="qualityOptions[quality]"
                     [height]="72" 
@@ -32,7 +31,7 @@
                     (ready)="ready($event)"
                     (stateChange)="stateChange($event)">
                 </youtube-player>
-                <img *ngIf="!track?.source" src="assets/images/cover/vinyl.png" alt="Tunrly.com free music app">
+                <img *ngIf="!track?.source || videoShown" [src]="track?.image[track.image.length - 1] || 'assets/images/cover/vinyl.png'" alt="Tunrly.com free music app">
             </div>
             <div class="song-info pl-3">
                 <span class="song-name d-inline-block text-truncate">{{ track?.name }}</span>

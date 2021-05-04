@@ -27,10 +27,15 @@ export class PlayerComponent implements OnInit, OnDestroy {
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'show-playlist';
     playerClass = 'player-primary';
+    showVideo = 'show-video';
     videoSize: number;
+    videoShown: Boolean = false;
     videoOptions = {
         autoplay: 0,
-        controls: 0
+        controls: 0,
+        modestbranding: 1,
+        iv_load_policy: 3,
+        showinfo: 0
     };
     playerOptions = {
         index: 0,
@@ -56,7 +61,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                     this.playerOptions = this.playerService.playerOptions;                    
                     this.track = this.playerService.track;
                     this.interacted = false;
-
+                    
                     this.userSubscription = this.userService.user.subscribe(
                         user => {
                             this.volume = (user?.settings?.volume + 1)/3 * 75 || 100;
@@ -201,9 +206,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.playerService.setOption(option);
     }
 
-    togglePlaylist() {        
+    togglePlaylist() {  
+        if(this.videoShown) this.toggleVideo();          
         if(this.document.body.classList.contains(this.showPlaylist)) this.document.body.classList.remove(this.showPlaylist);
         else this.document.body.classList.add(this.showPlaylist);
+    }
+
+    toggleVideo() {        
+        if(this.document.body.classList.contains(this.showVideo)) this.document.body.classList.remove(this.showVideo);
+        else this.document.body.classList.add(this.showVideo);
+        this.videoShown = !this.videoShown;
     }
 
     playPause(){
