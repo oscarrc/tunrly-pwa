@@ -13,6 +13,7 @@ export class ViewsComponent implements OnInit, OnDestroy {
 
     themeClass:string = 'theme-light';
     showPlaylist:string = 'show-playlist';
+    showVideo:string = 'show-video';
     limitReached:boolean = false;
     skinSubscription: Subscription;
     routerSubscription: Subscription;
@@ -29,6 +30,7 @@ export class ViewsComponent implements OnInit, OnDestroy {
             this.perfectScroll.directiveRef.update();
             this.perfectScroll.directiveRef.scrollToTop(0, 100);
             this.document.body.classList.remove(this.showPlaylist);
+            this.document.body.classList.remove(this.showVideo);
         });
 
         this.scrollSubscription = this.scrollService.limitReached.subscribe(
