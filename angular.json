@@ -27,7 +27,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/.htaccess",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              { "glob": "assetlinks.json", "input": "src", "output": "/.well-known/" }
             ],
             "styles": [
               "node_modules/ionicons/dist/css/ionicons.min.css",
