@@ -9,6 +9,12 @@
   "start_url": "./index.html",
   "icons": [
     {
+      "src": "assets/icons/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
       "src": "assets/icons/windows10/Square71x71Logo.scale-400.png",
       "sizes": "284x284"
     },

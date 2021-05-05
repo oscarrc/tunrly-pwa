@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { PlayerService } from 'src/app/services/player.service';
-import { StorageService } from 'src/app/services/storage.service'
 import { UserService } from 'src/app/services/user.service';
 import { TrackService } from 'src/app/services/track.service';
 
@@ -14,7 +13,6 @@ import { TrackService } from 'src/app/services/track.service';
 export class PlayerComponent implements OnInit, OnDestroy {
     //TODO intensly test background playing
     //TODO code background playing cleanly
-    //TODO "Maximize" video
     player: any;
     track: any = {};
     state: number = -1;
@@ -28,10 +26,15 @@ export class PlayerComponent implements OnInit, OnDestroy {
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'show-playlist';
     playerClass = 'player-primary';
+    showVideo = 'show-video';
     videoSize: number;
+    videoShown: Boolean = false;
     videoOptions = {
-        autoplay: 1,
-        controls: 0
+        autoplay: 0,
+        controls: 0,
+        modestbranding: 1,
+        iv_load_policy: 3,
+        showinfo: 0
     };
     playerOptions = {
         index: 0,
@@ -48,14 +51,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
     // @ts-ignore 
     mediaSession = navigator.mediaSession;
     dummy = new Audio("assets/misc/silence.ogg");
-
+    interacted: Boolean = false;
+    
     constructor(@Inject(DOCUMENT) private document: Document,
                 private userService: UserService,
-                private storageService: StorageService,
                 private trackService: TrackService,
                 private playerService: PlayerService) { 
-                    this.playerOptions = this.playerService.getOptions();
-
+                    this.playerOptions = this.playerService.playerOptions;                    
+                    this.track = this.playerService.track;
+                    this.interacted = false;
+                    
                     this.userSubscription = this.userService.user.subscribe(
                         user => {
                             this.volume = (user?.settings?.volume + 1)/3 * 75 || 100;
@@ -63,17 +68,29 @@ export class PlayerComponent implements OnInit, OnDestroy {
                         }
                     )
             
-                    this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {            
-                        this.track = this.playerService.track;            
+                    this.nowPlayingSubscription = this.playerService.currentOptions.subscribe((options) => {
+                        this.interacted = true;
+                        this.track = this.playerService.track;        
                         this.playerOptions = options;
-                        this.initTrack(this.track);
+                        this.initTrack(this.track);                  
                     }); 
                 }
 
-    ngOnInit() {
+    ngOnInit() {        
+        this.initVisibilityHandler();
         this.initPlayer();
-        this.initMediaSession();
+        this.initMediaSession(); 
+        this.initTrack(this.track);
+    }
 
+    ngOnDestroy() {
+        this.skinSubscription?.unsubscribe();
+        this.userSubscription?.unsubscribe();
+        this.nowPlayingSubscription.unsubscribe();
+        this.stop();
+    }
+
+    initVisibilityHandler(){        
         Object.defineProperty(document, 'visibilityState', {value: 'visible', writable: true});
         Object.defineProperty(document, 'hidden', {value: false, writable: true});
         document.dispatchEvent(new Event("visibilitychange"));
@@ -82,16 +99,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
             window.addEventListener(event_name, function(event) {
                   event.stopImmediatePropagation();
             }, true);
-        }
-        
-        document.addEventListener("visibilitychange", () => { console.log(1) })       
-    }
-
-    ngOnDestroy() {
-        this.skinSubscription?.unsubscribe();
-        this.userSubscription?.unsubscribe();
-        this.nowPlayingSubscription.unsubscribe();
-        this.stop();
+        }  
     }
 
     initTrack(track){
@@ -160,7 +168,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 break;
             case 3: //Buffering
                 break;
-            case 5: //Queued
+            case 5: //Queued      
                 this.playPause();
                 break;
         }
@@ -195,17 +203,24 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     toggleOptions(option){
         this.playerService.setOption(option);
-        this.storageService.setLocalStorage('player', this.playerOptions);
     }
 
-    togglePlaylist() {        
+    togglePlaylist() {  
+        if(this.videoShown) this.toggleVideo();          
         if(this.document.body.classList.contains(this.showPlaylist)) this.document.body.classList.remove(this.showPlaylist);
         else this.document.body.classList.add(this.showPlaylist);
     }
 
+    toggleVideo() {     
+        if(this.document.body.classList.contains(this.showPlaylist)) this.togglePlaylist();  
+        if(this.document.body.classList.contains(this.showVideo)) this.document.body.classList.remove(this.showVideo);
+        else this.document.body.classList.add(this.showVideo);
+        this.videoShown = !this.videoShown;
+    }
+
     playPause(){
         if(this.state == 1) this.player.pauseVideo();
-        else this.dummy.play().then( () => {            
+        else if(this.interacted) this.dummy.play().then( () => {            
             this.mediaSession.playbackState = "playing";
             this.player.playVideo();
         }).catch()
@@ -226,6 +241,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     seekStart(event){
         this.seekTime = event.target.value;
     }
+
     seekEnd(event){        
         const time = (this.duration * event.target.value)/100;
         this.player?.seekTo(time, true);

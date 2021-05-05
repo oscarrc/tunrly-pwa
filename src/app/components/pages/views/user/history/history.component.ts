@@ -45,7 +45,7 @@ export class UserHistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.history.loading = true;
         this.trackService.getTracks( tracks.slice(offset, limit)).subscribe( tracks => {    
-            this.history.items = tracks.reverse();
+            this.history.items = tracks;
         }).add( () => this.history.loading = false );
     }
 

@@ -28,7 +28,7 @@ export class AsideRightComponent implements OnInit, OnDestroy {
             this.playlist = playlist;        
         });
 
-        this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {
+        this.nowPlayingSubscription = this.playerService.currentOptions.subscribe((options) => {
             this.nowPlaying = options.index;
             this.modified = options.modified;
         });

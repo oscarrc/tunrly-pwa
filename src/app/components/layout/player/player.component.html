@@ -20,10 +20,9 @@
          <!-- Begin | Audio -->
         <div class="audio">
             <div class="song-image">
-                <span class="video-player-overlay"><i class="ion-md-expand"></i></span>
+                <span *ngIf="track?.source" class="video-player-overlay" (click)="toggleVideo()"><i [class]="videoShown ? 'ion-md-contract' : 'ion-md-expand' "></i></span>
                 <youtube-player *ngIf="track?.source"
                     id="videoPlayer"
-                    controls=0
                     [videoId]="track.source" 
                     [suggestedQuality]="qualityOptions[quality]"
                     [height]="72" 
@@ -32,7 +31,7 @@
                     (ready)="ready($event)"
                     (stateChange)="stateChange($event)">
                 </youtube-player>
-                <img *ngIf="!track?.source" src="assets/images/cover/vinyl.png" alt="Tunrly.com free music app">
+                <img *ngIf="!track?.source || videoShown" [src]="track?.image[track.image.length - 1] || 'assets/images/cover/vinyl.png'" alt="Tunrly.com free music app">
             </div>
             <div class="song-info pl-3">
                 <span class="song-name d-inline-block text-truncate">{{ track?.name }}</span>
@@ -48,7 +47,7 @@
             <div class="audio-controls--main d-flex">
                 <button class="btn btn-icon-only track-repeat" [class]="{'text-primary': playerOptions?.repeat}"><i class="ion-md-sync" (click)="toggleOptions('repeat')"></i></button>
                 <button class="btn btn-icon-only" (click)="playPrev()"><i class="ion-md-skip-backward"></i></button>
-                <button class="btn btn-air btn-pill btn-default btn-icon-only track-play-pause" [class]="{ 'track-playing' : state == 1 }" (click)="playPause()" [disabled]="!track?.source">
+                <button class="btn btn-air btn-pill btn-default btn-icon-only track-play-pause" [class]="{ 'track-playing' : state == 1 }" (click)=" interacted=true; playPause()" [disabled]="!track?.source">
                     <i class="ion-md-play"></i>
                     <i class="ion-md-pause"></i>
                 </button>

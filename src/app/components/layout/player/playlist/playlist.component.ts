@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnDestroy, OnInit, Inject } from '@angular/core';
+import { Component, HostBinding, OnDestroy, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 import { PlayerService } from 'src/app/services/player.service';
@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-playlist',
     templateUrl: './playlist.component.html'
 })
-export class PlaylistComponent implements OnInit, OnDestroy {
+export class PlaylistComponent implements OnDestroy {
 
     @HostBinding('id') id = 'playerPlaylist';
 
@@ -21,18 +21,16 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     private nowPlayingSubscription: Subscription;
 
     constructor(@Inject(DOCUMENT) private document: Document,
-                private playerService: PlayerService) { }
-
-    ngOnInit() {
-        this.playlistSubscription = this.playerService.currentPlaylist.subscribe((playlist) => {
-            this.playlist = playlist;        
-        });
-
-        this.nowPlayingSubscription = this.playerService.playerOptions.subscribe((options) => {
-            this.nowPlaying = options.index;
-            this.modified = options.modified;
-        });
-    }
+                private playerService: PlayerService) {
+                    this.playlistSubscription = this.playerService.currentPlaylist.subscribe((playlist) => {
+                        this.playlist = playlist;      
+                    });
+            
+                    this.nowPlayingSubscription = this.playerService.currentOptions.subscribe((options) => {
+                        this.nowPlaying = options.index;
+                        this.modified = options.modified;
+                    });
+                }
 
     ngOnDestroy() {
         this.playlistSubscription.unsubscribe();
