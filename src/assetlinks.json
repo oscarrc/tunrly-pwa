@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.tunrly.twa",
+    "sha256_cert_fingerprints": [
+      "34:42:0A:03:65:EE:7E:68:D8:3B:CF:96:50:0F:34:7D:75:E1:31:C9:F5:AC:D7:49:9D:62:66:CB:97:A0:30:9F"
+    ]
+  }
+}]
