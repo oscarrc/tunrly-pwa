@@ -112,7 +112,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 res => this.userService.set(res)
             );
         }else{
-            this.stop();
+            // this.stop();
         }
     }
 
