@@ -225,10 +225,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playNext(){
+        this.state = -1;
         this.playerService.playNext();
     }
 
     playPrev(){
+        this.state = -1;
         this.playerService.playPrev();
     }
 
