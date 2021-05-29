@@ -53,7 +53,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     dummy = new Audio("assets/misc/silence.ogg");
     interacted: Boolean = false;
     
-    constructor(@Inject(DOCUMENT) private document: Document,
+    constructor(@Inject(DOCUMENT) public document: Document,
                 private userService: UserService,
                 private trackService: TrackService,
                 private playerService: PlayerService) { 
@@ -206,7 +206,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     togglePlaylist() {  
-        if(this.videoShown) this.toggleVideo();          
+        if(this.document.body.classList.contains(this.showVideo)) this.toggleVideo();          
         if(this.document.body.classList.contains(this.showPlaylist)) this.document.body.classList.remove(this.showPlaylist);
         else this.document.body.classList.add(this.showPlaylist);
     }
@@ -215,7 +215,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
         if(this.document.body.classList.contains(this.showPlaylist)) this.togglePlaylist();  
         if(this.document.body.classList.contains(this.showVideo)) this.document.body.classList.remove(this.showVideo);
         else this.document.body.classList.add(this.showVideo);
-        this.videoShown = !this.videoShown;
     }
 
     playPause(){
