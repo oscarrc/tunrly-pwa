@@ -10,8 +10,8 @@
             step=".001"
             (panstart)="seekStart($event)"
             (panend)="seekEnd($event)">
-        <progress class="audio-progress audio-progress--played track-song-played-progress" min="0" max="100" [value]="(time * 100 / duration) || 0"></progress>
-        <progress class="audio-progress audio-progress--buffered track-buffered-progress" min="0" max="100" [value]="buffered || 0"></progress>
+        <progress class="audio-progress audio-progress--played track-song-played-progress" min="0" max="100" [value]="duration && time ? (time * 100 / duration) : 0"></progress>
+        <progress class="audio-progress audio-progress--buffered track-buffered-progress" min="0" max="100" [value]="buffered ? buffered : 0"></progress>
     </div>
     <!-- End | Audio Player Progress -->
     
@@ -20,7 +20,7 @@
          <!-- Begin | Audio -->
         <div class="audio">
             <div class="song-image">
-                <span *ngIf="track?.source" class="video-player-overlay" (click)="toggleVideo()"><i [class]="videoShown ? 'ion-md-contract' : 'ion-md-expand' "></i></span>
+                <span *ngIf="track?.source" class="video-player-overlay" (click)="toggleVideo()"><i [class]="document.body.classList.contains(this.showVideo) ? 'ion-md-contract' : 'ion-md-expand' "></i></span>
                 <youtube-player *ngIf="track?.source"
                     id="videoPlayer"
                     [videoId]="track.source" 
@@ -31,7 +31,7 @@
                     (ready)="ready($event)"
                     (stateChange)="stateChange($event)">
                 </youtube-player>
-                <img *ngIf="!track?.source || videoShown" [src]="track?.image[track.image.length - 1] || 'assets/images/cover/vinyl.png'" alt="Tunrly.com free music app">
+                <img *ngIf="!track?.source || document.body.classList.contains(this.showVideo)" default="assets/images/cover/extralarge.png" [src]="track?.image[track.image.length - 1] || 'assets/images/cover/vinyl.png'" alt="Tunrly.com free music app">
             </div>
             <div class="song-info pl-3">
                 <span class="song-name d-inline-block text-truncate">{{ track?.name }}</span>
