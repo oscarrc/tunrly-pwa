@@ -10,8 +10,8 @@
             step=".001"
             (panstart)="seekStart($event)"
             (panend)="seekEnd($event)">
-        <progress class="audio-progress audio-progress--played track-song-played-progress" min="0" max="100" [value]="duration ? (time * 100 / duration) : 0"></progress>
-        <progress class="audio-progress audio-progress--buffered track-buffered-progress" min="0" max="100" [value]="buffered || 0"></progress>
+        <progress class="audio-progress audio-progress--played track-song-played-progress" min="0" max="100" [value]="duration && time ? (time * 100 / duration) : 0"></progress>
+        <progress class="audio-progress audio-progress--buffered track-buffered-progress" min="0" max="100" [value]="buffered ? buffered : 0"></progress>
     </div>
     <!-- End | Audio Player Progress -->
     

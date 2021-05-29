@@ -30,10 +30,6 @@ export class PlayerService {
         return this.playlist.tracks[this.options.index];
     }
 
-    get index(){
-        return this.options.index;
-    }
-
     get playerOptions():any{
         return this.options;
     }
