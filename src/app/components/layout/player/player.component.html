@@ -10,7 +10,7 @@
             step=".001"
             (panstart)="seekStart($event)"
             (panend)="seekEnd($event)">
-        <progress class="audio-progress audio-progress--played track-song-played-progress" min="0" max="100" [value]="(time * 100 / duration) || 0"></progress>
+        <progress class="audio-progress audio-progress--played track-song-played-progress" min="0" max="100" [value]="duration ? (time * 100 / duration) : 0"></progress>
         <progress class="audio-progress audio-progress--buffered track-buffered-progress" min="0" max="100" [value]="buffered || 0"></progress>
     </div>
     <!-- End | Audio Player Progress -->
@@ -20,7 +20,7 @@
          <!-- Begin | Audio -->
         <div class="audio">
             <div class="song-image">
-                <span *ngIf="track?.source" class="video-player-overlay" (click)="toggleVideo()"><i [class]="videoShown ? 'ion-md-contract' : 'ion-md-expand' "></i></span>
+                <span *ngIf="track?.source" class="video-player-overlay" (click)="toggleVideo()"><i [class]="document.body.classList.contains(this.showVideo) ? 'ion-md-contract' : 'ion-md-expand' "></i></span>
                 <youtube-player *ngIf="track?.source"
                     id="videoPlayer"
                     [videoId]="track.source" 

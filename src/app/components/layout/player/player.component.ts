@@ -28,7 +28,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
     playerClass = 'player-primary';
     showVideo = 'show-video';
     videoSize: number;
-    videoShown: Boolean = false;
     videoOptions = {
         autoplay: 0,
         controls: 0,
@@ -96,7 +95,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         document.dispatchEvent(new Event("visibilitychange"));
 
         for (let event_name of ["visibilitychange", "webkitvisibilitychange", "blur"]) {
-            window.addEventListener(event_name, function(event) {
+            window.addEventListener(event_name, (event) => {
                   event.stopImmediatePropagation();
             }, true);
         }  
@@ -112,7 +111,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 res => this.userService.set(res)
             );
         }else{
-            this.stop();
+            this.stop()
         }
     }
 
@@ -159,7 +158,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                     this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
                 }, 500);             
                 break;
-            case 2: //Pausa 
+            case 2: //Pause 
                 clearInterval(this.timer);
                 this.dummy.play().then( () => {
                     this.dummy.pause();
@@ -254,12 +253,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     stop(){
         clearInterval(this.timer);
-        this.time,
-        this.duration,
-        this.buffered = 0;
         // @ts-ignore 
         this.mediaSession.metadata = new MediaMetadata({});        
         this.mediaSession.playbackState = "paused";
         this.dummy.pause(); 
+        this.time = null;
+        this.duration = null;
+        this.buffered = null;
     }
 }
