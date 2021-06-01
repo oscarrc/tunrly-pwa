@@ -12,7 +12,7 @@ import Fingerprint2 from '@fingerprintjs/fingerprintjs';
 @Injectable()
 export class AuthService {
     private authURL = environment.api + '/auth/';
-    private domain = environment.domain == 'localhost' ? environment.domain : '.' + environment.domain;
+    private domain = environment.domain == 'localhost' ? environment.domain : '.' + environment.domain.replace(/^.+\.([^\.]+\.[^\.]+)$/, '$1');
     private loggedIn = new BehaviorSubject<boolean>(this.hasSession());
     private fingerprint:string;
     private cookieTTL:any = 0;
