@@ -22,6 +22,7 @@ export class PlaylistComponent implements OnDestroy {
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 private playerService: PlayerService) {
+                    this.nowPlaying = this.playerService.playerOptions.index;
                     this.playlistSubscription = this.playerService.currentPlaylist.subscribe((playlist) => {
                         this.playlist = playlist;      
                     });

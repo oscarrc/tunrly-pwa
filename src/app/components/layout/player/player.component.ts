@@ -28,7 +28,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
     playerClass = 'player-primary';
     showVideo = 'show-video';
     videoSize: number;
-    videoShown: Boolean = false;
     videoOptions = {
         autoplay: 0,
         controls: 0,
@@ -53,7 +52,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     dummy = new Audio("assets/misc/silence.ogg");
     interacted: Boolean = false;
     
-    constructor(@Inject(DOCUMENT) private document: Document,
+    constructor(@Inject(DOCUMENT) public document: Document,
                 private userService: UserService,
                 private trackService: TrackService,
                 private playerService: PlayerService) { 
@@ -96,7 +95,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         document.dispatchEvent(new Event("visibilitychange"));
 
         for (let event_name of ["visibilitychange", "webkitvisibilitychange", "blur"]) {
-            window.addEventListener(event_name, function(event) {
+            window.addEventListener(event_name, (event) => {
                   event.stopImmediatePropagation();
             }, true);
         }  
@@ -112,7 +111,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 res => this.userService.set(res)
             );
         }else{
-            // this.stop();
+            this.stop()
         }
     }
 
@@ -159,7 +158,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                     this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
                 }, 500);             
                 break;
-            case 2: //Pausa 
+            case 2: //Pause 
                 clearInterval(this.timer);
                 this.dummy.play().then( () => {
                     this.dummy.pause();
@@ -206,7 +205,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     togglePlaylist() {  
-        if(this.videoShown) this.toggleVideo();          
+        if(this.document.body.classList.contains(this.showVideo)) this.toggleVideo();          
         if(this.document.body.classList.contains(this.showPlaylist)) this.document.body.classList.remove(this.showPlaylist);
         else this.document.body.classList.add(this.showPlaylist);
     }
@@ -215,7 +214,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
         if(this.document.body.classList.contains(this.showPlaylist)) this.togglePlaylist();  
         if(this.document.body.classList.contains(this.showVideo)) this.document.body.classList.remove(this.showVideo);
         else this.document.body.classList.add(this.showVideo);
-        this.videoShown = !this.videoShown;
     }
 
     playPause(){
@@ -227,10 +225,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playNext(){
+        this.state = -1;
         this.playerService.playNext();
     }
 
     playPrev(){
+        this.state = -1;
         this.playerService.playPrev();
     }
 
@@ -255,12 +255,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     stop(){
         clearInterval(this.timer);
-        this.time,
-        this.duration,
-        this.buffered = 0;
         // @ts-ignore 
         this.mediaSession.metadata = new MediaMetadata({});        
         this.mediaSession.playbackState = "paused";
         this.dummy.pause(); 
+        this.time = null;
+        this.duration = null;
+        this.buffered = null;
     }
 }
