@@ -71,7 +71,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
                         this.interacted = true;
                         this.track = this.playerService.track;        
                         this.playerOptions = options;
-                        this.initTrack(this.track);                  
+                        this.initTrack(this.track);    
+                        console.log(options)  
                     }); 
                 }
 
@@ -102,10 +103,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     initTrack(track){
-        if(track && !track.source)
+        if(track && !track?.source)
             this.trackService.getSource(this.track._id).subscribe( s => this.track.source = s["source"]);
 
-        if(this.track){                
+        if(track){
             this.setMediaSession();
             this.userService.addToHistory(this.track._id).subscribe(
                 res => this.userService.set(res)
@@ -155,7 +156,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 this.timer = setInterval( () => {
                     this.time = this.player.getCurrentTime();
                     this.buffered = this.player.getVideoLoadedFraction() * 100 || 0;
-                    this.mediaSession.setPositionState({ duration: this.duration, playbackRate: 1, position: this.time });
+                    this.mediaSession.setPositionState({ 
+                        duration: this.duration, 
+                        playbackRate: 1, 
+                        position: this.duration >= this.time ? this.time : 0
+                    });
                 }, 500);             
                 break;
             case 2: //Pause 
@@ -165,7 +170,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                     this.mediaSession.playbackState = "paused";
                 }).catch();
                 break;
-            case 3: //Buffering
+            case 3: //Buffering    
                 break;
             case 5: //Queued      
                 this.playPause();
@@ -225,12 +230,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playNext(){
-        this.state = -1;
+        this.stop();
         this.playerService.playNext();
     }
 
     playPrev(){
-        this.state = -1;
+        this.stop();
         this.playerService.playPrev();
     }
 
@@ -252,15 +257,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.seekStart(event);
         this.seekEnd(event);
     }
-
+    
     stop(){
         clearInterval(this.timer);
         // @ts-ignore 
-        this.mediaSession.metadata = new MediaMetadata({});        
+        this.mediaSession.metadata = new MediaMetadata({});     
+        this.dummy.play().then(() => this.dummy.pause() );   
         this.mediaSession.playbackState = "paused";
-        this.dummy.pause(); 
-        this.time = null;
-        this.duration = null;
-        this.buffered = null;
+        this.state = - 1;
+        this.time = 0;
+        this.duration = 0;
+        this.buffered = 0;
     }
 }

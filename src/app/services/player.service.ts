@@ -49,10 +49,11 @@ export class PlayerService {
     }
 
     playNext(){
-        if(this.options.repeat && this.options.index == this.playlist.tracks.length - 1) this.options.index = -1;
-        if(this.options.shuffle) this.options.index = Math.floor(Math.random()* this.playlist.tracks.length);
-        if(this.playlist.tracks?.length > this.options.index) this.options.index += 1;         
-        this.currentOptions.emit(this.options);        
+        if(this.options.shuffle) this.options.index = Math.floor(Math.random()* this.playlist.tracks.length);        
+        if(this.options.index < this.playlist.tracks?.length - 1) this.options.index += 1;
+        else if(this.options.repeat) this.options.index = 0;
+             
+        this.currentOptions.emit(this.options);
         this.storageService.setLocalStorage('player', this.options);
     }
 
