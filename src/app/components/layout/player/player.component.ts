@@ -11,8 +11,8 @@ import { TrackService } from 'src/app/services/track.service';
     templateUrl: './player.component.html'
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-    //TODO intensly test background playing
-    //TODO code background playing cleanly
+    //TODO background play
+    //TODO Video not playing when not sourced and browser is minimized
     player: any;
     track: any = {};
     state: number = -1;
@@ -71,8 +71,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                         this.interacted = true;
                         this.track = this.playerService.track;        
                         this.playerOptions = options;
-                        this.initTrack(this.track);    
-                        console.log(options)  
+                        this.initTrack(this.track);
                     }); 
                 }
 
@@ -151,7 +150,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 clearInterval(this.timer);
                 this.playNext();
                 break;
-            case 1: //Playing                
+            case 1: //Playing              
                 this.duration = this.player.getDuration();
                 this.timer = setInterval( () => {
                     this.time = this.player.getCurrentTime();
@@ -170,7 +169,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                     this.mediaSession.playbackState = "paused";
                 }).catch();
                 break;
-            case 3: //Buffering    
+            case 3: //Buffering                
                 break;
             case 5: //Queued      
                 this.playPause();
@@ -230,12 +229,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playNext(){
-        this.stop();
         this.playerService.playNext();
     }
 
     playPrev(){
-        this.stop();
         this.playerService.playPrev();
     }
 
