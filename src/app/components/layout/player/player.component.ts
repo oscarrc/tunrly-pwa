@@ -141,7 +141,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     stateChange(event){
         const state = event.data;
         this.state = state;
-        
+        console.log(state);
+
         switch(state){
             case -1: //Not started
                 this.playPause();
@@ -229,10 +230,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
 
     playNext(){
+        this.stop();
         this.playerService.playNext();
     }
 
     playPrev(){
+        this.stop();
         this.playerService.playPrev();
     }
 
