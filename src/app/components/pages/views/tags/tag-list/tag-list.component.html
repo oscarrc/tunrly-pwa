@@ -19,8 +19,7 @@
             </a>
             <div class="ml-2">
                 <button [disabled]="page==1" type="button" class="btn pr-2 btn-icon-only btn-transparent"  (click)="prevPage()"><i class="ion-md-arrow-back"></i></button>
-                {{ this[type].slice((page-1)*limit, page*limit).length }}
-                <button [disabled]="this[type].slice((page-1)*limit, page*limit).length < limit" type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
+                <button [disabled]="this[type].length < limit" type="button" class="btn btn-icon-only btn-transparent" (click)="nextPage()"><i class="ion-md-arrow-forward"></i></button>
             </div>
         </div>
     </div>
