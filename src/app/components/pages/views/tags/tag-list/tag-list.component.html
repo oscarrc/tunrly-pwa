@@ -29,12 +29,12 @@
     <div class="section">
         <div *ngIf="tracks && !loading" class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
-                <div class="col-6 col-xl-2 col-lg-4 col-sm-6" *ngFor="let track of tracks | slice:(page-1)*limit:page*limit">
+                <div class="col-6 col-xl-2 col-lg-4 col-sm-6" *ngFor="let track of tracks">
                     <app-primary-card [track]="track" [showOptions]="true"></app-primary-card>
                 </div>
             </ng-container>
             <ng-template #listView>
-                <div class="col-xl-6 col-lg-12" *ngFor="let track of tracks  | slice:(page-1)*limit:page*limit; let i = index">
+                <div class="col-xl-6 col-lg-12" *ngFor="let track of tracks; let i = index">
                     <app-track-list-view [trackNumber]="(i + 1 + ((page - 1) * limit))" [track]="track" [icon]="'la-ellipsis-h'"></app-track-list-view>
                 </div>
             </ng-template>
@@ -54,7 +54,7 @@
         </div>
 
         <div *ngIf="albums && !loading" class="row custom-card-list">
-            <div class="col-6 col-xl-2 col-lg-4 col-sm-6" *ngFor="let album of albums | slice:(page-1)*limit:page*limit">
+            <div class="col-6 col-xl-2 col-lg-4 col-sm-6" *ngFor="let album of albums">
                 <app-image-card [item]="album" type="album"
                                 [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
             </div>
@@ -67,7 +67,7 @@
         </div>
 
         <div *ngIf="artists && !loading" class="row custom-card-list">
-            <div class="col-6 col-xl-2 col-lg-4 col-sm-6" *ngFor="let artist of artists | slice:(page-1)*limit:page*limit">
+            <div class="col-6 col-xl-2 col-lg-4 col-sm-6" *ngFor="let artist of artists">
                 <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'" type="artist"></app-image-card>
             </div>
         </div>
@@ -79,7 +79,7 @@
         </div>
 
         <div *ngIf="playlists && !loading" class="row custom-card-list">
-            <div class="col-lg-5 col-sm-6" *ngFor="let playlist of playlists | slice:(page-1)*limit:page*limit">
+            <div class="col-lg-5 col-sm-6" *ngFor="let playlist of playlists">
                 <app-description-card [item]="playlist"  type="playlist"></app-description-card>
             </div>
         </div>
