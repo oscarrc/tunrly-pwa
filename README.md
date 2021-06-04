@@ -1,6 +1,6 @@
 # Tunrly.com PWA
 
-Angular PWA para Tunrly.com
+Angular PWA for Tunrly.com. It consumes the [Tunrly API](https://github.com/oscarrc/tunrly-api)
 
 ## Functionalities
 
