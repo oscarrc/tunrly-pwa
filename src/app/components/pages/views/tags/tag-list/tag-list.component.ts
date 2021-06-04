@@ -49,6 +49,7 @@ export class TagListComponent implements AfterViewInit, OnDestroy {
     }
     
     getTag(){
+        this.loading = true;
         this.tagService.getTag(this.tagName, this.type, this.page, this.limit).subscribe(
             res => this[this.type] = res
         ).add( () => this.loading = false )
