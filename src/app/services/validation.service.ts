@@ -11,8 +11,8 @@ export class ValidationService {
         
     }
 
-    create(email: string, action: number):Observable<Object>{
-        return this.httpClient.post(this.validationURL, { email: email, action: action });
+    create(user: string, action: number):Observable<Object>{
+        return this.httpClient.post(this.validationURL, { user: user, action: action });
     }
 
     validate(token: string, action: number, password: string = null):Observable<Object>{
