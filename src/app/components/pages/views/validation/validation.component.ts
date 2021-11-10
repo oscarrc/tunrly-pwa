@@ -33,7 +33,7 @@ export class ValidationComponent implements OnInit, OnDestroy{
                     this.config = new Config();
                     this.brand = this.config.config.brand;
                     this.routeSubscription = this.route.params.subscribe(param => {
-                        this.action = param.action;
+                        this.action = parseInt(param.action);
                         this.token = param.token;
                     });
                 }
