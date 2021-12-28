@@ -58,10 +58,10 @@ export class PlayerService {
     }
 
     playPrev(){
-        if(this.options.repeat && this.options.index == 0 ) this.options.index = this.playlist.tracks.length;
-        if(this.options.index > 0 && this.playlist.tracks.length)          
-            this.options.index = this.options.shuffle ? Math.floor(Math.random()* this.playlist.tracks.length) : this.options.index - 1;
-        this.currentOptions.emit(this.options);        
+        if(this.options.shuffle) this.options.index = Math.floor(Math.random()* this.playlist.tracks.length);
+        if(this.options.index > 0) this.options.index -= 1;
+        else if(this.options.repeat) this.options.index = this.playlist.tracks.length - 1;
+        this.currentOptions.emit(this.options);
         this.storageService.setLocalStorage('player', this.options);
     }
 
