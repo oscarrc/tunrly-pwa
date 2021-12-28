@@ -172,7 +172,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 break;
             case 3: //Buffering                 
                 break;
-            case 5: //Queued      
+            case 5: //Queued 
                 this.playPause();
                 break;
         }
